@@ -12,7 +12,7 @@ function Input({
       data-slot="input"
       className={cn(
         // Base styles
-        "!text-xl !md:text-lg w-full max-w-md h-13 px-4 py-4  rounded-sm bg-white transition-colors text-[#5D636F]",
+        "!text-xl !md:text-lg w-full max-w-md h-13 px-4 py-4  rounded-sm bg-white transition-colors text-[#333333]",
 
         // Default border #d7d6d9
         "border border-[#d1d0d4]",
@@ -21,7 +21,7 @@ function Input({
         "hover:border-[#86848c]",
 
         // Focus
-        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-300 focus-visible:border-blue-500",
+        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-300 focus-visible:border-orange-500",
 
         // Dark mode & placeholder
         "dark:bg-input/30 placeholder:text-gray-400 file:text-foreground",

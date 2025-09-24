@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import Providers from "./components/Providers";
+import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Jost } from "next/font/google";
 const jost = Jost({
   subsets: ["latin"],
@@ -22,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${jost.className} antialiased`}>
         {/* <Providers> */}
-        {children}
+        <LayoutWrapper>{children}</LayoutWrapper>
         {/* </Providers> */}
       </body>
     </html>
