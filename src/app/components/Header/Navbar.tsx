@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
                 className="w-6 h-6 rounded-full"
               />
               <div className="flex flex-col space-x-5">
-                <span className="text-xs !text-white">Currency</span>
+                <p className="!text-lg !text-white">Currency</p>
                 <button
                   onClick={() => setCurrencyOpen(!currencyOpen)}
                   className="flex items-center space-x-1 text-sm font-semibold !text-white hover:text-blue-300"
@@ -104,13 +104,13 @@ const Navbar: React.FC = () => {
             <div className="flex items-center space-x-5">
               <FaUser className="h-6 w-6" />
               <div className="flex flex-col leading-tight space-x-5">
-                <p className="text-sm font-semibold !text-white">Account</p>
+                <p className="!text-lg font-semibold !text-white">Account</p>
                 <div className="flex items-center space-x-1">
-                  <button className="text-sm font-semibold hover:text-blue-300">
+                  <button className="text-base whitespace-nowrap font-medium hover:text-blue-300">
                     Sign In
                   </button>
-                  <span>/</span>
-                  <button className="text-sm font-semibold hover:text-blue-300">
+                  <span className="!text-white">/</span>
+                  <button className="text-base font-medium hover:text-blue-300">
                     Register
                   </button>
                 </div>
@@ -121,7 +121,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center space-x-5">
               <FaHeadphones className="h-7 w-7" />
               <div className="flex flex-col leading-tight space-x-5">
-                <p className="text-sm font-semibold !text-white">
+                <p className="!text-lg font-semibold !text-white">
                   orders@newtownspares.com
                 </p>
                 <p className="text-sm font-semibold !text-white">
