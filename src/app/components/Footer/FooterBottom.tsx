@@ -1,7 +1,7 @@
 
 const FooterBottom = () => {
   return (
-    <footer className="bg-[#484848] text-white">
+    <footer className="bg-[#484848] text-white ">
      
       {/* 🔹 Newsletter Section */}
       <section className="py-6 border-b border-white-700 bg-[#585858]">

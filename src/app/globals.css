@@ -105,8 +105,13 @@ html {
 /* Fix layout calculation */
 html,
 body {
-  height: 100%;
+  /* height: 100%;
   overflow: hidden;
+  scroll-behavior: smooth; */
+
+    height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto; /* ✅ Allow vertical scrolling */
   scroll-behavior: smooth;
 }
 
@@ -126,7 +131,7 @@ h3 {
 p,
 a,
 li {
-  @apply text-lg font-medium leading-relaxed tracking-wide;
+  @apply text-xl font-medium leading-relaxed tracking-wide;
 }
 
 span {
@@ -134,7 +139,7 @@ span {
 }
 
 p {
-  color: #333333;
+  color: #000000;
 }
 /* Ensure links are clickable */
 a {
