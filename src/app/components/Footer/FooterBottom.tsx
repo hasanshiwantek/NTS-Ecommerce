@@ -4,7 +4,7 @@ const FooterBottom = () => {
     <footer className="bg-[#484848] text-white ">
       {/* 🔹 Newsletter Section */}
       <section className="py-6 border-b border-white-700 bg-[#585858]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-10/12 mx-auto px-4 sm:px-6 lg:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left: Heading + text */}
           <div className="text-center md:text-left">
             <h4 className="text-2xl md:text-3xl font-semibold mb-2">
@@ -30,7 +30,7 @@ const FooterBottom = () => {
       </section>
 
       {/* 🔹 Product Categories Section */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-6 py-10 border-b border-gray-700">
+      <section className="max-w-10/12 mx-auto px-4 sm:px-6 lg:px-6 py-10 border-b border-gray-700">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Categories */}
           <nav aria-label="Categories">
@@ -208,7 +208,7 @@ const FooterBottom = () => {
       </section>
 
       {/* 🔹 Info Section */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-6 py-10">
+      <section className="max-w-10/12 mx-auto px-4 sm:px-6 lg:px-6 py-10">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Customer Services */}
           <nav aria-label="Customer Services">
