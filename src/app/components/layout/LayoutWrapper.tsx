@@ -17,7 +17,7 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
       <Header />
 
       {/* Content area that grows to push footer down */}
-      <main className="flex-grow p-6">{children}</main>
+      <main className="flex-grow !p-6  !px-[5%] ">{children}</main>
 
       <Footer />
     </div>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import navlogo from "@/assets/navlogo.png";
 import Image from "next/image";
+import Link from "next/link";
 import { FaHeadphones, FaUser, FaChevronDown } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 const Navbar: React.FC = () => {
@@ -18,13 +19,15 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between lg:px-24 h-20">
           {/* Left: Logo */}
           <div className="flex items-center shrink-0">
+            <Link href={"/"}>
             <Image
               src={navlogo}
               alt="Logo"
               width={120}
               height={120}
               className="object-contain"
-            />
+              />
+              </Link>
           </div>
 
           {/* Center: Search (desktop only) */}
@@ -66,7 +69,7 @@ const Navbar: React.FC = () => {
                 className="w-6 h-6 rounded-full"
               />
               <div className="flex flex-col">
-                <p className="text-sm text-gray-200">Currency</p>
+                <p className="text-base text-gray-200">Currency</p>
                 <button
                   onClick={() => setCurrencyOpen(!currencyOpen)}
                   className="flex items-center gap-1 text-sm font-semibold text-white hover:text-blue-300"
@@ -97,7 +100,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <FaUser className="h-6 w-6" />
               <div className="flex flex-col leading-tight">
-                <p className="text-sm font-semibold">Account</p>
+                <p className="text-base text-gray-200">Account</p>
                 <div className="flex items-center gap-1">
                   <button className="text-sm font-medium hover:text-blue-300">
                     Sign In
@@ -114,10 +117,10 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <FaHeadphones className="h-6 w-6" />
               <div className="flex flex-col leading-tight">
-                <p className="text-sm font-semibold">
+                <p className="text-base text-gray-200">
                   orders@newtownspares.com
                 </p>
-                <p className="text-xs font-semibold">(209) 300 1234567</p>
+                <p className="text-sm font-semibold">(209) 300 1234567</p>
               </div>
             </div>
 

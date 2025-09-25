@@ -52,7 +52,7 @@ const SingleProduct: React.FC = () => {
   };
 
   return (
-    <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="max-w-full mx-auto ">
       {/* Breadcrumb */}
       <p className="p-primary text-base sm:text-sm text-gray-500 mb-4 sm:mb-6">
         Home <span className="mx-2">{">"}</span>
@@ -84,7 +84,9 @@ const SingleProduct: React.FC = () => {
 
             <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] ">
               <Image
-                src={"https://cdn11.bigcommerce.com/s-4jpol1blth/images/stencil/640w/products/78219/966124/41FF8B7RPNL._AC___93112.1736531700.jpg?c=1"}
+                src={
+                  "https://cdn11.bigcommerce.com/s-4jpol1blth/images/stencil/640w/products/78219/966124/41FF8B7RPNL._AC___93112.1736531700.jpg?c=1"
+                }
                 alt="Selected Product"
                 className="w-full h-full object-contain rounded-lg  "
                 width={500}
