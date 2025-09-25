@@ -1,0 +1,92 @@
+"use client";
+
+import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const ProductFAQs = () => {
+  return (
+    <section className="!p-6   !px-[5%] ">
+      <h1 className="h1-primary mb-6">FAQs</h1>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Left Column */}
+        <Accordion type="single" collapsible className="w-full space-y-3">
+          <AccordionItem value="q1" className="border rounded-md px-3">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+              What is the purpose of the Targus 720KB external floppy drive?
+            </AccordionTrigger>
+            <AccordionContent className="text-lg text-gray-600 leading-7">
+              The Targus 720KB external floppy drive provides innovative and
+              intelligent solutions for data storage. This makes it an excellent
+              choice for developers, startups, and enterprises that aim to
+              manage their digital products with utmost efficiency. With its
+              reliable performance and user-friendly design, it caters to the
+              diverse needs of modern businesses.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="q2" className="border rounded-md px-3">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+              Professionals restoring old software or files from floppy disks.
+            </AccordionTrigger>
+            <AccordionContent className="text-lg text-gray-600 leading-7">
+              Perfect for IT specialists and engineers handling legacy files,
+              ensuring smooth migration and restoration from floppy disk
+              formats.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
+        {/* Right Column */}
+        <Accordion type="single" collapsible className="w-full space-y-3">
+          <AccordionItem value="q3" className="border rounded-md px-3">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+              Who can benefit from using the Targus 720KB external floppy drive?
+            </AccordionTrigger>
+            <AccordionContent className="text-lg text-gray-600 leading-7">
+              This device is ideal for both professionals and hobbyists looking
+              for reliable legacy data storage access.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="q4" className="border rounded-md px-3">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+              Individuals with legacy systems needing floppy disk access.
+            </AccordionTrigger>
+            <AccordionContent className="text-lg text-gray-600 leading-7">
+              Perfect for those maintaining or repairing old systems still
+              dependent on floppy media.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="q5" className="border rounded-md px-3">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+              Collectors of vintage technology requiring data retrieval.
+            </AccordionTrigger>
+            <AccordionContent className="text-lg text-gray-600 leading-7">
+              Enthusiasts and collectors benefit by accessing and preserving
+              historical data stored on floppy disks.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="q6" className="border rounded-md px-3">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+              Students studying computer history and technology evolution.
+            </AccordionTrigger>
+            <AccordionContent className="text-lg text-gray-600 leading-7">
+              Educational institutions and students can explore how early data
+              storage shaped computing.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+    </section>
+  );
+};
+
+export default ProductFAQs;

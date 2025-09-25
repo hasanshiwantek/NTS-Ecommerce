@@ -120,16 +120,21 @@ body {
 
 
 .h1-primary {
-  @apply text-4xl font-semibold text-[#333333]; /* 2.5rem */
+  @apply text-3xl font-semibold text-[#333333]; /* 2.5rem */
 }
 
 .h2-primary {
-  @apply text-3xl font-bold text-[#333333]; /* 1.5rem */
+  @apply text-2xl font-bold text-[#333333]; /* 1.5rem */
 }
 
 .h3-primary {
-  @apply text-2xl font-medium text-[#333333]; /* 1.2rem */
+  @apply text-xl font-medium text-[#333333]; /* 1.2rem */
 }
+
+.h4-primary {
+  @apply text-lg font-semibold text-[#333333]; /* 1.2rem */
+}
+
 
 .p-primary,
 .a-primary,
@@ -138,7 +143,7 @@ body {
 }
 
 .span-primary {
-  @apply text-base font-semibold leading-relaxed tracking-wide text-[#333333];
+  @apply text-base font-medium leading-relaxed tracking-wide text-[#333333];
 }
 
 .p-primary {

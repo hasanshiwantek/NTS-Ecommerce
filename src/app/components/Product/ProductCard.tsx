@@ -23,7 +23,7 @@ import laptopimg5 from "@/assets/laptopimg5.png";
 import supportIcon1 from "@/assets/support/support-img1.png";
 import supportIcon2 from "@/assets/support/support-img2.png";
 import supportIcon3 from "@/assets/support/support-img3.png";
-import { Phone } from "lucide-react";
+import { Phone, Plus, Minus } from "lucide-react";
 import Image from "next/image";
 const SingleProduct: React.FC = () => {
   const [quantity, setQuantity] = useState(0);
@@ -54,17 +54,17 @@ const SingleProduct: React.FC = () => {
   return (
     <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Breadcrumb */}
-      <div className="text-base sm:text-sm text-gray-500 mb-4 sm:mb-6">
+      <p className="p-primary text-base sm:text-sm text-gray-500 mb-4 sm:mb-6">
         Home <span className="mx-2">{">"}</span>
         {product.name} <span className="mx-2">{">"}</span>
         <span className="text-gray-700 font-medium">{product.code}</span>
-      </div>
+      </p>
 
       {/* Product Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl shadow-md">
+      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl shadow-md">
         {/* Left: Images */}
-        <div className="flex flex-col">
-          <div className="flex flex-col sm:flex-row sm:space-x-4">
+        <div className="flex flex-col lg:col-span-1">
+          <div className="flex flex-col sm:flex-row sm:space-x-4 ">
             {/* Thumbnails */}
             <div className="flex sm:flex-col gap-2 sm:gap-y-3 overflow-x-auto sm:overflow-visible pb-2 sm:pb-0">
               {images.map((img, idx) => (
@@ -82,21 +82,21 @@ const SingleProduct: React.FC = () => {
               ))}
             </div>
 
-            <div className="flex-1 mt-3 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px]">
+            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] ">
               <Image
-                src={selectedImage}
+                src={"https://cdn11.bigcommerce.com/s-4jpol1blth/images/stencil/640w/products/78219/966124/41FF8B7RPNL._AC___93112.1736531700.jpg?c=1"}
                 alt="Selected Product"
-                className="w-full h-full object-contain rounded-lg"
-                // width={300}
-                // height={300}
-                // objectFit="contain"
+                className="w-full h-full object-contain rounded-lg  "
+                width={500}
+                height={500}
+                objectFit="contain"
               />
             </div>
           </div>
         </div>
 
         {/* Right: Details */}
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full lg:col-span-2 ">
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-[var(--primary-color)] mb-2 lg:mb-0">
               {product.name}
@@ -108,10 +108,10 @@ const SingleProduct: React.FC = () => {
             {/* Rating */}
             <div className="flex items-center space-x-2 mb-4">
               <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-              <span className="text-gray-700 font-medium">
+              <span className="text-gray-700 font-semibold text-base">
                 {product.rating}
               </span>
-              <span className="text-blue-500 font-bold text-sm">
+              <span className="text-blue-500 font-bold text-base">
                 ({product.reviews} reviews)
               </span>
             </div>
@@ -129,7 +129,7 @@ const SingleProduct: React.FC = () => {
 
               {/* Secure Methods */}
               <div className="flex flex-wrap items-center gap-2 border-b border-gray-300 pb-3">
-                <span className="text-xs sm:text-sm text-gray-600 font-medium">
+                <span className="p-primary sm:text-sm text-gray-600 font-medium">
                   Secure methods:
                 </span>
                 <div className="flex items-center gap-2">
@@ -158,10 +158,8 @@ const SingleProduct: React.FC = () => {
                     className="w-12 h-12 object-contain"
                   />
                   <div className="flex-1 text-center sm:text-left">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Free shipping Up to 10 lbs
-                    </h3>
-                    <p className="text-sm text-gray-700">
+                    <h4 className="h4-primary">Free shipping Up to 10 lbs</h4>
+                    <p className="span-primary ">
                       Get your orders delivered without extra cost.
                     </p>
                   </div>
@@ -187,9 +185,7 @@ const SingleProduct: React.FC = () => {
 
               {/* SKU */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 my-3">
-                <span className="text-sm sm:text-lg text-gray-600 font-medium">
-                  SKU:
-                </span>
+                <span className=" span-primary ">SKU:</span>
                 <span className="text-sm sm:text-lg font-bold text-gray-900">
                   Z9PR-D12-(ASMB6-IKVM)
                 </span>
@@ -197,9 +193,7 @@ const SingleProduct: React.FC = () => {
 
               {/* Availability */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
-                <span className="text-sm sm:text-lg text-gray-600 font-medium">
-                  Availability:
-                </span>
+                <span className="span-primary">Availability:</span>
                 <span className="text-sm sm:text-lg text-green-900">
                   In Stock
                 </span>
@@ -207,15 +201,13 @@ const SingleProduct: React.FC = () => {
 
               {/* Quantity */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mt-2">
-                <span className="text-sm sm:text-lg text-gray-600 font-medium">
-                  Quantity:
-                </span>
-                <div className="flex items-center space-x-3 border border-gray-300 rounded-full px-2 mt-2 sm:mt-0">
+                <span className="span-primary">Quantity:</span>
+                <div className="flex items-center  space-x-3 border border-gray-300 rounded-full px-2 mt-2 sm:mt-0">
                   <button
                     onClick={decrement}
-                    className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-gray-700 hover:text-red-500 transition"
+                    className="w-7 h-7   sm:w-8 sm:h-8 flex items-center justify-center text-gray-700 hover:text-red-500 transition"
                   >
-                    -
+                    <Minus width={15} height={15} />
                   </button>
                   <span className="text-base sm:text-lg font-semibold w-6 text-center border-x border-gray-300">
                     {quantity}
@@ -224,7 +216,7 @@ const SingleProduct: React.FC = () => {
                     onClick={increment}
                     className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-gray-700 hover:text-green-600 transition"
                   >
-                    +
+                    <Plus width={15} height={15} />
                   </button>
                 </div>
               </div>
@@ -253,8 +245,8 @@ const SingleProduct: React.FC = () => {
         </div>
 
         {/* Support Section */}
-        <div>
-          <div className="mt-6 border border-gray-300 rounded-lg text-center h-max">
+        <div className="lg:col-span-1">
+          <div className="mt-6 border border-gray-300 rounded-lg text-center h-max ">
             {/* Avatars */}
             <div className="bg-[#F5F6FA] p-2 ">
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">
