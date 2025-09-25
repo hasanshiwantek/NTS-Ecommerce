@@ -12,7 +12,7 @@ function Input({
       data-slot="input"
       className={cn(
         // Base styles
-        "!text-xl !md:text-lg w-full max-w-md h-13 px-4 py-4  rounded-sm bg-white transition-colors text-[#333333]",
+        "!text-lg !md:text-lg w-full max-w-md h-13 px-4 py-4   rounded-sm bg-white transition-colors text-[#333333]",
 
         // Default border #d7d6d9
         "border border-[#d1d0d4]",
@@ -24,7 +24,7 @@ function Input({
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-300 focus-visible:border-orange-500",
 
         // Dark mode & placeholder
-        "dark:bg-input/30 placeholder:text-gray-400 file:text-foreground",
+        "dark:bg-input/30 placeholder:text-gray-400 file:text-foreground !font-[520]",
 
         // Validation & accessibility
         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",

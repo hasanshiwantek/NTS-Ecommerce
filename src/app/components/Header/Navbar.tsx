@@ -20,14 +20,14 @@ const Navbar: React.FC = () => {
           {/* Left: Logo */}
           <div className="flex items-center shrink-0">
             <Link href={"/"}>
-            <Image
-              src={navlogo}
-              alt="Logo"
-              width={120}
-              height={120}
-              className="object-contain"
+              <Image
+                src={navlogo}
+                alt="Logo"
+                width={120}
+                height={120}
+                className="object-contain"
               />
-              </Link>
+            </Link>
           </div>
 
           {/* Center: Search (desktop only) */}
@@ -106,9 +106,11 @@ const Navbar: React.FC = () => {
                     Sign In
                   </button>
                   <span>/</span>
-                  <button className="text-sm font-medium hover:text-blue-300">
-                    Register
-                  </button>
+                  <Link href={"/auth/signup"}>
+                    <button className="text-sm font-medium hover:text-blue-300">
+                      Register
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

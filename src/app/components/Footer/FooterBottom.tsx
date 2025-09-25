@@ -35,7 +35,7 @@ const FooterBottom = () => {
           {/* Categories */}
           <nav aria-label="Categories">
             <h4 className="text-lg font-semibold mb-4">Categories</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a href="#" className="hover:text-white">
                   Hard drive
@@ -82,7 +82,7 @@ const FooterBottom = () => {
           {/* Hard Drive */}
           <nav aria-label="Hard Drive">
             <h4 className="text-lg font-semibold mb-4">Hard drive</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a href="#" className="hover:text-white">
                   HDD
@@ -129,7 +129,7 @@ const FooterBottom = () => {
           {/* SSD */}
           <nav aria-label="SSD">
             <h4 className="text-lg font-semibold mb-4">SSD</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a href="#" className="hover:text-white">
                   NVME
@@ -171,7 +171,7 @@ const FooterBottom = () => {
           {/* Monitors */}
           <nav aria-label="Monitors">
             <h4 className="text-lg font-semibold mb-4">Monitors</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a href="#" className="hover:text-white">
                   Gaming
@@ -235,7 +235,7 @@ const FooterBottom = () => {
           {/* My Account */}
           <nav aria-label="My Account">
             <h4 className="text-lg font-semibold mb-4">My Account</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a href="#" className="hover:text-white">
                   Sign in
@@ -257,7 +257,7 @@ const FooterBottom = () => {
           {/* Contact */}
           <section aria-label="Contact Us">
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <ul className="space-y-2 text-gray-300 text-sm">
+            <ul className="space-y-2 text-gray-300 text-base">
               <li>
                 <a
                   href="mailto:contact@albatross.com"
@@ -277,14 +277,14 @@ const FooterBottom = () => {
           {/* Address */}
           <address className="not-italic">
             <h4 className="text-lg font-semibold mb-4">Address</h4>
-            <p className="!text-gray-300 text-sm">
+            <p className="!text-gray-300 text-base">
               123 Lakeview Avenue, Zurich
             </p>
-            <p className="!text-gray-300 text-sm">Switzerland</p>
+            <p className="!text-gray-300 text-base">Switzerland</p>
           </address>
         </div>
       </section>
-      <div className="border-t border-white-700 p-3 text-center  text-sm bg-[#585858]">
+      <div className="border-t border-white-700 p-3 text-center  text-base bg-[#585858]">
         <p className="!text-gray-400">
           &copy; newtownspares 2025. All rights reserved.
         </p>

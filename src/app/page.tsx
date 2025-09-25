@@ -32,10 +32,12 @@ export const metadata: Metadata = {
 
 const Page = () => {
   return (
-    <div className="flex flex-col gap-5">
-      <Banner />
-      <RelatedProduct />
-    </div>
+    <>
+      <main className="flex flex-col gp-5" role="main">
+        <Banner />
+        <RelatedProduct />
+      </main>
+    </>
   );
 };
 
