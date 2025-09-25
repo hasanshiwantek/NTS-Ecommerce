@@ -4,10 +4,10 @@ import Banner from "./components/Home/Banner";
 const Page = () => {
   return (
     <>
-      <div className="flex flex-col gp-5">
+      <main className="flex flex-col gp-5" role="main">
         <Banner />
         <RelatedProduct />
-      </div>
+      </main>
     </>
   );
 };
