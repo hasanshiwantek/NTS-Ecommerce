@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Menu, ChevronDown } from "lucide-react";
 
 const LinkHeader = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Left Menu Dropdown
+  const [mobileMenu, setMobileMenu] = useState(false); // Mobile Links Toggle
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -13,7 +14,7 @@ const LinkHeader = () => {
 
   return (
     <header className="bg-[#5B5B5B] text-white">
-      <nav className="container mx-auto flex items-center justify-between px-4 py-3 relative ">
+      <nav className="container mx-auto flex items-center justify-between px-4 py-3 relative">
         {/* Left Section: Menu Icon + Dropdown */}
         <div className="relative flex items-center gap-2 mr-5">
           <button
@@ -31,7 +32,7 @@ const LinkHeader = () => {
 
           {/* Dropdown */}
           {isOpen && (
-            <ul className="absolute left-0 top-8 flex flex-col bg-[#4A4A4A] text-white rounded shadow-lg w-40 z-10 ">
+            <ul className="absolute left-0 top-8 flex flex-col bg-[#4A4A4A] text-white rounded shadow-lg w-40 z-100">
               <li>
                 <Link
                   href="/contact"
@@ -76,8 +77,8 @@ const LinkHeader = () => {
           )}
         </div>
 
-        {/* Right Section: Product Links */}
-        <ul className="flex items-center gap-9 whitespace-nowrap ">
+        {/* Right Section: Product Links (Desktop) */}
+        <ul className="hidden lg:flex items-center lg:me-16 gap-8 whitespace-nowrap">
           <li>
             <Link href="/portable-storage" className="hover:text-gray-300">
               Portable Storage Drive
@@ -119,6 +120,85 @@ const LinkHeader = () => {
             </Link>
           </li>
         </ul>
+
+        {/* Mobile Product Links */}
+        <div className="lg:hidden">
+          <button
+            onClick={() => setMobileMenu(!mobileMenu)}
+            className="hover:text-gray-300 focus:outline-none"
+          >
+            {mobileMenu ? "✕" : "☰"}
+          </button>
+
+          {mobileMenu && (
+            <ul className="absolute left-0 top-12 w-full bg-[#4A4A4A] flex flex-col gap-2 px-4 py-4 z-20">
+              <li>
+                <Link
+                  href="/portable-storage"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Portable Storage Drive
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/connectors"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Connectors
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/power-supply"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Power Supply
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/charging-cables"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Charging Cables
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/data-cables"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Data Cables
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hdmi-cables"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  HDMI Cables
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/memory-readers"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Memory Card Readers
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/motherboards"
+                  className="block py-2 hover:text-gray-300"
+                >
+                  Computer Motherboards
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
       </nav>
     </header>
   );
