@@ -238,18 +238,18 @@ img {
 
 /* Responsive Typography */
 @media (max-width: 768px) {
-  h1 {
+  .h1-primary {
     @apply text-3xl;
   }
-  h2 {
+  .h2-primary {
     @apply text-xl;
   }
-  h3 {
+  .h3-primary {
     @apply text-lg;
   }
-  p,
-  a,
-  li {
+  .p-primary,
+  .a-primary,
+  .li-primary {
     @apply text-[1.1rem];
   }
 }
