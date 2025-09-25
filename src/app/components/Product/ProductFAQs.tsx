@@ -10,7 +10,7 @@ import {
 
 const ProductFAQs = () => {
   return (
-    <section className="">
+    <section className="my-8">
       <h1 className="h1-primary mb-6">FAQs</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

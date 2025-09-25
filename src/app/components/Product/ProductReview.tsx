@@ -15,7 +15,7 @@ const ProductReview = () => {
     <section
       id="reviews"
       aria-labelledby="reviews-heading"
-      className=""
+      className="my-8"
     >
       <header className="mb-8">
         <h1

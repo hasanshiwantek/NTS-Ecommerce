@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
                 className="w-6 h-6 rounded-full"
               />
               <div className="flex flex-col">
-                <p className="text-sm text-gray-200">Currency</p>
+                <p className="text-base text-gray-200">Currency</p>
                 <button
                   onClick={() => setCurrencyOpen(!currencyOpen)}
                   className="flex items-center gap-1 text-sm font-semibold text-white hover:text-blue-300"
@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <FaUser className="h-6 w-6" />
               <div className="flex flex-col leading-tight">
-                <p className="text-sm font-semibold">Account</p>
+                <p className="text-base text-gray-200">Account</p>
                 <div className="flex items-center gap-1">
                   <button className="text-sm font-medium hover:text-blue-300">
                     Sign In
@@ -117,10 +117,10 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-2">
               <FaHeadphones className="h-6 w-6" />
               <div className="flex flex-col leading-tight">
-                <p className="text-sm font-semibold">
+                <p className="text-base text-gray-200">
                   orders@newtownspares.com
                 </p>
-                <p className="text-xs font-semibold">(209) 300 1234567</p>
+                <p className="text-sm font-semibold">(209) 300 1234567</p>
               </div>
             </div>
 

@@ -4,7 +4,7 @@ import React from "react";
  
 const ProductOverview = () => {
   return (
-    <section className="my-5">
+    <section className="my-8">
       <div className="max-w-full">
         {/* Main Overview Heading */}
         <h1 className="h1-primary !mb-4 ">Overview</h1>

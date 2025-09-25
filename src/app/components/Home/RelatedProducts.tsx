@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import productimg from '@/assets/product-img.png'
+import productimg from "@/assets/product-img.png";
 import Image from "next/image";
 
 const RelatedProduct = () => {
@@ -71,26 +71,26 @@ const RelatedProduct = () => {
       price: "US$ 7,200.00",
     },
   ];
- 
+
   const [startIndex, setStartIndex] = useState(0);
   const itemsPerPage = 4;
- 
+
   const handlePrev = () => {
     setStartIndex((prev) => Math.max(prev - itemsPerPage, 0));
   };
- 
+
   const handleNext = () => {
     setStartIndex((prev) =>
       Math.min(prev + itemsPerPage, products.length - itemsPerPage)
     );
   };
- 
+
   const visibleProducts = products.slice(startIndex, startIndex + itemsPerPage);
- 
+
   return (
-    <div className="max-w-8xl mx-auto px-4 sm:px-6 py-12 relative">
-      <h1 className=" mb-4 text-3xl font-semibold text-start ms-16">Related Products</h1>
- 
+    <div className=" my-8 relative">
+      <h1 className="h1-primary my-5">Related Products</h1>
+
       {/* Slider Row */}
       <div className="flex items-center">
         {/* Left Arrow */}
@@ -101,7 +101,7 @@ const RelatedProduct = () => {
         >
           <FaChevronLeft />
         </button>
- 
+
         {/* Products */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-1 lg:px-4">
           {visibleProducts.map((product) => (
@@ -124,7 +124,7 @@ const RelatedProduct = () => {
             </div>
           ))}
         </div>
- 
+
         {/* Right Arrow */}
         <button
           onClick={handleNext}
@@ -137,5 +137,5 @@ const RelatedProduct = () => {
     </div>
   );
 };
- 
+
 export default RelatedProduct;
