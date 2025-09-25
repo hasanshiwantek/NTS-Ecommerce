@@ -101,11 +101,11 @@ const RelatedProduct = () => {
         </button>
  
         {/* Products */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-1 px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-1 lg:px-4">
           {visibleProducts.map((product) => (
             <div
               key={product.id}
-              className="border rounded-lg shadow-md p-6 flex flex-col items-center text-center bg-white"
+              className="border rounded-lg shadow-md p-2 lg:p-6 flex flex-col items-center text-center bg-white"
             >
               <img
                 src={product.image}
