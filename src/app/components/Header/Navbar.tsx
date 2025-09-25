@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import navlogo from "@/assets/navlogo.png";
 import Image from "next/image";
+import Link from "next/link";
 import { FaHeadphones, FaUser, FaChevronDown } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 const Navbar: React.FC = () => {
@@ -18,13 +19,15 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between lg:px-24 h-20">
           {/* Left: Logo */}
           <div className="flex items-center shrink-0">
+            <Link href={"/"}>
             <Image
               src={navlogo}
               alt="Logo"
               width={120}
               height={120}
               className="object-contain"
-            />
+              />
+              </Link>
           </div>
 
           {/* Center: Search (desktop only) */}
