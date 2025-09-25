@@ -1,13 +1,13 @@
-import React from 'react'
-
+import React from "react";
+import ProductCard from "../components/Product/ProductCard";
+import ProductOverview from "../components/Product/ProductOverview";
 const page = () => {
   return (
-    <div>
-        <h1>
-            All Products page
-        </h1>
+    <div className="my-2">
+      <ProductCard />
+      <ProductOverview/>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

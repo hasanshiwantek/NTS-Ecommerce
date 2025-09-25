@@ -98,7 +98,7 @@ body {
 }
 
 html {
-  font-size: 62.8%; /* 1rem = 10px */
+  font-size: 75%; /* 1rem = 10px */
   overflow-x: hidden;
 }
 
@@ -116,33 +116,36 @@ body {
 }
 
 /* Tailwind Typography System */
-h1 {
+
+
+
+.h1-primary {
   @apply text-4xl font-semibold text-[#333333]; /* 2.5rem */
 }
 
-h2 {
+.h2-primary {
   @apply text-3xl font-bold text-[#333333]; /* 1.5rem */
 }
 
-h3 {
+.h3-primary {
   @apply text-2xl font-medium text-[#333333]; /* 1.2rem */
 }
 
-p,
-a,
-li {
-  @apply text-xl font-medium leading-relaxed tracking-wide;
+.p-primary,
+.a-primary,
+.li-primary {
+  @apply text-lg font-medium leading-relaxed tracking-wide;
 }
 
-span {
-  @apply text-lg font-semibold leading-relaxed tracking-wide text-[#333333];
+.span-primary {
+  @apply text-base font-semibold leading-relaxed tracking-wide text-[#333333];
 }
 
-p {
+.p-primary {
   color: #000000;
 }
 /* Ensure links are clickable */
-a {
+.a-primary {
   text-decoration: none;
   line-height: normal;
 }
@@ -153,13 +156,15 @@ button {
   cursor: pointer;
 }
 
+
+
 .btn-outline-primary {
-  @apply text-[#F15939] border border-[#F15939] font-medium rounded-md px-4 py-[8px] text-xl transition-all my-1 duration-200 cursor-pointer;
+  @apply text-[#333333] border border-[#333333] font-medium rounded-md px-4 py-[6px] text-xl transition-all my-1 duration-200 cursor-pointer;
   background-color: transparent;
 }
 
 .btn-outline-primary:hover {
-  @apply bg-[#f1f8fe];
+  @apply bg-[white] text-[#f15939] border-[#F15939] ;
 }
 
 .btn-primary {
