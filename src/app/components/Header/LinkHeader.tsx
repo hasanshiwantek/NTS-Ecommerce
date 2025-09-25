@@ -13,9 +13,9 @@ const LinkHeader = () => {
 
   return (
     <header className="bg-[#5B5B5B] text-white">
-      <nav className="container mx-auto flex items-center justify-between px-4 py-3 relative">
+      <nav className="container mx-auto flex items-center justify-between px-4 py-3 relative ">
         {/* Left Section: Menu Icon + Dropdown */}
-        <div className="relative flex items-center gap-2">
+        <div className="relative flex items-center gap-2 mr-5">
           <button
             onClick={toggleDropdown}
             className="flex items-center gap-2 hover:text-gray-300 focus:outline-none"
@@ -31,13 +31,21 @@ const LinkHeader = () => {
 
           {/* Dropdown */}
           {isOpen && (
-            <ul className="absolute left-0 top-8 flex flex-col bg-[#4A4A4A] text-white rounded shadow-lg w-40 z-10">
+            <ul className="absolute left-0 top-8 flex flex-col bg-[#4A4A4A] text-white rounded shadow-lg w-40 z-10 ">
               <li>
                 <Link
                   href="/contact"
                   className="block px-4 py-2 hover:bg-gray-600"
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/products"
+                  className="block px-4 py-2 hover:bg-gray-600"
+                >
+                  Products
                 </Link>
               </li>
               <li>
@@ -69,7 +77,7 @@ const LinkHeader = () => {
         </div>
 
         {/* Right Section: Product Links */}
-        <ul className="flex items-center gap-6">
+        <ul className="flex items-center gap-9 whitespace-nowrap ">
           <li>
             <Link href="/portable-storage" className="hover:text-gray-300">
               Portable Storage Drive
