@@ -6,16 +6,14 @@ import ProductOverview from "@/app/components/Product/ProductOverview";
 import ProductFAQs from "@/app/components/Product/ProductFAQs";
 import ProductReview from "@/app/components/Product/ProductReview";
 import RelatedProduct from "@/app/components/Home/RelatedProducts";
-interface ProductPageProps {
-  params: { slug: string };
-}
+type Props = {
+  params: {
+    slug: string;
+  };
+};
 
 // ✅ Dynamic metadata for SEO
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await fetchProductBySlug(params.slug);
 
   if (!product) {
@@ -64,11 +62,7 @@ export async function generateMetadata({
 }
 
 // ✅ Page component (server-side)
-export default async function ProductPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function ProductPage({ params }: Props) {
   const product = await fetchProductBySlug(params.slug);
   const products = await fetchProducts();
 
