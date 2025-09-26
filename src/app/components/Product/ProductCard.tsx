@@ -61,26 +61,31 @@ const ProductCard: React.FC = () => {
       </p>
 
       {/* Product Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl shadow-md">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl">
         {/* Left: Images */}
         <div className="flex flex-col lg:col-span-1">
-          <div className="flex flex-col sm:flex-row sm:space-x-4 ">
+          <div className="flex flex-col sm:flex-row sm:space-x-4">
             {/* Thumbnails */}
-            <div className="flex sm:flex-col gap-2 sm:gap-y-3 overflow-x-auto sm:overflow-visible pb-2 sm:pb-0">
-              {images.map((img, idx) => (
-                <Image
-                  key={idx}
-                  src={img}
-                  alt={`Thumbnail ${idx + 1}`}
-                  onClick={() => setSelectedImage(img)}
-                  className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${
-                    selectedImage === img
-                      ? "border-2 border-blue-500"
-                      : "border"
-                  }`}
-                />
-              ))}
-            </div>
+          <div
+  className="
+    flex gap-2 pb-2
+    max-[642px]:flex-row max-[642px]:overflow-x-auto max-[642px]:pb-2
+    sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0
+  "
+>
+  {images.map((img, idx) => (
+    <Image
+      key={idx}
+      src={img}
+      alt={`Thumbnail ${idx + 1}`}
+      onClick={() => setSelectedImage(img)}
+      className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${
+        selectedImage === img ? "border-2 border-blue-500" : "border"
+      }`}
+    />
+  ))}
+</div>
+
 
             <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] ">
               <Image
@@ -98,7 +103,8 @@ const ProductCard: React.FC = () => {
         </div>
 
         {/* Right: Details */}
-        <div className="flex flex-col h-full lg:col-span-2 ">
+        <div className="flex flex-col h-full w-full lg:w-[42rem]">
+
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-[var(--primary-color)] mb-2 lg:mb-0">
               {product.name}
@@ -247,8 +253,9 @@ const ProductCard: React.FC = () => {
         </div>
 
         {/* Support Section */}
-        <div className="lg:col-span-1">
-          <div className="mt-6 border border-gray-300 rounded-lg text-center h-max ">
+        <div className="w-full mt-0 lg:mt-6 lg:w-[27rem] lg:ml-[6rem]">
+
+          <div className="mt-6 border border-gray-300 rounded-lg text-center h-max">
             {/* Avatars */}
             <div className="bg-[#F5F6FA] p-2 ">
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">

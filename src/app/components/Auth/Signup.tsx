@@ -55,7 +55,8 @@ const SignupPage = () => {
           Create an account to get started.
         </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-5 max-[642px]:max-w-sm 
+    max-[642px]:mx-auto">
           {/* Name Fields */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
