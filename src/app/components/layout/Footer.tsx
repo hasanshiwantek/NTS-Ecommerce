@@ -1,9 +1,14 @@
-import React from 'react'
-import FooterBottom from '../Footer/FooterBottom'
-const Footer = () => {
-  return (
-    <div><FooterBottom/></div>
-  )
-}
+// components/Footer/Footer.tsx
+import FooterBottom from "../Footer//FooterBottom";
+// import { fetchCategories } from "@/lib/api/category";
 
-export default Footer
+
+export default  function Footer() {
+  // const categories = await fetchCategories();
+
+  return (
+    <footer>
+      <FooterBottom  />
+    </footer>
+  );
+}
