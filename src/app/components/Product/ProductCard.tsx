@@ -25,7 +25,7 @@ import supportIcon2 from "@/assets/support/support-img2.png";
 import supportIcon3 from "@/assets/support/support-img3.png";
 import { Phone, Plus, Minus } from "lucide-react";
 import Image from "next/image";
-const SingleProduct: React.FC = () => {
+const ProductCard: React.FC = () => {
   const [quantity, setQuantity] = useState(0);
   // Array of product images
   const images = [laptopimg1, laptopimg2, laptopimg3, laptopimg4, laptopimg5];
@@ -324,4 +324,4 @@ const SingleProduct: React.FC = () => {
   );
 };
 
-export default SingleProduct;
+export default ProductCard;

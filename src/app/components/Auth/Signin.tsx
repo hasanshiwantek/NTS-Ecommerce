@@ -49,8 +49,8 @@ const SigninPage = () => {
     </div>
 
     {/* Right Section (Form) */}
-    <div className="flex justify-center w-full">
-      <div className="p-10 bg-white w-full sm:w-10/12 md:w-8/12 lg:w-7/12">
+    <div className="flex justify-center w-full ">
+      <div className="p-10 bg-white w-full  sm:w-10/12 md:w-8/12 lg:w-7/12">
         <h2 className="h1-primary text-center mb-1">Welcome back</h2>
         <p className="p-primary text-center mb-6">
           Login to your account
