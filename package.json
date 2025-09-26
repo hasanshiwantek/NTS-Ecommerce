@@ -37,6 +37,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "font-awesome": "^4.7.0",
+    "framer-motion": "^12.23.22",
     "jodit-react": "^5.2.19",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
