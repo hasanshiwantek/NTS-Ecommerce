@@ -8,7 +8,7 @@ import ProductReview from "@/app/components/Product/ProductReview";
 import RelatedProduct from "@/app/components/Home/RelatedProducts";
 type PageProps = {
   params: {
-    slug: string;
+    slug: any;
   };
 };
 // ✅ Dynamic metadata for SEO
