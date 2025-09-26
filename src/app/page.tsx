@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import RelatedProduct from "./components/Home/RelatedProducts";
 import Banner from "./components/Home/Banner";
-
+import { fetchProducts } from "@/lib/api/products";
+import Spinner from "./components/loader/loader";
+import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Home | New Town Spares",
   description:
@@ -30,12 +32,16 @@ export const metadata: Metadata = {
   },
 };
 
-const Page = () => {
+const Page = async () => {
+  const products = await fetchProducts();
+
   return (
     <>
       <main className="flex flex-col gp-5" role="main">
         <Banner />
-        <RelatedProduct />
+        <Suspense fallback={<Spinner/>}>
+          <RelatedProduct products={products.slice(0, 8)} />
+        </Suspense>
       </main>
     </>
   );

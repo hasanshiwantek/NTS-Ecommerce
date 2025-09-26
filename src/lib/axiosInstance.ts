@@ -1,20 +1,21 @@
+// lib/axiosInstance.ts
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
-  baseURL: "https://wellers.brokercell.com/api/",
+  baseURL: "https://ecom.brokercell.com/api/",
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  if (typeof window != "undefined") {
+  if (typeof window !== "undefined") {
     const token = localStorage.getItem("token");
-    // const storeId = localStorage.getItem("storeId");
+    const storeId = 4;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    // if (storeId) {
-    //   config.headers["storeId"] = Number(storeId);
-    // }
+    if (storeId) {
+      config.headers["storeId"] = Number(storeId);
+    }
   }
 
   return config;
@@ -33,7 +34,6 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    // ✅ Show the main message
     if (error.response?.data?.message) {
       toast.error(error.response.data.message, {
         style: {
@@ -43,7 +43,6 @@ axiosInstance.interceptors.response.use(
       });
     }
 
-    // ✅ Show each validation error from `errors` object
     const errors = error.response?.data.errors;
     if (errors && typeof errors === "object") {
       Object.values(errors).forEach((fieldErrors) => {
