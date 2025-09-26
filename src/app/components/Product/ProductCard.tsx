@@ -66,31 +66,32 @@ const ProductCard: React.FC = () => {
         <div className="flex flex-col lg:col-span-1">
           <div className="flex flex-col sm:flex-row sm:space-x-4">
             {/* Thumbnails */}
-          <div
-  className="
+            <div
+              className="
     flex gap-2 pb-2
     max-[642px]:flex-row max-[642px]:overflow-x-auto max-[642px]:pb-2
     sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0
   "
->
-  {images.map((img, idx) => (
-    <Image
-      key={idx}
-      src={img}
-      alt={`Thumbnail ${idx + 1}`}
-      onClick={() => setSelectedImage(img)}
-      className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${
-        selectedImage === img ? "border-2 border-blue-500" : "border"
-      }`}
-    />
-  ))}
-</div>
-
+            >
+              {images.map((img, idx) => (
+                <Image
+                  key={idx}
+                  src={img}
+                  alt={`Thumbnail ${idx + 1}`}
+                  onClick={() => setSelectedImage(img)}
+                  className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${
+                    selectedImage === img
+                      ? "border-2 border-blue-500"
+                      : "border"
+                  }`}
+                />
+              ))}
+            </div>
 
             <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] ">
               <Image
                 src={
-                  "https://cdn11.bigcommerce.com/s-4jpol1blth/images/stencil/640w/products/78219/966124/41FF8B7RPNL._AC___93112.1736531700.jpg?c=1"
+                  "https://cdn11.bigcommerce.com/s-4jpol1blth/images/stencil/640w/products/78219/966124/41FF8B7RPNL._AC___93112.1736531700.jpg?c=1%22"
                 }
                 alt="Selected Product"
                 className="w-full h-full object-contain rounded-lg  "
@@ -104,7 +105,6 @@ const ProductCard: React.FC = () => {
 
         {/* Right: Details */}
         <div className="flex flex-col h-full w-full lg:w-[42rem]">
-
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-[var(--primary-color)] mb-2 lg:mb-0">
               {product.name}
@@ -253,8 +253,7 @@ const ProductCard: React.FC = () => {
         </div>
 
         {/* Support Section */}
-        <div className="w-full mt-0 lg:mt-6 lg:w-[27rem] lg:ml-[6rem]">
-
+        <div className="w-full mt-0 lg:mt-6 lg:w-[27rem] lg:ml-[9rem]">
           <div className="mt-6 border border-gray-300 rounded-lg text-center h-max">
             {/* Avatars */}
             <div className="bg-[#F5F6FA] p-2 ">
