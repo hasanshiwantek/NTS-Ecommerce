@@ -64,7 +64,7 @@ export async function generateMetadata({
 }
 
 // ✅ Page component (server-side)
-const ProductPage = async ({ params }: ProductPageProps) => {
+const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const product = await fetchProductBySlug(params.slug);
   const products = await fetchProducts();
 
