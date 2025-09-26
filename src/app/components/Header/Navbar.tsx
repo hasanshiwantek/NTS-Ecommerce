@@ -102,9 +102,11 @@ const Navbar: React.FC = () => {
               <div className="flex flex-col leading-tight">
                 <p className="text-base text-gray-200">Account</p>
                 <div className="flex items-center gap-1">
+                  <Link href={"/auth/login"}>
                   <button className="text-sm font-medium hover:text-blue-300">
                     Sign In
                   </button>
+                  </Link>
                   <span>/</span>
                   <Link href={"/auth/signup"}>
                     <button className="text-sm font-medium hover:text-blue-300">

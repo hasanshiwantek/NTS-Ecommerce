@@ -21,10 +21,12 @@ const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
       <AnimatePresence mode="wait" initial={false}>
         <motion.main
           key={pathname}
-          className="flex-grow !p-6 !px-[5%]"
-          initial={{ opacity: 0, y: 15 }}   // page hidden + neeche se
-          animate={{ opacity: 1, y: 0 }}    // smooth entry
-          exit={{}}                         // ❌ disable exit animation
+          className={`flex-grow ${
+            pathname.includes("/auth") ? "" : "!p-6 !px-[5%]"
+          }`}
+          initial={{ opacity: 0, y: 15 }} // page hidden + neeche se
+          animate={{ opacity: 1, y: 0 }} // smooth entry
+          exit={{}} // ❌ disable exit animation
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           {children}
