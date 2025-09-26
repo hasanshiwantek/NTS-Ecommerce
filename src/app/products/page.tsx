@@ -11,7 +11,7 @@ const page = () => {
       <ProductOverview/>
       <ProductFAQs/>
       <ProductReview/>
-      <RelatedProduct/>
+      {/* <RelatedProduct /> */}
     </div>
   );
 };
