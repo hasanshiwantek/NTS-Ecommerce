@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import Script from "next/script";
 import { fetchProductBySlug, fetchProducts } from "@/lib/api/products";
 import ProductCard from "@/app/components/Product/ProductCard";
@@ -13,7 +13,10 @@ interface PageProps {
   };
 }
 // ✅ Dynamic metadata for SEO
-export async function generateMetadata({ params }:PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: PageProps,
+  parent?: ResolvingMetadata
+): Promise<Metadata> {
   const product = await fetchProductBySlug(params.slug);
 
   if (!product) {
