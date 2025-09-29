@@ -6,12 +6,6 @@ import ProductOverview from "@/app/components/Product/ProductOverview";
 import ProductFAQs from "@/app/components/Product/ProductFAQs";
 import ProductReview from "@/app/components/Product/ProductReview";
 import RelatedProduct from "@/app/components/Home/RelatedProducts";
-// ✅ Interface for route params
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata(
   { params }: { params: { slug: string } },
