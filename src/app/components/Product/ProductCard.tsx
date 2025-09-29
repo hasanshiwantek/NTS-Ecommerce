@@ -10,25 +10,17 @@ import freelogo from "@/assets/card-icon/freelogo.png";
 import dhllogo from "@/assets/card-icon/dhllogo.png";
 import upslogo from "@/assets/card-icon/upslogo.png";
 import feedxlogo from "@/assets/card-icon/feedxlogo.png";
-import fasterlogo from "@/assets/card-icon/fasterlogo.png";
-import bluelogo from "@/assets/card-icon/bluelogo.png";
-import dunlogo from "@/assets/card-icon/dunlogo.png";
-import authorizelogo from "@/assets/card-icon/authorizelogo.png";
-import trustlogo from "@/assets/card-icon/trustlogo.png";
-import laptopimg1 from "@/assets/laptopimg1.png";
-import laptopimg2 from "@/assets/laptopimg2.png";
-import laptopimg3 from "@/assets/laptopimg3.png";
-import laptopimg4 from "@/assets/laptopimg4.png";
-import laptopimg5 from "@/assets/laptopimg5.png";
 import supportIcon1 from "@/assets/support/support-img1.png";
 import supportIcon2 from "@/assets/support/support-img2.png";
 import supportIcon3 from "@/assets/support/support-img3.png";
 import { Phone, Plus, Minus } from "lucide-react";
 import Image from "next/image";
-const ProductCard: React.FC = () => {
+const ProductCard = ({ product }: { product: any }) => {
   const [quantity, setQuantity] = useState(0);
-  // Array of product images
-  const images = [laptopimg1, laptopimg2, laptopimg3, laptopimg4, laptopimg5];
+  const images =
+    product?.image?.length > 0
+      ? product.image.map((img: any) => img.path)
+      : ["/default-product-image.svg"];
 
   // Selected image state (default = first image)
   const [selectedImage, setSelectedImage] = useState(images[0]);
@@ -38,26 +30,23 @@ const ProductCard: React.FC = () => {
     if (quantity > 0) setQuantity(quantity - 1);
   };
 
-  const product = {
-    name: "Western Digital",
-    name2:
-      "PA905U - Targus 720KB PC 1.44MB PC 1.4MB Mac 1 x 4-pin Type A Male Hot-Swappable 3.5-Inch External Floppy Drive",
-    code: "CODE92934U9",
-    price: 28.0,
-    originalPrice: 40.0,
-    rating: 4.5,
-    reviews: 324,
-    image:
-      "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400",
-  };
-
   return (
     <div className="max-w-full mx-auto ">
       {/* Breadcrumb */}
       <p className="p-primary text-base sm:text-sm text-gray-500 mb-4 sm:mb-6">
         Home <span className="mx-2">{">"}</span>
-        {product.name} <span className="mx-2">{">"}</span>
-        <span className="text-gray-700 font-medium">{product.code}</span>
+        {product?.categoryHierarchy?.map((cat: any, idx: number) => (
+          <span key={cat.id}>
+            {cat.name}
+            {idx < product.categoryHierarchy.length - 1 && (
+              <span className="mx-2">{">"}</span>
+            )}
+          </span>
+        ))}
+        <span className="mx-2">{">"}</span>
+        <span className="text-gray-700 font-medium">
+          {product?.sku || "N/A"}
+        </span>
       </p>
 
       {/* Product Layout */}
@@ -68,16 +57,18 @@ const ProductCard: React.FC = () => {
             {/* Thumbnails */}
             <div
               className="
-    flex gap-2 pb-2
-    max-[642px]:flex-row max-[642px]:overflow-x-auto max-[642px]:pb-2
-    sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0
-  "
+                flex gap-2 pb-2
+                max-[642px]:flex-row max-[642px]:overflow-x-auto max-[642px]:pb-2
+                sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0
+              "
             >
-              {images.map((img, idx) => (
+              {images.map((img: string, idx: number) => (
                 <Image
                   key={idx}
                   src={img}
                   alt={`Thumbnail ${idx + 1}`}
+                  width={96}
+                  height={80}
                   onClick={() => setSelectedImage(img)}
                   className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${
                     selectedImage === img
@@ -88,16 +79,14 @@ const ProductCard: React.FC = () => {
               ))}
             </div>
 
+            {/* Main Image */}
             <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] ">
               <Image
-                src={
-                  "https://cdn11.bigcommerce.com/s-4jpol1blth/images/stencil/640w/products/78219/966124/41FF8B7RPNL._AC___93112.1736531700.jpg?c=1%22"
-                }
-                alt="Selected Product"
-                className="w-full h-full object-contain rounded-lg  "
+                src={selectedImage || "/default-product-image.svg"}
+                alt={product?.image?.[0]?.altText || product?.name || "Product"}
+                className="w-full h-full object-contain rounded-lg"
                 width={500}
                 height={500}
-                objectFit="contain"
               />
             </div>
           </div>
@@ -107,20 +96,20 @@ const ProductCard: React.FC = () => {
         <div className="flex flex-col h-full w-full lg:w-[42rem]">
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-[var(--primary-color)] mb-2 lg:mb-0">
-              {product.name}
+              {product?.name || "N/A"}
             </h1>
             <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 leading-7 mb-3">
-              {product.name2}
+              {product?.pageTitle || "N/A"}
             </h1>
 
             {/* Rating */}
             <div className="flex items-center space-x-2 mb-4">
               <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
               <span className="text-gray-700 font-semibold text-base">
-                {product.rating}
+                {product?.rating || "N/A"}
               </span>
               <span className="text-blue-500 font-bold text-base">
-                ({product.reviews} reviews)
+                ({product?.reviews || "N/A"} reviews)
               </span>
             </div>
 
@@ -128,10 +117,13 @@ const ProductCard: React.FC = () => {
             <div className="mb-6">
               <div className="flex items-center space-x-3 mb-3">
                 <span className="text-2xl sm:text-3xl font-bold">
-                  £{product.price}.00
+                  £{Number(product?.price || 0).toFixed(2)}
                 </span>
                 <span className="text-base sm:text-lg line-through text-pink-400">
-                  £{product.originalPrice}.00
+                  £
+                  {product?.msrp && product.msrp > 0
+                    ? Number(product.msrp).toFixed(2)
+                    : "N/A"}
                 </span>
               </div>
 
@@ -195,7 +187,7 @@ const ProductCard: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 my-3">
                 <span className=" span-primary ">SKU:</span>
                 <span className="text-sm sm:text-lg font-bold text-gray-900">
-                  Z9PR-D12-(ASMB6-IKVM)
+                  {product?.sku || "N/A"}
                 </span>
               </div>
 
@@ -203,7 +195,7 @@ const ProductCard: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
                 <span className="span-primary">Availability:</span>
                 <span className="text-sm sm:text-lg text-green-900">
-                  In Stock
+                  {product?.availabilityText || "N/A"}
                 </span>
               </div>
 
