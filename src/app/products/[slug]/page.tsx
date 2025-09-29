@@ -9,7 +9,6 @@ import RelatedProduct from "@/app/components/Home/RelatedProducts";
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
-  _parent?: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params; // <-- await here
   const product = await fetchProductBySlug(slug);
