@@ -7,11 +7,12 @@ import ProductFAQs from "@/app/components/Product/ProductFAQs";
 import ProductReview from "@/app/components/Product/ProductReview";
 import RelatedProduct from "@/app/components/Home/RelatedProducts";
 // ✅ Dynamic metadata for SEO
-export async function generateMetadata(props: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { params } = props;
-  const product = await fetchProductBySlug(params.slug);
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> },
+  _parent?: ResolvingMetadata
+): Promise<Metadata> {
+  const { slug } = await params; // <-- await here
+  const product = await fetchProductBySlug(slug);
 
   if (!product) {
     return {
@@ -20,7 +21,7 @@ export async function generateMetadata(props: {
     };
   }
 
-  const url = `https://nts-ecommerce.vercel.app/products/${params.slug}`;
+  const url = `https://nts-ecommerce.vercel.app/products/${slug}`;
 
   return {
     title: `${product.pageTitle || product.name} | New Town Spares`,
@@ -59,11 +60,15 @@ export async function generateMetadata(props: {
 }
 
 // ✅ Page component (server-side)
-export default async function ProductPage(props: { params: { slug: string } }) {
-  const { params } = props; // ✅ unwrap props synchronously
-  console.log("Slug param:", params.slug); // should log string, not Promise
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params; // <-- await here
+  console.log("Slug: ", slug);
 
-  const product = await fetchProductBySlug(params.slug);
+  const product = await fetchProductBySlug(slug);
   const products = await fetchProducts();
 
   if (!product) {
@@ -85,7 +90,7 @@ export default async function ProductPage(props: { params: { slug: string } }) {
     },
     offers: {
       "@type": "Offer",
-      url: `https://nts-ecommerce.vercel.app/products/${params.slug}`,
+      url: `https://nts-ecommerce.vercel.app/products/${slug}`,
       priceCurrency: "USD",
       price: product.price,
       availability: product.availabilityText
