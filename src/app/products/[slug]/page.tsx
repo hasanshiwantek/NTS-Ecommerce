@@ -14,7 +14,7 @@ interface PageProps {
 }
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata(
-  { params }: PageProps,
+  { params }: { params: { slug: string } },
   parent?: ResolvingMetadata
 ): Promise<Metadata> {
   const product = await fetchProductBySlug(params.slug);
@@ -65,7 +65,11 @@ export async function generateMetadata(
 }
 
 // ✅ Page component (server-side)
-export default async function ProductPage({ params }: PageProps) {
+export default async function ProductPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   console.log("......", params);
 
   const product = await fetchProductBySlug(params.slug);
