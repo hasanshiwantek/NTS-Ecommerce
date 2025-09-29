@@ -2,7 +2,7 @@
 import FooterBottom from "../Footer//FooterBottom";
 // import { fetchCategories } from "@/lib/api/category";
 
-export default async function Footer() {
+export default  function Footer() {
   // const categories = await fetchCategories();
 
   return (
