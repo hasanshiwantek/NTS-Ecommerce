@@ -111,10 +111,10 @@ const LinkHeader = () => {
 
   return (
     <header className="bg-[#5B5B5B] text-white">
-  <nav className="w-full flex items-center justify-between px-16 lg:px-32 py-3 relative">
+  <nav className="w-full flex items-center justify-start px-16 lg:px-32 py-3 relative">
     {/* Left Section: Menu Button */}
     <div
-      className="relative flex flex-1 items-center gap-2 mr-5"
+      className="relative flex  items-center gap-2 mr-8"
       ref={menuRef}
     >
       <button
@@ -139,7 +139,7 @@ const LinkHeader = () => {
     </div>
 
     {/* Right Section: Static Links */}
-    <ul className="hidden lg:flex flex-1 items-center gap-8 whitespace-nowrap">
+    <ul className="hidden lg:flex  items-center gap-8 whitespace-nowrap">
       <li>
         <Link href="/portable-storage" className="hover:text-gray-300">
           Portable Storage Drive

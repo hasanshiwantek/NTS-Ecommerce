@@ -3,11 +3,22 @@
 "use client";
 
 import { useState } from "react";
-
-export default function PriceFilter() {
+interface Props {
+  filters: any;
+  setFilters: (callback: (prev: any) => any) => void;
+}
+export default function PriceFilter({ filters, setFilters }: Props) {
   const [min, setMin] = useState(250);
   const [max, setMax] = useState(8000);
 
+  const handleConfirm = () => {
+    setFilters((prev) => ({
+      ...prev,
+      minPrice: min,
+      maxPrice: max,
+      page: 1, // Reset to first page
+    }));
+  };
   return (
     <div className="space-y-3">
       <div className="flex items-center space-x-2">
@@ -46,7 +57,10 @@ export default function PriceFilter() {
         />
       </div>
 
-      <button className="!w-full !py-1.5 !rounded !text-base btn-outline-primary">
+      <button
+        className="!w-full !py-1.5 !rounded !text-base btn-outline-primary"
+        onClick={handleConfirm}
+      >
         Confirm
       </button>
     </div>

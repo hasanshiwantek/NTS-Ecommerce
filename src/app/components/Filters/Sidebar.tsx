@@ -6,16 +6,23 @@ import CategoryFilter from "./CategoryFilter";
 import BrandFilter from "./BrandFilter";
 import PriceFilter from "./PriceFilter";
 import { ChevronUp, ChevronDown } from "lucide-react";
-
 export default function Sidebar({
   categories,
   brands,
+  filters,
+  setFilters,
 }: {
   categories: any;
   brands: any;
+  filters: any;
+  setFilters: any;
 }) {
-  const [expandedSection, setExpandedSection] = useState<string | null>("Top Brands");
-  const [expandedCategorySection, setExpandedCategorySection] = useState<string | null>(null);
+  const [expandedSection, setExpandedSection] = useState<string | null>(
+    "Top Brands"
+  );
+  const [expandedCategorySection, setExpandedCategorySection] = useState<
+    string | null
+  >(null);
 
   const toggleCategorySection = (section: string) => {
     setExpandedCategorySection((prev) => (prev === section ? null : section));
@@ -23,6 +30,24 @@ export default function Sidebar({
 
   const toggleSection = (section: string) => {
     setExpandedSection((prev) => (prev === section ? null : section));
+  };
+
+  // user clicks a category
+  const handleCategoryClick = (catId: number) => {
+    setFilters((prev: any) => ({
+      ...prev,
+      categoryIds: [catId], // or push multiple
+      page: 1, // reset page
+    }));
+  };
+
+  // user clicks a brand
+  const handleBrandClick = (brandId: number) => {
+    setFilters((prev: any) => ({
+      ...prev,
+      brandId,
+      page: 1,
+    }));
   };
 
   return (
@@ -58,7 +83,10 @@ export default function Sidebar({
                 transition={{ duration: 0.3 }}
                 className="mt-2 ml-2 border-l overflow-hidden"
               >
-                <BrandFilter brands={brands} />
+                <BrandFilter
+                  brands={brands}
+                  handleBrandClick={handleBrandClick}
+                />
               </motion.div>
             )}
           </AnimatePresence>
@@ -68,13 +96,23 @@ export default function Sidebar({
         {categories.map((cat: any) => (
           <li key={cat.id}>
             <div
-              onClick={() => toggleCategorySection(cat.name)}
+              onClick={() => {
+                toggleCategorySection(cat.name);
+                // ✅ trigger filter/API
+              }}
               className="flex justify-between cursor-pointer"
             >
-              <span className="li-primary !text-[#4A4A4A]">{cat.name}</span>
+              <span
+                className="li-primary !text-[#4A4A4A] hover:bg-gray-50"
+                onClick={() => handleCategoryClick(cat.id)}
+              >
+                {cat.name}
+              </span>
               <span
                 className={`transform transition-transform duration-300 ${
-                  expandedCategorySection === cat.name ? "rotate-180" : "rotate-0"
+                  expandedCategorySection === cat.name
+                    ? "rotate-180"
+                    : "rotate-0"
                 }`}
               >
                 <ChevronDown size={18} className="!text-[#4A4A4A]" />
@@ -90,7 +128,10 @@ export default function Sidebar({
                   transition={{ duration: 0.3 }}
                   className="mt-2 ml-2 border-l overflow-hidden"
                 >
-                  <CategoryFilter categories={cat.subcategories || []} />
+                  <CategoryFilter
+                    categories={cat.subcategories || []}
+                    handleCategoryClick={handleCategoryClick}
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -100,13 +141,14 @@ export default function Sidebar({
 
       {/* Price Filter */}
       <div className="mt-2">
-
-      <div className="border-t bg-gray-50 px-4 py-3 mt-2">
-        <h2 className="!text-xl !font-semibold !text-[#4A4A4A]">Shop by price</h2>
-      </div>
-      <div className="p-4">
-        <PriceFilter />
-      </div>
+        <div className="border-t bg-gray-50 px-4 py-3 mt-2">
+          <h2 className="!text-xl !font-semibold !text-[#4A4A4A]">
+            Shop by price
+          </h2>
+        </div>
+        <div className="p-4">
+          <PriceFilter filters={filters} setFilters={setFilters} />
+        </div>
       </div>
 
       {/* Footer Info */}

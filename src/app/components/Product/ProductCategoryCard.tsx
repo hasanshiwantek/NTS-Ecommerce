@@ -1,50 +1,71 @@
 // components/Product/ProductCategoryCard.tsx
-
+import Link from "next/link";
 interface Product {
-  title: string;
-  price: number;
-  oldPrice: number;
+  id: number;
+  name: string;
+  slug: string;
   sku: string;
-  rating: number;
-  reviews: number;
-  image: string;
+  price: any;
+  msrp: any;
+  rating: any;
+  reviews: any;
+  brand?: { id: number; name: string };
+  categories?: { id: number; name: string }[];
+  image?: { path?: string }[];
+  availabilityText?: string;
+  description?: string;
+  customFields?: Record<string, string>;
 }
+
 import { ShoppingCart } from "lucide-react";
 export default function ProductCategoryCard({ product }: { product: Product }) {
+  const imageUrl = product.image?.[0]?.path || "./default-product-image.svg";
   return (
-    <div className="border rounded p-4 flex md:flex-col sm:flex-col lg:flex-row xl:flex-row flex-col gap-4 items-center">
+    <div className="border rounded p-4 grid grid-cols-1 md:grid-cols-[120px_1fr_auto] gap-4 items-center">
       {/* Image */}
       <img
-        src={product.image}
-        alt={product.title}
+        src={imageUrl}
+        alt={product?.name}
         className="w-[120px] h-[120px] object-contain"
       />
-
       {/* Info */}
       <div className="">
-        <h3 className="font-medium text-xl mb-1 text-[#4A4A4A]">
-          {product.title}
-        </h3>
+        <Link href={`/products/${product?.slug}`} className="cursor-pointer">
+          <h3 className="font-medium text-xl mb-1 text-[#4A4A4A]">
+            {product?.name}
+          </h3>
+        </Link>
 
         <div className="flex items-center gap-2 text-[var(--primary-color)] text-sm font-semibold">
-          ★ {product.rating}
-          <span className="!text-[#1A80AD] font-semibold">
-            ({product.reviews} Reviews)
-          </span>
+          {product.rating && product.reviews > 0 ? (
+            <>
+              ★ {product?.rating}
+              <span className="!text-[#1A80AD] font-semibold">
+                ({product?.reviews} Reviews)
+              </span>
+            </>
+          ) : (
+            <span className="text-gray-500 italic">No reviews yet</span>
+          )}
         </div>
 
         <p className="span-primary  mt-1">
-          <span className="span-primary  ">HP SKU:</span>{" "}
-          <span className="span-primary  ">{product.sku}</span>
+          <span className="span-primary  ">SKU:</span>{" "}
+          <span className="span-primary  ">{product?.sku}</span>
         </p>
 
         <div className="flex items-center gap-2 mt-2">
           <p className="text-lg font-bold text-[#4A4A4A]">
-            £{product.price.toFixed(2)}
+            {product?.price && !isNaN(Number(product.price))
+              ? `£${Number(product.price).toFixed(2)}`
+              : "Price not available"}
           </p>
-          <p className="text-sm text-red-500 line-through">
-            £{product.oldPrice.toFixed(2)}
-          </p>
+
+          {product.msrp > 0 && (
+            <p className="text-sm text-red-500 line-through">
+              £{Number(product?.msrp).toFixed(2)}
+            </p>
+          )}
         </div>
       </div>
 
