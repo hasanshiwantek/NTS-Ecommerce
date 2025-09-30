@@ -1,33 +1,22 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Button } from "@/components/ui/button"
 
 type PaginationProps = {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-  perPage: string;
-  onPerPageChange: (value: string) => void;
-};
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
+}
 
 const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
-  perPage,
-  onPerPageChange,
 }: PaginationProps) => {
   const getVisiblePages = () => {
-    if (totalPages <= 7) return [...Array(totalPages).keys()].map((i) => i + 1);
+    if (totalPages <= 7) return [...Array(totalPages).keys()].map((i) => i + 1)
 
-    if (currentPage <= 4) return [1, 2, 3, 4, 5, "...", totalPages];
+    if (currentPage <= 4) return [1, 2, 3, 4, 5, "...", totalPages]
     if (currentPage >= totalPages - 3)
       return [
         1,
@@ -37,7 +26,7 @@ const Pagination = ({
         totalPages - 2,
         totalPages - 1,
         totalPages,
-      ];
+      ]
     return [
       1,
       "...",
@@ -46,59 +35,62 @@ const Pagination = ({
       currentPage + 1,
       "...",
       totalPages,
-    ];
-  };
+    ]
+  }
 
   return (
-    <div className="flex items-center justify-start gap-5 px-2 text-lg ">
-      {/* Page numbers */}
-      <div className="flex items-center space-x-1">
-        {getVisiblePages().map((page, i) =>
-          page === "..." ? (
-            <span key={`ellipsis-${i}`} className="text-gray-500 px-1">
-              ...
-            </span>
-          ) : (
-            <Button
-              key={i}
-              variant={currentPage === page ? "secondary" : "ghost"}
-              size="lg"
-              className={`h-7 w-7 p-2 text-[var(--primary-color)] font-medium text-xl cursor-pointer hover:text-gray-400 hover:border ${
-                currentPage === page && "bg-[var(--primary-color)] text-white "
-              }`}
-              onClick={() => onPageChange(Number(page))}
-            >
-              {page}
-            </Button>
-          )
-        )}
-        {currentPage < totalPages && (
-          <button
-            onClick={() => onPageChange(currentPage + 1)}
-            className="text-[var(--primary-color)]  mx-4 text-xl"
+    <div className="flex justify-center items-center space-x-1 mt-6">
+      {/* Prev Button */}
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="rounded px-3 text-sm"
+      >
+        Prev
+      </Button>
+
+      {/* Page Buttons */}
+      {getVisiblePages().map((page, i) =>
+        page === "..." ? (
+          <span
+            key={`ellipsis-${i}`}
+            className="px-2 text-sm text-gray-500 select-none"
           >
-            Next
-          </button>
-        )}
-      </div>
+            ...
+          </span>
+        ) : (
+          <Button
+            key={i}
+            size="sm"
+            variant={currentPage === page ? "default" : "outline"}
+            onClick={() => onPageChange(Number(page))}
+            className={`rounded px-3 text-sm ${
+              currentPage === page
+                ? "bg-[var(--primary-color)] text-white hover:bg-[var(--primary-color)]"
+                : ""
+            }`}
+          >
+            {page}
+          </Button>
+        )
+      )}
 
-      {/* View per page */}
-      <div className="flex items-center">
-        <Select value={perPage} onValueChange={onPerPageChange}>
-          <SelectTrigger className="">
-            <SelectValue placeholder={`View ${perPage}`} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="20">View 20</SelectItem>
-            <SelectItem value="10">View 10</SelectItem>
-            <SelectItem value="30">View 30</SelectItem>
-            <SelectItem value="50">View 50</SelectItem>
-            <SelectItem value="100">View 100</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      {/* Next Button */}
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="rounded px-3 text-sm"
+      >
+        Next
+      </Button>
     </div>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination
+
+
