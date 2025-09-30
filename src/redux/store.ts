@@ -1,15 +1,34 @@
-import { configureStore } from '@reduxjs/toolkit';
-import homeReducer from './slices/homeSlice';
-import authReducer from './slices/authSlice'
-import configReducer from './slices/configSlice'
- 
-export const store = configureStore({
-  reducer: {
-    home: homeReducer,
-    auth: authReducer,
-    config: configReducer,
-  },
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { persistReducer, persistStore } from "redux-persist";
+
+import homeReducer from "./slices/homeSlice";
+import authReducer from "./slices/authSlice";
+import configReducer from "./slices/configSlice";
+import cartSliceReducer from "./slices/cartSlice";
+
+// ✅ only cart persist hoga
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+};
+
+const rootReducer = combineReducers({
+  home: homeReducer,
+  auth: authReducer,
+  config: configReducer,
+  cart: persistReducer(cartPersistConfig, cartSliceReducer), // persisted
 });
+
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // redux-persist ke liye required
+    }),
+});
+
+export const persistor = persistStore(store);
 
 // Infer types
 export type RootState = ReturnType<typeof store.getState>;
