@@ -29,7 +29,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
   return (
     <div className=" my-8 relative">
-      <h1 className="h1-primary my-5">Related Products</h1>
+      <h1 className="h1-primary my-5 md:ml-28">Related Products</h1>
 
       {/* Slider Row */}
       <div className="flex items-center">
@@ -43,77 +43,79 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
         </button>
 
         {/* Products */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 flex-1 lg:px-4">
-          {visibleProducts.map((product: any) => (
-            <div
-              key={product.id}
-              className="group relative border rounded-lg  p-2 lg:p-6 flex flex-col items-start bg-white overflow-hidden"
-            >
-              {/* Product Image */}
-              <div className="w-full h-40 flex items-center justify-center mb-4">
-                <Image
-                  src={
-                    product.image?.[1]?.path ||
-                    product.image?.[0]?.path ||
-                    "/default-product-image.svg"
-                  }
-                  alt={product.name}
-                  width={160}
-                  height={160}
-                  className="object-contain max-h-full"
-                />
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-11/12 m-auto lg:px-4">
+  {visibleProducts.map((product: any) => (
+    <div
+      key={product.id}
+      className="group relative border rounded-lg p-4 lg:p-6 flex flex-col items-start bg-white overflow-hidden"
+    >
+      {/* Product Image */}
+      <div className="w-full h-40 flex items-center justify-center mb-4">
+        <Image
+          src={
+            product.image?.[1]?.path ||
+            product.image?.[0]?.path ||
+            "/default-product-image.svg"
+          }
+          alt={product.name}
+          width={160}
+          height={160}
+          className="object-contain max-h-full"
+        />
+      </div>
 
-              {/* Product Name */}
-              <Link
-                href={`/products/${product?.slug}`}
-                className="cursor-pointer hover:underline"
-              >
-                <p className="mb-2 font-semibold text-lg line-clamp-2 text-[#4A4A4A]">
-                  {product.name}
-                </p>
-              </Link>
+      {/* Product Name */}
+      <Link
+        href={`/products/${product?.slug}`}
+        className="cursor-pointer hover:underline"
+      >
+        <p className="mb-2 font-semibold text-lg line-clamp-2 text-[#4A4A4A]">
+          {product.name}
+        </p>
+      </Link>
 
-              {/* Price + Title (default state) */}
-              <div className="transition-all duration-300 group-hover:translate-y-10 opacity-100 group-hover:opacity-0">
-                <h3 className="mb-1 text-lg text-[#666666]">
-                  {product.pageTitle}
-                </h3>
-                <p className="text-lg font-semibold">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    minimumFractionDigits: 2,
-                  }).format(Number(product.price))}
-                </p>
-              </div>
+      {/* Price + Title (always visible ✅) */}
+      <div>
+        <h3 className="text-lg text-[#666666]">
+          {product.brand.name  + " | " +  product.availabilityText}
+        </h3>
+        <p className="text-lg font-semibold">
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+          }).format(Number(product.price))}
+        </p>
+      </div>
 
-              {/* Action Buttons (hover state) */}
-              <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 opacity-0 translate-y-10 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 p-2">
-                <button
-                   onClick={() => {
-    dispatch(
-      addToCart({
-        id: product.id,
-        name: product.name,
-        price: Number(product.price),
-        image: product.image?.[0]?.path || "/default-product-image.svg",
-        slug: product.slug,
-      })
-    );
-    toast.success(`${product.name} added to cart!`);
-  }}
-                  className="btn-primary w-56"
-                >
-                  Add to Cart
-                </button>
-                <button className="w-56 text-[#4A4A4A] bg-white border-1 border-[#4A4A4A] font-medium rounded-md px-4 py-[6px] text-xl transition-all my-1 duration-200 cursor-pointer">
-                  Get Quote
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Action Buttons (hover state) */}
+      <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 opacity-0 translate-y-10 group-hover:translate-y-8 lg:group-hover:translate-y-6 group-hover:opacity-100 transition-all duration-300 p-2">
+        <button
+          onClick={() => {
+            dispatch(
+              addToCart({
+                id: product.id,
+                name: product.name,
+                price: Number(product.price),
+                image:
+                  product.image?.[0]?.path || "/default-product-image.svg",
+                slug: product.slug,
+              })
+            );
+            toast.success(`${product.name} added to cart!`);
+          }}
+          className="btn-primary w-full lg:w-52 lg:mr-2"
+        >
+          Add to Cart
+        </button>
+        <button className="w-full lg:w-52 lg:mr-2 text-[#4A4A4A] bg-white border border-[#4A4A4A] font-medium rounded-md px-4 py-[6px] text-xl transition-all my-1 duration-200 cursor-pointer">
+          Get Quote
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         {/* Right Arrow */}
         <button
