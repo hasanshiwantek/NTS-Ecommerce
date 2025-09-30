@@ -70,7 +70,7 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
 
             {/* Main Image */}
-            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] ">
+            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] border-2">
               <Image
                 src={selectedImage || "/default-product-image.svg"}
                 alt={product?.image?.[0]?.altText || product?.name || "Product"}
