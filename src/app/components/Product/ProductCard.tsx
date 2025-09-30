@@ -29,7 +29,6 @@ const ProductCard = ({ product }: { product: any }) => {
   const decrement = () => {
     if (quantity > 0) setQuantity(quantity - 1);
   };
-
   return (
     <div className="max-w-full mx-auto">
       {/* Breadcrumb */}
@@ -61,10 +60,12 @@ const ProductCard = ({ product }: { product: any }) => {
                   width={150}
                   height={150}
                   onClick={() => setSelectedImage(img)}
-                  className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${selectedImage === img
-                      ? "border-2 border-blue-500"
-                      : "border"
-                    }`}
+                 className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition 
+  ${selectedImage === img
+    ? "border-2 border-blue-500 ring-2 ring-blue-300"
+    : "border"
+  }`}
+
                 />
               ))}
             </div>
@@ -87,20 +88,21 @@ const ProductCard = ({ product }: { product: any }) => {
         <div className="flex flex-col h-full flex-1 min-w-[20rem]">
           <div>
             <h1 className="text-lg sm:text-xl font-bold text-[var(--primary-color)] mb-2 lg:mb-0">
-              {product.name}
+              {product?.brand?.name}
             </h1>
             <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 leading-7 mb-3">
               {product?.pageTitle || "N/A"}
             </h1>
 
             {/* Rating */}
-            <div className="flex items-center space-x-2 mb-4">
-              <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+            <div className="flex items-center space-x-3 mb-4">
+              {product?.rating &&   <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />}
+           
               <span className="text-gray-700 font-semibold text-base">
-                {product.rating}
+                {product?.rating || "N/A " + " Ratings"}
               </span>
               <span className="text-blue-500 font-bold text-base">
-                ({product.reviews} reviews)
+                {product.reviews || "N/A " + " Reviews"}  
               </span>
             </div>
 
@@ -172,7 +174,7 @@ const ProductCard = ({ product }: { product: any }) => {
               {/* Quantity */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mt-2">
                 <span className="span-primary">Quantity:</span>
-                <div className="flex items-center border border-gray-300 rounded-full px-2 mt-2 sm:mt-0">
+                <div className="flex items-center justify-center w-28 lg:w-24 border border-gray-300 rounded-full px-2 mt-2 sm:mt-0">
                   <button
                     onClick={decrement}
                     className="w-7 h-7 sm:w-6 sm:h-8 flex items-center justify-center text-gray-700 hover:text-red-500 transition"

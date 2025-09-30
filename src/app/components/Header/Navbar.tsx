@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
           <FaHeadphones className="h-6 w-6" />
           <div className="flex flex-col leading-tight">
             <p className="text-base text-gray-200">orders@newtownspares.com</p>
-            <p className="text-sm font-semibold">(209) 300 1234567</p>
+            <p className="text-lg font-medium">(209) 300 1234567</p>
           </div>
         </div>
 
