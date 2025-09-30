@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { RootState } from "@/redux/store";
+import { toast } from "react-toastify";
 const RelatedProduct = ({ products }: { products: Product[] }) => {
   const [startIndex, setStartIndex] = useState(0);
   const itemsPerPage = 4;
@@ -90,19 +91,18 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
               {/* Action Buttons (hover state) */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 opacity-0 translate-y-10 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 p-2">
                 <button
-                  onClick={() =>
-                    dispatch(
-                      addToCart({
-                        id: product.id,
-                        name: product.name,
-                        price: Number(product.price),
-                        image:
-                          product.image?.[0]?.path ||
-                          "/default-product-image.svg",
-                        slug: product.slug,
-                      })
-                    )
-                  }
+                   onClick={() => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: Number(product.price),
+        image: product.image?.[0]?.path || "/default-product-image.svg",
+        slug: product.slug,
+      })
+    );
+    toast.success(`${product.name} added to cart!`);
+  }}
                   className="btn-primary w-56"
                 >
                   Add to Cart
