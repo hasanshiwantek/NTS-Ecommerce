@@ -12,7 +12,7 @@ export default function BrandFilter({
         <li
           key={b.brand.id}
           className="px-2 py-[2px] hover:bg-gray-100 rounded cursor-pointer li-primary !text-[#666666]"
-          onClick={() => handleBrandClick(b.brand.id)}
+          onClick={() => handleBrandClick(b.brand.id, b.brand.name)}
         >
           {b.brand.name}
         </li>

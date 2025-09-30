@@ -4,6 +4,7 @@ interface Props {
   setView: (view: "list" | "grid") => void;
   filters: any;
   setFilters: any;
+  filterMeta:any;
 }
 
 export default function SortingBar({
@@ -12,6 +13,7 @@ export default function SortingBar({
   setView,
   filters,
   setFilters,
+  filterMeta,
 }: Props) {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
@@ -39,9 +41,36 @@ export default function SortingBar({
     }));
   };
 
+  // ✅ Build a dynamic title based on filters
+const getFilterTitle = () => {
+  const parts: string[] = [];
+
+  if (filterMeta.brandName) {
+    parts.push(`Brand: ${filterMeta.brandName}`);
+  }
+
+  if (filterMeta.categoryName) {
+    parts.push(`Category: ${filterMeta.categoryName}`);
+  }
+
+  if (filters.minPrice !== undefined && filters.maxPrice !== undefined) {
+    parts.push(`Price: $${filters.minPrice} - $${filters.maxPrice}`);
+  } else if (filters.minPrice !== undefined) {
+    parts.push(`Price: Above $${filters.minPrice}`);
+  } else if (filters.maxPrice !== undefined) {
+    parts.push(`Price: Below $${filters.maxPrice}`);
+  }
+
+  return parts.length === 0
+    ? `All Products (Showing ${total || 0})`
+    : `${parts.join(", ")} (Showing ${total || 0})`;
+};
+
+
   return (
     <div className="flex xl:flex-row lg:flex-row md:flex-col sm:flex-col flex-col justify-between items-center border p-4">
-      <h4 className="li-primary">Top Brands (Showing 96 of {total})</h4>
+      {/* ✅ Dynamic heading */}
+      <h4 className="li-primary">{getFilterTitle()}</h4>
 
       <div className="flex xl:flex-row lg:flex-row md:flex-col sm:flex-col flex-col items-center gap-3 text-sm">
         <span className="span-primary">Sort by</span>

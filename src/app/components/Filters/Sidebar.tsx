@@ -11,11 +11,17 @@ export default function Sidebar({
   brands,
   filters,
   setFilters,
+  products,
+  filterMeta,
+  setFilterMeta,
 }: {
   categories: any;
   brands: any;
   filters: any;
   setFilters: any;
+  products: any;
+  filterMeta: any;
+  setFilterMeta: any;
 }) {
   const [expandedSection, setExpandedSection] = useState<string | null>(
     "Top Brands"
@@ -33,21 +39,23 @@ export default function Sidebar({
   };
 
   // user clicks a category
-  const handleCategoryClick = (catId: number) => {
+  const handleCategoryClick = (catId: number, name: string) => {
     setFilters((prev: any) => ({
       ...prev,
       categoryIds: [catId], // or push multiple
       page: 1, // reset page
     }));
+    setFilterMeta((prev: any) => ({ ...prev, categoryName: name }));
   };
 
   // user clicks a brand
-  const handleBrandClick = (brandId: number) => {
+  const handleBrandClick = (brandId: number, name: string) => {
     setFilters((prev: any) => ({
       ...prev,
       brandId,
       page: 1,
     }));
+    setFilterMeta((prev: any) => ({ ...prev, brandName: name }));
   };
 
   return (
@@ -104,7 +112,7 @@ export default function Sidebar({
             >
               <span
                 className="li-primary !text-[#4A4A4A] hover:bg-gray-50"
-                onClick={() => handleCategoryClick(cat.id)}
+                onClick={() => handleCategoryClick(cat.id,cat.name)}
               >
                 {cat.name}
               </span>
@@ -152,8 +160,8 @@ export default function Sidebar({
       </div>
 
       {/* Footer Info */}
-      <div className="text-xs px-4 py-2 text-gray-500 border-t">
-        12 products
+      <div className="text-base px-4 py-2 text-gray-500 border-t">
+        {products?.length} products
       </div>
     </aside>
   );
