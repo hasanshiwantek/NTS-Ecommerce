@@ -58,8 +58,8 @@ const ProductCard = ({ product }: { product: any }) => {
                   key={idx}
                   src={img}
                   alt={`Thumbnail ${idx + 1}`}
-                  width={96}
-                  height={80}
+                  width={150}
+                  height={150}
                   onClick={() => setSelectedImage(img)}
                   className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition ${selectedImage === img
                       ? "border-2 border-blue-500"
@@ -70,7 +70,7 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
 
             {/* Main Image */}
-            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] border-2">
+            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px]  p-1">
               <Image
                 src={selectedImage || "/default-product-image.svg"}
                 alt={product?.image?.[0]?.altText || product?.name || "Product"}
@@ -124,11 +124,11 @@ const ProductCard = ({ product }: { product: any }) => {
                   Secure methods:
                 </span>
                 <div className="flex items-center gap-2">
-                  <Image src={visa} alt="Visa" className="h-6 w-auto" />
-                  <Image src={debit} alt="Debit" className="h-6 w-auto" />
-                  <Image src={paypal} alt="PayPal" className="h-6 w-auto" />
-                  <Image src={americanexpress} alt="AmEx" className="h-6 w-auto" />
-                  <Image src={googlepay} alt="GooglePay" className="h-6 w-auto" />
+                  <Image src={visa} alt="Visa" className="h-auto w-auto" />
+                  <Image src={debit} alt="Debit" className="h-auto w-auto" />
+                  <Image src={paypal} alt="PayPal" className="h-auto w-auto" />
+                  <Image src={americanexpress} alt="AmEx" className="h-auto w-auto" />
+                  <Image src={googlepay} alt="GooglePay" className="h-auto w-auto" />
                 </div>
               </div>
 
@@ -195,7 +195,7 @@ const ProductCard = ({ product }: { product: any }) => {
 
           {/* Actions */}
           <div className="flex justify-between items-center gap-3 sm:gap-4">
-            <button className="w-full btn-primary !rounded-full flex items-center justify-center space-x-2 transition !py-4">
+            <button className="w-full btn-primary !rounded-full flex items-center justify-center space-x-2 transition !py-3">
               <ShoppingCart className="w-5 h-5" />
               <span>Add to Cart</span>
             </button>
@@ -231,15 +231,15 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
             <div className="p-3">
               <div className="flex justify-center mb-2">
-                <button className="btn-outline-primary flex w-64 justify-center gap-5 items-center !rounded-full">
-                  <Phone width={15} height={15} /> Call us Now
+                <button className="btn-outline-primary flex w-64 justify-center gap-5 items-center !rounded-full !text-lg">
+                  <Phone width={12} height={12} /> Call us Now
                 </button>
               </div>
               <div className="flex justify-center gap-3 mb-3">
-                <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full">
+                <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-lg">
                   Email
                 </button>
-                <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full">
+                <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-lg">
                   Chat
                 </button>
               </div>
@@ -258,7 +258,7 @@ const ProductCard = ({ product }: { product: any }) => {
                 <p className="text-xl w-80 text-start">
                   Request a Quote and one of our sales representative will get in touch with you very soon
                 </p>
-                <button className="btn-outline-primary flex m-auto w-64 justify-center gap-5 items-center !rounded-full">
+                <button className="btn-outline-primary flex m-auto w-64 justify-center gap-5 items-center !rounded-full !text-lg">
                   Get Quote
                 </button>
               </div>

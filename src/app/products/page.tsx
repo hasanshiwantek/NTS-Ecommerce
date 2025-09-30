@@ -9,8 +9,8 @@ export default async function ProductsPage() {
   const brands = await fetchBrands();
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="flex gap-6">
+    <div className="container  ">
+      <div className="flex gap-6 py-4">
         {/* Sidebar: Filters */}
         <aside className="w-[240px] shrink-0  rounded  bg-white">
           <Sidebar categories={categories} brands={brands} />

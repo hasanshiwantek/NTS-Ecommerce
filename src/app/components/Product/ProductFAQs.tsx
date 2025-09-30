@@ -15,9 +15,9 @@ const ProductFAQs = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Column */}
-        <Accordion type="single" collapsible className="w-full space-y-3">
+        <Accordion type="single" collapsible className="w-full space-y-5">
           <AccordionItem value="q1" className="border rounded-md px-3">
-            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold !text-[#4A4A4A]">
               What is the purpose of the Targus 720KB external floppy drive?
             </AccordionTrigger>
             <AccordionContent className="text-lg text-gray-600 leading-7">
@@ -31,7 +31,7 @@ const ProductFAQs = () => {
           </AccordionItem>
 
           <AccordionItem value="q2" className="border rounded-md px-3">
-            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold !text-[#4A4A4A]">
               Professionals restoring old software or files from floppy disks.
             </AccordionTrigger>
             <AccordionContent className="text-lg text-gray-600 leading-7">
@@ -43,9 +43,9 @@ const ProductFAQs = () => {
         </Accordion>
 
         {/* Right Column */}
-        <Accordion type="single" collapsible className="w-full space-y-3">
+        <Accordion type="single" collapsible className="w-full space-y-5">
           <AccordionItem value="q3" className="border rounded-md px-3">
-            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold !text-[#4A4A4A]">
               Who can benefit from using the Targus 720KB external floppy drive?
             </AccordionTrigger>
             <AccordionContent className="text-lg text-gray-600 leading-7">
@@ -55,7 +55,7 @@ const ProductFAQs = () => {
           </AccordionItem>
 
           <AccordionItem value="q4" className="border rounded-md px-3">
-            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold !text-[#4A4A4A]">
               Individuals with legacy systems needing floppy disk access.
             </AccordionTrigger>
             <AccordionContent className="text-lg text-gray-600 leading-7">
@@ -65,7 +65,7 @@ const ProductFAQs = () => {
           </AccordionItem>
 
           <AccordionItem value="q5" className="border rounded-md px-3">
-            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold !text-[#4A4A4A]">
               Collectors of vintage technology requiring data retrieval.
             </AccordionTrigger>
             <AccordionContent className="text-lg text-gray-600 leading-7">
@@ -75,7 +75,7 @@ const ProductFAQs = () => {
           </AccordionItem>
 
           <AccordionItem value="q6" className="border rounded-md px-3">
-            <AccordionTrigger className="!text-lg sm:text-base font-semibold">
+            <AccordionTrigger className="!text-lg sm:text-base font-semibold !text-[#4A4A4A]">
               Students studying computer history and technology evolution.
             </AccordionTrigger>
             <AccordionContent className="text-lg text-gray-600 leading-7">

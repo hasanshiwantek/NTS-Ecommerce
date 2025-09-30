@@ -17,7 +17,9 @@ export default function PageTransition({
       <motion.main
         key={pathname}
         className={`flex-grow ${
-          pathname.includes("/auth") ? "" : "!p-6 !px-[5%]"
+          pathname.includes("/auth")
+            ? ""
+            : "py-6 lg:px-[7%] xl:px-[7%] 2xl:px-[6%] md:px-[7%] px-[7%]"
         }`}
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
