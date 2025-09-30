@@ -4,7 +4,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { RootState } from "@/redux/store";
+import { decreaseQty, increaseQty, removeFromCart } from "@/redux/slices/cartSlice";
 const CheckoutComponent = () => {
+     const dispatch = useAppDispatch();
+  const cart = useAppSelector((state: RootState) => state.cart.items);
+
+  // subtotal calculate
+  const subtotal = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  const shipping = cart.length > 0 ? 240 : 0; // dummy static shipping
+  const tax = 0; // static
+  const total = subtotal + shipping + tax;
+    
   return (
        <div className="bg-gray-50 min-h-screen py-10 px-[5%]">
       {/* Heading + Subheading */}
@@ -335,77 +351,93 @@ const CheckoutComponent = () => {
 
 
         {/* Right Section (Order Summary) */}
-        <div className="bg-white border lg:col-span-1 rounded-md shadow-sm p-6">
-          <h2 className="text-lg font-semibold flex items-center gap-2 mb-4">
-            <span className="w-6 h-6 flex items-center justify-center rounded-full border bg-red-600 text-white border-red-600 text-sm">
-              4
-            </span>
-            Order Summary
-          </h2>
+           <div className="bg-white border lg:col-span-1 rounded-md shadow-sm p-6">
+      <h2 className="text-lg font-semibold flex items-center gap-2 mb-4">
+        <span className="w-6 h-6 flex items-center justify-center rounded-full border bg-red-600 text-white border-red-600 text-sm">
+          {cart.length}
+        </span>
+        Order Summary
+      </h2>
 
-          <div className="space-y-4">
-            {[1, 2].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 border-b pb-3">
-                <Image
-                  src="/checkouticon/orderimg.png"
-                  alt="Card"
-                  width={100}
-                  height={35}
-                  className="object-cover"
-                />
-                <div className="flex-1">
-                  <p className="text-sm font-medium">
-                    PA905U - Targus 720KB PC 1.44MB
-                  </p>
-                  <p className="text-sm text-gray-500">$400.00</p>
+      <div className="space-y-4">
+        {cart.map((item, i) => (
+          <div key={i} className="flex items-center gap-3 border-b pb-3">
+            <Image
+              src={item.image || "/checkouticon/orderimg.png"}
+              alt={item.name}
+              width={100}
+              height={35}
+              className="object-cover"
+            />
+            <div className="flex-1">
+              <p className="text-sm font-medium">{item.name}</p>
+              <p className="text-sm text-gray-500">
+                ${item.price.toFixed(2)}
+              </p>
 
-                  <div className="flex items-center gap-2 mt-1">
-                    <button className="px-2 border">-</button>
-                    <span>3</span>
-                    <button className="px-2 border">+</button>
+              <div className="flex items-center gap-2 mt-1">
+                <button
+                  onClick={() => dispatch(decreaseQty(item.id))}
+                  className="px-2 border"
+                >
+                  -
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  onClick={() => dispatch(increaseQty(item.id))}
+                  className="px-2 border"
+                >
+                  +
+                </button>
 
-                    <button className="ml-auto text-gray-500 hover:text-red-700">
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
+                <button
+                  onClick={() => dispatch(removeFromCart(item.id))}
+                  className="ml-auto text-gray-500 hover:text-red-700"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
-            ))}
+            </div>
           </div>
+        ))}
+      </div>
 
-          <div className="mt-4 space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span>Cart Subtotal</span>
-              <span>$200.00</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>$240.00</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Tax</span>
-              <span>$0</span>
-            </div>
-          </div>
-
-          <div className="mt-4 space-y-2">
-            <label
-              htmlFor="discountCode"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Discount Code
-            </label>
-            <div className="flex gap-2">
-              <Input id="discountCode" type="text" className="flex-1" />
-              <button className="bg-gray-200 px-4 py-2 rounded">Apply</button>
-            </div>
-          </div>
-
-          <div className="mt-4 flex justify-between font-semibold text-lg">
-            <span>Order total</span>
-            <span>$440.00</span>
-          </div>
+      {/* Totals */}
+      <div className="mt-4 space-y-2 text-sm">
+        <div className="flex justify-between">
+          <span>Cart Subtotal</span>
+          <span>${subtotal.toFixed(2)}</span>
         </div>
+        <div className="flex justify-between">
+          <span>Shipping</span>
+          <span>${shipping.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Tax</span>
+          <span>${tax.toFixed(2)}</span>
+        </div>
+      </div>
+
+      {/* Discount Code */}
+      <div className="mt-4 space-y-2">
+        <label
+          htmlFor="discountCode"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Discount Code
+        </label>
+        <div className="flex gap-2">
+          <Input id="discountCode" type="text" className="flex-1" />
+          <button className="bg-gray-200 px-4 py-2 rounded">Apply</button>
+        </div>
+      </div>
+
+      {/* Total */}
+      <div className="mt-4 flex justify-between font-semibold text-lg">
+        <span>Order total</span>
+        <span>${total.toFixed(2)}</span>
+      </div>
+    </div>
       </div>
     </div>
   );
