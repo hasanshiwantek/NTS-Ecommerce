@@ -10,15 +10,17 @@ import { decreaseQty, increaseQty, removeFromCart } from "@/redux/slices/cartSli
 const CheckoutComponent = () => {
      const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
+  console.log("reduxxxx" , cart);
+  
 
-  // subtotal calculate
+   // subtotal calculate (price string → number)
   const subtotal = cart.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + Number(item.price) * (item.quantity || 1),
     0
   );
 
-  const shipping = cart.length > 0 ? 240 : 0; // dummy static shipping
-  const tax = 0; // static
+  const shipping = cart.length > 0 ? 240 : 0; // static example
+  const tax = 0; // static example
   const total = subtotal + shipping + tax;
     
   return (
@@ -359,11 +361,15 @@ const CheckoutComponent = () => {
         Order Summary
       </h2>
 
+      {/* Cart Items */}
       <div className="space-y-4">
         {cart.map((item, i) => (
           <div key={i} className="flex items-center gap-3 border-b pb-3">
             <Image
-              src={item.image || "/checkouticon/orderimg.png"}
+              src={
+                // agar API se array hai to first image use karlo
+                item.image?.[0]?.path || "/checkouticon/orderimg.png"
+              }
               alt={item.name}
               width={100}
               height={35}
@@ -372,7 +378,7 @@ const CheckoutComponent = () => {
             <div className="flex-1">
               <p className="text-sm font-medium">{item.name}</p>
               <p className="text-sm text-gray-500">
-                ${item.price.toFixed(2)}
+                ${Number(item.price).toFixed(2)}
               </p>
 
               <div className="flex items-center gap-2 mt-1">
