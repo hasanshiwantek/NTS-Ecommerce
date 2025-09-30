@@ -18,7 +18,11 @@ interface Product {
 }
 
 import { ShoppingCart } from "lucide-react";
+import { addToCart } from "@/redux/slices/cartSlice";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "@/hooks/useReduxHooks";
 export default function ProductCategoryCard({ product }: { product: Product }) {
+  const dispatch = useAppDispatch();
   const imageUrl = product.image?.[0]?.path || "./default-product-image.svg";
   return (
     <div className="border rounded p-4 grid grid-cols-1 md:grid-cols-[120px_1fr_auto] gap-4 items-center">
@@ -72,7 +76,12 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
       {/* CTA Buttons */}
       <div className="flex flex-col items-end gap-2">
         {/* Add To Cart */}
-        <button className="flex items-center justify-center gap-2 w-40 bg-[var(--primary-color)] text-white font-medium px-5 py-2 rounded shadow hover:bg-white hover:text-[var(--primary-color)] hover:border-[var(--primary-color)] hover:border  transition">
+        <button 
+         onClick={() => {
+    dispatch(addToCart(product)); 
+    toast.success(`${product.name} added to cart!`);
+  }}
+         className="flex items-center justify-center gap-2 w-40 bg-[var(--primary-color)] text-white font-medium px-5 py-2 rounded shadow hover:bg-white hover:text-[var(--primary-color)] hover:border-[var(--primary-color)] hover:border  transition">
           <ShoppingCart size={16} />
           Add To Cart
         </button>

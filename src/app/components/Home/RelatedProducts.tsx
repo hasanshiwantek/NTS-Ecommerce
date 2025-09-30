@@ -92,18 +92,9 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
       <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 opacity-0 translate-y-10 group-hover:translate-y-8 lg:group-hover:translate-y-6 group-hover:opacity-100 transition-all duration-300 p-2">
         <button
           onClick={() => {
-            dispatch(
-              addToCart({
-                id: product.id,
-                name: product.name,
-                price: Number(product.price),
-                image:
-                  product.image?.[0]?.path || "/default-product-image.svg",
-                slug: product.slug,
-              })
-            );
-            toast.success(`${product.name} added to cart!`);
-          }}
+    dispatch(addToCart(product)); // pura product object jayega
+    toast.success(`${product.name} added to cart!`);
+  }}
           className="btn-primary w-full lg:w-52 lg:mr-2"
         >
           Add to Cart
