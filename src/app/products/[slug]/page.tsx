@@ -7,9 +7,11 @@ import ProductFAQs from "@/app/components/Product/ProductFAQs";
 import ProductReview from "@/app/components/Product/ProductReview";
 import RelatedProduct from "@/app/components/Home/RelatedProducts";
 // ✅ Dynamic metadata for SEO
-export async function generateMetadata(
-  { params }: { params: Promise<{ slug: string }> },
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params; // <-- await here
   const product = await fetchProductBySlug(slug);
 
@@ -112,9 +114,6 @@ export default async function ProductPage({
       />
 
       <article className="my-6">
-        {/* H1 for SEO */}
-        <h1 className="text-2xl font-bold mb-4">{product.pageTitle}</h1>
-
         {/* Product Sections */}
         <ProductCard product={product} />
         <ProductOverview product={product} />
