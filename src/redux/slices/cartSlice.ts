@@ -3,11 +3,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CartItem {
   id: string | number;
-  name: string;
-  price: number;
-  image?: string;
-  slug?: string;
   quantity: number;
+  // baki jo bhi props product ke andar aate hain unhe dynamically allow karenge
+  [key: string]: any;
 }
 
 interface CartState {
@@ -22,7 +20,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<Omit<CartItem, "quantity">>) => {
+    addToCart: (state, action: PayloadAction<any>) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
@@ -31,8 +29,8 @@ const cartSlice = createSlice({
         existingItem.quantity += 1;
       } else {
         state.items.push({
-          ...action.payload,
-          quantity: 1, // 👈 initial quantity
+          ...action.payload, // pura product object
+          quantity: 1,       // 👈 sirf quantity inject
         });
       }
     },
