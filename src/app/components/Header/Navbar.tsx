@@ -6,10 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaHeadphones, FaUser, FaChevronDown } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
+import { RootState } from "@/redux/store";
+import { useAppSelector } from "@/hooks/useReduxHooks";
 const Navbar: React.FC = () => {
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currency, setCurrency] = useState("USD");
   const [mobileOpen, setMobileOpen] = useState(false);
+   const cart = useAppSelector((state: RootState) => state.cart.items);
 
   const currencies = ["USD", "CAD", "EUR"];
 
@@ -123,7 +126,7 @@ const Navbar: React.FC = () => {
         <button className="relative text-white hover:text-blue-300 transition">
           <ShoppingCart className="w-7 h-7" />
           <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            2
+            {cart?.length || 0}
           </span>
         </button>
       </section>
