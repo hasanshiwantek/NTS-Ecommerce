@@ -5,44 +5,44 @@ import React from "react";
 const ProductOverview = ({ product }: { product: any }) => {
   return (
     <section className="my-8">
-      <div className="max-w-full">
+      <div className="w-full max-w-[1719px] flex flex-col gap-8 ">
         {/* Main Overview Heading */}
-        <h1 className="h1-primary !mb-4">Overview</h1>
+        <h1 className="h1-secondary-medium !mb-4">Overview</h1>
 
         {/* Intro Paragraph */}
-        <p className="p-primary !mb-6 !leading-relaxed !max-w-3xl">
-          Introducing the <strong>{product?.name || "N/A"}</strong>, a versatile
-          solution for your networking needs. This product is manufactured by{" "}
-          <strong>{product?.brand?.name || "N/A"}</strong>, offering reliable
+        <p className="h5-regular !mb-6 !leading-relaxed ">
+          Introducing the {product?.name || "N/A"}, a versatile
+          solution for your networking needs. This product is manufactured by
+         {product?.brand?.name || "N/A"}, offering reliable
           performance for enterprises and organizations.
         </p>
 
         {/* Key Features */}
         <section className="!mb-8">
-          <h2 className="!text-2xl !font-semibold !mb-3">Key Features:</h2>
+          <h2 className="h5-regular !mb-3">Key Features:</h2>
           <ul className="!list-disc !list-inside !space-y-2">
-            <li className="li-primary">
-              <span className="!font-semibold">SKU:</span>{" "}
+            <li className="h5-regular">
+              <span className="">SKU:</span>{" "}
               {product?.sku || "N/A"}
             </li>
-            <li className="li-primary">
-              <span className="!font-semibold">MPN:</span>{" "}
+            <li className="h5-regular">
+              <span className="">MPN:</span>{" "}
               {product?.mpn || "N/A"}
             </li>
-            <li className="li-primary">
-              <span className="!font-semibold">Brand:</span>{" "}
+            <li className="h5-regular">
+              <span className="">Brand:</span>{" "}
               {product?.brand?.name || "N/A"}
             </li>
-            <li className="li-primary">
-              <span className="!font-semibold">Category:</span>{" "}
+            <li className="h5-regular">
+              <span className="">Category:</span>{" "}
               {product?.categories?.[0]?.name || "N/A"}
             </li>
-            <li className="li-primary">
-              <span className="!font-semibold">Availability:</span>{" "}
+            <li className="h5-regular">
+              <span className="">Availability:</span>{" "}
               {product?.availabilityText || "N/A"}
             </li>
-            <li className="li-primary">
-              <span className="!font-semibold">Weight:</span>{" "}
+            <li className="h5-regular">
+              <span className="">Weight:</span>{" "}
               {product?.dimensions?.weight
                 ? `${product.dimensions.weight} lbs`
                 : "N/A"}
@@ -51,7 +51,7 @@ const ProductOverview = ({ product }: { product: any }) => {
         </section>
 
         {/* Closing Paragraph */}
-        <p className="!mb-10 !leading-relaxed p-primary">
+        <p className="!mb-10 !leading-relaxed h5-regular">
           {product?.metaDescription ||
             product?.description ||
             "N/A description available for this product."}
@@ -59,14 +59,14 @@ const ProductOverview = ({ product }: { product: any }) => {
 
         {/* Product Details Section */}
         <section className="!mt-8 border">
-          <div className="bg-[#F5F6FA] p-2">
-            <h2 className="!text-2xl !font-semibold !mb-2">
+          <div className="bg-[#F5F6FA] py-[20px] px-[30px]">
+            <h2 className="h3-secondary  !mb-2">
               {product?.sku || "N/A"}
             </h2>
           </div>
 
           {/* Key-Value Details */}
-          <dl className="!space-y-4 p-2">
+          <dl className="p-2 space-y-4">
             {[
               ["Brand", product?.brand?.name || "N/A"],
               [
@@ -87,10 +87,10 @@ const ProductOverview = ({ product }: { product: any }) => {
                   index % 2 === 1 ? "bg-gray-50" : ""
                 }`}
               >
-                <dt className="!font-medium !text-gray-700 li-primary">
+                <dt className="h5-regular">
                   {key}
                 </dt>
-                <dd className="!text-gray-900 !text-center li-primary">
+                <dd className="h5-medium !text-center ">
                   {value}
                 </dd>
               </div>
