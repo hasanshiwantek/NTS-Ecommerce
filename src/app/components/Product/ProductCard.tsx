@@ -32,10 +32,10 @@ const ProductCard = ({ product }: { product: any }) => {
   return (
    <div className="max-w-full mx-auto">
   {/* Breadcrumb */}
-  <p className="p-primary text-base sm:text-sm text-gray-500 mb-4 sm:mb-6">
+  <p className="h5-20px-regular mb-4 sm:mb-6">
     Home <span className="mx-2">{">"}</span>
     {product.name} <span className="mx-2">{">"}</span>
-    <span className="text-gray-700 font-medium">{product.code}</span>
+    <span className="h5-regular">{product.code}</span>
   </p>
 
   {/* Product Layout */}
@@ -70,11 +70,11 @@ const ProductCard = ({ product }: { product: any }) => {
         </div>
 
         {/* Main Image */}
-        <div className="flex-1 sm:mt-0 flex items-center justify-center w-full h-64 sm:h-[400px] md:h-[450px] lg:w-[350px] xl:h-[499.6673889160156px] p-1 bg-[#F2F3F7]">
+        <div className="flex-1 sm:mt-0 flex items-center justify-center w-full h-64 sm:h-[400px] md:h-[450px] xl:w-[30rem] 2xl:w-[350px] xl:h-[499.6673889160156px] p-1 bg-[#F2F3F7]">
           <Image
             src={selectedImage || "/default-product-image.svg"}
             alt={product?.image?.[0]?.altText || product?.name || "Product"}
-            className="w-full h-full object-contain rounded-lg lg:p-16"
+            className="w-full h-full object-contain rounded-lg lg:p-0 2xl:p-16"
             width={500}
             height={500}
           />
@@ -83,7 +83,7 @@ const ProductCard = ({ product }: { product: any }) => {
     </div>
 
     {/* Middle: Details */}
-    <div className="flex flex-col h-full w-full lg:w-[45%] xl:w-[696px]">
+    <div className="flex flex-col h-full w-full lg:w-[45%] xl:w-[496px] 2xl:w-[696px]">
       <div>
         <h6 className="h6-regular">{product?.brand?.name}</h6>
         <h3 className="h3-secondary leading-7 mb-3">
@@ -95,7 +95,7 @@ const ProductCard = ({ product }: { product: any }) => {
           {product?.rating && (
             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
           )}
-          <h6 className="h6-medium">
+          <h6 className="h6-medium-color">
             {product?.rating || "N/A " + " Ratings"}
           </h6>
           <h6 className="!text-blue-500 h6-medium">
