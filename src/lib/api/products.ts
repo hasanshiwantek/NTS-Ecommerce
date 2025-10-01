@@ -1,23 +1,35 @@
 // lib/api/products.ts
 import serverAxios from "../serverAxios";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
-
 export const fetchProducts = async () => {
   try {
-    const res = await serverAxios.get("web/products/products");
-    // console.log("All Products Response: ",res.data);
-    return res.data?.data || []; // Adjust if your API wraps the response differently
+    const res = await fetch(`${baseURL}web/products/products`, {
+      cache: "no-store", // ⛔ disables caching → always fresh
+      headers: {
+        storeId: "4",
+      },
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch products");
+    const data = await res.json();
+    return data?.data || [];
   } catch (error) {
     console.error("Failed to fetch products:", error);
     throw new Error("Failed to load products");
   }
 };
-
 export const fetchProductBySlug = async (slug: string) => {
   try {
-    const res = await serverAxios.get(`web/products/get-product/${slug}`);
-    console.log("Slug Products Response: ", res.data);
-    return res.data?.data; // assuming API returns { data: {...product} }
+    const res = await fetch(`${baseURL}web/products/get-product/${slug}`, {
+      cache: "no-store", // ⛔ product details always fresh
+      headers: {
+        storeId: "4",
+      },
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch product");
+    const data = await res.json();
+    return data?.data;
   } catch (err) {
     console.error("Error fetching product:", err);
     throw new Error("Failed to load product");
@@ -61,7 +73,7 @@ export async function fetchFilteredProducts(filters: {
   }
 
   const data = await res.json();
-  console.log("Filtered Data:",data);
-  
+  console.log("Filtered Data:", data);
+
   return data; // {status, message, data: []}
 }
