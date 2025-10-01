@@ -39,16 +39,16 @@ const ProductCard = ({ product }: { product: any }) => {
       </p>
 
       {/* Product Layout */}
-      <div className="flex flex-wrap gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl">
+      <div className="flex flex-wrap gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl w-[1719px]">
         {/* Left: Images */}
-        <div className="flex flex-col flex-shrink-0 w-full md:w-1/2 xl:w-[30%]">
+        <div className="flex flex-col flex-shrink-0 w-full md:w-1/2 xl:w-[600px]">
 
           <div className="flex flex-col sm:flex-row sm:space-x-4">
             {/* Thumbnails */}
             <div
               className="
                 flex gap-2 pb-2
-                max-[642px]:flex-row max-[642px]:overflow-x-auto max-[642px]:pb-2
+                max-[642px]:flex-row max-[642px]:overflow-x-auto max-[642px]
                 sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0
               "
             >
@@ -60,7 +60,7 @@ const ProductCard = ({ product }: { product: any }) => {
                   width={150}
                   height={150}
                   onClick={() => setSelectedImage(img)}
-                 className={`w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-lg cursor-pointer transition 
+                 className={`w-24 h-20 sm:w-24 sm:h-20 object-contain my-4 rounded-lg cursor-pointer transition bg-[#3333331A] p-2
   ${selectedImage === img
     ? "border-2 border-blue-500 ring-2 ring-blue-300"
     : "border"
@@ -71,11 +71,11 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
 
             {/* Main Image */}
-            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] p-1">
+            <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] p-1 bg-[#3333331A]">
               <Image
                 src={selectedImage || "/default-product-image.svg"}
                 alt={product?.image?.[0]?.altText || product?.name || "Product"}
-                className="w-full h-full object-contain rounded-lg md:mb-24"
+                className="w-full h-full object-contain rounded-lg md:mb-"
                 width={500}
                 height={500}
               />
@@ -85,39 +85,39 @@ const ProductCard = ({ product }: { product: any }) => {
         </div>
 
         {/* Middle: Details */}
-        <div className="flex flex-col h-full flex-1 min-w-[20rem]">
+        <div className="flex flex-col h-full flex-1 w-[696px]">
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-[var(--primary-color)] mb-2 lg:mb-0">
+            <h6 className="h6-regular">
               {product?.brand?.name}
-            </h1>
-            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 leading-7 mb-3">
+            </h6>
+            <h3 className="h3-secondary leading-7 mb-3">
               {product?.pageTitle || "N/A"}
-            </h1>
+            </h3>
 
             {/* Rating */}
             <div className="flex items-center space-x-3 mb-4">
               {product?.rating &&   <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />}
            
-              <span className="text-gray-700 font-semibold text-base">
+              <h6 className="h6-medium">
                 {product?.rating || "N/A " + " Ratings"}
-              </span>
-              <span className="text-blue-500 font-bold text-base">
+              </h6>
+              <h6 className="!text-blue-500 h6-medium">
                 {product.reviews || "N/A " + " Reviews"}  
-              </span>
+              </h6>
             </div>
 
             {/* Price */}
             <div className="mb-6">
               <div className="flex items-center space-x-3 mb-3">
-                <span className="text-2xl sm:text-3xl font-bold">
+                <h2 className="h2-secondary">
                   £{Number(product?.price || 0).toFixed(2)}
-                </span>
-                <span className="text-base sm:text-lg line-through text-pink-400">
+                </h2>
+                <h5 className="h5-regular line-through !text-pink-400">
                   £
                   {product?.msrp && product.msrp > 0
                     ? Number(product.msrp).toFixed(2)
                     : "N/A"}
-                </span>
+                </h5>
               </div>
 
               {/* Secure Methods */}
@@ -143,8 +143,8 @@ const ProductCard = ({ product }: { product: any }) => {
                     className="w-12 h-12 object-contain"
                   />
                   <div className="flex-1 text-center sm:text-left">
-                    <h4 className="h4-primary">Free shipping Up to 10 lbs</h4>
-                    <p className="span-primary">
+                    <h5 className="h5-bold">Free shipping Up to 10 lbs</h5>
+                    <p className="h7-regular">
                       Get your orders delivered without extra cost.
                     </p>
                   </div>
@@ -158,22 +158,22 @@ const ProductCard = ({ product }: { product: any }) => {
 
               {/* SKU */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 my-3">
-                <span className=" span-primary ">SKU:</span>
-                <span className="text-sm sm:text-lg font-bold text-gray-900">
+                <h5 className=" h5-medium ">SKU:</h5>
+                <h5 className="h5-medium text-gray-900">
                   {product?.sku || "N/A"}
-                </span>
+                </h5>
               </div>
 
               {/* Availability */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
-                <span className="span-primary">Availability:</span>
-                <span className="text-sm sm:text-lg text-green-900">
+                <h5 className="h5-regular">Availability:</h5>
+                <h5 className="h5-medium text-green-900">
                   {product?.availabilityText || "N/A"}
-                </span>
+                </h5>
               </div>
               {/* Quantity */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mt-2">
-                <span className="span-primary">Quantity:</span>
+                <h5 className="h5-regular">Quantity:</h5>
                 <div className="flex items-center justify-center w-28 lg:w-24 border border-gray-300 rounded-full px-2 mt-2 sm:mt-0">
                   <button
                     onClick={decrement}
@@ -218,11 +218,11 @@ const ProductCard = ({ product }: { product: any }) => {
         </div>
 
         {/* Right: Support Section */}
-        <div className="flex-shrink-0 w-full xl:w-[25rem] mt-6 xl:mt-0 xl:ml-auto">
+        <div className="flex-shrink-0 w-full xl:w-[376px] mt-6 xl:mt-0 xl:ml-auto">
           {/* Support Card 1 */}
           <div className="border border-gray-300 rounded-lg text-center h-max">
             <div className="bg-[#F5F6FA] p-2">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-800 my-3">
+              <h3 className="h5-bold my-3">
                 Dedicated Support Team, 24/7
               </h3>
             </div>
@@ -251,7 +251,7 @@ const ProductCard = ({ product }: { product: any }) => {
           {/* Support Card 2 */}
           <div className="mt-6 border border-gray-300 rounded-lg text-center h-max">
             <div className="bg-[#F5F6FA] p-2">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-800 my-3">
+              <h3 className="h5-bold my-3">
                 Looking for a Bulk Quantity?
               </h3>
             </div>
