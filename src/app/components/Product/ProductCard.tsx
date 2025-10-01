@@ -86,7 +86,7 @@ const ProductCard = ({ product }: { product: any }) => {
     <div className="flex flex-col h-full w-full lg:w-[45%] xl:w-[496px] 2xl:w-[696px]">
       <div>
         <h6 className="h6-regular">{product?.brand?.name}</h6>
-        <h3 className="h3-secondary leading-7 mb-3">
+        <h3 className="h3-secondary leading-[30px] mb-3">
           {product?.pageTitle || "N/A"}
         </h3>
 
@@ -98,7 +98,7 @@ const ProductCard = ({ product }: { product: any }) => {
           <h6 className="h6-medium-color">
             {product?.rating || "N/A " + " Ratings"}
           </h6>
-          <h6 className="!text-blue-500 h6-medium">
+          <h6 className="!text-[#1A80AD] h6-medium">
             {product.reviews || "N/A " + " Reviews"}
           </h6>
         </div>
@@ -228,22 +228,22 @@ const ProductCard = ({ product }: { product: any }) => {
         <div className="bg-[#F5F6FA] p-2">
           <h3 className="h5-bold my-3">Dedicated Support Team, 24/7</h3>
         </div>
-        <div className="flex justify-center my-2">
-          <Image src={supportIcon1} alt="Support 1" className="w-12 h-12 rounded-full" />
-          <Image src={supportIcon2} alt="Support 2" className="w-12 h-12 rounded-full -ml-2" />
-          <Image src={supportIcon3} alt="Support 3" className="w-12 h-12 rounded-full -ml-2" />
+        <div className="flex justify-center my-6">
+          <Image src={supportIcon1} alt="Support 1" className="w-[5rem] h-[5rem] rounded-full" />
+          <Image src={supportIcon2} alt="Support 2" className="w-[5rem] h-[5rem] rounded-full -ml-2" />
+          <Image src={supportIcon3} alt="Support 3" className="w-[5rem] h-[5rem] rounded-full -ml-2" />
         </div>
         <div className="p-3">
           <div className="flex justify-center mb-2">
-            <button className="btn-outline-primary flex w-64 justify-center gap-5 items-center !rounded-full !text-lg">
+            <button className="btn-outline-primary flex w-64 justify-center gap-5 items-center !rounded-full !text-[20px] !font-normal">
               <Phone width={12} height={12} /> Call us Now
             </button>
           </div>
           <div className="flex justify-center gap-3 mb-3">
-            <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-lg">
+            <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-[20px] !font-normal">
               Email
             </button>
-            <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-lg">
+            <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-[20px] !font-normal">
               Chat
             </button>
           </div>
@@ -260,7 +260,7 @@ const ProductCard = ({ product }: { product: any }) => {
             <p className="text-xl w-80 text-start">
               Request a Quote and one of our sales representative will get in touch with you very soon
             </p>
-            <button className="btn-outline-primary flex m-auto w-64 justify-center gap-5 items-center !rounded-full !text-lg">
+            <button className="btn-outline-primary flex m-auto w-64 justify-center gap-5 items-center !rounded-full  !text-[20px] font-normal">
               Get Quote
             </button>
           </div>

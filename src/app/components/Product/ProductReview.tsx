@@ -110,7 +110,7 @@ const ProductReview = () => {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <h4 className="h5-20px-medium" itemProp="author">
+                      <h4 className="text-[20px] font-medium" itemProp="author">
                         {review.name}
                       </h4>
                       <time
