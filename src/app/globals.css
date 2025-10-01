@@ -355,14 +355,6 @@ img {
   font-weight: 400;
 }
  
-
-.h5-20px-medium{
-  font-size: 20px;
-  color: #2C2C2C;
-  font-weight: 400;
-}
-
-
  
 /* H6 */
 .h6-bold {
@@ -373,6 +365,11 @@ img {
 .h6-medium {
   font-size: 18px;
   color: #F15939;
+  font-weight: 500;
+}
+.h6-medium-color {
+  font-size: 18px;
+  color: #4A4A4A;
   font-weight: 500;
 }
 .h6-regular {
@@ -403,3 +400,7 @@ img {
  
  
  
+
+
+
+
