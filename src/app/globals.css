@@ -109,15 +109,13 @@ body {
   overflow: hidden;
   scroll-behavior: smooth; */
 
-    height: 100%;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: auto; /* ✅ Allow vertical scrolling */
   scroll-behavior: smooth;
 }
 
 /* Tailwind Typography System */
-
-
 
 .h1-primary {
   @apply text-3xl font-semibold text-[#333333]; /* 2.5rem */
@@ -134,7 +132,6 @@ body {
 .h4-primary {
   @apply text-lg font-semibold text-[#333333]; /* 1.2rem */
 }
-
 
 .p-primary,
 .a-primary,
@@ -161,15 +158,13 @@ button {
   cursor: pointer;
 }
 
-
-
 .btn-outline-primary {
   @apply text-[#333333] border border-[#333333] font-medium rounded-md px-4 py-[6px] text-xl transition-all my-1 duration-200 cursor-pointer;
   background-color: transparent;
 }
 
 .btn-outline-primary:hover {
-  @apply bg-[white] text-[#f15939] border-[#F15939] ;
+  @apply bg-[white] text-[#f15939] border-[#F15939];
 }
 
 .btn-primary {
@@ -272,52 +267,43 @@ img {
   background-color: #4a5568;
 }
 
-
-
-
-
-
-
-
 /* H1 */
 .h1-secondary {
   font-size: 36px;
   font-weight: 500; /* medium */
-  color: #D9D9D9;
+  color: #d9d9d9;
 }
- 
 
 .h1-secondary-medium {
   font-size: 36px;
   font-weight: 500; /* medium */
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
- 
 
 /* H2 */
 .h2-secondary {
   font-size: 32px;
   font-weight: 600; /* bold */
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
 .h2-medium {
   font-size: 32px;
   font-weight: 500; /* medium */
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
- 
+
 /* H3 */
 .h3-secondary {
   font-size: 24px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-weight: 500; /* medium */
 }
 .h3-regular {
   font-size: 24px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-weight: 400; /* regular */
 }
- 
+
 /* H4 */
 .h4-bold {
   font-size: 22px;
@@ -331,50 +317,55 @@ img {
   font-size: 22px;
   font-weight: 400;
 }
- 
+
 /* H5 */
 .h5-bold {
   font-size: 20px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-weight: 600; /* bold */
 }
 .h5-medium {
   font-size: 20px;
-  color: #4A4A4A;
+  color: #4a4a4a;
+  font-weight: 500;
+}
+
+.h5-medium-20px-medium{
+  font-size: 20px;
+  color: #333333;
   font-weight: 500;
 }
 .h5-regular {
   font-size: 20px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-weight: 400;
 }
 
-.h5-20px-regular{
+.h5-20px-regular {
   font-size: 20px;
   color: #666666;
   font-weight: 400;
 }
- 
- 
+
 /* H6 */
 .h6-bold {
   font-size: 18px;
-  color: #F15939;
+  color: #f15939;
   font-weight: 700;
 }
 .h6-medium {
   font-size: 18px;
-  color: #F15939;
+  color: #f15939;
   font-weight: 500;
 }
 .h6-medium-color {
   font-size: 18px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-weight: 500;
 }
 .h6-regular {
   font-size: 18px;
-  color: #F15939;
+  color: #f15939;
   font-weight: 400;
 }
 
@@ -384,11 +375,19 @@ img {
   font-weight: 500;
 }
 
- 
+.h6-18-px-regular{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2; /* 120% */
+  letter-spacing: 0.14px;
+  color: #545454;
+  vertical-align: bottom;
+}
+
 /* H7 */
 .h7-regular {
   font-size: 16px;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-weight: 400;
 }
 
@@ -397,10 +396,3 @@ img {
   color: #666666;
   font-weight: 400;
 }
- 
- 
- 
-
-
-
-
