@@ -5,7 +5,7 @@ import LinkHeader from "../Header/LinkHeader";
 const Header = () => {
   return (
     <div>
-      {/* <TopHeader /> */}
+      <TopHeader />
       <Navbar />
       <LinkHeader/>
     </div>
