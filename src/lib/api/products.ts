@@ -4,7 +4,7 @@ const baseURL = process.env.NEXT_PUBLIC_API_URL;
 export const fetchProducts = async () => {
   try {
     const res = await fetch(`${baseURL}web/products/products`, {
-      cache: "no-store", // ⛔ disables caching → always fresh
+      next: { revalidate: 60 }, // ✅ revalidate every 60 seconds
       headers: {
         storeId: "4",
       },
@@ -18,10 +18,12 @@ export const fetchProducts = async () => {
     throw new Error("Failed to load products");
   }
 };
+
+// Get single product by slug (always fresh)
 export const fetchProductBySlug = async (slug: string) => {
   try {
     const res = await fetch(`${baseURL}web/products/get-product/${slug}`, {
-      cache: "no-store", // ⛔ product details always fresh
+      cache: "no-store", // ✅ always fetch fresh data for details
       headers: {
         storeId: "4",
       },
@@ -35,7 +37,6 @@ export const fetchProductBySlug = async (slug: string) => {
     throw new Error("Failed to load product");
   }
 };
-
 // lib/api/products.ts
 export async function fetchFilteredProducts(filters: {
   page?: number;
