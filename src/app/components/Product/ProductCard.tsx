@@ -42,7 +42,6 @@ const ProductCard = ({ product }: { product: any }) => {
       <div className="flex flex-wrap gap-6 sm:gap-8 bg-white p-4 sm:p-6 rounded-xl w-[1719px]">
         {/* Left: Images */}
         <div className="flex flex-col flex-shrink-0 w-full md:w-1/2 xl:w-[600px]">
-
           <div className="flex flex-col sm:flex-row sm:space-x-4">
             {/* Thumbnails */}
             <div
@@ -60,12 +59,12 @@ const ProductCard = ({ product }: { product: any }) => {
                   width={150}
                   height={150}
                   onClick={() => setSelectedImage(img)}
-                 className={`w-24 h-20 sm:w-24 sm:h-20 object-contain my-4 rounded-lg cursor-pointer transition bg-[#3333331A] p-2
-  ${selectedImage === img
-    ? "border-2 border-blue-500 ring-2 ring-blue-300"
-    : "border"
+                  className={`w-24 h-20 sm:w-24 sm:h-20 object-contain my-4 rounded-lg cursor-pointer transition bg-[#3333331A] p-2
+  ${
+    selectedImage === img
+      ? "border-2 border-blue-500 ring-2 ring-blue-300"
+      : "border"
   }`}
-
                 />
               ))}
             </div>
@@ -81,28 +80,27 @@ const ProductCard = ({ product }: { product: any }) => {
               />
             </div>
           </div>
-
         </div>
 
         {/* Middle: Details */}
         <div className="flex flex-col h-full flex-1 w-[696px]">
           <div>
-            <h6 className="h6-regular">
-              {product?.brand?.name}
-            </h6>
+            <h6 className="h6-regular">{product?.brand?.name}</h6>
             <h3 className="h3-secondary leading-7 mb-3">
               {product?.pageTitle || "N/A"}
             </h3>
 
             {/* Rating */}
             <div className="flex items-center space-x-3 mb-4">
-              {product?.rating &&   <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />}
-           
+              {product?.rating && (
+                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+              )}
+
               <h6 className="h6-medium">
                 {product?.rating || "N/A " + " Ratings"}
               </h6>
               <h6 className="!text-blue-500 h6-medium">
-                {product.reviews || "N/A " + " Reviews"}  
+                {product.reviews || "N/A " + " Reviews"}
               </h6>
             </div>
 
@@ -129,8 +127,16 @@ const ProductCard = ({ product }: { product: any }) => {
                   <Image src={visa} alt="Visa" className="h-auto w-auto" />
                   <Image src={debit} alt="Debit" className="h-auto w-auto" />
                   <Image src={paypal} alt="PayPal" className="h-auto w-auto" />
-                  <Image src={americanexpress} alt="AmEx" className="h-auto w-auto" />
-                  <Image src={googlepay} alt="GooglePay" className="h-auto w-auto" />
+                  <Image
+                    src={americanexpress}
+                    alt="AmEx"
+                    className="h-auto w-auto"
+                  />
+                  <Image
+                    src={googlepay}
+                    alt="GooglePay"
+                    className="h-auto w-auto"
+                  />
                 </div>
               </div>
 
@@ -222,14 +228,24 @@ const ProductCard = ({ product }: { product: any }) => {
           {/* Support Card 1 */}
           <div className="border border-gray-300 rounded-lg text-center h-max">
             <div className="bg-[#F5F6FA] p-2">
-              <h3 className="h5-bold my-3">
-                Dedicated Support Team, 24/7
-              </h3>
+              <h3 className="h5-bold my-3">Dedicated Support Team, 24/7</h3>
             </div>
             <div className="flex justify-center my-2">
-              <Image src={supportIcon1} alt="Support 1" className="w-12 h-12 rounded-full" />
-              <Image src={supportIcon2} alt="Support 2" className="w-12 h-12 rounded-full -ml-2" />
-              <Image src={supportIcon3} alt="Support 3" className="w-12 h-12 rounded-full -ml-2" />
+              <Image
+                src={supportIcon1}
+                alt="Support 1"
+                className="w-12 h-12 rounded-full"
+              />
+              <Image
+                src={supportIcon2}
+                alt="Support 2"
+                className="w-12 h-12 rounded-full -ml-2"
+              />
+              <Image
+                src={supportIcon3}
+                alt="Support 3"
+                className="w-12 h-12 rounded-full -ml-2"
+              />
             </div>
             <div className="p-3">
               <div className="flex justify-center mb-2">
@@ -251,14 +267,13 @@ const ProductCard = ({ product }: { product: any }) => {
           {/* Support Card 2 */}
           <div className="mt-6 border border-gray-300 rounded-lg text-center h-max">
             <div className="bg-[#F5F6FA] p-2">
-              <h3 className="h5-bold my-3">
-                Looking for a Bulk Quantity?
-              </h3>
+              <h3 className="h5-bold my-3">Looking for a Bulk Quantity?</h3>
             </div>
             <div className="p-3">
               <div className="flex flex-col items-start mb-2">
                 <p className="text-xl w-80 text-start">
-                  Request a Quote and one of our sales representative will get in touch with you very soon
+                  Request a Quote and one of our sales representative will get
+                  in touch with you very soon
                 </p>
                 <button className="btn-outline-primary flex m-auto w-64 justify-center gap-5 items-center !rounded-full !text-lg">
                   Get Quote
@@ -269,7 +284,6 @@ const ProductCard = ({ product }: { product: any }) => {
         </div>
       </div>
     </div>
-
   );
 };
 
