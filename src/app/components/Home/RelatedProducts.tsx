@@ -47,7 +47,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
             {visibleProducts.map((product: any) => (
               <div
                 key={product.id}
-                className="group relative flex flex-col items-start w-full max-w-[405.75px] h-[350px]  border border-gray-200 border-[1.25px] rounded-md bg-white p-4 lg:p-6 overflow-hidden "
+                className="group relative flex flex-col items-start w-full max-w-[405.75px] h-[350px]  border border-gray-200 rounded-md bg-white p-4 lg:p-6 overflow-hidden "
               >
                 {/* Product Image */}
                 <div className="h-90 flex items-center justify-center mb-4 w-full max-w-[405.75px] ">
