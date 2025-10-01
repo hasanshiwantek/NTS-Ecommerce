@@ -50,40 +50,52 @@ const Navbar: React.FC = () => {
 
       {/* Center: Search (Desktop only) */}
       <div
+  className="
+    relative hidden lg:block 
+    flex-1 max-w-[60%] xl:max-w-[40rem] 2xl:max-w-[695.52px] 2xl:mx-8
+  "
+>
+  <input
+    type="text"
+    placeholder="Search products..."
+    className="
+      w-full px-4 md:px-5 lg:px-6 
+      py-2 md:py-2.5 lg:py-3 
+      rounded-full bg-white text-gray-800 
+      focus:outline-none focus:ring-2 focus:ring-blue-400 
+      text-sm sm:text-base lg:text-lg
+      h-10 sm:h-12 md:h-12 lg:h-14 xl:h-[60px] 2xl:h-[64px]
+      pr-12 sm:pr-16 md:pr-20 lg:pr-24 2xl:pr-52
+    "
+  />
+  <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+    <button
+      className="
+        bg-[#F1593957] rounded-full
+        w-8 h-8            
+        sm:w-9 sm:h-9       
+        md:w-10 md:h-6    
+        lg:w-16 lg:h-10    
+        xl:w-24 xl:h-16     
+        2xl:w-[88px] 2xl:h-[46px] 
+        flex items-center justify-center
+      "
+    >
+      <Search
         className="
-          relative hidden lg:block 
-          flex-1 max-w-[60%] xl:max-w-[40rem] 2xl:max-w-[695.52px] 2xl:mx-8
+          w-4 h-4 
+          sm:w-5 sm:h-5 
+          md:w-6 md:h-6 
+          lg:w-7 lg:h-7 
+          xl:w-8 xl:h-8 
+          2xl:w-[23.7px] 2xl:h-[23.7px]
+          text-black 
         "
-      >
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="
-            w-full px-4 md:px-5 lg:px-6 
-            py-2 md:py-2.5 lg:py-3 
-            rounded-full bg-white text-gray-800 
-            focus:outline-none focus:ring-2 focus:ring-blue-400 
-            text-sm sm:text-base lg:text-lg
-            h-10 sm:h-12 md:h-12 lg:h-14 xl:h-[60px] 2xl:h-[64px]
-            pr-12 sm:pr-16 md:pr-20 lg:pr-24 2xl:pr-52
-          "
-        />
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
-          <button className="bg-[#F1593957] p-2 rounded-full hover:bg-gray-800 transition">
-            <Search
-              className="
-                w-4 h-4 
-                sm:w-5 sm:h-5 
-                md:w-6 md:h-6 
-                lg:w-7 lg:h-7 
-                xl:w-8 xl:h-8 
-                2xl:w-[88px] 2xl:h-[46px]
-                text-black
-              "
-            />
-          </button>
-        </div>
-      </div>
+      />
+    </button>
+  </div>
+</div>
+
 
       {/* Right Section (Desktop only) */}
       <section className="hidden lg:flex items-center gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
