@@ -164,7 +164,7 @@ const ProductCard = ({ product }: { product: any }) => {
           {/* Availability */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
             <h5 className="h5-regular">Availability:</h5>
-            <h5 className="h5-medium text-green-900">
+            <h5 className="h5-medium !text-[#00B67A]">
               {product?.availabilityText || "N/A"}
             </h5>
           </div>

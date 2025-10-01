@@ -290,7 +290,7 @@ img {
 .h1-secondary-medium {
   font-size: 36px;
   font-weight: 500; /* medium */
-  color: #333333;
+  color: #4A4A4A;
 }
  
 
@@ -377,6 +377,13 @@ img {
   color: #F15939;
   font-weight: 400;
 }
+
+.h6-18-px-medium {
+  font-size: 18px;
+  color: #333333;
+  font-weight: 500;
+}
+
  
 /* H7 */
 .h7-regular {
@@ -384,6 +391,13 @@ img {
   color: #4A4A4A;
   font-weight: 400;
 }
+
+.h7-16-px-regular {
+  font-size: 16px;
+  color: #666666;
+  font-weight: 400;
+}
+ 
  
  
 
