@@ -17,6 +17,7 @@ interface ProductListProps {
   pagination: any;
   isLoading?: boolean;
   error?: string | null;
+  filterMeta:any
 }
 
 export default function ProductList({
@@ -26,6 +27,7 @@ export default function ProductList({
   pagination,
   isLoading = false,
   error = null,
+  filterMeta,
 }: ProductListProps) {
   const [view, setView] = useState<"list" | "grid">("list");
   const [page, setPage] = useState(1);
@@ -62,6 +64,7 @@ export default function ProductList({
         setView={setView}
         filters={filters}
         setFilters={setFilters}
+        filterMeta={filterMeta}
       />
 
       {/* Error State */}

@@ -274,12 +274,25 @@ img {
 
 
 
+
+
+
+
+
 /* H1 */
 .h1-secondary {
   font-size: 36px;
   font-weight: 500; /* medium */
   color: #D9D9D9;
 }
+ 
+
+.h1-secondary-medium {
+  font-size: 36px;
+  font-weight: 500; /* medium */
+  color: #333333;
+}
+ 
 
 /* H2 */
 .h2-secondary {
@@ -292,7 +305,7 @@ img {
   font-weight: 500; /* medium */
   color: #4A4A4A;
 }
-
+ 
 /* H3 */
 .h3-secondary {
   font-size: 24px;
@@ -304,7 +317,7 @@ img {
   color: #4A4A4A;
   font-weight: 400; /* regular */
 }
-
+ 
 /* H4 */
 .h4-bold {
   font-size: 22px;
@@ -318,13 +331,12 @@ img {
   font-size: 22px;
   font-weight: 400;
 }
-
+ 
 /* H5 */
 .h5-bold {
   font-size: 20px;
   color: #4A4A4A;
   font-weight: 600; /* bold */
-
 }
 .h5-medium {
   font-size: 20px;
@@ -336,7 +348,7 @@ img {
   color: #4A4A4A;
   font-weight: 400;
 }
-
+ 
 /* H6 */
 .h6-bold {
   font-size: 18px;
@@ -353,13 +365,12 @@ img {
   color: #F15939;
   font-weight: 400;
 }
-
+ 
 /* H7 */
 .h7-regular {
   font-size: 16px;
   color: #4A4A4A;
   font-weight: 400;
 }
-
-
-
+ 
+ 

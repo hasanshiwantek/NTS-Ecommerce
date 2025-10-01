@@ -2,13 +2,25 @@
 import { fetchCategories } from "@/lib/api/category";
 import { fetchBrands } from "@/lib/api/brand";
 import ProductsClientWrapper from "../components/Product/ProductsClientWrapper";
-export default async function ProductsPage() {
+
+export default async function ProductsPage({
+  initialCategoryId,
+  initialCategoryName,
+}: {
+  initialCategoryId?: number;
+  initialCategoryName?: string;
+}) {
   const categories = await fetchCategories();
   const brands = await fetchBrands();
 
   return (
     <div className="container">
-      <ProductsClientWrapper categories={categories} brands={brands} />
+      <ProductsClientWrapper
+        categories={categories}
+        brands={brands}
+        initialCategoryId={initialCategoryId}
+        initialCategoryName={initialCategoryName}
+      />
     </div>
   );
 }

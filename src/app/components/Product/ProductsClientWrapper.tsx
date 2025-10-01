@@ -4,7 +4,12 @@ import Sidebar from "../Filters/Sidebar";
 import ProductList from "./ProductList";
 import { fetchFilteredProducts } from "@/lib/api/products";
 import { ProductFilterPayload } from "@/types/types";
-export default function ProductsClientWrapper({ categories, brands }: any) {
+export default function ProductsClientWrapper({
+  categories,
+  brands,
+  initialCategoryId,
+  initialCategoryName,
+}: any) {
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,12 +19,18 @@ export default function ProductsClientWrapper({ categories, brands }: any) {
   const [filters, setFilters] = useState<ProductFilterPayload>({
     page: 1,
     pageSize: 20,
-    categoryIds: [],
+    categoryIds: initialCategoryId ? [initialCategoryId] : [],
     brandId: undefined,
     minPrice: undefined,
     maxPrice: undefined,
     sortBy: "",
   });
+
+  // 👇 Separate state for UI display (not sent to API)
+const [filterMeta, setFilterMeta] = useState({
+  brandName: undefined as string | undefined,
+  categoryName: initialCategoryName || undefined,
+});
 
   console.log("Filters: ", filters);
 
@@ -52,6 +63,9 @@ export default function ProductsClientWrapper({ categories, brands }: any) {
             brands={brands}
             filters={filters}
             setFilters={setFilters}
+            products={products}
+             filterMeta={filterMeta}
+             setFilterMeta={setFilterMeta}
           />
         </aside>
 
@@ -64,6 +78,7 @@ export default function ProductsClientWrapper({ categories, brands }: any) {
             pagination={pagination}
             isLoading={isLoading}
             error={error}
+            filterMeta={filterMeta}
           />
         </main>
       </div>
