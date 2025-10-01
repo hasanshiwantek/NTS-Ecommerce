@@ -109,7 +109,7 @@ const LinkHeader = () => {
 
   return (
     <header className="bg-[#5B5B5B] text-white">
-      <nav className="w-full flex items-center justify-start px-16 lg:px-32 py-3 relative">
+      <nav className="w-full flex items-center justify-start gap-12 px-16 lg:px-32 py-3 relative max-w-[1920px]" >
         {/* Left Section: Menu Button */}
         <div className="relative flex  items-center gap-2 mr-8" ref={menuRef}>
           <button
@@ -117,7 +117,7 @@ const LinkHeader = () => {
             className="flex items-center gap-2 hover:text-gray-300 focus:outline-none"
           >
             <Menu className="w-6 h-6" />
-            <span className="font-semibold !text-white">Menu</span>
+            <span className="text-[20px] font-normal !text-white">Menu</span>
             <ChevronDown
               className={`w-4 h-4 transition-transform duration-200 ${
                 isOpen ? "rotate-180" : ""
@@ -137,7 +137,7 @@ const LinkHeader = () => {
         </div>
 
         {/* Right Section: Static Links */}
-        <ul className="hidden lg:flex  items-center gap-8 whitespace-nowrap">
+        <ul className="hidden lg:flex  items-center gap-8 whitespace-nowrap text-[20px] font-normal">
           <li>
             <Link href="/portable-storage" className="hover:text-gray-300">
               Portable Storage Drive
