@@ -10,7 +10,7 @@ const ProductOverview = ({ product }: { product: any }) => {
         <h1 className="h1-secondary-medium !mb-4">Overview</h1>
 
         {/* Intro Paragraph */}
-        <p className="h5-regular !mb-6 !leading-relaxed ">
+        <p className="h5-regular !mb-6 !leading-relaxed w-full xl:w-[85rem]">
           Introducing the {product?.name || "N/A"}, a versatile
           solution for your networking needs. This product is manufactured by
          {product?.brand?.name || "N/A"}, offering reliable
@@ -51,11 +51,16 @@ const ProductOverview = ({ product }: { product: any }) => {
         </section>
 
         {/* Closing Paragraph */}
-        <p className="!mb-10 !leading-relaxed h5-regular">
-          {product?.metaDescription ||
-            product?.description ||
-            "N/A description available for this product."}
-        </p>
+        <p
+  className="!mb-10 !leading-relaxed h5-regular"
+  dangerouslySetInnerHTML={{
+    __html:
+      product?.metaDescription ||
+      product?.description ||
+      "N/A description available for this product.",
+  }}
+></p>
+
 
         {/* Product Details Section */}
         <section className="!mt-8 border">
