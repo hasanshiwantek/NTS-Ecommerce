@@ -48,7 +48,7 @@ const ProductCard = ({ product }: { product: any }) => {
           className="
             flex gap-2 pb-2
             max-[642px]:flex-row max-[642px]:overflow-x-auto
-            sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0
+            sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0 mb-1
           "
         >
           {images.map((img: string, idx: number) => (
@@ -59,7 +59,7 @@ const ProductCard = ({ product }: { product: any }) => {
               width={150}
               height={150}
               onClick={() => setSelectedImage(img)}
-              className={`w-24 h-20 object-contain my-4 rounded-lg cursor-pointer transition bg-[#3333331A] p-2
+              className={`w-24 h-24 object-contain my-4 rounded-lg cursor-pointer transition bg-[#F2F3F7] p-2
                 ${
                   selectedImage === img
                     ? "border-2 border-blue-500 ring-2 ring-blue-300"
@@ -70,11 +70,11 @@ const ProductCard = ({ product }: { product: any }) => {
         </div>
 
         {/* Main Image */}
-        <div className="flex-1 sm:mt-0 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] p-1 bg-[#3333331A]">
+        <div className="flex-1 sm:mt-0 flex items-center justify-center w-full h-64 sm:h-[400px] md:h-[450px] lg:w-[350px] xl:h-[499.6673889160156px] p-1 bg-[#F2F3F7]">
           <Image
             src={selectedImage || "/default-product-image.svg"}
             alt={product?.image?.[0]?.altText || product?.name || "Product"}
-            className="w-full h-full object-contain rounded-lg p-12"
+            className="w-full h-full object-contain rounded-lg lg:p-16"
             width={500}
             height={500}
           />
@@ -201,11 +201,11 @@ const ProductCard = ({ product }: { product: any }) => {
 
       {/* Actions */}
       <div className="flex justify-between items-center gap-3 sm:gap-4">
-        <button className="w-full btn-primary !rounded-full flex items-center justify-center space-x-2 transition !py-3">
+        <button className="!w-[70rem] btn-primary !rounded-full flex items-center justify-center space-x-2 transition !py-5">
           <ShoppingCart className="w-5 h-5" />
           <span>Add to Cart</span>
         </button>
-        <button className="w-64 btn-outline-primary !rounded-full flex items-center justify-center space-x-2 transition !py-4">
+        <button className="!w-[30rem] btn-outline-primary !rounded-full flex items-center justify-center space-x-2 transition !py-5">
           <span>Buy Now</span>
         </button>
       </div>
