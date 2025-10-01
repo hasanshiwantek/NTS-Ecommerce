@@ -86,7 +86,7 @@ const ProductCard = ({ product }: { product: any }) => {
     <div className="flex flex-col h-full w-full lg:w-[45%] xl:w-[696px]">
       <div>
         <h6 className="h6-regular">{product?.brand?.name}</h6>
-        <h3 className="h3-secondary leading-7 mb-3">
+        <h3 className="h3-secondary leading-8 mb-3">
           {product?.pageTitle || "N/A"}
         </h3>
 
