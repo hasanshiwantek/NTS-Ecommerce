@@ -109,78 +109,89 @@ const LinkHeader = () => {
 
   return (
     <header className="bg-[#5B5B5B] text-white">
-      <nav className="w-full flex items-center justify-start gap-12 px-16 lg:px-32 py-3 relative max-w-[1920px]" >
-        {/* Left Section: Menu Button */}
-        <div className="relative flex  items-center gap-2 mr-8" ref={menuRef}>
-          <button
-            onClick={toggleDropdown}
-            className="flex items-center gap-2 hover:text-gray-300 focus:outline-none"
-          >
-            <Menu className="w-6 h-6" />
-            <span className="text-[20px] font-normal !text-white">Menu</span>
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${
-                isOpen ? "rotate-180" : ""
-              }`}
-            />
-          </button>
+  <nav className="w-full flex items-center justify-start 
+                  gap-4 lg:gap-2 xl:gap-8 2xl:gap-0 
+                  px-4 sm:px-6 md:px-10 lg:px-[2%] xl:px-[5%] 2xl:px-32 
+                  py-2 sm:py-3 
+                  relative 2xl:max-w-[1920px]">
+    {/* Left Section: Menu Button */}
+    <div
+      className="relative flex items-center 
+                 gap-1 sm:gap-2 md:gap-3 lg:gap-4 mr-2 sm:mr-4 md:mr-6 lg:mr-8"
+      ref={menuRef}
+    >
+      <button
+        onClick={toggleDropdown}
+        className="flex items-center gap-1 sm:gap-2 hover:text-gray-300 focus:outline-none"
+      >
+        <Menu className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 2xl:w-[24px] 2xl:h-[24px]" />
+        <span className="text-sm sm:text-base md:text-lg xl:text-xl 2xl:text-[20px] font-normal !text-white">
+          Menu
+        </span>
+        <ChevronDown
+          className={`w-3 h-4 sm:w-4 sm:h-5 md:w-5 md:h-6 2xl:w-[12px] 2xl:h-[24px] transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
 
-          {/* Mega Menu */}
-          {isOpen && (
-            <div className="absolute left-0 top-10 flex bg-white shadow-xl border z-50">
-              <DropdownColumn
-                heading="All Categories"
-                categories={categories}
-              />
-            </div>
-          )}
+      {/* Mega Menu */}
+      {isOpen && (
+        <div className="absolute left-0 top-10 flex bg-white shadow-xl border z-50">
+          <DropdownColumn heading="All Categories" categories={categories} />
         </div>
+      )}
+    </div>
 
-        {/* Right Section: Static Links */}
-        <ul className="hidden lg:flex  items-center gap-8 whitespace-nowrap text-[20px] font-normal">
-          <li>
-            <Link href="/portable-storage" className="hover:text-gray-300">
-              Portable Storage Drive
-            </Link>
-          </li>
-          <li>
-            <Link href="/connectors" className="hover:text-gray-300">
-              Connectors
-            </Link>
-          </li>
-          <li>
-            <Link href="/power-supply" className="hover:text-gray-300">
-              Power Supply
-            </Link>
-          </li>
-          <li>
-            <Link href="/charging-cables" className="hover:text-gray-300">
-              Charging Cables
-            </Link>
-          </li>
-          <li>
-            <Link href="/data-cables" className="hover:text-gray-300">
-              Data Cables
-            </Link>
-          </li>
-          <li>
-            <Link href="/hdmi-cables" className="hover:text-gray-300">
-              HDMI Cables
-            </Link>
-          </li>
-          <li>
-            <Link href="/memory-readers" className="hover:text-gray-300">
-              Memory Card Readers
-            </Link>
-          </li>
-          <li>
-            <Link href="/motherboards" className="hover:text-gray-300">
-              Computer Motherboards
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    {/* Right Section: Static Links */}
+    <ul className="hidden lg:flex items-center 
+                   gap-4 md:gap-6 xl:gap-8 
+                   whitespace-nowrap 
+                   text-sm sm:text-base md:text-sm lg:text-[1rem] xl:text-xl nav-fix 2xl:text-[20px] font-normal">
+      <li>
+        <Link href="/portable-storage" className="hover:text-gray-300">
+          Portable Storage Drive
+        </Link>
+      </li>
+      <li>
+        <Link href="/connectors" className="hover:text-gray-300">
+          Connectors
+        </Link>
+      </li>
+      <li>
+        <Link href="/power-supply" className="hover:text-gray-300">
+          Power Supply
+        </Link>
+      </li>
+      <li>
+        <Link href="/charging-cables" className="hover:text-gray-300">
+          Charging Cables
+        </Link>
+      </li>
+      <li>
+        <Link href="/data-cables" className="hover:text-gray-300">
+          Data Cables
+        </Link>
+      </li>
+      <li>
+        <Link href="/hdmi-cables" className="hover:text-gray-300">
+          HDMI Cables
+        </Link>
+      </li>
+      <li>
+        <Link href="/memory-readers" className="hover:text-gray-300">
+          Memory Card Readers
+        </Link>
+      </li>
+      <li>
+        <Link href="/motherboards" className="hover:text-gray-300">
+          Computer Motherboards
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+
   );
 };
 

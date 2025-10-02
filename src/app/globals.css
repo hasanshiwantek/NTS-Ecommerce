@@ -404,3 +404,8 @@ img {
 
 
 
+@media (min-width: 1536px) and (max-width: 1570px) {
+  .nav-fix {
+    font-size: 1.5rem;  /* px-6 */
+  }
+}
