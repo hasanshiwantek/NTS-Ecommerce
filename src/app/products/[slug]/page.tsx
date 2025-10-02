@@ -113,7 +113,7 @@ export default async function ProductPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="my-6">
+      <article >
         {/* Product Sections */}
         <ProductCard product={product} />
         <ProductOverview product={product} />

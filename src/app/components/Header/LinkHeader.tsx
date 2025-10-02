@@ -108,13 +108,13 @@ const LinkHeader = () => {
   }, []);
 
   return (
-    <header className="bg-[#5B5B5B] text-white">
-      <nav className="w-full flex items-center justify-start gap-12 px-16 lg:px-32 py-3 relative max-w-[1920px]" >
+    <header className="bg-[#5B5B5B]">
+      <nav className="w-full flex items-center justify-start gap-12 px-16 lg:px-22 py-3 relative max-w-[1920px]" >
         {/* Left Section: Menu Button */}
         <div className="relative flex  items-center gap-2 mr-8" ref={menuRef}>
           <button
             onClick={toggleDropdown}
-            className="flex items-center gap-2 hover:text-gray-300 focus:outline-none"
+            className="flex items-center gap-2 hover:text-gray-300 focus:outline-none text-[#F2F2F2]"
           >
             <Menu className="w-6 h-6" />
             <span className="text-[20px] font-normal !text-white">Menu</span>
@@ -138,42 +138,42 @@ const LinkHeader = () => {
 
         {/* Right Section: Static Links */}
         <ul className="hidden lg:flex  items-center gap-8 whitespace-nowrap text-[20px] font-normal">
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/portable-storage" className="hover:text-gray-300">
               Portable Storage Drive
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/connectors" className="hover:text-gray-300">
               Connectors
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/power-supply" className="hover:text-gray-300">
               Power Supply
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/charging-cables" className="hover:text-gray-300">
               Charging Cables
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/data-cables" className="hover:text-gray-300">
               Data Cables
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/hdmi-cables" className="hover:text-gray-300">
               HDMI Cables
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/memory-readers" className="hover:text-gray-300">
               Memory Card Readers
             </Link>
           </li>
-          <li>
+          <li className="text-[#F2F2F2]">
             <Link href="/motherboards" className="hover:text-gray-300">
               Computer Motherboards
             </Link>
