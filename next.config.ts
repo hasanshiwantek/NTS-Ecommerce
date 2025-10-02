@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "ecom.brokercell.com",
+        port: "", // leave empty if no port
+        pathname: "/product_images/**", // allow all images inside /product_images/
+      },
     ],
   },
 };
