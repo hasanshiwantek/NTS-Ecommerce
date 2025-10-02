@@ -257,7 +257,7 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
 
             {/* Note */}
-            <div className="mt-4 p-3">
+            <div className="mt-9 xl:mt-1 2xl:mt-1 lg:mt-16 p-3">
               <p className="text-[18px] font-normal text-[#4A4A4A] leading-6 italic w-[60rem]">
                 <span className="text-red-600">*</span> All Business Entities,
                 Corporations, Public & Private School Systems, Governmental
@@ -270,9 +270,9 @@ const ProductCard = ({ product }: { product: any }) => {
           {/* Right: Support Section */}
           <div className="w-full lg:w-[25%] xl:w-[376px] 2xl:w-[376px] mt-6 xl:mt-0 xl:ml-auto">
             {/* Support Card 1 */}
-            <div className="border border-gray-300 rounded-[20px] text-center h-max w-full ">
-              <div className="bg-[#F5F6FA] p-2  rounded-r-[20px] rounded-l-[20px]">
-                <h3 className="h5-bold my-3">Dedicated Support Team, 24/7</h3>
+            <div className="border border-gray-300 rounded-[20px]  h-max w-full ">
+              <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px] ">
+                <h3 className="h5-bold my-2">Dedicated Support Team, 24/7</h3>
               </div>
               <div className="flex justify-center my-2">
                 <Image
@@ -293,15 +293,15 @@ const ProductCard = ({ product }: { product: any }) => {
               </div>
               <div className="p-3">
                 <div className="flex justify-center mb-2">
-                  <button className="btn-outline-primary flex w-64 justify-center gap-5 items-center !rounded-full !text-[20px] !font-normal">
+                  <button className="btn-outline-primary flex w-80 justify-center gap-5 items-center !rounded-full !text-[20px] !font-normal">
                     <Phone width={12} height={12} /> Call us Now
                   </button>
                 </div>
                 <div className="flex justify-center gap-3 mb-3">
-                  <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-[20px] !font-normal">
+                  <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full !text-[20px] !font-normal">
                     Email
                   </button>
-                  <button className="!px-10 py-2 btn-outline-primary w-32 !rounded-full !text-[20px] !font-normal">
+                  <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full !text-[20px] !font-normal">
                     Chat
                   </button>
                 </div>
@@ -309,20 +309,22 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
 
             {/* Support Card 2 */}
-            <div className="mt-6 border border-gray-300 rounded-[20px] text-center h-max">
-              <div className="bg-[#F5F6FA] p-2 rounded-r-[20px] rounded-l-[20px]">
-                <h3 className="h5-bold my-3">Looking for a Bulk Quantity?</h3>
+            <div className="mt-6 border border-gray-300 rounded-[20px]  h-max  lg:h-max">
+              {/* Header */}
+              <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px] ">
+                <h3 className="h5-bold my-2">Looking for a Bulk Quantity?</h3>
               </div>
-              <div className="p-3">
-                <div className="flex flex-col items-start mb-2">
-                  <p className="text-xl w-80 text-start">
-                    Request a Quote and one of our sales representative will get
-                    in touch with you very soon
-                  </p>
-                  <button className="btn-outline-primary flex m-auto w-64 justify-center gap-5 items-center !rounded-full !text-lg">
-                    Get Quote
-                  </button>
-                </div>
+
+              {/* Body */}
+              <div className="px-6 py-6 flex flex-col lg:text-start xl:items-start md:items-center sm:items-center items-center">
+                <p className="h5-regular mb-4 max-w-[500px]  leading-[1.5]">
+                  Request a Quote and one of our sales representative will get
+                  in touch with you very soon
+                </p>
+
+                <button className="btn-outline-primary xl:w-96 lg:w-64  !py-4 flex justify-center items-center !rounded-full !text-[20px] !font-normal">
+                  Get Quote
+                </button>
               </div>
             </div>
           </div>
