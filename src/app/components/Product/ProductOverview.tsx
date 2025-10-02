@@ -5,12 +5,14 @@ import React from "react";
 const ProductOverview = ({ product }: { product: any }) => {
   return (
     <section className="my-8">
-      <div className="w-full max-w-[1719px] flex flex-col gap-8 ">
+      <div className="w-full max-w-[1719px] flex flex-col">
+        < div className="flex flex-col gap-8"  >
+
         {/* Main Overview Heading */}
-        <h1 className="h1-secondary-medium !mb-4">Overview</h1>
+        <h1 className="h1-secondary-medium ">Overview</h1>
 
         {/* Intro Paragraph */}
-        <p className="h5-regular !mb-6 !leading-relaxed w-full xl:w-[85rem]">
+        <p className="h5-regular !leading-relaxed w-full xl:w-[85rem]">
           Introducing the {product?.name || "N/A"}, a versatile
           solution for your networking needs. This product is manufactured by
          {product?.brand?.name || "N/A"}, offering reliable
@@ -18,8 +20,8 @@ const ProductOverview = ({ product }: { product: any }) => {
         </p>
 
         {/* Key Features */}
-        <section className="!mb-8">
-          <h2 className="h5-regular !mb-3">Key Features:</h2>
+        <section className="">
+          <h2 className="h5-regular !mb-1">Key Features:</h2>
           <ul className="!list-disc !list-inside !space-y-2">
             <li className="h5-regular">
               <span className="">SKU:</span>{" "}
@@ -61,10 +63,12 @@ const ProductOverview = ({ product }: { product: any }) => {
   }}
 ></p>
 
+        </div>
+
 
         {/* Product Details Section */}
-        <section className="!mt-8 border">
-          <div className="bg-[#F5F6FA] py-[20px] px-[30px]">
+        <section className="border">
+          <div className="bg-[#F5F6FA] py-[20px] px-[8px]">
             <h2 className="h3-secondary  !mb-2">
               {product?.sku || "N/A"}
             </h2>
