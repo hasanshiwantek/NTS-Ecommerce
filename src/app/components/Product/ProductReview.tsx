@@ -41,7 +41,7 @@ const ProductReview = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* LEFT Summary (unchanged) */}
-        <aside className="border rounded-lg p-6 flex flex-col items-center lg:items-start">
+        <aside className="rounded-lg p-6 flex flex-col items-center lg:items-start">
           <div className="mx-auto">
             <div className="flex items-center space-x-2 mb-2">
               <span className="text-green-600 font-semibold text-xl">
