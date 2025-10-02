@@ -45,7 +45,7 @@ const ProductCard = ({ product }: { product: any }) => {
   />{" "}
           {/* {product.name} {" "} */}
         {product.categoryHierarchy?.map((data:any, index:number) => (
-  <span key={index} className="!text-[20px] !font-normal !text-[#4A4A4A]">
+  <span key={index} className="h5-regular">
     {data?.name}
   </span>
 ))}
@@ -65,22 +65,23 @@ const ProductCard = ({ product }: { product: any }) => {
             sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0 
           "
               >
-                {images.map((img: string, idx: number) => (
-                  <Image
-                    key={idx}
-                    src={img}
-                    alt={`Thumbnail ${idx + 1}`}
-                    width={150}
-                    height={150}
-                    onClick={() => setSelectedImage(img)}
-                    className={`w-28 h-28 object-contain  rounded-lg cursor-pointer transition bg-[#F2F3F7] border p-2
-                ${
-                  selectedImage === img
-                    ? "border-2 border-[#F2F3F7] ring-2 ring-[#F2F3F7]"
-                    : "border"
-                }`}
-                  />
-                ))}
+               {images.map((img: string, idx: number) => (
+  <Image
+    key={idx}
+    src={img}
+    alt={`Thumbnail ${idx + 1}`}
+    width={150}
+    height={150}
+    onClick={() => setSelectedImage(img)}
+    className={`w-28 h-28 object-contain rounded-lg cursor-pointer transition bg-[#F2F3F7] p-2
+      ${
+        selectedImage === img
+          ? "border-2 border-black ring-2 ring-gray-900"
+          : "border border-black ring-2 ring-[#3333331A]"
+      }`}
+  />
+))}
+
               </div>
 
               {/* Main Image */}
@@ -247,18 +248,18 @@ const ProductCard = ({ product }: { product: any }) => {
 
             {/* Actions */}
             <div className="flex justify-between items-center gap-3 sm:gap-4">
-              <button className="w-[65rem]  bg-[#F15939]  hover:border-[#F15939] hover:bg-white hover:text-[#F15939] font-medium text-[22px] text-white border border-[#F15939]  hover:#f15939 !rounded-full flex items-center justify-center space-x-2 transition !py-5">
+              <button className="w-[65rem]  bg-[#F15939]  hover:border-[#F15939] hover:bg-white hover:text-[#F15939] h4-medium text-white border border-[#F15939]  hover:#f15939 !rounded-full flex items-center justify-center space-x-2 transition !py-5">
                 <ShoppingCart className="w-7 h-7" />
                 <span>Add to Cart</span>
               </button>
-              <button className="w-[35rem]  text-[22px] font-medium border-2  border-[#4A4A4A] bg-transparent hover:text-[#F15939] hover:bg-[white] text-[#333333] hover:border-[#F15939] !rounded-full flex items-center justify-center space-x-2 transition !py-5">
+              <button className="w-[35rem]  h4-medium border-2  border-[#4A4A4A] bg-transparent hover:text-[#F15939] hover:bg-[white] text-[#333333] hover:border-[#F15939] !rounded-full flex items-center justify-center space-x-2 transition !py-5">
                 <span>Buy Now</span>
               </button>
             </div>
 
             {/* Note */}
             <div className="mt-9 xl:mt-1 2xl:mt-1 lg:mt-16 p-3">
-              <p className="text-[18px] font-normal text-[#4A4A4A] leading-6 italic w-[60rem]">
+              <p className="h6-regular !text-[#4A4A4A] leading-6 italic w-[60rem]">
                 <span className="text-red-600">*</span> All Business Entities,
                 Corporations, Public & Private School Systems, Governmental
                 Organizations, Colleges, Universities & Libraries are welcome to
@@ -293,15 +294,15 @@ const ProductCard = ({ product }: { product: any }) => {
               </div>
               <div className="p-3">
                 <div className="flex justify-center mb-2">
-                  <button className="btn-outline-primary flex w-80 justify-center gap-5 items-center !rounded-full !text-[20px] !font-normal">
+                  <button className="btn-outline-primary flex w-80 justify-center gap-5 items-center !rounded-full h5-regular">
                     <Phone width={12} height={12} /> Call us Now
                   </button>
                 </div>
                 <div className="flex justify-center gap-3 mb-3">
-                  <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full !text-[20px] !font-normal">
+                  <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full h5-regular">
                     Email
                   </button>
-                  <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full !text-[20px] !font-normal">
+                  <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full h5-regular">
                     Chat
                   </button>
                 </div>
@@ -322,7 +323,7 @@ const ProductCard = ({ product }: { product: any }) => {
                   in touch with you very soon
                 </p>
 
-                <button className="btn-outline-primary xl:w-96 lg:w-64  !py-4 flex justify-center items-center !rounded-full !text-[20px] !font-normal">
+                <button className="btn-outline-primary xl:w-96 lg:w-64  !py-4 flex justify-center items-center !rounded-full h5-regular">
                   Get Quote
                 </button>
               </div>
