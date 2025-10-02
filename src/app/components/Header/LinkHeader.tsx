@@ -114,7 +114,7 @@ const LinkHeader = () => {
                   gap-4 lg:gap-2 xl:gap-8 2xl:gap-0 
                   px-4 sm:px-6 md:px-10 lg:px-[2%] xl:px-[5%] 2xl:px-32 
                   py-2 sm:py-3 
-                  relative 2xl:max-w-[1920px]"
+                  relative 2xl:max-w-[1920px] xl:h-[56px] 2xl:h-[56px] lg:[h-56px] h-max"
       >
         {/* Left Section: Menu Button */}
         <div

@@ -17,7 +17,7 @@ const ProductFAQs = () => {
         {/* Left Column */}
         <Accordion type="single" collapsible className="w-full space-y-5">
           <AccordionItem value="q1" className="border rounded-md px-3">
-            <AccordionTrigger className="h3-secondary ">
+            <AccordionTrigger className="h3-regular ">
               What is the purpose of the Targus 720KB external floppy drive?
             </AccordionTrigger>
             <AccordionContent className="h5-20px-regular  leading-8">

@@ -1,0 +1,58 @@
+"use client";
+import React from "react";
+import Image from "next/image";
+import { Phone } from "lucide-react";
+import supportIcon1 from "@/assets/support/support-img1.png";
+import supportIcon2 from "@/assets/support/support-img2.png";
+import supportIcon3 from "@/assets/support/support-img3.png";
+
+const ProductRight = () => {
+  return (
+    <div className="w-full lg:w-[25%] xl:w-[376px] 2xl:w-[376px] mt-6 xl:mt-0 xl:ml-auto">
+      {/* Support Card 1 */}
+      <div className="border border-gray-300 rounded-[20px] h-max w-full">
+        <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px]">
+          <h3 className="h5-bold my-2">Dedicated Support Team, 24/7</h3>
+        </div>
+        <div className="flex justify-center my-2">
+          <Image src={supportIcon1} alt="Support 1" className="w-[5rem] h-[5rem] rounded-full" />
+          <Image src={supportIcon2} alt="Support 2" className="w-[5rem] h-[5rem] rounded-full -ml-2" />
+          <Image src={supportIcon3} alt="Support 3" className="w-[5rem] h-[5rem] rounded-full -ml-2" />
+        </div>
+        <div className="p-3">
+          <div className="flex justify-center mb-2">
+            <button className="btn-outline-primary flex w-80 justify-center gap-5 items-center !rounded-full h5-regular">
+              <Phone width={12} height={12} /> Call us Now
+            </button>
+          </div>
+          <div className="flex justify-center gap-3 mb-3">
+            <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full h5-regular">
+              Email
+            </button>
+            <button className="!px-10 py-2 btn-outline-primary w-40 !rounded-full h5-regular">
+              Chat
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Support Card 2 */}
+      <div className="mt-6 border border-gray-300 rounded-[20px] h-max lg:h-max">
+        <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px]">
+          <h3 className="h5-bold my-2">Looking for a Bulk Quantity?</h3>
+        </div>
+        <div className="px-6 py-6 flex flex-col items-center xl:items-start">
+          <p className="h5-regular mb-4 max-w-[500px] leading-[1.5]">
+            Request a Quote and one of our sales representative will get in
+            touch with you very soon
+          </p>
+          <button className="btn-outline-primary xl:w-96 lg:w-64 !py-4 flex justify-center items-center !rounded-full h5-regular">
+            Get Quote
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductRight;
