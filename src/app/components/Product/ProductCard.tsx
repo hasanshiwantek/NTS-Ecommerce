@@ -35,9 +35,22 @@ const ProductCard = ({ product }: { product: any }) => {
       <div className=" bg-white  rounded-xl w-full max-w-[1719px]  sm:p-4">
         {/* Breadcrumb */}
         <p className="h5-20px-regular lg:mb-7  ">
-          Home <span className="mx-2">{">"}</span>
-          {product.name} <span className="mx-2">{">"}</span>
-          <span className="h5-regular">{product.code}</span>
+            Home{" "}
+  <Image
+    className="inline-block align-middle"
+    src="/arrow-right.png"
+    alt="Arrow Right Icon"
+    width={12}
+    height={12}
+  />{" "}
+          {/* {product.name} {" "} */}
+        {product.categoryHierarchy?.map((data:any, index:number) => (
+  <span key={index} className="!text-[20px] !font-normal !text-[#4A4A4A]">
+    {data?.name}
+  </span>
+))}
+
+        
         </p>
 
         <div className="flex flex-wrap lg:flex-nowrap gap-6 sm:gap-8  ">
@@ -106,7 +119,7 @@ const ProductCard = ({ product }: { product: any }) => {
                     {product?.rating || "N/A " + " Ratings"}
                   </h6>
 
-                  <h6 className="!text-blue-500 h6-medium">
+                  <h6 className="!text-[#1A80AD] h6-medium">
                     {product.reviews || "N/A " + " Reviews"}
                   </h6>
                 </div>
