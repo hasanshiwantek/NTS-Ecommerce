@@ -35,22 +35,23 @@ const ProductCard = ({ product }: { product: any }) => {
       <div className=" bg-white  rounded-xl w-full max-w-[1719px]  sm:p-4">
         {/* Breadcrumb */}
         <p className="h5-20px-regular lg:mb-7  ">
-            Home{" "}
-  <Image
-    className="inline-block align-middle"
-    src="/arrow-right.png"
-    alt="Arrow Right Icon"
-    width={12}
-    height={12}
-  />{" "}
+          Home{" "}
+          <Image
+            className="inline-block align-middle"
+            src="/arrow-right.png"
+            alt="Arrow Right Icon"
+            width={12}
+            height={12}
+          />{" "}
           {/* {product.name} {" "} */}
-        {product.categoryHierarchy?.map((data:any, index:number) => (
-  <span key={index} className="!text-[20px] !font-normal !text-[#4A4A4A]">
-    {data?.name}
-  </span>
-))}
-
-        
+          {product.categoryHierarchy?.map((data: any, index: number) => (
+            <span
+              key={index}
+              className="!text-[20px] !font-normal !text-[#4A4A4A]"
+            >
+              {data?.name}
+            </span>
+          ))}
         </p>
 
         <div className="flex flex-wrap lg:flex-nowrap gap-6 sm:gap-8  ">
@@ -247,11 +248,11 @@ const ProductCard = ({ product }: { product: any }) => {
 
             {/* Actions */}
             <div className="flex justify-between items-center gap-3 sm:gap-4">
-              <button className="w-[65rem]  bg-[#F15939]  hover:border-[#F15939] hover:bg-white hover:text-[#F15939] font-medium text-[22px] text-white border border-[#F15939]  hover:#f15939 !rounded-full flex items-center justify-center space-x-2 transition !py-5">
+              <button className="w-[70rem]  bg-[#F15939]  hover:border-[#F15939] hover:bg-white hover:text-[#F15939] font-medium text-[22px] text-white border border-[#F15939]  hover:#f15939 !rounded-full flex items-center justify-center space-x-2 transition !py-5">
                 <ShoppingCart className="w-7 h-7" />
                 <span>Add to Cart</span>
               </button>
-              <button className="w-[35rem]  text-[22px] font-medium border-2  border-[#4A4A4A] bg-transparent hover:text-[#F15939] hover:bg-[white] text-[#333333] hover:border-[#F15939] !rounded-full flex items-center justify-center space-x-2 transition !py-5">
+              <button className="w-[30rem]  text-[22px] font-medium border-2  border-[#4A4A4A] bg-transparent hover:text-[#F15939] hover:bg-[white] text-[#333333] hover:border-[#F15939] !rounded-full flex items-center justify-center space-x-2 transition !py-5">
                 <span>Buy Now</span>
               </button>
             </div>
