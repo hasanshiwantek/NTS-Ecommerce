@@ -32,15 +32,15 @@ const ProductCard = ({ product }: { product: any }) => {
   return (
     <div className="max-w-full mx-auto">
       {/* Product Layout */}
-      <div className=" bg-white  rounded-xl w-full max-w-[1719px] mx-auto  sm:p-4">
+      <div className=" bg-white  rounded-xl w-full max-w-[1719px]  sm:p-4">
         {/* Breadcrumb */}
-        <p className="h5-20px-regular lg:mb-7 lg:-ml-[4rem] xl:-ml-[4rem] 2xl:-ml-[4rem] ">
+        <p className="h5-20px-regular lg:mb-7  ">
           Home <span className="mx-2">{">"}</span>
           {product.name} <span className="mx-2">{">"}</span>
           <span className="h5-regular">{product.code}</span>
         </p>
 
-        <div className="flex flex-wrap lg:flex-nowrap gap-6 sm:gap-8 justify-center ">
+        <div className="flex flex-wrap lg:flex-nowrap gap-6 sm:gap-8  ">
           {/* Left: Images */}
           <div className="flex flex-col w-full lg:w-[30%] xl:w-[600px]">
             <div className="flex flex-col sm:flex-row sm:space-x-4">
