@@ -119,7 +119,7 @@ const ProductCard = ({ product }: { product: any }) => {
                     {product?.rating || "N/A " + " Ratings"}
                   </h6>
 
-                  <h6 className="!text-blue-500 h6-medium">
+                  <h6 className="!text-[#1A80AD] h6-medium">
                     {product.reviews || "N/A " + " Reviews"}
                   </h6>
                 </div>
