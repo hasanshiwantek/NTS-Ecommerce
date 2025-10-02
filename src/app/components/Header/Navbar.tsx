@@ -24,27 +24,21 @@ const Navbar: React.FC = () => {
         flex items-center justify-between lg:justify-center
         gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10
         h-16 sm:h-20 lg:h-24 xl:h-32 2xl:h-[124px]
-        w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-29
+        w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-24
       "
     >
       {/* Left: Logo */}
       <div className="flex items-center flex-shrink-0">
         <Link href={"/"}>
-          <Image
-            src={navlogo}
-            alt="Logo"
-            width={120}
-            height={120}
-            className="
-              object-contain 
-              w-32 h-7         
-              sm:w-40 sm:h-8  
-              md:w-44 md:h-9  
-              lg:w-48 lg:h-10 
-              xl:w-56 xl:h-12 
-              2xl:w-[253.48px] 2xl:h-[48px]
-            "
-          />
+         <div className="relative w-32 h-7 sm:w-40 sm:h-8 md:w-44 md:h-9 lg:w-48 lg:h-10 xl:w-56 xl:h-12 2xl:w-[253.48px] 2xl:h-[48px]">
+  <Image
+    src={navlogo}
+    alt="Logo"
+    fill
+    className="object-contain"
+  />
+</div>
+
         </Link>
       </div>
 

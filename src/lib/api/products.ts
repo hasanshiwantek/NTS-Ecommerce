@@ -31,6 +31,8 @@ export const fetchProductBySlug = async (slug: string) => {
 
     if (!res.ok) throw new Error("Failed to fetch product");
     const data = await res.json();
+    console.log("ddddddddd",data.data);
+    
     return data?.data;
   } catch (err) {
     console.error("Error fetching product:", err);
