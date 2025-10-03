@@ -69,13 +69,13 @@ const SignupPage = () => {
           {/* Name Fields */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="firstName">First Name <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="firstName">First Name <span className="text-red-600">*</span></Label>
               <Input id="firstName" className="!w-full !max-w-full h-[60px]"
                 {...register("firstName", { required: true })} />
               {errors.firstName && <p className="text-sm text-red-500">Required</p>}
             </div>
             <div>
-              <Label htmlFor="lastName">Last Name <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="lastName">Last Name <span className="text-red-600">*</span></Label>
               <Input id="lastName" className="!w-full !max-w-full h-[60px]"
                 {...register("lastName", { required: true })} />
               {errors.lastName && <p className="text-sm text-red-500">Required</p>}
@@ -85,13 +85,13 @@ const SignupPage = () => {
           {/* Email / Phone */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="email">Email <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="email">Email <span className="text-red-600">*</span></Label>
               <Input id="email" type="email" className="!w-full !max-w-full h-[60px]"
                 {...register("email", { required: true })} />
               {errors.email && <p className="text-sm text-red-500">Required</p>}
             </div>
             <div>
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label className="h5-regular" htmlFor="phone">Phone Number</Label>
               <Input id="phone" type="tel" className="!w-full !max-w-full h-[60px]"
                 {...register("phone")} />
             </div>
@@ -100,13 +100,13 @@ const SignupPage = () => {
           {/* Password / Confirm */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="password">Password <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="password">Password <span className="text-red-600">*</span></Label>
               <Input id="password" type="password" className="!w-full !max-w-full h-[60px]"
                 {...register("password", { required: true })} />
               {errors.password && <p className="text-sm text-red-500">Required</p>}
             </div>
             <div>
-              <Label htmlFor="confirmPassword">Confirm Password <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="confirmPassword">Confirm Password <span className="text-red-600">*</span></Label>
               <Input id="confirmPassword" type="password" className="!w-full !max-w-full h-[60px]"
                 {...register("confirmPassword", { required: true })} />
               {errors.confirmPassword && <p className="text-sm text-red-500">Required</p>}
@@ -115,7 +115,7 @@ const SignupPage = () => {
 
           {/* Company Name */}
           <div>
-            <Label htmlFor="company">Company Name</Label>
+            <Label className="h5-regular" htmlFor="company">Company Name</Label>
             <Input id="company" className="!w-full !max-w-full h-[60px]"
               {...register("company")} />
           </div>
@@ -123,18 +123,18 @@ const SignupPage = () => {
           {/* Address */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <Label htmlFor="address1">Address Line 1 <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="address1">Address Line 1 <span className="text-red-600">*</span></Label>
               <Input id="address1" className="!w-full !max-w-full h-[60px]"
                 {...register("address1", { required: true })} />
               {errors.address1 && <p className="text-sm text-red-500">Required</p>}
             </div>
             <div>
-              <Label htmlFor="address2">Address Line 2</Label>
+              <Label className="h5-regular" htmlFor="address2">Address Line 2</Label>
               <Input id="address2" className="!w-full !max-w-full h-[60px]"
                 {...register("address2")} />
             </div>
             <div>
-              <Label htmlFor="city">Suburb/City <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="city">Suburb/City <span className="text-red-600">*</span></Label>
               <Input id="city" className="!w-full !max-w-full h-[60px]"
                 {...register("city", { required: true })} />
               {errors.city && <p className="text-sm text-red-500">Required</p>}
@@ -144,7 +144,7 @@ const SignupPage = () => {
           {/* Country / State / Zip */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <Label htmlFor="country">Country <span className="text-red-600">*</span></Label>
+              <Label className="h5-regular" htmlFor="country">Country <span className="text-red-600">*</span></Label>
               <Select>
                 <SelectTrigger className="!w-full !max-w-full !h-[60px]">
                   <SelectValue placeholder="Select" />
@@ -157,12 +157,12 @@ const SignupPage = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="state">State/Province</Label>
+              <Label className="h5-regular" htmlFor="state">State/Province</Label>
               <Input id="state" className="!w-full !max-w-full h-[60px]"
                 {...register("state")} />
             </div>
             <div>
-              <Label htmlFor="zip" >Zip/Postcode</Label>
+              <Label className="h5-regular" htmlFor="zip" >Zip/Postcode</Label>
               <Input id="zip" className="!w-full !max-w-full h-[60px]"
                 {...register("zip")} />
             </div>
