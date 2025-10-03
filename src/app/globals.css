@@ -373,13 +373,13 @@ img {
 @media (min-width: 1024px) {
   .h3-secondary,
   .h3-regular {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 @media (min-width: 1280px) {
   .h3-secondary,
   .h3-regular {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 @media (min-width: 1536px) {
@@ -469,7 +469,7 @@ img {
   .h5-regular,
   .h5-medium-20px-medium,
   .h5-20px-regular {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 @media (min-width: 1024px) {
@@ -478,7 +478,7 @@ img {
   .h5-regular,
   .h5-medium-20px-medium,
   .h5-20px-regular {
-    font-size: 18px;
+    font-size: 15px;
   }
 }
 @media (min-width: 1280px) {
@@ -487,7 +487,7 @@ img {
   .h5-regular,
   .h5-medium-20px-medium,
   .h5-20px-regular {
-    font-size: 19px;
+    font-size: 15px;
   }
 }
 @media (min-width: 1536px) {
@@ -543,7 +543,7 @@ img {
   .h6-regular,
   .h6-18-px-medium,
   .h6-18-px-regular {
-    font-size: 14px;
+    font-size: 13.5px;
   }
 }
 @media (min-width: 1024px) {
@@ -553,7 +553,7 @@ img {
   .h6-regular,
   .h6-18-px-medium,
   .h6-18-px-regular {
-    font-size: 16px;
+    font-size: 13.5px;
   }
 }
 @media (min-width: 1280px) {
@@ -563,7 +563,7 @@ img {
   .h6-regular,
   .h6-18-px-medium,
   .h6-18-px-regular {
-    font-size: 17px;
+    font-size: 13.5px;
   }
 }
 @media (min-width: 1536px) {
@@ -593,19 +593,19 @@ img {
 @media (min-width: 640px) {
   .h7-regular,
   .h7-16-px-regular {
-    font-size: 14px;
+    font-size: 12px;
   }
 }
 @media (min-width: 1024px) {
   .h7-regular,
   .h7-16-px-regular {
-    font-size: 15px;
+    font-size: 12px;
   }
 }
 @media (min-width: 1280px) {
   .h7-regular,
   .h7-16-px-regular {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
