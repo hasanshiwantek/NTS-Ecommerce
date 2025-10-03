@@ -57,7 +57,7 @@ export default function PageTransition({
         className={`flex-grow ${
           pathname.includes("/auth")
             ? ""
-            : "py-6 lg:px-[7%] xl:px-[5.2%] 2xl:px-[5.2%] md:px-[7%] px-[7%]"
+            : "py-6 lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] md:px-[7%] px-[7%]"
         }`}
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}

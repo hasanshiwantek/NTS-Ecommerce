@@ -23,22 +23,29 @@ export const fetchProducts = async () => {
 export const fetchProductBySlug = async (slug: string) => {
   try {
     const res = await fetch(`${baseURL}web/products/get-product/${slug}`, {
-      cache: "no-store", // ✅ always fetch fresh data for details
-      headers: {
-        storeId: "4",
-      },
+      cache: "no-store",
+      headers: { storeId: "4" },
     });
 
-    if (!res.ok) throw new Error("Failed to fetch product");
+    if (!res.ok) {
+      console.error(`❌ API failed for slug: ${slug}, status: ${res.status}`);
+      return null;
+    }
+
     const data = await res.json();
-    console.log("ddddddddd",data.data);
-    
-    return data?.data;
+    if (!data?.data) {
+      console.warn(`⚠️ No product found for slug: ${slug}`);
+      return null;
+    }
+    console.log("Slug data response: ", data?.data);
+
+    return data.data;
   } catch (err) {
-    console.error("Error fetching product:", err);
-    throw new Error("Failed to load product");
+    console.error("🚨 Error fetching product:", err);
+    return null; // always return null, not throw
   }
 };
+
 // lib/api/products.ts
 export async function fetchFilteredProducts(filters: {
   page?: number;
