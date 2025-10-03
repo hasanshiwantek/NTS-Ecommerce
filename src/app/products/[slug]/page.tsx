@@ -72,10 +72,6 @@ export default async function ProductPage({
   const product = await fetchProductBySlug(slug);
   const products = await fetchProducts();
 
-  if (!product) {
-    return <div className="text-center py-10">❌ Product not found</div>;
-  }
-
   // ✅ JSON-LD Structured Data for rich snippets
   const jsonLd = {
     "@context": "https://schema.org/",
