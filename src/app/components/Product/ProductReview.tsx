@@ -43,32 +43,39 @@ const ProductReview = () => {
         {/* LEFT Summary (unchanged) */}
         <aside className="rounded-lg p-6 flex flex-col items-center lg:items-start">
           <div className="mx-auto">
-            <div className="flex items-center space-x-2 mb-2">
-              <span className="text-green-600 font-semibold text-xl">
-                ★ Trustpilot
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <span className="text-green-600 font-semibold text-3xl">
+                ★
+              </span>
+              <span className="text-black font-semibold text-3xl">
+                 Trustpilot
               </span>
             </div>
-            <p className="flex items-center text-lg font-semibold">
+            <p className="flex items-center justify-center text-2xl font-semibold">
               4.5
-              <span className="flex ml-2 text-yellow-400">
+              <span className="flex ml-4 text-[#FFA439]">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-4 h-4 ${
-                      i < 4 ? "fill-yellow-400" : "fill-muted"
+                    className={`w-6 h-6 ${
+                      i < 4 ? "fill-[#FFA439]" : "fill-muted"
                     }`}
                   />
                 ))}
               </span>
             </p>
-            <p className="text-base text-muted-foreground mb-4">
+            <p className="h6-regular !text-muted-foreground mb-4">
               from 134 reviews
             </p>
           </div>
           <ul className="w-full space-y-2">
             {[5, 4, 3, 2, 1].map((star, i) => (
               <li key={star} className="flex items-center text-sm">
-                <span className="w-6 font-medium">{star}.0</span>
+               <span className="flex items-center gap-1 font-medium ">
+  {star}.0
+  <Star className="w-6 h-6 fill-[#FFA439] text-[#FFA439]" />
+</span>
+
                 <div className="flex-1 mx-2 h-2 bg-gray-200 rounded-full">
                   <div
                     className="h-2 bg-black rounded-full"
@@ -82,7 +89,7 @@ const ProductReview = () => {
             ))}
           </ul>
 
-          <button className="!mt-6 btn-outline-primary mx-auto">
+          <button className="!mt-6 btn-outline-primary !text-[18px] !font-medium !px-10 !py-4 mx-auto">
             Write a review
           </button>
         </aside>
@@ -122,12 +129,12 @@ const ProductReview = () => {
                       </time>
                     </div>
                   </div>
-                  <div className="flex space-x-1 text-yellow-400">
+                  <div className="flex space-x-1 text-[#FFA439]">
                     {[...Array(5)].map((_, starIdx) => (
                       <Star
                         key={starIdx}
-                        className={`w-4 h-4 ${
-                          starIdx < 4 ? "fill-yellow-400" : "fill-muted"
+                        className={`w-6 h-6 ${
+                          starIdx < 4 ? "fill-[#FFA439]" : "fill-muted"
                         }`}
                       />
                     ))}
