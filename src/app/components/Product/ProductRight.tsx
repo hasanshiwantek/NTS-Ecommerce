@@ -64,43 +64,37 @@ const ProductRight = () => {
         </div>
       </div>
       {/* icon with text */}
-      <div className="space-y-5 my-12">
-  {/* First Line */}
-  <div className="flex items-center gap-4">
-    <Image
-            src="/dun-icon.png" 
+      <div className="space-y-5 my-5">
+        {/* First Line */}
+        <div className="flex items-center gap-4">
+          <Image
+            src="/dun-icon.png"
+            alt="Rating"
+            width={25}
+            height={24}
+            className="2xl:w-[2rem] 2xl:h-[2rem] xl:w-[2rem] xl:h-[2rem] w-[2rem] h-[2rem] object-contain "
+          />
+          <p className="h6-regular !text-[#4A4A4A]">
+            <span className="font-medium">Dun & Broadcast Rating</span>{" "}
+            <span className="cursor-pointer underline">Learn more</span>
+          </p>
+        </div>
 
-      alt="Rating"
-      width={25}
-      height={24}
-      className="object-contain"
-    />
-    <p className="h6-regular !text-[#4A4A4A]">
-      <span className="font-medium">Dun & Broadcast Rating</span>{" "}
-      <span className="cursor-pointer underline">
-        Learn more
-      </span>
-    </p>
-  </div>
-
-  {/* Second Line */}
-  <div className="flex items-center gap-2">
-    <Image
-      src="/sam-icon.png" 
-      alt="Authorize Supplier"
-      width={32.960344314575195}
-      height={24}
-      className="object-contain"
-    />
-    <p className="h6-regular !text-[#4A4A4A]">
-      <span className="font-medium">SAM.GOV Authorize supplier</span>{" "}
-      <span className="cursor-pointer underline">
-        Learn more
-      </span>
-    </p>
-  </div>
-</div>
-
+        {/* Second Line */}
+        <div className="flex items-center gap-2">
+          <Image
+            src="/sam-icon.png"
+            alt="Authorize Supplier"
+            width={32.960344314575195}
+            height={24}
+           className="2xl:w-[2rem] 2xl:h-[2rem] xl:w-[2rem] xl:h-[2rem] w-[2rem] h-[2rem] object-contain"
+          />
+          <p className="h6-regular !text-[#4A4A4A]">
+            <span className="font-medium">SAM.GOV Authorize supplier</span>{" "}
+            <span className="cursor-pointer underline">Learn more</span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
