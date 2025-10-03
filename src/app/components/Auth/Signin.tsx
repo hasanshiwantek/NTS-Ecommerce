@@ -26,8 +26,8 @@ const SigninPage = () => {
   };
 
   return (
-   <section
-  className={`!min-h-screen !w-full relative flex items-center justify-center !bg-cover !bg-center p-4 ${styles.signUpBG}`}
+<section
+  className={`!min-h-screen !w-full relative flex items-center justify-center !bg-cover !bg-center p-8 ${styles.signUpBG}`}
 >
   {/* Overlay */}
   <div className="absolute inset-0 bg-black/20" />
@@ -36,67 +36,69 @@ const SigninPage = () => {
   <div className="relative z-10 w-full max-w-8xl bg-transparent rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden">
     
     {/* Left Section */}
-    <div className="flex flex-col items-start justify-center p-10">
-      <h1 className="text-5xl font-bold mb-4 text-white">
+    <div className="flex flex-col items-center lg:items-start justify-center p-6 sm:p-10">
+      <h1 className="text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] 2xl:text-[60px] font-extrabold mb-4 text-white leading-tight">
         Lorem ipsum dolor sit amet
       </h1>
-      <h2 className="text-2xl mb-6 text-white">
+      <h2 className="text-[1.5rem] sm:text-[1.75rem] lg:text-[2rem] 2xl:text-[32px] font-extrabold mb-6 text-white leading-snug">
         Sed ut perspiciatis, unde omnis iste natus error
       </h2>
-      <Button asChild className="btn-primary !py-6 rounded">
+      <Button asChild className="btn-primary w-[60%] sm:w-[240px] !py-6 sm:!py-8 2xl:w-[214px] 2xl:!py-9 rounded h4-medium">
         <Link href="/auth/signup">Call to Action</Link>
       </Button>
     </div>
 
     {/* Right Section (Form) */}
-    <div className="flex justify-center w-full ">
-      <div className="p-10 bg-white w-full  sm:w-10/12 md:w-8/12 lg:w-7/12">
-        <h2 className="h1-primary text-center mb-1">Welcome back</h2>
-        <p className="p-primary text-center mb-6">
-          Login to your account
-        </p>
+    <div className="flex justify-center w-full">
+      <div className="p-6 sm:p-8 lg:p-10 bg-white w-full sm:w-11/12 md:w-9/12 lg:w-8/12 xl:w-7/12 2xl:w-[650px] rounded-lg shadow-md 2xl:p-[40px]">
+        
+        {/* Header */}
+        <h2 className="h1-primary text-center mb-3 sm:mb-4">Welcome back</h2>
+        <p className="p-primary text-center mb-8 sm:mb-12">Login to your account</p>
 
+        {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
           <div>
-            <Label htmlFor="email">
+            <Label className="h5-regular" htmlFor="email">
               Email <span className="text-red-600">*</span>
             </Label>
             <Input
               id="email"
               type="email"
+              className="!w-full !max-w-full h-[50px] sm:h-[55px] 2xl:h-[60px]"
               {...register("email", { required: true })}
             />
-            {errors.email && (
-              <p className="text-sm text-red-500">Required</p>
-            )}
+            {errors.email && <p className="text-sm text-red-500">Required</p>}
           </div>
 
           {/* Password */}
           <div>
-            <Label htmlFor="password">
+            <Label className="h5-regular" htmlFor="password">
               Password <span className="text-red-600">*</span>
             </Label>
             <Input
               id="password"
               type="password"
+              className="!w-full !max-w-full h-[50px] sm:h-[55px] 2xl:h-[60px]"
               {...register("password", { required: true })}
             />
-            {errors.password && (
-              <p className="text-sm text-red-500">Required</p>
-            )}
+            {errors.password && <p className="text-sm text-red-500">Required</p>}
           </div>
 
+          {/* Forgot password */}
+          <p className="text-[14px] sm:text-[16px] font-semibold text-[#F15939] text-end">Forgot password?</p>
+
           {/* Submit */}
-          <Button type="submit" className="w-full !py-6 rounded btn-primary">
+          <Button type="submit" className="w-full !py-6 sm:!py-7 2xl:!py-9 !rounded-full btn-primary h4-medium">
             Login
           </Button>
         </form>
 
         {/* Divider */}
-        <div className="flex items-center my-6">
+        <div className="flex items-center my-8 sm:my-12">
           <div className="flex-grow border-t border-gray-300" />
-          <span className="px-3 text-gray-500 text-sm">or continue with</span>
+          <span className="px-3 text-gray-500 h5-regular">or continue with</span>
           <div className="flex-grow border-t border-gray-300" />
         </div>
 
@@ -104,14 +106,14 @@ const SigninPage = () => {
         <div className="flex flex-col lg:flex-row justify-center gap-4">
           <Button
             variant="outline"
-            className="w-56 flex items-center justify-center gap-3 !py-6"
+            className="w-full lg:w-[45%] xl:w-[55%] 2xl:w-[279.9px] h-[50px] sm:h-[55px] rounded-xl lg:text-sm xl:text-lg 2xl:text-[18px] font-normal flex items-center justify-center gap-3"
           >
             <FcGoogle className="w-6 h-6" />
             Continue with Google
           </Button>
           <Button
             variant="outline"
-            className="w-56 flex items-center justify-center gap-3 !py-6"
+            className="w-full lg:w-[45%] xl:w-[55%] 2xl:w-[279.9px] h-[50px] sm:h-[55px] rounded-xl lg:text-sm xl:text-lg 2xl:text-[18px] font-normal flex items-center justify-center gap-3"
           >
             <FaFacebook className="w-6 h-6 text-blue-600" />
             Continue with Facebook
@@ -119,7 +121,7 @@ const SigninPage = () => {
         </div>
 
         {/* Bottom Text */}
-        <p className="p-primary text-center mt-6">
+        <p className="h6-medium text-center !text-[#4A4A4A] my-6 sm:my-8">
           Don’t have an account?{" "}
           <Link href="/auth/signup" className="text-red-500 hover:underline">
             Sign up
@@ -129,6 +131,8 @@ const SigninPage = () => {
     </div>
   </div>
 </section>
+
+
 
   );
 };
