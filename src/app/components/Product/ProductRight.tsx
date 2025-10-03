@@ -8,7 +8,7 @@ import supportIcon3 from "@/assets/support/support-img3.png";
 
 const ProductRight = () => {
   return (
-    <div className="w-full lg:w-[25%] xl:w-[282px] 2xl:w-[376px] mt-6 xl:mt-0 xl:ml-auto">
+    <div className="product-right  w-full lg:w-[25%] xl:w-[282px] 2xl:w-[376px] mt-6 xl:mt-0 xl:ml-auto">
       {/* Support Card 1 */}
       <div className="border border-gray-300 rounded-[20px] h-max w-full">
         <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px] text-center">
