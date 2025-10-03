@@ -53,9 +53,10 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
             {visibleProducts.map((product: any) => (
               <div
                 key={product.id}
-                className="group relative flex flex-col w-full 
+                className="group relative flex flex-col 
+             w-full 
              xl:w-[291.31px] xl:h-[291.31px] 
-             2xl:w-[405.75px] 2xl:h-[449px]
+             2xl:w-[340.75px] 2xl:h-[449px] 
              border border-[#D6D6D6] rounded-md bg-white p-4 lg:p-6 overflow-hidden"
               >
                 {/* Product Image */}
@@ -101,10 +102,12 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                 </div>
 
                 {/* Action Buttons → Always bottom aligned */}
-               <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 
+                <div
+                  className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 
                                 opacity-0 translate-y-10 group-hover:translate-y-4 
                                 lg:group-hover:translate-y-6 group-hover:opacity-100 
-                                transition-all duration-300 p-2">
+                                transition-all duration-300 p-2"
+                >
                   <button
                     onClick={() => {
                       dispatch(addToCart(product));
