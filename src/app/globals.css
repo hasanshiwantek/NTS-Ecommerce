@@ -614,3 +614,44 @@ img {
     font-size: 1.5rem; /* px-6 */
   }
 }
+
+
+
+/* 3xl breakpoint (>=1600px) */
+@media (min-width: 1536px) {
+  .product-left {
+    width: 40rem !important;
+  }
+  .product-middle {
+    width: 45.625rem !important;
+  }
+  .product-right {
+    width: 30.5rem !important;
+  }
+}
+
+/* 4xl breakpoint (>=1920px) */
+@media (min-width: 1920px) {
+  .product-left {
+    width: 900px !important;
+  }
+  .product-middle {
+    width: 1000px !important;
+  }
+  .product-right {
+    width: 500px !important;
+  }
+}
+
+/* 5xl breakpoint (>=2560px) */
+@media (min-width: 2560px) {
+  .product-left {
+    width: 1200px !important;
+  }
+  .product-middle {
+    width: 1300px !important;
+  }
+  .product-right {
+    width: 600px !important;
+  }
+}

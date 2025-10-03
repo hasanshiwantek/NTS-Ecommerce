@@ -15,7 +15,7 @@ import cart from "@/assets/card-icon/shoppingCart.svg";
 
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   return (
-    <div className="flex flex-col h-full w-full lg:w-[45%] xl:w-[522px] 2xl:w-[696px]">
+    <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[522px] 2xl:w-[696px]">
       <div>
         <div className="flex flex-col 2xl:gap-3 xl:gap-[9px] gap-3">
           <h6 className="h6-regular">{product?.brand?.name}</h6>
@@ -203,7 +203,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
       {/* Note */}
       <div className="p-3 2xl:mt-4 xl:mt-2 mt-2">
-        <p className="h6-regular !text-[#4A4A4A] leading-6 italic xl:w-[522px] 2xl:w-[696px]">
+        <p className="h6-regular !text-[#4A4A4A] leading-6 italic xl:w-[522px] 2xl:w-[550px]">
           <span className="text-red-600">*</span> All Business Entities,
           Corporations, Public & Private School Systems, Governmental
           Organizations, Colleges, Universities & Libraries are welcome to

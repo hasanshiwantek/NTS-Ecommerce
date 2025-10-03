@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
   return (
-    <div className="flex flex-col w-full lg:w-[30%] xl:w-[450px] xl:h-[374px] 2xl:w-[600px]">
+    <div className=" product-left flex flex-col w-full lg:w-[30%] xl:w-[450px] xl:h-[374px] 2xl:w-[600px] 3xl:w-[650px] 4xl:w-[700px]">
       <div className="flex flex-col sm:flex-row sm:space-x-4">
         {/* Thumbnails */}
         <div
