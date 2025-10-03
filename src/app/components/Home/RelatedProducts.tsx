@@ -35,29 +35,34 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
   return (
     <>
       <h1 className="h1-secondary-medium">Related Products</h1>
-      <div className="my-8 relative w-full max-w-[1719px] mx-auto">
+      <div className="my-8 relative w-full max-w-[1719px] mx-auto ">
         {/* AnimatePresence for smooth slide */}
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={startIndex}
-      initial={{ x: direction > 0 ? 300 : -300 }}
-      animate={{ x: 0 }}
-      transition={{
-    type: "spring",
-    stiffness: 70, 
-    damping: 20,    
-  }}
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 
-                 gap-10 relative justify-items-center"
+            initial={{ x: direction > 0 ? 300 : -300 }}
+            animate={{ x: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 70,
+              damping: 20,
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 
+                 gap-10  relative justify-items-center "
           >
             {visibleProducts.map((product: any) => (
               <div
                 key={product.id}
-                className="group relative flex flex-col items-start w-full max-w-[405.75px] h-[350px]  
-                           border border-gray-200 rounded-md bg-white p-4 lg:p-6 overflow-hidden"
+                className="group relative flex flex-col w-full 
+             xl:w-[291.31px] xl:h-[291.31px] 
+             2xl:w-[405.75px] 2xl:h-[449px]
+             border border-[#D6D6D6] rounded-md bg-white p-4 lg:p-6 overflow-hidden"
               >
                 {/* Product Image */}
-                <div className="h-90 flex items-center justify-center mb-4 w-full max-w-[405.75px]">
+                <div
+                  className="w-full flex items-center justify-center 
+                  xl:h-[225px] 2xl:h-[280px] mb-4"
+                >
                   <Image
                     src={
                       product.image?.[1]?.path ||
@@ -67,24 +72,24 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                     alt={product.name}
                     width={200}
                     height={200}
-                    className="object-contain max-h-full"
+                    className="object-contain h-full w-auto"
                   />
                 </div>
 
-                {/* Product Name */}
+                {/* Product Name (2 lines max, fixed height) */}
                 <Link
                   href={`/products/${product?.slug}`}
                   className="cursor-pointer hover:underline"
                 >
-                  <p className="mb-2 h6-18-px-medium line-clamp-1">
+                  <p className="h6-18-px-medium line-clamp-2 min-h-[3rem]">
                     {product.name}
                   </p>
                 </Link>
 
-                {/* Price + Title */}
-                <div className="min-h-[5.5rem]">
-                  <h3 className="h7-16-px-regular">
-                    {product.brand.name + " | " + product.availabilityText}
+                {/* Brand + Availability + Price (reserve space) */}
+                <div className="flex flex-col justify-between min-h-[4.5rem] mt-2">
+                  <h3 className="h7-16-px-regular line-clamp-1">
+                    {product.brand.name} | {product.availabilityText}
                   </h3>
                   <p className="h6-18-px-medium group-hover:invisible">
                     {new Intl.NumberFormat("en-US", {
@@ -95,8 +100,8 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                   </p>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 
+                {/* Action Buttons → Always bottom aligned */}
+               <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 
                                 opacity-0 translate-y-10 group-hover:translate-y-4 
                                 lg:group-hover:translate-y-6 group-hover:opacity-100 
                                 transition-all duration-300 p-2">
@@ -107,7 +112,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                     }}
                     className="btn-primary xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
                                w-full sm:w-[48%] md:w-[45%] lg:w-[40%] xl:w-[40%]
-                               2xl:w-[173.875px] 2xl:h-[50px] mr-2"
+                               2xl:w-[173.875px] 2xl:h-[50px] mr-2 whitespace-nowrap"
                   >
                     Add to Cart
                   </button>
@@ -117,7 +122,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                                w-full sm:w-[48%] md:w-[45%] lg:w-[40%] xl:w-[40%]
                                2xl:w-[173.875px] 2xl:h-[50px] mr-2
                                text-[#4A4A4A] bg-white border border-[#4A4A4A] 
-                               rounded-md px-4 py-2 transition-all my-1 duration-200 cursor-pointer"
+                               rounded-md px-4 py-2 transition-all my-1 duration-200 cursor-pointer whitespace-nowrap"
                   >
                     Get Quote
                   </button>
