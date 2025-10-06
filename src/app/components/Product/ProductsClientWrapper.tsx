@@ -4,12 +4,15 @@ import Sidebar from "../Filters/Sidebar";
 import ProductList from "./ProductList";
 import { fetchFilteredProducts } from "@/lib/api/products";
 import { ProductFilterPayload } from "@/types/types";
+import { useParams } from "next/navigation";
+
 export default function ProductsClientWrapper({
   categories,
   brands,
   initialCategoryId,
   initialCategoryName,
 }: any) {
+  const params = useParams(); // get slug param
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +28,24 @@ export default function ProductsClientWrapper({
     maxPrice: undefined,
     sortBy: "",
   });
+
+    // ✅ Sync filters when URL slug changes
+  useEffect(() => {
+    if (params?.slug && categories?.length > 0) {
+      const matched = categories.find((c: any) => c.slug === params.slug);
+      if (matched) {
+        setFilters((prev) => ({
+          ...prev,
+          categoryIds: [matched.id],
+          page: 1,
+        }));
+        setFilterMeta((prev) => ({
+          ...prev,
+          categoryName: matched.name,
+        }));
+      }
+    }
+  }, [params?.slug, categories]);
 
   // 👇 Separate state for UI display (not sent to API)
 const [filterMeta, setFilterMeta] = useState({
@@ -57,7 +78,7 @@ const [filterMeta, setFilterMeta] = useState({
     <div className="container  ">
       <div className="flex gap-6 py-4">
         {/* Sidebar: Filters */}
-        <aside className="w-[240px] shrink-0  rounded  bg-white">
+        <aside className="  2xl:w-[412px] xl:w-[309px]  lg:w-[20rem] md:w-[20rem] sm:w-[15rem] w-[15rem] p-2 shrink-0  rounded  bg-white">
           <Sidebar
             categories={categories}
             brands={brands}

@@ -33,11 +33,11 @@ export default function ProductList({
   const [page, setPage] = useState(1);
   const total = pagination?.total || 0;
   return (
-    <section className="flex-1 px-6">
+    <section className="max-w-full 2xl:w-[1260px] xl:w-[945px] lg:w-[55rem]   flex-1 px-6">
       {/* Headings */}
       <div className="mb-4">
-        <h2 className="text-xl font-semibold text-[#4A4A4A]">Heading Text</h2>
-        <p className="span-primary">
+        <h2 className="h2-medium ">Heading Text</h2>
+        <p className="h4-regular ">
           Do you need to fix your computer or make it work better? At
           NewTownSpares, we have all the IT Accessories you need! It doesn’t
           matter if it’s for your home, work, or even an old computer. We are
@@ -47,8 +47,8 @@ export default function ProductList({
       </div>
 
       <div className="mb-4">
-        <h2 className="text-xl font-semibold text-[#4A4A4A]">Heading Text</h2>
-        <p className="span-primary">
+        <h2 className="h2-medium ">Heading Text</h2>
+        <p className="h4-regular ">
           Do you need to fix your computer or make it work better? At
           NewTownSpares, we have all the IT Accessories you need! It doesn’t
           matter if it’s for your home, work, or even an old computer. We are
@@ -113,7 +113,7 @@ export default function ProductList({
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className={`mt-4 ${
             view === "grid"
-              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  "
               : "space-y-4"
           }`}
         >

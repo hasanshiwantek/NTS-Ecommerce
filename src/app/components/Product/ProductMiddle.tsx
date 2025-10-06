@@ -181,7 +181,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       w-full lg:w-[40rem] xl:w-[50rem] 2xl:w-[70rem]
     "
         >
-          <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7" fill="white" />
+          <ShoppingCart
+            className="w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7"
+            fill="white"
+          />
           <span>Add to Cart</span>
         </button>
 
