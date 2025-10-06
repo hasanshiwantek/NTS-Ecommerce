@@ -74,13 +74,13 @@ const FooterBottom = () => {
       py-16
     "
   >
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10">
       {categories.map((category) => (
         <nav key={category.id} aria-label={category.name}>
           <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
             {category.name}
           </h4>
-          <ul className="h5-regular !text-[#FFFFFF] space-y-3">
+          <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4">
             {category.subcategories?.length ? (
               category.subcategories.map((sub) => (
                 <li key={sub.id}>
@@ -123,7 +123,7 @@ const FooterBottom = () => {
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
       <nav aria-label="Customer Services">
         <h4 className="h5-bold !text-[#FFFFFF] mb-4">Customer Services</h4>
-        <ul className="space-y-3 h5-regular !text-[#FFFFFF]">
+        <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
           <li><Link href="#">Refund policy</Link></li>
           <li><Link href="#">Warranty</Link></li>
           <li><Link href="#">Exchange policy</Link></li>
@@ -132,7 +132,7 @@ const FooterBottom = () => {
 
       <nav aria-label="My Account">
         <h4 className="h5-bold !text-[#FFFFFF] mb-4">My Account</h4>
-        <ul className="space-y-3 h5-regular !text-[#FFFFFF]">
+        <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
           <li><Link href="#">Sign in</Link></li>
           <li><Link href="#">Sign up</Link></li>
           <li><Link href="#">My cart</Link></li>
@@ -141,7 +141,7 @@ const FooterBottom = () => {
 
       <section aria-label="Contact Us">
         <h4 className="h5-bold !text-[#FFFFFF] mb-4">Contact Us</h4>
-        <ul className="space-y-3 h5-regular !text-[#FFFFFF]">
+        <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
           <li><a href="mailto:contact@newtownspares.com">contact@newtownspares.com</a></li>
           <li><a href="tel:+4122123345677">+41 22 123345677</a></li>
         </ul>

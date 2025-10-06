@@ -30,10 +30,10 @@ const SigninPage = () => {
   className={`!min-h-screen !w-full relative flex items-center justify-center !bg-cover !bg-center p-8 ${styles.signUpBG}`}
 >
   {/* Overlay */}
-  <div className="absolute inset-0 bg-black/20" />
+  <div className="absolute inset-0 bg-black/10" />
 
   {/* Grid Layout */}
-  <div className="relative z-10 w-full max-w-8xl bg-transparent rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+  <div className="relative z-10 w-full max-w-8xl bg-transparent rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden 2xl:ms-20">
     
     {/* Left Section */}
     <div className="flex flex-col items-center lg:items-start justify-center p-6 sm:p-10">
@@ -50,11 +50,11 @@ const SigninPage = () => {
 
     {/* Right Section (Form) */}
     <div className="flex justify-center w-full">
-      <div className="p-6 sm:p-8 lg:p-10 bg-white w-full sm:w-11/12 md:w-9/12 lg:w-8/12 xl:w-7/12 2xl:w-[650px] rounded-lg shadow-md 2xl:p-[40px]">
+      <div className="p-6 sm:p-8 lg:p-10 bg-white w-full sm:w-11/12 md:w-9/12 lg:w-8/12 xl:w-7/12 2xl:w-[650px] rounded-lg shadow-md 2xl:px-[40px]">
         
         {/* Header */}
-        <h2 className="h1-primary text-center mb-3 sm:mb-4">Welcome back</h2>
-        <p className="p-primary text-center mb-8 sm:mb-12">Login to your account</p>
+        <h2 className="h2-medium text-center">Welcome back</h2>
+        <p className="h5-regular text-center mb-12">Login to your account</p>
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -121,7 +121,7 @@ const SigninPage = () => {
         </div>
 
         {/* Bottom Text */}
-        <p className="h6-medium text-center !text-[#4A4A4A] my-6 sm:my-8">
+        <p className="h6-medium text-center !text-[#4A4A4A] mt-10">
           Don’t have an account?{" "}
           <Link href="/auth/signup" className="text-red-500 hover:underline">
             Sign up
