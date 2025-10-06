@@ -112,7 +112,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           </p>
 
           {product.msrp > 0 && (
-            <p className="h5-20px-regular text-[#FF435C] line-through">
+            <p className="h5-20px-regular !text-[#FF435C] line-through">
               £{Number(product?.msrp).toFixed(2)}
             </p>
           )}
