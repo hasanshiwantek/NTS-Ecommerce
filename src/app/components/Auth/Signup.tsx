@@ -169,7 +169,7 @@ const SignupPage = () => {
           </div>
 
           {/* Submit */}
-          <Button type="submit" className="w-full !py-9 !rounded-full btn-primary h4-medium">
+          <Button type="submit" className="w-full !py-9 !rounded-full btn-primary h4-medium !text-[#FFFFFF]">
             Sign up
           </Button>
 
