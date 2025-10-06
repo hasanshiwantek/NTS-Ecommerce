@@ -3,6 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+ 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -41,7 +42,17 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+ 
+ 
+    /* ✅ Add your Figma-based breakpoints here */
+  --breakpoint-sm: 640px;    /* 640px */
+  --breakpoint-md: 768px;    /* 768px */
+  --breakpoint-lg: 1024px;    /* 1024px */
+  --breakpoint-xl: 1280px;    /* 1440px → Figma desktop */
+  --breakpoint-2xl: 1440px;  /* 1920px → Figma big screen */
+  --breakpoint-3xl: 2560px;  /* 2560px → ultra-wide */
 }
+ 
 
 :root {
   --primary-color: #f15939;
@@ -268,7 +279,7 @@ img {
 }
 
 /* Tailwind Breakpoints reference:
-   sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px
+   sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1440px
 */
 
 /* ================= H1 (36px final) ================= */
@@ -302,7 +313,7 @@ img {
     font-size: 32px;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .h1-secondary,
   .h1-secondary-medium {
     font-size: 36px;
@@ -341,7 +352,7 @@ img {
     font-size: 28px;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .h2-secondary,
   .h2-medium {
     font-size: 32px;
@@ -382,7 +393,7 @@ img {
     font-size: 18px;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .h3-secondary,
   .h3-regular {
     font-size: 24px;
@@ -426,7 +437,7 @@ img {
     font-size: 21px;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .h4-bold,
   .h4-medium,
   .h4-regular {
@@ -490,7 +501,7 @@ img {
     font-size: 15px;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .h5-bold,
   .h5-medium,
   .h5-regular,
@@ -566,7 +577,7 @@ img {
     font-size: 13.5px;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .h6-bold,
   .h6-medium,
   .h6-medium-color,
@@ -609,7 +620,7 @@ img {
   }
 }
 
-@media (min-width: 1536px) and (max-width: 1570px) {
+@media (min-width: 1440px) and (max-width: 1570px) {
   .nav-fix {
     font-size: 1.5rem; /* px-6 */
   }
@@ -618,7 +629,7 @@ img {
 
 
 /* 3xl breakpoint (>=1600px) */
-@media (min-width: 1536px) {
+@media (min-width: 1440px) {
   .product-left {
     width: 40rem !important;
   }
