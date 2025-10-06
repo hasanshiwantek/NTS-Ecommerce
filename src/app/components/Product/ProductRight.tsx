@@ -8,7 +8,7 @@ import supportIcon3 from "@/assets/support/support-img3.png";
 
 const ProductRight = () => {
   return (
-    <div className="product-right  w-full lg:w-[25%] xl:w-[282px] 2xl:w-[376px] mt-6 xl:mt-0 xl:ml-auto">
+    <div className="product-right  w-full lg:w-[25%] xl:w-[282px] 2xl:w-[22%] mt-6 xl:mt-0 xl:ml-auto">
       {/* Support Card 1 */}
       <div className="border border-gray-300 rounded-[20px] h-max w-full">
         <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px] text-center">
@@ -53,12 +53,12 @@ const ProductRight = () => {
         <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px] text-center">
           <h3 className="h5-bold my-2">Looking for a Bulk Quantity?</h3>
         </div>
-        <div className="px-6 py-6 flex flex-col items-center xl:items-start">
+        <div className="px-6 py-6 flex flex-col items-center xl:items-center">
           <p className="h5-regular mb-4 max-w-[500px] leading-[1.5]">
             Request a Quote and one of our sales representative will get in
             touch with you very soon
           </p>
-          <button className="btn-outline-primary 2xl:w-96 xl:w-80  w-60 !py-4 flex justify-center items-center !rounded-full h5-regular">
+          <button className="btn-outline-primary  xl:w-80 w-60 !py-4 flex justify-center items-center !rounded-full h5-regular">
             Get Quote
           </button>
         </div>
