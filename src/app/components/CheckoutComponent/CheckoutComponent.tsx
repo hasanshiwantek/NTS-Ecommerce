@@ -45,67 +45,67 @@ const CheckoutComponent = () => {
               Shipping Address
             </h2>
 
-            <form className="space-y-4">
+            <form className="space-y-6">
               {/* Email */}
               <div className="flex flex-col">
-                <label htmlFor="email" className="h5-regular mb-1">Email *</label>
-                <Input id="email" type="email" className="w-full !max-w-full" />
+                <label htmlFor="email" className="h5-regular mb-2">Email *</label>
+                <Input id="email" type="email" className="w-full h-[60px] !max-w-full" />
               </div>
 
               {/* First & Last Name */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col">
-                  <label htmlFor="firstName" className="h5-regular mb-1">First Name *</label>
-                  <Input id="firstName" type="text" className="w-full !max-w-full" />
+                  <label htmlFor="firstName" className="h5-regular mb-2">First Name *</label>
+                  <Input id="firstName" type="text" className="w-full h-[60px] !max-w-full" />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="lastName" className="h5-regular mb-1">Last Name *</label>
-                  <Input id="lastName" type="text" className="w-full !max-w-full" />
+                  <label htmlFor="lastName" className="h5-regular mb-2">Last Name *</label>
+                  <Input id="lastName" type="text" className="w-full h-[60px] !max-w-full" />
                 </div>
               </div>
 
               {/* Other Fields */}
               <div className="flex flex-col">
-                <label htmlFor="company" className="h5-regular mb-1">Company</label>
-                <Input id="company" type="text" className="w-full !max-w-full" />
+                <label htmlFor="company" className="h5-regular mb-2">Company</label>
+                <Input id="company" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="phone" className="h5-regular mb-1">Phone Number</label>
-                <Input id="phone" type="text" className="w-full !max-w-full" />
+                <label htmlFor="phone" className="h5-regular mb-2">Phone Number</label>
+                <Input id="phone" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="address1" className="h5-regular mb-1">Address Line 1 *</label>
-                <Input id="address1" type="text" className="w-full !max-w-full" />
+                <label htmlFor="address1" className="h5-regular mb-2">Address Line 1 *</label>
+                <Input id="address1" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="address2" className="h5-regular mb-1">Address Line 2</label>
-                <Input id="address2" type="text" className="w-full !max-w-full" />
+                <label htmlFor="address2" className="h5-regular mb-2">Address Line 2</label>
+                <Input id="address2" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="city" className="h5-regular mb-1">City *</label>
-                <Input id="city" type="text" className="w-full !max-w-full" />
+                <label htmlFor="city" className="h5-regular mb-2">City *</label>
+                <Input id="city" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               {/* Country */}
               <div className="flex flex-col">
-                <label htmlFor="country" className="h5-regular mb-1">Country *</label>
-                <select id="country" className="border rounded px-3 py-2 w-full text-gray-600">
+                <label htmlFor="country" className="h5-regular mb-2">Country *</label>
+                <select id="country" className="border rounded px-3 py-2 w-full h-[60px] text-gray-600">
                   <option>Select your country *</option>
                 </select>
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="state" className="h5-regular mb-1">State/Province</label>
-                <Input id="state" type="text" className="w-full !max-w-full" />
+                <label htmlFor="state" className="h5-regular mb-2">State/Province</label>
+                <Input id="state" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               <div className="flex flex-col">
-                <label htmlFor="zip" className="h5-regular mb-1">Zip/Postcode *</label>
-                <Input id="zip" type="text" className="w-full !max-w-full" />
+                <label htmlFor="zip" className="h5-regular mb-2">Zip/Postcode *</label>
+                <Input id="zip" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
 
               {/* Checkbox */}
@@ -166,8 +166,8 @@ const CheckoutComponent = () => {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="orderComment" className="h5-regular mb-1">Order Comment</label>
-                <Input id="orderComment" type="text" className="w-full !max-w-full" />
+                <label htmlFor="orderComment" className="h5-regular mb-4">Order Comment</label>
+                <Input id="orderComment" type="text" className="w-full h-[60px] !max-w-full" />
               </div>
             </div>
           </div>
@@ -191,20 +191,20 @@ const CheckoutComponent = () => {
                 <Image src="/checkouticon/card.png" alt="Card" width={207} height={35} className="object-contain" />
               </div>
 
-              <div className="space-y-4 py-3">
+              <div className="space-y-6 py-3">
                 <div>
-                  <label htmlFor="ccNumber" className="h5-regular mb-1">Credit Card Number*</label>
-                  <Input id="ccNumber" type="text" className="w-full !max-w-full" />
+                  <label htmlFor="ccNumber" className="h5-regular mb-4">Credit Card Number*</label>
+                  <Input id="ccNumber" type="text" className="w-full h-[60px] !max-w-full mt-3"  />
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 w-full">
                   <div className="flex flex-col w-full sm:w-1/2">
-                    <label htmlFor="expiration" className="h5-regular mb-1">Expiration *</label>
-                    <Input id="expiration" type="text" placeholder="MM / YY" className="w-full !max-w-full" />
+                    <label htmlFor="expiration" className="h5-regular mb-4">Expiration *</label>
+                    <Input id="expiration" type="text" placeholder="MM / YY" className="w-full h-[60px] !max-w-full" />
                   </div>
                   <div className="flex flex-col w-full sm:w-1/2">
-                    <label htmlFor="cvc" className="h5-regular mb-1">CVC *</label>
-                    <Input id="cvc" type="text" className="w-full !max-w-full" />
+                    <label htmlFor="cvc" className="h5-regular mb-4">CVC *</label>
+                    <Input id="cvc" type="text" className="w-full h-[60px] !max-w-full" />
                   </div>
                 </div>
               </div>
@@ -263,7 +263,7 @@ const CheckoutComponent = () => {
                            <span>${shipping.toFixed(2)}</span> </div> <div className="flex justify-between h5-regular"> <span>Tax</span> 
                            <span>${tax.toFixed(2)}</span> </div> </div> {/* Discount Code */} <div className="mt-4 space-y-2"> 
                             <label htmlFor="discountCode" className="h5-regular" > Apply Discount Code </label> <div className="flex gap-2"> 
-                              <Input id="discountCode" type="text" className="!max-w-full" /> <button className="h4-medium border border-black px-4 rounded">Apply</button> 
+                              <Input id="discountCode" type="text" className= "h-[60px] !max-w-full mt-3" /> <button className="h4-medium border border-black px-4 rounded">Apply</button> 
                               </div> </div> {/* Total */} <div className="mt-4 flex justify-between h3-secondary"> <span>Order total</span> <span>${total.toFixed(2)}
                                 </span> </div>
         </div>
