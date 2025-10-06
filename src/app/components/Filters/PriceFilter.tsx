@@ -26,14 +26,14 @@ export default function PriceFilter({ filters, setFilters }: Props) {
           type="number"
           value={min}
           onChange={(e) => setMin(Number(e.target.value))}
-          className="w-22 border rounded px-2 py-1 text-sm"
+          className="w-full  border rounded px-2 py-1 h5-20px-regular"
         />
         <span>—</span>
         <input
           type="number"
           value={max}
           onChange={(e) => setMax(Number(e.target.value))}
-          className="w-22 border rounded px-2 py-1 text-sm"
+          className="w-full  border rounded px-2 py-1 h5-20px-regular"
         />
       </div>
 
@@ -45,7 +45,7 @@ export default function PriceFilter({ filters, setFilters }: Props) {
           max={10000}
           value={min}
           onChange={(e) => setMin(Number(e.target.value))}
-          className="w-full accent-orange-500"
+          className="w-full accent-orange-500 "
         />
         <input
           type="range"
@@ -58,7 +58,7 @@ export default function PriceFilter({ filters, setFilters }: Props) {
       </div>
 
       <button
-        className="!w-full !py-1.5 !rounded !text-base btn-outline-primary"
+        className="!w-full !py-1.5 !rounded h5-20px-regular btn-outline-primary"
         onClick={handleConfirm}
       >
         Confirm

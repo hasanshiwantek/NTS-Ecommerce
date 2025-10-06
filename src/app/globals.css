@@ -95,7 +95,7 @@
 }
 
 body {
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   /* overflow-y: auto; */
   /* scroll-behavior: smooth; */
   /* height: fit-content; */
@@ -110,7 +110,7 @@ body {
 
 html {
   font-size: 75%;
-  overflow-x: hidden;
+  /* overflow-x: auto; */
 }
 
 /* Fix layout calculation */
@@ -322,13 +322,22 @@ img {
 
 /* ================= H2 (32px final) ================= */
 .h2-secondary,
-.h2-medium {
+.h2-medium,
+.h2-bold
+{
   font-size: 18px;
 }
+
 .h2-secondary {
   font-weight: 600;
   color: #4a4a4a;
 }
+
+.h2-bold {
+  font-weight: 700;
+  color: #4a4a4a;
+}
+
 .h2-medium {
   font-weight: 500;
   color: #4a4a4a;
@@ -336,25 +345,33 @@ img {
 
 @media (min-width: 640px) {
   .h2-secondary,
-  .h2-medium {
+  .h2-medium,
+   .h2-bold
+  {
     font-size: 20px;
   }
 }
 @media (min-width: 1024px) {
   .h2-secondary,
-  .h2-medium {
+  .h2-medium ,
+   .h2-bold
+  {
     font-size: 24px;
   }
 }
 @media (min-width: 1280px) {
   .h2-secondary,
-  .h2-medium {
-    font-size: 28px;
+  .h2-medium,
+   .h2-bold
+  {
+    font-size: 24px;
   }
 }
 @media (min-width: 1440px) {
   .h2-secondary,
-  .h2-medium {
+  .h2-medium,
+  .h2-bold
+  {
     font-size: 32px;
   }
 }
@@ -405,6 +422,7 @@ img {
 .h4-medium,
 .h4-regular {
   font-size: 14px;
+  color:#666666
 }
 .h4-bold {
   font-weight: 700;
@@ -427,14 +445,14 @@ img {
   .h4-bold,
   .h4-medium,
   .h4-regular {
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 @media (min-width: 1280px) {
   .h4-bold,
   .h4-medium,
   .h4-regular {
-    font-size: 21px;
+    font-size: 16.5px;
   }
 }
 @media (min-width: 1440px) {
@@ -442,6 +460,7 @@ img {
   .h4-medium,
   .h4-regular {
     font-size: 22px;
+    line-height: 32px;
   }
 }
 
@@ -452,6 +471,7 @@ img {
 .h5-medium-20px-medium,
 .h5-20px-regular {
   font-size: 14px;
+  line-height: 20px;
 }
 .h5-bold {
   font-weight: 600;
