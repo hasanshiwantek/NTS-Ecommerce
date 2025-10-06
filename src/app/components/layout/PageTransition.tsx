@@ -55,10 +55,11 @@ export default function PageTransition({
       <motion.main
         key={pathname}
         className={`flex-grow ${
-          pathname.includes("/auth")
-            ? ""
-            : "py-6 lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] md:px-[7%] px-[7%]"
-        }`}
+  ["/auth", "/privacyPolicy"].some(p => pathname.includes(p))
+    ? ""
+    : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
+}`}
+
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{}} // You can customize exit transition if needed

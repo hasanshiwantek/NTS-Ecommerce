@@ -47,7 +47,7 @@ const SignupPage = () => {
   className={`relative flex items-center justify-center min-h-screen !bg-cover !bg-center p-4 ${styles.signUpBG}`}
 >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-0 bg-black/10" />
 
       {/* Form Container */}
       <div
@@ -55,11 +55,11 @@ const SignupPage = () => {
                    max-w-[95%] sm:max-w-[90%] lg:max-w-[80%] 2xl:max-w-[1000px]
                    bg-white rounded-lg shadow-md 
                    p-6 sm:p-8 lg:px-[40px] 
-                   h-auto 2xl:h-[865px] flex flex-col justify-center"
+                   h-auto 2xl:h-[880px] flex flex-col justify-center"
       >
-        <div className="flex flex-col justify-center items-center mb-8">
-          <h1 className="h2-medium text-center mb-1">Signup</h1>
-        <p className="h5-regular text-center">Create an account to get started.</p>
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="h2-medium text-center">Signup</h1>
+        <p className="h5-regular text-center mb-4">Create an account to get started.</p>
         </div>
 
         <form
