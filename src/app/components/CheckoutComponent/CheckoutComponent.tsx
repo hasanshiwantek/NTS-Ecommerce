@@ -262,8 +262,8 @@ const CheckoutComponent = () => {
                           </div> <div className="flex justify-between h5-regular"> <span>Shipping</span>
                            <span>${shipping.toFixed(2)}</span> </div> <div className="flex justify-between h5-regular"> <span>Tax</span> 
                            <span>${tax.toFixed(2)}</span> </div> </div> {/* Discount Code */} <div className="mt-4 space-y-2"> 
-                            <label htmlFor="discountCode" className="h5-regular" > Apply Discount Code </label> <div className="flex gap-2"> 
-                              <Input id="discountCode" type="text" className= "h-[60px] !max-w-full mt-3" /> <button className="h4-medium border border-black px-4 rounded">Apply</button> 
+                            <label htmlFor="discountCode" className="h5-regular" > Apply Discount Code </label> <div className="flex gap-2 my-2"> 
+                              <Input id="discountCode" type="text" className= "h-[60px] !max-w-full " /> <button className="h4-medium border border-black px-4 rounded">Apply</button> 
                               </div> </div> {/* Total */} <div className="mt-4 flex justify-between h3-secondary"> <span>Order total</span> <span>${total.toFixed(2)}
                                 </span> </div>
         </div>
