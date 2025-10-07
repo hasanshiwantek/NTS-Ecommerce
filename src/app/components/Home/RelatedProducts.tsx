@@ -47,16 +47,16 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
               stiffness: 70,
               damping: 20,
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 
                  gap-10  relative justify-items-center "
           >
             {visibleProducts.map((product: any) => (
               <div
                 key={product.id}
-                className="group relative flex flex-col 
+                className="group relative flex flex-col justify-evenly items-start 
              w-full 
-             xl:w-[291.31px] xl:h-[291.31px] 
-             2xl:w-[340.75px] 2xl:h-[449px] 
+             xl:w-[101.5%] xl:h-[335.55px] 
+             2xl:w-[100.4%] 2xl:h-[449px] 
              border border-[#D6D6D6] rounded-md bg-white p-4 lg:p-6 overflow-hidden"
               >
                 {/* Product Image */}
@@ -72,7 +72,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                     }
                     alt={product.name}
                     width={200}
-                    height={200}
+                    height={100}
                     className="object-contain h-full w-auto"
                   />
                 </div>
@@ -114,7 +114,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                       toast.success(`${product.name} added to cart!`);
                     }}
                     className="btn-primary xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
-                               w-full sm:w-[48%] md:w-[45%] lg:w-[40%] xl:w-[40%]
+                               w-full sm:w-[48%] md:w-[45%] lg:w-[50%] xl:w-[45%]
                                2xl:w-[173.875px] 2xl:h-[50px] mr-2 whitespace-nowrap"
                   >
                     Add to Cart
@@ -122,7 +122,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
                   <button
                     className="xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
-                               w-full sm:w-[48%] md:w-[45%] lg:w-[40%] xl:w-[40%]
+                               w-full sm:w-[48%] md:w-[45%] lg:w-[50%] xl:w-[45%]
                                2xl:w-[173.875px] 2xl:h-[50px] mr-2
                                text-[#4A4A4A] bg-white border border-[#4A4A4A] 
                                rounded-md px-4 py-2 transition-all my-1 duration-200 cursor-pointer whitespace-nowrap"
@@ -140,8 +140,8 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
           onClick={handlePrev}
           disabled={startIndex === 0}
           className="absolute left-2 top-1/2 -translate-y-1/2 
-                     md:-left-20 border-2 text-[#F15939] 
-                     rounded-full p-4 hover:bg-gray-300 disabled:opacity-50"
+                     md:-left-25 border-2 text-[#F15939] 
+                     rounded-full p-6 2xl:p-8 hover:bg-gray-300 disabled:opacity-50"
         >
           <FaChevronLeft className="w-[10px]" />
         </button>
@@ -151,8 +151,8 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
           onClick={handleNext}
           disabled={startIndex >= products.length - itemsPerPage}
           className="absolute right-2 top-1/2 -translate-y-1/2 
-                     md:-right-20 border-2 text-[#F15939] 
-                     rounded-full p-4 hover:bg-gray-300 disabled:opacity-50"
+                     md:-right-25 border-2 text-[#F15939] 
+                     rounded-full p-6 2xl:p-8 hover:bg-gray-300 disabled:opacity-50"
         >
           <FaChevronRight className="w-[10px]" />
         </button>
