@@ -45,41 +45,45 @@ const DropdownColumn = ({
       >
         {categories.length > 0 &&
           categories.map((cat) => (
-            <Link key={cat.id} href={`/category/${cat.slug}`}  onClick={() => setIsOpen(false)}>
-            <motion.li
+            <Link
               key={cat.id}
-              variants={listVariants}
-              className="flex justify-between items-center px-4 py-3 h4-regular hover:bg-gray-100 hover:border-l-2 border-[#F15939] cursor-pointer relative"
-              onMouseEnter={() => setActiveCategory(cat.id)}
-              onMouseLeave={() => setActiveCategory(null)}
+              href={`/category/${cat.slug}`}
+              onClick={() => setIsOpen(false)}
             >
-              {cat.name}
+              <motion.li
+                key={cat.id}
+                variants={listVariants}
+                className="flex justify-between items-center px-4 py-3 h4-regular hover:bg-gray-100 hover:border-l-2 border-[#F15939] cursor-pointer relative"
+                onMouseEnter={() => setActiveCategory(cat.id)}
+                onMouseLeave={() => setActiveCategory(null)}
+              >
+                {cat.name}
 
-              {cat.subcategories?.length > 0 && (
-                <ChevronRight className="w-4 h-4 text-gray-500" />
-              )}
-
-              {/* Child dropdown stays same */}
-              <AnimatePresence>
-                {activeCategory === cat.id && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 30 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute top-0 left-full flex"
-                  >
-                    {cat.subcategories.length > 0 ? (
-                      <DropdownColumn
-                         setIsOpen={setIsOpen}
-                        heading={cat.name}
-                        categories={cat.subcategories}
-                      />
-                    ) : null}
-                  </motion.div>
+                {cat.subcategories?.length > 0 && (
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
-              </AnimatePresence>
-            </motion.li>
+
+                {/* Child dropdown stays same */}
+                <AnimatePresence>
+                  {activeCategory === cat.id && (
+                    <motion.div
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 30 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute top-0 left-full flex"
+                    >
+                      {cat.subcategories.length > 0 ? (
+                        <DropdownColumn
+                          setIsOpen={setIsOpen}
+                          heading={cat.name}
+                          categories={cat.subcategories}
+                        />
+                      ) : null}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.li>
             </Link>
           ))}
       </motion.ul>
@@ -111,6 +115,9 @@ const LinkHeader = () => {
   useEffect(() => {
     fetchCategories().then((data) => setCategories(data));
   }, []);
+
+  // ✅ Limit the number of top-level categories shown in the navbar
+  const visibleCategories = categories.slice(0, 9); // same count as before
 
   return (
     <header className="bg-[#5B5B5B] text-white">
@@ -155,52 +162,24 @@ const LinkHeader = () => {
         </div>
 
         {/* Right Section: Static Links */}
+        {/* ✅ Right Section: Dynamic Categories */}
         <ul
           className="hidden lg:flex items-center 
-                   gap-4 md:gap-6 xl:gap-8 
-                   whitespace-nowrap 
-                   text-sm sm:text-base md:text-sm lg:text-[1rem] xl:text-xl nav-fix 2xl:text-[20px] font-normal"
+            gap-4 md:gap-6 xl:gap-8 
+            whitespace-nowrap 
+            text-sm sm:text-base md:text-sm lg:text-[1rem] xl:text-xl 2xl:text-[20px] 
+            font-normal"
         >
-          <li className="text-[#F2F2F2]">
-            <Link href="/portable-storage" className="hover:text-gray-300">
-              Portable Storage Drive
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/connectors" className="hover:text-gray-300">
-              Connectors
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/power-supply" className="hover:text-gray-300">
-              Power Supply
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/charging-cables" className="hover:text-gray-300">
-              Charging Cables
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/data-cables" className="hover:text-gray-300">
-              Data Cables
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/hdmi-cables" className="hover:text-gray-300">
-              HDMI Cables
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/memory-readers" className="hover:text-gray-300">
-              Memory Card Readers
-            </Link>
-          </li>
-          <li className="text-[#F2F2F2]">
-            <Link href="/motherboards" className="hover:text-gray-300">
-              Computer Motherboards
-            </Link>
-          </li>
+          {visibleCategories.map((cat) => (
+            <li key={cat.id} className="text-[#F2F2F2]">
+              <Link
+                href={`/category/${cat.slug}`}
+                className="hover:text-gray-300 transition-colors"
+              >
+                {cat.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
