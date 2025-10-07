@@ -45,7 +45,7 @@ const DropdownColumn = ({
       >
         {categories.length > 0 &&
           categories.map((cat) => (
-            <Link href={`/category/${cat.slug}`}  onClick={() => setIsOpen(false)}>
+            <Link key={cat.id} href={`/category/${cat.slug}`}  onClick={() => setIsOpen(false)}>
             <motion.li
               key={cat.id}
               variants={listVariants}
