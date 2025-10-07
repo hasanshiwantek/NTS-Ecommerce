@@ -82,9 +82,9 @@ export default function ProductsClientWrapper({
           className="
   2xl:w-[34rem]    /* 412px → 25.75rem */
   xl:w-[25rem]      /* 309px → 19.3rem */
-        lg:w-[50%]
-  md:w-[50%]
-  sm:w-[50%]
+        lg:w-[20rem] 
+  md:w-[20rem] 
+  sm:w-[20rem] 
   w-full
   2xl:px-2 p-0
   shrink-0 rounded bg-white
