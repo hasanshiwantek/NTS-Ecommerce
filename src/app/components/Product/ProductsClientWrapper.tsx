@@ -29,7 +29,7 @@ export default function ProductsClientWrapper({
     sortBy: "",
   });
 
-    // ✅ Sync filters when URL slug changes
+  // ✅ Sync filters when URL slug changes
   useEffect(() => {
     if (params?.slug && categories?.length > 0) {
       const matched = categories.find((c: any) => c.slug === params.slug);
@@ -48,10 +48,10 @@ export default function ProductsClientWrapper({
   }, [params?.slug, categories]);
 
   // 👇 Separate state for UI display (not sent to API)
-const [filterMeta, setFilterMeta] = useState({
-  brandName: undefined as string | undefined,
-  categoryName: initialCategoryName || undefined,
-});
+  const [filterMeta, setFilterMeta] = useState({
+    brandName: undefined as string | undefined,
+    categoryName: initialCategoryName || undefined,
+  });
 
   console.log("Filters: ", filters);
 
@@ -78,15 +78,26 @@ const [filterMeta, setFilterMeta] = useState({
     <div className="container  ">
       <div className="flex gap-6 py-4">
         {/* Sidebar: Filters */}
-        <aside className="  2xl:w-[412px] xl:w-[309px]  lg:w-[20rem] md:w-[20rem] sm:w-[15rem] w-[15rem] p-2 shrink-0  rounded  bg-white">
+        <aside
+          className="
+  2xl:w-[34rem]    /* 412px → 25.75rem */
+  xl:w-[25rem]      /* 309px → 19.3rem */
+        lg:w-[50%]
+  md:w-[50%]
+  sm:w-[50%]
+  w-full
+  2xl:px-2 p-0
+  shrink-0 rounded bg-white
+"
+        >
           <Sidebar
             categories={categories}
             brands={brands}
             filters={filters}
             setFilters={setFilters}
             products={products}
-             filterMeta={filterMeta}
-             setFilterMeta={setFilterMeta}
+            filterMeta={filterMeta}
+            setFilterMeta={setFilterMeta}
           />
         </aside>
 

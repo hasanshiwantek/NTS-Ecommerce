@@ -471,7 +471,9 @@ img {
 .h5-medium-20px-medium,
 .h5-20px-regular {
   font-size: 14px;
-  line-height: 20px;
+      line-height: 20px;
+
+
 }
 .h5-bold {
   font-weight: 600;
@@ -519,6 +521,7 @@ img {
   .h5-medium-20px-medium,
   .h5-20px-regular {
     font-size: 15px;
+      line-height: 20px;
   }
 }
 @media (min-width: 1440px) {
@@ -528,6 +531,7 @@ img {
   .h5-medium-20px-medium,
   .h5-20px-regular {
     font-size: 20px;
+      line-height: 26px;
   }
 }
 
