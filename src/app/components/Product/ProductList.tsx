@@ -37,7 +37,7 @@ export default function ProductList({
       className="
         flex-1 px-4 sm:px-6 md:px-8
 
-w-[95%] sm:w-[90%] md:w-[90%] lg:w-[100%] xl:w-[105%] 2xl:w-[110%]
+w-[95%] sm:w-[90%] md:w-[110%] lg:w-[110%] xl:w-[105%] 2xl:w-[110%]
         mx-auto
         transition-all duration-300
       "

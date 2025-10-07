@@ -68,9 +68,9 @@ export default function Sidebar({
       flex flex-col gap-5 w-full bg-white rounded-xl
       2xl:px-2 p-0
       2xl:w-[34rem]   xl:w-[25rem] 
-        lg:w-[50%]
-  md:w-[50%]
-  sm:w-[50%]
+        lg:w-[20rem] 
+  md:w-[20rem] 
+  sm:w-[20rem] 
       transition-all duration-300
     "
     >

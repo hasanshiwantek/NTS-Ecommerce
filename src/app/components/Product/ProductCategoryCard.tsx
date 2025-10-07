@@ -29,11 +29,11 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
   return (
     <div
       className="
-        border rounded-md bg-white p-[2%]
+        border rounded-md bg-white p-6
         grid gap-[2%] items-center w-full transition-all duration-300
         2xl:grid-cols-[20%_1fr_20%]
         xl:grid-cols-[22%_1fr_22%]
-        lg:grid-cols-1
+        lg:grid-cols-[25%_1fr_25%]
       "
     >
       {/* ✅ Product Image */}
@@ -140,8 +140,8 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
     hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]
     transition duration-300
     w-[70%] sm:w-[65%] md:w-[60%] xl:w-[80%] 2xl:w-[85%]
-    py-[7%]
-    text-[90%] sm:text-[95%] xl:text-lg 2xl:text-xl
+    2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
+    text-base sm:text-base xl:text-lg 2xl:text-xl
   "
         >
           <ShoppingCart size={16} fill="white" />
@@ -154,8 +154,8 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
     border border-gray-500 text-gray-800 bg-white rounded-md font-medium
     hover:bg-gray-100 transition duration-300
     w-[65%] sm:w-[60%] md:w-[55%] xl:w-[80%] 2xl:w-[85%]
-    py-[7%]
-    text-[90%] sm:text-[95%] xl:text-lg 2xl:text-xl
+   2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
+   text-base sm:text-base xl:text-lg 2xl:text-xl
   "
         >
           Quote | Help
