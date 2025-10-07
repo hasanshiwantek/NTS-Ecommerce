@@ -29,25 +29,23 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
   return (
     <div
       className="
-        border rounded p-4
-        grid gap-6 items-center w-full transition-all duration-300
-        xl:grid-cols-[187.5px_1fr_180px]     /* 🧱 Figma desktop (1440px) */
-        2xl:grid-cols-[240px_1fr_240px]      /* 🧱 Figma big screen (1920px) */
-        2xl:w-[1260px]
-         lg:grid-cols-1              /* Tablets (2 cols: image + content) */
-        md:grid-cols-1                       /* Stack on mobile */
+        border rounded-md bg-white p-6
+        grid gap-[2%] items-center w-full transition-all duration-300
+        2xl:grid-cols-[20%_1fr_20%]
+        xl:grid-cols-[22%_1fr_22%]
+        lg:grid-cols-[25%_1fr_25%]
       "
     >
       {/* ✅ Product Image */}
       <div
         className="
-    flex items-center justify-center w-full shrink-0
-    2xl:w-full 2xl:h-[250px]
-    xl:w-full xl:h-[187.5px]
-    lg:w-full lg:h-[180px]
-    md:w-full md:h-[160px]
-    sm:w-full sm:h-[180px]
-  "
+          flex items-center justify-center w-full shrink-0
+          2xl:h-[40%]
+          xl:h-[35%]
+          lg:h-[30%]
+          md:h-[25%]
+          sm:h-[22%]
+        "
       >
         <Image
           src={imageUrl}
@@ -55,27 +53,30 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           width={250}
           height={250}
           className="
-      object-contain
-      2xl:w-[192px] 2xl:h-[206px]
-      xl:w-[144.5px] xl:h-[154.5px]
-      lg:w-[160px] lg:h-[160px]
-      md:w-[180px] md:h-[140px]
-      sm:w-[150px] sm:h-[130px]
-    "
+            object-contain
+            w-[80%] h-auto max-h-[220px]
+            2xl:w-[95%]
+            xl:w-[80%]
+            lg:w-[70%]
+            md:w-[65%]
+            sm:w-[60%]
+          "
         />
       </div>
 
       {/* ✅ Product Info */}
       <div
-        className="
+      className="
           flex flex-col justify-center 2xl:justify-start xl:justify-start 
           text-center lg:text-left 2xl:text-left xl:text-left
-          2xl:gap-[10px] 2xl:w-[710px] 2xl:h-[226px] 2xl:items-start xl:items-start 
+          2xl:gap-[2%] xl:gap-[3%]
+          w-full
+          2xl:items-start xl:items-start 
           md:items-center md:text-center
         "
       >
-        <Link href={`/products/${product?.slug}`} className="cursor-pointer">
-          <h3 className="mb-1 h3-regular">{product?.name}</h3>
+        <Link href={`/products/${product?.slug}`} className="cursor-pointer ">
+          <h3 className="mb-1 h3-regular line-clamp-2">{product?.name}</h3>
         </Link>
 
         <div
@@ -127,37 +128,35 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           md:mt-4
         "
       >
-        {/* Add To Cart */}
+        {/* ✅ Add To Cart */}
         <button
           onClick={() => {
             dispatch(addToCart(product));
             toast.success(`${product.name} added to cart!`);
           }}
           className="
-            flex items-center justify-center gap-2
-            w-[160px] h-[45px] rounded-[6px] text-[15px]
-            bg-[var(--primary-color)] text-white font-medium
-            hover:bg-white hover:text-[var(--primary-color)] hover:border-[var(--primary-color)] hover:border
-            transition
-            xl:w-[180px] xl:h-[45px] xl:text-[15px] /* Figma desktop */
-            2xl:w-[240px] 2xl:h-[60px] 2xl:text-[16.5px] /* Figma big screen */
-          "
+    flex items-center justify-center gap-[4%]
+    bg-[var(--primary-color)] text-white font-medium rounded-md
+    hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]
+    transition duration-300
+    w-[70%] sm:w-[65%] md:w-[60%] xl:w-[80%] 2xl:w-[85%]
+    2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
+    text-base sm:text-base xl:text-lg 2xl:text-xl
+  "
         >
           <ShoppingCart size={16} fill="white" />
           Add To Cart
         </button>
 
-        {/* Quote | Help */}
+        {/* ✅ Quote | Help */}
         <button
           className="
-            text-[14px] font-medium border border-gray-500
-            bg-white text-gray-800 rounded transition
-            hover:bg-gray-100
-            w-[140px] h-[40px]
-            md:w-[160px] md:h-[45px]
-            xl:w-[180px] xl:h-[45px] xl:text-[15px] /* Figma desktop */
-            2xl:w-[240px] 2xl:h-[60px] 2xl:text-[16.5px] /* Figma big screen */
-          "
+    border border-gray-500 text-gray-800 bg-white rounded-md font-medium
+    hover:bg-gray-100 transition duration-300
+    w-[65%] sm:w-[60%] md:w-[55%] xl:w-[80%] 2xl:w-[85%]
+   2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
+   text-base sm:text-base xl:text-lg 2xl:text-xl
+  "
         >
           Quote | Help
         </button>

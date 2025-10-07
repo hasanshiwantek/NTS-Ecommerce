@@ -20,8 +20,8 @@ const ProductOverview = ({ product }: { product: any }) => {
 
           {/* Key Features */}
           <section className="">
-            <h2 className="h5-regular !mb-1">Key Features:</h2>
-            <ul className="!list-disc !list-inside !space-y-2">
+            <h2 className="h5-regular !mb-2">Key Features:</h2>
+            <ul className="!list-disc !list-inside !space-y-3">
               <li className="h5-regular">
                 <span className="">SKU:</span> {product?.sku || "N/A"}
               </li>

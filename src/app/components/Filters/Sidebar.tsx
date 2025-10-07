@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CategoryFilter from "./CategoryFilter";
 import BrandFilter from "./BrandFilter";
 import PriceFilter from "./PriceFilter";
 import { ChevronUp, ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 export default function Sidebar({
   categories,
   brands,
@@ -31,7 +31,8 @@ export default function Sidebar({
     string | null
   >(null);
 
-    const router = useRouter();
+  const router = useRouter();
+  const params = useParams();
   const toggleCategorySection = (section: string) => {
     setExpandedCategorySection((prev) => (prev === section ? null : section));
   };
@@ -39,7 +40,6 @@ export default function Sidebar({
   const toggleSection = (section: string) => {
     setExpandedSection((prev) => (prev === section ? null : section));
   };
-
 
   // ✅ Category click: update filter + URL
   const handleCategoryClick = (catId: number, name: string, slug?: string) => {
@@ -50,9 +50,9 @@ export default function Sidebar({
     }));
     setFilterMeta((prev: any) => ({ ...prev, categoryName: name }));
 
-    // Push to new slug URL
     if (slug) router.push(`/category/${slug}`);
   };
+
   // user clicks a brand
   const handleBrandClick = (brandId: number, name: string) => {
     setFilters((prev: any) => ({
@@ -63,8 +63,46 @@ export default function Sidebar({
     setFilterMeta((prev: any) => ({ ...prev, brandName: name }));
   };
 
+  // ✅ Utility: Find a category by slug and return its parent chain
+  const findParentChain: any = (
+    cats: any[],
+    slug: string,
+    chain: any[] = []
+  ) => {
+    for (const cat of cats) {
+      if (cat.slug === slug) return [...chain, cat];
+      if (cat.subcategories?.length) {
+        const found = findParentChain(cat.subcategories, slug, [...chain, cat]);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+
+  // ✅ When URL slug changes, auto-expand matching categories
+  useEffect(() => {
+    if (params?.slug && categories?.length > 0) {
+      const chain = findParentChain(categories, params.slug);
+      if (chain && chain.length > 0) {
+        // open the immediate parent section
+        const topLevel = chain[0];
+        setExpandedCategorySection(topLevel.name);
+      }
+    }
+  }, [params?.slug, categories]);
+
   return (
-    <aside className="2xl:w-[412px] xl:w-[309px]  flex flex-col gap-5 w-full  bg-white  rounded-xl ">
+    <aside
+      className="
+      flex flex-col gap-5 w-full bg-white rounded-xl
+      2xl:px-2 p-0
+      2xl:w-[34rem]   xl:w-[25rem] 
+        lg:w-[20rem] 
+  md:w-[20rem] 
+  sm:w-[20rem] 
+      transition-all duration-300
+    "
+    >
       <div className="border rounded-xl ">
         {/* Category Section */}
         <div className="border-b 2xl:p-6  xl:p-[18px] p-4  bg-gray-100 rounded-t-lg">
@@ -118,7 +156,9 @@ export default function Sidebar({
               >
                 <span
                   className="h5-regular hover:bg-gray-50 2xl:px-[7px] 2xl:py-[8px] xl:px-[5px] xl:py-[6px] p-2  py-1"
-                  onClick={() => handleCategoryClick(cat.id, cat.name,cat.slug)}
+                  onClick={() =>
+                    handleCategoryClick(cat.id, cat.name, cat.slug)
+                  }
                 >
                   {cat.name}
                 </span>

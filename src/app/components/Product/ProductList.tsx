@@ -17,7 +17,7 @@ interface ProductListProps {
   pagination: any;
   isLoading?: boolean;
   error?: string | null;
-  filterMeta:any
+  filterMeta: any;
 }
 
 export default function ProductList({
@@ -33,7 +33,15 @@ export default function ProductList({
   const [page, setPage] = useState(1);
   const total = pagination?.total || 0;
   return (
-    <section className="max-w-full 2xl:w-[1260px] xl:w-[945px] lg:w-[55rem]   flex-1 px-6">
+    <section
+      className="
+        flex-1 px-4 sm:px-6 md:px-8
+
+w-[95%] sm:w-[90%] md:w-[110%] lg:w-[110%] xl:w-[105%] 2xl:w-[110%]
+        mx-auto
+        transition-all duration-300
+      "
+    >
       {/* Headings */}
       <div className="mb-4">
         <h2 className="h2-medium ">Heading Text</h2>
