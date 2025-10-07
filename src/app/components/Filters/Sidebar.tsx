@@ -31,7 +31,7 @@ export default function Sidebar({
     string | null
   >(null);
 
-    const router = useRouter();
+  const router = useRouter();
   const toggleCategorySection = (section: string) => {
     setExpandedCategorySection((prev) => (prev === section ? null : section));
   };
@@ -39,7 +39,6 @@ export default function Sidebar({
   const toggleSection = (section: string) => {
     setExpandedSection((prev) => (prev === section ? null : section));
   };
-
 
   // ✅ Category click: update filter + URL
   const handleCategoryClick = (catId: number, name: string, slug?: string) => {
@@ -64,7 +63,17 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="2xl:w-[412px] xl:w-[309px]  flex flex-col gap-5 w-full  bg-white  rounded-xl ">
+    <aside
+      className="
+      flex flex-col gap-5 w-full bg-white rounded-xl
+      2xl:px-2 p-0
+      2xl:w-[34rem]   xl:w-[25rem] 
+        lg:w-[50%]
+  md:w-[50%]
+  sm:w-[50%]
+      transition-all duration-300
+    "
+    >
       <div className="border rounded-xl ">
         {/* Category Section */}
         <div className="border-b 2xl:p-6  xl:p-[18px] p-4  bg-gray-100 rounded-t-lg">
@@ -118,7 +127,9 @@ export default function Sidebar({
               >
                 <span
                   className="h5-regular hover:bg-gray-50 2xl:px-[7px] 2xl:py-[8px] xl:px-[5px] xl:py-[6px] p-2  py-1"
-                  onClick={() => handleCategoryClick(cat.id, cat.name,cat.slug)}
+                  onClick={() =>
+                    handleCategoryClick(cat.id, cat.name, cat.slug)
+                  }
                 >
                   {cat.name}
                 </span>

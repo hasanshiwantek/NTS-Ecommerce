@@ -140,7 +140,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
           onClick={handlePrev}
           disabled={startIndex === 0}
           className="absolute left-2 top-1/2 -translate-y-1/2 
-                     md:-left-25 border-2 text-[#F15939] 
+                     md:-left-23 border-2 text-[#F15939] 
                      rounded-full p-6 2xl:p-8 hover:bg-gray-300 disabled:opacity-50"
         >
           <FaChevronLeft className="w-[10px]" />
@@ -151,7 +151,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
           onClick={handleNext}
           disabled={startIndex >= products.length - itemsPerPage}
           className="absolute right-2 top-1/2 -translate-y-1/2 
-                     md:-right-25 border-2 text-[#F15939] 
+                     md:-right-23 border-2 text-[#F15939] 
                      rounded-full p-6 2xl:p-8 hover:bg-gray-300 disabled:opacity-50"
         >
           <FaChevronRight className="w-[10px]" />
