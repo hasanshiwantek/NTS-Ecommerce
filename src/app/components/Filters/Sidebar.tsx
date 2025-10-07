@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CategoryFilter from "./CategoryFilter";
 import BrandFilter from "./BrandFilter";
 import PriceFilter from "./PriceFilter";
 import { ChevronUp, ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 export default function Sidebar({
   categories,
   brands,
@@ -32,6 +32,7 @@ export default function Sidebar({
   >(null);
 
   const router = useRouter();
+  const params = useParams();
   const toggleCategorySection = (section: string) => {
     setExpandedCategorySection((prev) => (prev === section ? null : section));
   };
@@ -49,9 +50,9 @@ export default function Sidebar({
     }));
     setFilterMeta((prev: any) => ({ ...prev, categoryName: name }));
 
-    // Push to new slug URL
     if (slug) router.push(`/category/${slug}`);
   };
+
   // user clicks a brand
   const handleBrandClick = (brandId: number, name: string) => {
     setFilters((prev: any) => ({
@@ -61,6 +62,34 @@ export default function Sidebar({
     }));
     setFilterMeta((prev: any) => ({ ...prev, brandName: name }));
   };
+
+  // ✅ Utility: Find a category by slug and return its parent chain
+  const findParentChain: any = (
+    cats: any[],
+    slug: string,
+    chain: any[] = []
+  ) => {
+    for (const cat of cats) {
+      if (cat.slug === slug) return [...chain, cat];
+      if (cat.subcategories?.length) {
+        const found = findParentChain(cat.subcategories, slug, [...chain, cat]);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+
+  // ✅ When URL slug changes, auto-expand matching categories
+  useEffect(() => {
+    if (params?.slug && categories?.length > 0) {
+      const chain = findParentChain(categories, params.slug);
+      if (chain && chain.length > 0) {
+        // open the immediate parent section
+        const topLevel = chain[0];
+        setExpandedCategorySection(topLevel.name);
+      }
+    }
+  }, [params?.slug, categories]);
 
   return (
     <aside
