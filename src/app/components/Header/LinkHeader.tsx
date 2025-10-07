@@ -16,7 +16,9 @@ interface Category {
 const DropdownColumn = ({
   heading,
   categories,
+  setIsOpen,
 }: {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   heading: string;
   categories: Category[];
 }) => {
@@ -29,9 +31,9 @@ const DropdownColumn = ({
   };
 
   return (
-    <div className="w-[20rem] bg-white text-black border-r relative">
+    <div className="xl:w-[25.8rem] 2xl:w-[34.2rem]  bg-white text-black border-r relative">
       {/* Column Heading (static, no animation) */}
-      <div className="px-4 py-2 font-semibold text-red-600 border-b">
+      <div className="px-4 py-2 h3-secondary !text-[#F15939] border-b">
         {heading}
       </div>
 
@@ -43,14 +45,15 @@ const DropdownColumn = ({
       >
         {categories.length > 0 &&
           categories.map((cat) => (
+            <Link key={cat.id} href={`/category/${cat.slug}`}  onClick={() => setIsOpen(false)}>
             <motion.li
               key={cat.id}
               variants={listVariants}
-              className="flex justify-between items-center px-4 py-3 text-lg hover:bg-gray-100 cursor-pointer relative"
+              className="flex justify-between items-center px-4 py-3 h4-regular hover:bg-gray-100 hover:border-l-2 border-[#F15939] cursor-pointer relative"
               onMouseEnter={() => setActiveCategory(cat.id)}
               onMouseLeave={() => setActiveCategory(null)}
             >
-              <Link href={`/category/${cat.slug}`}>{cat.name}</Link>
+              {cat.name}
 
               {cat.subcategories?.length > 0 && (
                 <ChevronRight className="w-4 h-4 text-gray-500" />
@@ -68,6 +71,7 @@ const DropdownColumn = ({
                   >
                     {cat.subcategories.length > 0 ? (
                       <DropdownColumn
+                         setIsOpen={setIsOpen}
                         heading={cat.name}
                         categories={cat.subcategories}
                       />
@@ -76,6 +80,7 @@ const DropdownColumn = ({
                 )}
               </AnimatePresence>
             </motion.li>
+            </Link>
           ))}
       </motion.ul>
     </div>
@@ -141,6 +146,7 @@ const LinkHeader = () => {
           {isOpen && (
             <div className="absolute left-0 top-10 flex bg-white shadow-xl border z-50">
               <DropdownColumn
+                setIsOpen={setIsOpen}
                 heading="All Categories"
                 categories={categories}
               />
