@@ -118,7 +118,7 @@ const GlobalSearchBar: React.FC = () => {
       rounded-full bg-white text-gray-800 
       focus:outline-none focus:ring-2 focus:ring-orange-400 
       text-sm sm:text-base lg:text-lg
-      h-10 sm:h-12 md:h-12 lg:h-14 xl:h-[60px] 2xl:h-[64px]
+      h-10 sm:h-12 md:h-12 lg:h-14 xl:h-[50px] 2xl:h-[64px]
       pr-12 sm:pr-16 md:pr-20 lg:pr-27 2xl:pr-52
     h6-medium-color
     "
@@ -137,7 +137,7 @@ const GlobalSearchBar: React.FC = () => {
         sm:w-9 sm:h-9       
         md:w-10 md:h-6    
         lg:w-16 lg:h-10    
-        xl:w-24 xl:h-16     
+        xl:w-20 xl:h-13  
         2xl:w-[88px] 2xl:h-[46px] 
         flex items-center justify-center
       "
