@@ -22,9 +22,7 @@ function findCategoryBySlug(categories: any[], slug: string): any | undefined {
 // ✅ Dynamic SEO metadata per category
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: Props): Promise<Metadata> {
   const { slug } = await params;
   const categories = await fetchCategories();
   const category = findCategoryBySlug(categories, slug);
