@@ -4,7 +4,7 @@ import { fetchCategories } from "@/lib/api/category";
 import { Metadata } from "next";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // 👈 same as ProductPage
 }
 
 function findCategoryBySlug(categories: any[], slug: string): any | undefined {
@@ -62,7 +62,7 @@ export async function generateMetadata({
 }
 
 export default async function CategoryPage({ params }: Props) {
-  const { slug } =  params; // 👈 matching slug
+  const { slug } = await params; // 👈 matching slug
   console.log("Category Slug:", slug);
 
   const categories = await fetchCategories();
