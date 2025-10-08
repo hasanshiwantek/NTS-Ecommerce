@@ -26,7 +26,7 @@ const Navbar: React.FC = () => {
         flex items-center justify-between lg:justify-center
         gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10
         h-16 sm:h-20 lg:h-24 xl:h-32 2xl:h-[124px]
-        w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-22
+        w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-20 2xl:px-28
       "
         >
           {/* Left: Logo */}
