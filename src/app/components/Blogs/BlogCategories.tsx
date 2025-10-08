@@ -41,7 +41,7 @@ const BlogCategories = () => {
   ];
 
   return (
-   <div className="flex flex-col items-start xl:mx-24 2xl:mx-32 py-10 w-full xl:max-w-[925.5px] 2xl:max-w-[1234px] mx-auto">
+   <div className="flex flex-col items-start   py-10 w-full xl:max-w-[925.5px] 2xl:max-w-[1234px] ">
   <h2 className="h1-secondary !text-[#4A4A4A] uppercase mb-8">
     Categories
   </h2>

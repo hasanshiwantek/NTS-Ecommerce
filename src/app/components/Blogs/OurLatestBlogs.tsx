@@ -27,7 +27,7 @@ const blogs = [
 
 const OurLatestBlogs = () => {
   return (
-    <section className="w-full flex justify-center bg-white text-black py-10 px-4 sm:px-6 md:px-8 lg:px-10">
+    <section className="w-full flex justify-center bg-white text-black py-5">
       <div className="w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
         {/* Heading + Search */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-0">
