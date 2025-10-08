@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { RootState } from "@/redux/store";
 import { useAppSelector } from "@/hooks/useReduxHooks";
 import GlobalSearchBar from "./GlobalSearchBar";
+import MobileSearchBar from "./MobileSearchBar";
 const Navbar: React.FC = () => {
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currency, setCurrency] = useState("USD");
@@ -44,10 +45,12 @@ const Navbar: React.FC = () => {
 
           {/* Center: Search (Desktop only) */}
 
-          <div           className="
+          <div
+            className="
     relative hidden lg:block 
     flex-1 max-w-[60%] xl:max-w-[40rem] 2xl:max-w-[695.52px] 2xl:mx-8
-  ">
+  "
+          >
             {/* <div
             className="
     relative hidden lg:block 
@@ -202,13 +205,9 @@ const Navbar: React.FC = () => {
         {mobileOpen && (
           <div className="lg:hidden mt-4 space-y-4 px-4 pb-6">
             {/* Search */}
+
             <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full px-4 py-2 pr-10 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base"
-              />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 cursor-pointer" />
+              <MobileSearchBar />
             </div>
 
             {/* Currency */}
