@@ -56,9 +56,9 @@ const BlogCategories = () => {
           xl:flex-row 2xl:flex-row
           w-full 
           xl:w-[100%] 2xl:w-[100%] 
-          xl:h-[21.9rem] 2xl:h-[29.1rem] 
+          xl:h-[21.9rem] 2xl:h-[25.1rem] 
           md:gap-6 xl:gap-[30px] 2xl:gap-10 
-          bg-white rounded-lg overflow-hidden hover:shadow-lg transition
+          bg-white rounded-lg overflow-hidden transition group
         "
       >
         {/* Image */}
@@ -81,18 +81,25 @@ const BlogCategories = () => {
             w-full md:w-[55%] xl:w-[52.2%] 2xl:w-[51.8%]
             h-auto xl:h-[19.5rem] 2xl:h-[25.4rem] 
             flex flex-col justify-center my-auto 
-            gap-6 md:gap-6 xl:gap-8 
+            gap-6 md:gap-6 xl:gap-6 
             p-5 md:p-6 xl:p-0
           "
         >
           <p className="h5-medium border-l-3 border-[#F15939] pl-3">
             {blog.category}
           </p>
-          <h3 className="h2-medium leading-12.5">{blog.title}</h3>
-          <p className="h4-regular line-clamp-3">{blog.excerpt}</p>
-          <a href="#" className="h4-regular hover:underline">
-            Read More →
-          </a>
+          <h3 className="h3-secondary group-hover:!text-[#F15939] leading-12.5">{blog.title}</h3>
+          <p className="h5-regular line-clamp-3">{blog.excerpt}</p>
+         <a
+  href="#"
+  className="h4-regular relative inline-block group/readmore"
+>
+  Read More →
+  <span
+    className="absolute left-0 -bottom-1 h-[2px] !text-[#F15939] w-0 bg-current transition-all duration-300 group-hover/readmore:w-40"
+  ></span>
+</a>
+
         </div>
       </div>
     ))}

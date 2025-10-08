@@ -34,14 +34,14 @@ const GridCard = () => {
   return (
  <section className="w-full flex justify-center bg-[#D6D6D6] py-24 px-4 sm:px-6 lg:px-28">
   <div className="w-full xl:max-w-[1440px] 2xl:max-w-[1920px]">
-    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center">
       {blogs.map((blog) => (
         <Link
           key={blog.id}
           href={`/blog/${blog.slug}`}
           className="
             w-[80%] p-6 md:p-0 xl:w-[100.7%] 2xl:w-[97.1%]
-             rounded-lg hover:shadow-md transition overflow-hidden
+             rounded-lg transition overflow-hidden
             flex flex-col sm:flex-row justify-start items-center sm:items-stretch gap-5 sm:gap-7
           "
         >
