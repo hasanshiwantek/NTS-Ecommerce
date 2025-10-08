@@ -123,7 +123,7 @@ const LinkHeader = () => {
     <header className="bg-[#5B5B5B] text-white">
       <nav
         className="w-full flex items-center justify-start 
-                  gap-4 lg:gap-2 xl:gap-8 2xl:gap-0 
+                  gap-4 lg:gap-2 xl:gap-5 2xl:gap-7
                   px-4 sm:px-6 md:px-10 lg:px-[2%] xl:px-[5%] 2xl:px-32 
                   py-2 sm:py-3 
                   relative 2xl:max-w-[1920px] xl:h-[56px] 2xl:h-[56px] lg:[h-56px] h-max"
@@ -131,7 +131,7 @@ const LinkHeader = () => {
         {/* Left Section: Menu Button */}
         <div
           className="relative flex items-center 
-                 gap-1 sm:gap-2 md:gap-3 lg:gap-4 mr-2 sm:mr-4 md:mr-6 lg:mr-8"
+                 gap-1 sm:gap-2 md:gap-3 lg:gap-4 "
           ref={menuRef}
         >
           <button
