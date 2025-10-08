@@ -55,11 +55,30 @@ export const getWellerStatus = createAsyncThunk(
   }
 );
 
+export const globalSearch = createAsyncThunk(
+  "home/globalSearch",
+  async ({ query }: { query: any }, thunkAPI) => {
+    try {
+      const res = await axiosInstance.get(
+        `web/products/search-product?query=${query}`
+      );
+      console.log("Main Search Data: ", res?.data);
+      return res.data;
+    } catch (err: any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Failed to fetch search data"
+      );
+    }
+  }
+);
+
 // 2. Initial State
 const initialState = {
   statistics: null,
   groups: [],
   wellerStatus: [],
+  searchData: [],
   loading: false,
   error: null as string | null,
 };
@@ -108,6 +127,18 @@ const homeSlice = createSlice({
       .addCase(getWellerStatus.fulfilled, (state, action) => {
         state.loading = false;
         state.wellerStatus = action.payload;
+      })
+      // GLOBAL SEARCH
+      .addCase(globalSearch.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(globalSearch.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchData = action.payload;
+      })
+      .addCase(globalSearch.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch search data";
       });
   },
 });
