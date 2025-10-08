@@ -43,7 +43,7 @@ const SigninPage = () => {
       <h2 className="text-[1.5rem] sm:text-[1.75rem] lg:text-[2rem] 2xl:text-[32px] font-extrabold mb-6 text-white leading-snug">
         Sed ut perspiciatis, unde omnis iste natus error
       </h2>
-      <Button asChild className="btn-primary w-[60%] sm:w-[240px] !py-6 sm:!py-8 2xl:w-[214px] 2xl:!py-9 rounded h4-medium !text-[#FFFFFF]">
+      <Button asChild className="btn-primary w-[60%] sm:w-[240px] !py-6 sm:!py-8 2xl:w-[214px] 2xl:!py-9 rounded 2xl:text-[22px] xl:text-[16.5] text-[14px] ">
         <Link href="/auth/signup">Call to Action</Link>
       </Button>
     </div>
@@ -90,7 +90,7 @@ const SigninPage = () => {
           <p className="text-[14px] sm:text-[16px] font-semibold text-[#F15939] text-end">Forgot password?</p>
 
           {/* Submit */}
-          <Button type="submit" className="w-full !py-6 sm:!py-7 2xl:!py-9 !rounded-full btn-primary h4-medium !text-[#FFFFFF]">
+          <Button type="submit" className="w-full !py-6 sm:!py-7 2xl:!py-9 !rounded-full btn-primary  2xl:text-[22px] xl:text-[16.5] text-[14px] text-[#FFFFFF]">
             Login
           </Button>
         </form>
