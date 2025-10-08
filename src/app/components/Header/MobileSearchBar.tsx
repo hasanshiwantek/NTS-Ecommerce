@@ -15,7 +15,7 @@ const useDebounce = (value: string, delay = 500) => {
   return debouncedValue;
 };
 
-const GlobalSearchBar: React.FC = () => {
+const MobileSearchBar: React.FC = () => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
@@ -90,77 +90,21 @@ const GlobalSearchBar: React.FC = () => {
     <div ref={containerRef} className="relative">
       {/* Input Box */}
       <div className="relative">
-        {/* <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search categories..."
-          className="w-full px-5 py-3 rounded-full bg-white text-gray-800
-          focus:outline-none focus:ring-2 focus:ring-orange-400
-          text-base lg:text-lg pr-12"
-        />
-        <Search
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-          onClick={() => {
-            if (query.trim()) dispatch(globalSearch({ query }));
-          }}
-        /> */}
-
         <div>
           <input
-            type="search"
-            placeholder="Search products..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="
-      w-full px-4 md:px-5 lg:px-6 
-      py-2 md:py-2.5 lg:py-3 
-      rounded-full bg-white text-gray-800 
-      focus:outline-none focus:ring-2 focus:ring-orange-400 
-      text-sm sm:text-base lg:text-lg
-      h-10 sm:h-12 md:h-12 lg:h-14 xl:h-[50px] 2xl:h-[64px]
-      pr-12 sm:pr-16 md:pr-20 lg:pr-27 2xl:pr-52
-    h6-medium-color
-    "
+            type="text"
+            placeholder="Search products..."
+            className="w-full px-4 py-2 pr-10  rounded-full text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base"
           />
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
-            <button
-              onClick={() => {
-                if (query.trim()) {
-                  dispatch(globalSearch({ query }));
-                  setShowDropdown(true); // ensure it opens immediately
-                }
-              }}
-              className="
-        bg-[#F1593957] rounded-full
-        w-8 h-8            
-        sm:w-9 sm:h-9       
-        md:w-10 md:h-6    
-        lg:w-16 lg:h-10    
-        xl:w-20 xl:h-13  
-        2xl:w-[88px] 2xl:h-[46px] 
-        flex items-center justify-center
-      "
-            >
-              <Search
-                className="
-          w-4 h-4 
-          sm:w-5 sm:h-5 
-          md:w-6 md:h-6 
-          lg:w-7 lg:h-7 
-          xl:w-8 xl:h-8 
-          2xl:w-[23.7px] 2xl:h-[23.7px]
-          text-black 
-        "
-              />
-            </button>
-          </div>
+          <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white cursor-pointer" />
         </div>
       </div>
 
       {/* Dropdown Results */}
       {showDropdown && (
-        <div className="absolute top-full left-0 w-full mt-2 bg-white text-[#4A4A4A] shadow-lg rounded-md overflow-hidden z-50 max-h-[400px] overflow-y-auto">
+        <div className="absolute top-full left-0 w-full mt-2 bg-white text-[#4A4A4A] shadow-lg rounded-md overflow-hidden z-50 max-h-[200px] overflow-y-auto">
           {loading && <div className="p-3 text-gray/80">Searching...</div>}
 
           {!loading && results.length === 0 && (
@@ -173,7 +117,7 @@ const GlobalSearchBar: React.FC = () => {
                 key={item.id}
                 onClick={() => handleSelect(item.url)}
                 className="
-            flex items-start gap-3 p-3 border-b border-gray/50
+            flex items-start gap-4 p-4 border-b border-gray/50
             hover:bg-[var(--primary-color)] hover:text-white
             transition-colors cursor-pointer
           "
@@ -184,7 +128,7 @@ const GlobalSearchBar: React.FC = () => {
                     {item?.brand || "Brand"} |{" "}
                     <span>SKU: {item?.sku || "N/A"}</span>
                   </p>
-                  <p className="text-[15px] font-medium leading-tight line-clamp-2">
+                  <p className="text-[12px] font-medium leading-tight line-clamp-2">
                     {item?.name}
                   </p>
                   <p className="text-sm font-semibold mt-1">
@@ -199,4 +143,4 @@ const GlobalSearchBar: React.FC = () => {
   );
 };
 
-export default GlobalSearchBar;
+export default MobileSearchBar;
