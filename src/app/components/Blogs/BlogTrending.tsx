@@ -30,7 +30,7 @@ const blogs = [
 
 const BlogTrending = () => {
   return (
-    <section className="w-full flex justify-center bg-white text-black py-12 px-4 sm:px-6 lg:px-10">
+    <section className="w-full flex justify-center bg-white text-black py-12">
       <div className="w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
         {/* Heading */}
         <h2 className="h1-secondary uppercase tracking-wide mb-8 !text-[#4A4A4A]">
