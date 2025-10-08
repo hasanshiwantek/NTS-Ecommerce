@@ -4,7 +4,7 @@ import { fetchCategories } from "@/lib/api/category";
 import { Metadata } from "next";
 
 interface Props {
-  params: Promise<{ slug: string }>; // 👈 same as ProductPage
+  params: { slug: string };
 }
 
 function findCategoryBySlug(categories: any[], slug: string): any | undefined {
