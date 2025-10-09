@@ -19,10 +19,8 @@ const ProductCard = ({ product }: { product: any }) => {
 
   return (
     <div className="max-w-full mx-auto">
-      <div className="bg-white rounded-xl w-full max-w-[1719px]">
+      <div className="bg-white rounded-xl w-full max-w-[1719px] 2xl:px-3 px-0">
         {/* Breadcrumb */}
-        {/* <div className="bg-red-500 md:bg-yellow-500 lg:bg-blue-500 xl:bg-green-500 2xl:bg-purple-500 h-20 w-full"></div> */}
-
         <div className="flex items-center space-x-2 h5-20px-regular lg:mb-7 sm:mb-7 mb-7">
           <span>Home</span>
           {product.categoryHierarchy?.map((data: any, index: number) => (
@@ -39,7 +37,7 @@ const ProductCard = ({ product }: { product: any }) => {
           ))}
         </div>
 
-        <div className="flex flex-wrap lg:flex-nowrap 2xl:gap-6 xl:gap-6 lg:gap-6 md:gap-5 sm:gap-4 gap-4">
+        <div className="flex flex-wrap lg:flex-nowrap 2xl:gap-6 xl:gap-10 lg:gap-6 md:gap-5 sm:gap-4 gap-4 ">
           <ProductLeft
             images={images}
             selectedImage={selectedImage}

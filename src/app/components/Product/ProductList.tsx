@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCategoryCard from "./ProductCategoryCard";
 import ProductGridCard from "./ProductGridCard";
 import SortingBar from "./SortingBar";
@@ -32,6 +32,11 @@ export default function ProductList({
   const [view, setView] = useState<"list" | "grid">("list");
   const [page, setPage] = useState(1);
   const total = pagination?.total || 0;
+  // ✅ Scroll to top when filters.page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [filters.page]);
+
   return (
     <section
       className="
@@ -156,7 +161,7 @@ w-[95%] sm:w-[90%] md:w-[110%] lg:w-[110%] xl:w-[105%] 2xl:w-[110%]
       )}
 
       {/* Pagination */}
-      {!isLoading && !error && pagination?.lastPage > 1 && (
+      {!isLoading && !error && (
         <div className="mt-6 flex justify-end">
           <Pagination
             currentPage={filters.page}

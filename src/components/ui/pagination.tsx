@@ -39,14 +39,14 @@ const Pagination = ({
   }
 
   return (
-    <div className="flex justify-center items-center space-x-1 mt-6">
+    <div className="flex justify-center items-center space-x-3 mt-6">
       {/* Prev Button */}
       <Button
         variant="outline"
-        size="sm"
+        size="xl"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="rounded px-3 text-sm"
+        className="rounded-md px-3  2xl:text-lg text-base"
       >
         Prev
       </Button>
@@ -56,17 +56,17 @@ const Pagination = ({
         page === "..." ? (
           <span
             key={`ellipsis-${i}`}
-            className="px-2 text-sm text-gray-500 select-none"
+            className="px-3 text-sm text-gray-500 select-none"
           >
             ...
           </span>
         ) : (
           <Button
             key={i}
-            size="sm"
+            size="xl"
             variant={currentPage === page ? "default" : "outline"}
             onClick={() => onPageChange(Number(page))}
-            className={`rounded px-3 text-sm ${
+            className={`rounded-md px-3 2xl:text-lg text-base ${
               currentPage === page
                 ? "bg-[var(--primary-color)] text-white hover:bg-[var(--primary-color)]"
                 : ""
@@ -80,10 +80,10 @@ const Pagination = ({
       {/* Next Button */}
       <Button
         variant="outline"
-        size="sm"
+        size="xl"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="rounded px-3 text-sm"
+        className="rounded-md px-3 2xl:text-lg text-base"
       >
         Next
       </Button>
