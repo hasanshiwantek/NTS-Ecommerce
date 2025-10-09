@@ -63,11 +63,13 @@ export default function ProductGridCard({ product }: { product: Product }) {
         {/* Product Name */}
         <Link
           href={`/products/${product?.slug}`}
-          className="cursor-pointer w-full"
+          className="w-full cursor-pointer relative inline-block  group "
         >
           <h3 className="h6-18-px-medium w-full line-clamp-2">
             {product?.name}
           </h3>
+          {/* Animated underline */}
+          <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#F15939] transition-all duration-300 group-hover:w-full"></span>
         </Link>
 
         {/* SKU */}

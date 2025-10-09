@@ -138,6 +138,7 @@ export default function Sidebar({
                   <BrandFilter
                     brands={brands}
                     handleBrandClick={handleBrandClick}
+                    activeBrandId={filters?.brandId}
                   />
                 </motion.div>
               )}
@@ -185,6 +186,7 @@ export default function Sidebar({
                     <CategoryFilter
                       categories={cat.subcategories || []}
                       handleCategoryClick={handleCategoryClick}
+                       activeCategoryId={filters?.categoryIds?.[0]} // ✅ pass current active ID
                     />
                   </motion.div>
                 )}
