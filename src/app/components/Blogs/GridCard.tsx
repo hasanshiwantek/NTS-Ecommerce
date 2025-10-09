@@ -32,7 +32,7 @@ const blogs = [
 
 const GridCard = () => {
   return (
- <section className="w-full flex justify-center bg-[#D6D6D6] py-24 px-4 sm:px-6 lg:px-28">
+ <section className="w-full flex justify-center bg-[#F5F6FA] py-24 px-4 border sm:px-6 lg:px-5">
   <div className="w-full xl:max-w-[1440px] 2xl:max-w-[1920px]">
     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center">
       {blogs.map((blog) => (
@@ -50,8 +50,8 @@ const GridCard = () => {
             className="
               w-full sm:w-[30%] md:w-[25%] lg:w-[35%]
               xl:w-[36.5%] xl:h-[100.3%] 
-              2xl:w-[36.6%] 2xl:h-[100%]
-              relative overflow-hidden rounded-md flex-shrink-0
+              2xl:w-[40.6%] 2xl:h-[100%]
+              relative overflow-hidden  flex-shrink-0
             "
           >
             <Image
@@ -66,18 +66,18 @@ const GridCard = () => {
           {/* Text */}
           <div
             className="
-              flex flex-col justify-center lg:justify-between gap-3 lg:gap-0 items-start 
+              flex flex-col justify-center lg:justify-between gap-5 lg:gap-3 items-start 
               w-full sm:w-[55%] md:w-[60%]
               text-left py-3 sm:py-2
             "
           >
-            <p className="h5-regular !text-[#F15939]">
+            <p className="h6-18-px-regular  !text-[#F15939]">
               By {blog.author}
             </p>
-            <h3 className="h3-secondary group-hover:text-[#F15939] transition-colors duration-200">
+            <h3 className="h5-regular group-hover:text-[#F15939] transition-colors duration-200">
               {blog.title}
             </h3>
-            <p className="h5-regular">{blog.date}</p>
+            <p className="h6-18-px-regular ">{blog.date}</p>
           </div>
         </Link>
       ))}

@@ -121,8 +121,8 @@ body {
   scroll-behavior: smooth; */
 
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto; /* ✅ Allow vertical scrolling */
+  /* overflow-x: hidden; */
+  /* overflow-y: auto;  */
   scroll-behavior: smooth;
 }
 
@@ -649,6 +649,8 @@ img {
     font-size: 1.5rem; /* px-6 */
   }
 }
+
+
 
 
 
