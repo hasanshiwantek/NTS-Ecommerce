@@ -15,7 +15,7 @@ import cart from "@/assets/card-icon/shoppingCart.svg";
 
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   return (
-    <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[522px] 2xl:w-[40.8%]">
+    <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[40.5%] 2xl:w-[40.8%]">
       <div>
         <div className="flex flex-col 2xl:gap-3 xl:gap-[9px] gap-3">
           <h6 className="h6-regular">{product?.brand?.name}</h6>
