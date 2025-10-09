@@ -56,7 +56,7 @@ const BlogCategories = () => {
           xl:flex-row 2xl:flex-row
           w-full 
           xl:w-[100%] 2xl:w-[100%] 
-          xl:h-[21.9rem] 2xl:h-[25.1rem] 
+          xl:h-[20.9rem] 2xl:h-[20.1rem] 
           md:gap-6 xl:gap-[30px] 2xl:gap-10 
           bg-white rounded-lg overflow-hidden transition group
         "
@@ -64,7 +64,7 @@ const BlogCategories = () => {
         {/* Image */}
         <div
           className="
-            w-full md:w-[45%] xl:w-[44.5%] 2xl:w-[44.2%] 
+            w-full md:w-[35%] xl:w-[35.5%] 2xl:w-[38.2%] 
             h-[220px] md:h-[280px] lg:h-[320px] xl:h-auto
           "
         >
@@ -79,7 +79,7 @@ const BlogCategories = () => {
         <div
           className="
             w-full md:w-[55%] xl:w-[52.2%] 2xl:w-[51.8%]
-            h-auto xl:h-[19.5rem] 2xl:h-[25.4rem] 
+            h-auto xl:h-[20.5rem] 2xl:h-[20.4rem] 
             flex flex-col justify-center my-auto 
             gap-6 md:gap-6 xl:gap-6 
             p-5 md:p-6 xl:p-0

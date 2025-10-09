@@ -32,10 +32,6 @@
 //   );
 // }
 
-
-
-
-
 // file: components/layout/PageTransition.tsx
 "use client";
 
@@ -52,24 +48,20 @@ export default function PageTransition({
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <motion.main
+      <motion.div
         key={pathname}
         className={`flex-grow ${
-  ["/auth", "/privacyPolicy" ].some(p => pathname.includes(p))
-    ? ""
-    : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
-}`}
-
+          ["/auth", "/privacyPolicy"].some((p) => pathname.includes(p))
+            ? ""
+            : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
+        }`}
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{}} // You can customize exit transition if needed
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {children}
-      </motion.main>
+      </motion.div>
     </AnimatePresence>
   );
 }
-
-
-
