@@ -66,7 +66,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
 
       {/* ✅ Product Info */}
       <div
-      className="
+        className="
           flex flex-col justify-center 2xl:justify-start xl:justify-start 
           text-center lg:text-left 2xl:text-left xl:text-left
           2xl:gap-[2%] xl:gap-[3%]
@@ -75,8 +75,13 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           md:items-center md:text-center
         "
       >
-        <Link href={`/products/${product?.slug}`} className="cursor-pointer ">
-          <h3 className="mb-1 h3-regular line-clamp-2">{product?.name}</h3>
+        <Link
+          href={`/products/${product?.slug}`}
+          className="cursor-pointer relative inline-block  group "
+        >
+          <h3 className="mb-1 h3-regular line-clamp-2 ">{product?.name}</h3>
+          {/* Animated underline */}
+          <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#F15939] transition-all duration-300 group-hover:w-full"></span>
         </Link>
 
         <div

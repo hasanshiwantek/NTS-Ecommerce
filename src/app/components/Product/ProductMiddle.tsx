@@ -206,7 +206,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
       {/* Note */}
       <div className="p-3 2xl:mt-4 xl:mt-2 mt-2">
-        <p className="h6-regular !text-[#4A4A4A] leading-6 italic xl:w-[522px] 2xl:w-[550px]">
+        <p className="h6-regular !text-[#4A4A4A] leading-6 italic xl:w-[490px] 2xl:w-[550px]">
           <span className="text-red-600">*</span> All Business Entities,
           Corporations, Public & Private School Systems, Governmental
           Organizations, Colleges, Universities & Libraries are welcome to
