@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
@@ -19,6 +19,14 @@ const handleChange = (id: string, value: string) => {
     }));
   }
 };
+
+useEffect(() => {
+  const updatedQuantities: { [key: string]: number } = {};
+  cart.forEach((item) => {
+    updatedQuantities[item.id] = item.quantity;
+  });
+  setQuantities(updatedQuantities);
+}, [cart]);
 
 const handleManualQtyUpdate = (
   e: React.KeyboardEvent<HTMLInputElement>,
