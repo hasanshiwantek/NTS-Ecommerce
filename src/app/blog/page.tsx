@@ -3,18 +3,19 @@ import SingleBlog from "../components/SingleBlog/SingleBlog";
 import BlogSidebar from "../components/SingleBlog/BlogSidebar.tsx/BlogSidebar";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 const page = () => {
   return (
     <>
       <main className="2xl:px-3 px-0 w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
         <nav className="  flex items-center ">
-          <a href="/" className=" h5-20px-regular transition-colors">
+          <Link href="/" className=" h5-20px-regular transition-colors">
             Home
-          </a>
+          </Link>
           <ChevronRight className="mx-2 w-5 h-5 text-gray-400" />
-          <a href="/blogs" className="h5-20px-regular transition-colors">
+          <Link href="/blogs" className="h5-20px-regular transition-colors">
             Blogs
-          </a>
+          </Link>
           <ChevronRight className="mx-2 w-5 h-5 text-gray-400" />
           <span className="h5-regular">
             The Importance of Regular Hardware Upgrades
