@@ -441,7 +441,6 @@ const CheckoutComponent = () => {
                       onClick={() => dispatch(increaseQty(item.id))}
                       className="flex items-center justify-center w-16 h-10 h5-medium"
                     >
-                      {" "}
                       +{" "}
                     </button>
                     {/* Remove Button (trash icon) */}
