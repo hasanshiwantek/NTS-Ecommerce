@@ -57,7 +57,7 @@ const CommentForm = () => {
         </div>
 
         {/* Save Info Checkbox */}
-        <div className="flex items-start gap-2 h5-20px-regular">
+        <div className="flex items-center gap-2 h5-20px-regular">
           <Checkbox className="mt-1" />
           <span>
             Save my name, email, and website in this browser for the next time I
@@ -69,7 +69,7 @@ const CommentForm = () => {
         <div className="w-full flex 2xl:justify-start xl:justify-start  justify-center ">
           <button
             type="submit"
-            className="bg-[#F15939] text-white text-base font-medium py-[16.5px] w-[18.39%] min-w-[200px] rounded-full hover:bg-white hover:text-[var(--primary-color)] border hover:border-[var(--primary-color)] transition-colors 2xl:text-[22px] "
+            className="bg-[#F15939] text-white text-base font-medium py-[16.5px] w-[18.39%] min-w-[200px] rounded-full hover:bg-white hover:text-[var(--primary-color)] border hover:border-[var(--primary-color)] transition-colors 2xl:text-[22px]   xl:text-[16.5px] "
           >
             Post comment
           </button>
