@@ -13,7 +13,7 @@ import upslogo from "@/assets/card-icon/upslogo.png";
 import feedxlogo from "@/assets/card-icon/feedxlogo.png";
 import cart from "@/assets/card-icon/shoppingCart.svg";
 
-const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
+const ProductMiddle = ({ product, quantity, increment, decrement ,addtocart}: any) => {
   return (
     <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[40.5%] 2xl:w-[40.8%]">
       <div>
@@ -171,6 +171,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div className="flex justify-between items-center 2xl:mt-8 xl:mt-7 lg:mt-5 md:mt-3 mt-3 gap-3 sm:gap-4">
         {/* Add to Cart */}
         <button
+        onClick={addtocart}
           className="
       bg-[#F15939] 
       hover:border-[#F15939] hover:bg-white hover:text-[#F15939] 
