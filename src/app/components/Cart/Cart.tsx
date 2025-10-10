@@ -8,12 +8,12 @@ const Cart = () => {
       {/* Fixed container centered on screen */}
       <div
         className="
-         2xl:w-[1720px]  px-3
+        xl:w-[1290px] 2xl:w-[1720px]
           flex flex-col gap-10
         "
       >
         {/* Heading Section */}
-        <div className="2xl:max-w-[755px]">
+        <div className="w-full xl:max-w-[43.9%] 2xl:max-w-[44.2%]">
           <h1 className="h1-secondary-medium ">Shopping Cart</h1>
           <p className="h5-20px-regular text-gray-600">
             Log in to synchronize the items in your shopping cart.{" "}
@@ -26,17 +26,17 @@ const Cart = () => {
         {/* Main Content */}
         <div
           className="
-            flex flex-col lg:flex-row justify-between gap-6
-            w-full
+            flex flex-col lg:flex-row
+            w-full gap-5
           "
         >
           {/* Left: Cart List */}
-          <div className="w-full lg:w-[68%]">
+          <div className="w-full xl:w-[66.2%] 2xl:w-[66.8%]">
             <CartList />
           </div>
 
           {/* Right: Order Summary */}
-          <div className="w-full lg:w-[32%]">
+          <div className="w-full xl:w-[32.1%] 2xl:w-[32.3%]">
             <OrderSummary />
           </div>
         </div>
