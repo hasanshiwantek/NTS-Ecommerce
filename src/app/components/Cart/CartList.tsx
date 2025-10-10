@@ -1,9 +1,14 @@
-'use client'
+"use client";
 import Image from "next/image";
 import React, { useState } from "react";
-
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { RootState } from "@/redux/store";
+import Link from "next/link";
 const CartList = () => {
-    const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0);
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state: RootState) => state.cart.items);
+  console.log(cart);
 
   const increase = () => setValue((prev) => prev + 1);
   const decrease = () => setValue((prev) => (prev > 0 ? prev - 1 : 0));
@@ -21,21 +26,22 @@ const CartList = () => {
       {/* Example product row */}
       <div className="flex flex-col xl:flex-row items-center justify-between p-4">
         <div className="flex flex-col xl:flex-row items-center xl:w-[65.1%] 2xl:w-[64.5%]">
-         <div className="w-full xl:w-[18.1%] 2xl:w-[18%]">
-           <Image
-           width={98}
-           height={105}
-            src="/checkouticon/orderimg.png"
-            alt="Product"
-            className="xl:w-[87.6%] 2xl:w-[53%] xl:h-[6.5rem] 2xl:h-[8.8rem] object-contain border m-auto"
-          />
-         </div>
+          <div className="w-full xl:w-[18.1%] 2xl:w-[18%]">
+            <Image
+              width={98}
+              height={105}
+              src="/checkouticon/orderimg.png"
+              alt="Product"
+              className="xl:w-[87.6%] 2xl:w-[53%] xl:h-[6.5rem] 2xl:h-[8.8rem] object-contain border m-auto"
+            />
+          </div>
           <div className="w-full xl:w-[82.1%] 2xl:w-[82%]">
             <p className="h5-medium-20px-medium text-center xl:text-start">
               SKU: ZY110AY
             </p>
             <p className="h5-medium  mx-auto text-center w-[100%] sm:w-[60%]  md:w-[70%] lg:w-[80%] xl:text-start xl:w-[91.7%] 2xl:w-[100%]">
-              PA905U - Targus 720KB PC 1.44MB PC 1.4MB Mac 1 x 4-pin Type A Male Hot-Swappable 3.5-Inch External Floppy Drive
+              PA905U - Targus 720KB PC 1.44MB PC 1.4MB Mac 1 x 4-pin Type A Male
+              Hot-Swappable 3.5-Inch External Floppy Drive
             </p>
           </div>
         </div>
@@ -43,40 +49,39 @@ const CartList = () => {
         <div className="flex items-center gap-4 xl:gap-0 xl:w-[33%]  2xl:w-[32%] justify-between">
           <p className="h5-regular">$400.00</p>
           <div className="flex items-center border border-gray-300 overflow-hidden xl:w-[27.9%] 2xl:w-[28.1%]">
-      {/* Number Input */}
-      <input
-        type="number"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
-        className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-4 outline-none h5-medium [appearance:textfield] 
+            {/* Number Input */}
+            <input
+              type="number"
+              value={value}
+              onChange={(e) => setValue(Number(e.target.value))}
+              className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-4 outline-none h5-medium [appearance:textfield] 
                    [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-      />
+            />
 
-      {/* Buttons */}
-      <div className="flex flex-col justify-center items-center border-l border-gray-300 w-10 xl:w-[51%] 2xl:w-[48.9%]">
-        <button
-          type="button"
-          onClick={increase}
-          className="flex items-center justify-center w-2.5 h-5 hover:bg-gray-100 text-[#AEAEAE]"
-        >
-          ▲
-        </button>
-        <button
-          type="button"
-          onClick={decrease}
-          className="flex items-center justify-center w-2.5 h-6 hover:bg-gray-100 text-[#AEAEAE]"
-        >
-          ▼
-        </button>
-      </div>
-    </div>
+            {/* Buttons */}
+            <div className="flex flex-col justify-center items-center border-l border-gray-300 w-10 xl:w-[51%] 2xl:w-[48.9%]">
+              <button
+                type="button"
+                onClick={increase}
+                className="flex items-center justify-center w-2.5 h-5 hover:bg-gray-100 text-[#AEAEAE]"
+              >
+                ▲
+              </button>
+              <button
+                type="button"
+                onClick={decrease}
+                className="flex items-center justify-center w-2.5 h-6 hover:bg-gray-100 text-[#AEAEAE]"
+              >
+                ▼
+              </button>
+            </div>
+          </div>
           <p className="h5-regular">$1200.00</p>
         </div>
       </div>
 
       {/* line grey */}
       <div className="w-[97%] mx-auto h-[1px] bg-gray-300"></div>
-
 
       {/* Continue + Update */}
       <div className="flex justify-between items-center my-7 px-6">
@@ -88,7 +93,6 @@ const CartList = () => {
         </button>
       </div>
     </div>
-
   );
 };
 
