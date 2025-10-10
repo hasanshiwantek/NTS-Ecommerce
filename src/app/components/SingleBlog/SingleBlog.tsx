@@ -8,7 +8,7 @@ import CommentForm from "./CommentForm";
 const SingleBlog = () => {
   return (
     <>
-      <div className="flex flex-col gap-5  py-10 2xl:w-[68.6%]  2xl:max-w-[1180px]   w-full">
+      <div className="flex flex-col gap-5  py-10 2xl:w-[68.6%]  2xl:max-w-[1180px] xl:w-[68.6%] xl:max-w-[885px]   w-full">
         <BlogHeader />
         <TableofContents />
 

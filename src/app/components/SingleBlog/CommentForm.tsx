@@ -13,14 +13,14 @@ const CommentForm = () => {
         <h3 className="h2-medium">Leave A Comment</h3>
 
         {/* Input Fields */}
-        <div className="flex flex-wrap gap-[2.7%]">
+        <div className="flex flex-wrap gap-[3%]">
           <div className="flex flex-col  w-[29.26%]">
             <label className="h5-20px-regular mb-1">
               Name<span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              className="h-[60px] border border-[#D6D6D6] rounded-[6px] px-[5%] text-sm"
+              className="2xl:h-[60px] border xl:h-[45.5px] border-[#D6D6D6] rounded-[6px] px-[5%] text-sm"
               required
             />
           </div>
@@ -31,7 +31,7 @@ const CommentForm = () => {
             </label>
             <input
               type="email"
-              className="h-[60px] border border-[#D6D6D6] rounded-[6px] px-[5%] text-sm"
+              className="2xl:h-[60px] border xl:h-[45.5px] border-[#D6D6D6] rounded-[6px] px-[5%] text-sm"
               required
             />
           </div>
@@ -40,7 +40,7 @@ const CommentForm = () => {
             <label className="h5-20px-regular mb-1">Website</label>
             <input
               type="url"
-              className="h-[60px] border border-[#D6D6D6] rounded-[6px] px-[5%] text-sm"
+              className="2xl:h-[60px] xl:h-[45.5px] border border-[#D6D6D6] rounded-[6px] px-[5%] text-sm"
             />
           </div>
         </div>
@@ -51,7 +51,7 @@ const CommentForm = () => {
             Comment<span className="text-red-500">*</span>
           </label>
           <textarea
-            className="w-full h-[120px] border border-[#D6D6D6] rounded-[6px] px-[2.5%] py-[2%] text-sm resize-none"
+            className="w-full 2xl:h-[120px] xl:h-[92.5px]  border border-[#D6D6D6] rounded-[6px] px-[2.5%] py-[2%] text-sm resize-none"
             required
           />
         </div>
