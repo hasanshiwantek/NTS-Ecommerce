@@ -12,8 +12,13 @@ import dhllogo from "@/assets/card-icon/dhllogo.png";
 import upslogo from "@/assets/card-icon/upslogo.png";
 import feedxlogo from "@/assets/card-icon/feedxlogo.png";
 import cart from "@/assets/card-icon/shoppingCart.svg";
-
+import { useAppDispatch } from "@/hooks/useReduxHooks";
+import { toast } from "react-toastify";
+import { addToCart } from "@/redux/slices/cartSlice";
+import { useRouter } from "next/navigation";
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   return (
     <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[40.5%] 2xl:w-[40.8%]">
       <div>
@@ -171,6 +176,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div className="flex justify-between items-center 2xl:mt-8 xl:mt-7 lg:mt-5 md:mt-3 mt-3 gap-3 sm:gap-4">
         {/* Add to Cart */}
         <button
+          onClick={() => {
+            dispatch(addToCart(product));
+            toast.success(`${product.name} added to cart!`);
+          }}
           className="
       bg-[#F15939] 
       hover:border-[#F15939] hover:bg-white hover:text-[#F15939] 
@@ -190,6 +199,12 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
         {/* Buy Now */}
         <button
+          onClick={() => {
+            dispatch(addToCart(product));
+            setTimeout(() => {
+              router.push("/cart");
+            }, 2000);
+          }}
           className="
       text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[16.5px] 2xl:text-[22px] 
       font-medium border border-[#4A4A4A] 
