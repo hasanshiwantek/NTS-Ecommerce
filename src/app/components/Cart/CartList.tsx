@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
-import { decreaseQty, increaseQty, updateQty } from "@/redux/slices/cartSlice";
+import { decreaseQty, increaseQty, removeFromCart, updateQty } from "@/redux/slices/cartSlice";
+import { Trash2 } from "lucide-react";
 const CartList = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
@@ -52,7 +53,7 @@ const handleManualQtyUpdate = (
         </span>
       </div>
       {
-        cart?.map((item,index)=>
+       cart?.length > 0 ?  cart?.map((item,index)=>
           <>
              {/* Example product row */}
       <div key={index} className="flex flex-col xl:flex-row items-center justify-between p-4">
@@ -76,7 +77,7 @@ const handleManualQtyUpdate = (
           </div>
         </div>
 
-        <div className="flex items-center gap-4 xl:gap-0 xl:w-[33%]  2xl:w-[32%] justify-between">
+        <div className="relative flex items-center gap-4 xl:gap-0 xl:w-[33%]  2xl:w-[32%] justify-between">
           <p className="h5-regular">${Number(item.price).toFixed(2)}</p>
           <div className="flex items-center border border-gray-300 overflow-hidden xl:w-[27.9%] 2xl:w-[28.1%]">
             {/* Number Input */}
@@ -89,7 +90,7 @@ const handleManualQtyUpdate = (
   }
   onChange={(e) => handleChange(item.id, e.target.value)}
   onKeyDown={(e) => handleManualQtyUpdate(e, item.id)}
-              className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-4 outline-none h5-medium [appearance:textfield] 
+              className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-2 outline-none h5-medium [appearance:textfield] 
                    [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
@@ -112,6 +113,13 @@ const handleManualQtyUpdate = (
               </button>
             </div>
           </div>
+           <button
+                              onClick={() => dispatch(removeFromCart(item.id))}
+                              className="absolute -right-12 xl:right-0 xl:bottom-14 2xl:right-1 2xl:bottom-18 ml-auto text-gray-500 hover:text-red-700 transition"
+                            >
+                              {" "}
+                              <Trash2 className="w-5 h-5" />{" "}
+                            </button>{" "}
           <p className="h5-regular"> ${Number(item.price * item.quantity).toFixed(2)}</p>
         </div>
       </div>
@@ -119,7 +127,7 @@ const handleManualQtyUpdate = (
       {/* line grey */}
       <div className="w-[97%] mx-auto h-[1px] bg-gray-300"></div>
           </>
-        )
+        ) : <div className="text-7xl text-[#4A4A4A] text-center my-16">No Cart Added</div>
       }
    
 
