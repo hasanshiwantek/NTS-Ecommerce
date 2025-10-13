@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import banner from "@/assets/privacy-banner.png";
 
