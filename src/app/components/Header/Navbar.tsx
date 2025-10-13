@@ -173,14 +173,14 @@ const Navbar: React.FC = () => {
 
             {/* Cart */}
             <Link
-      href="/cart"
-      className="relative text-white hover:text-blue-300 transition"
-    >
-      <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-[37px] 2xl:h-[37px]" />
-      <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] sm:text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
-        {cart?.length || 0}
-      </span>
-    </Link>
+              href="/cart"
+              className="relative text-white hover:text-blue-300 transition"
+            >
+              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-[37px] 2xl:h-[37px]" />
+              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] sm:text-xs xl:text-base rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                {cart?.length || 0}
+              </span>
+            </Link>
           </section>
 
           {/* Mobile Right: Cart + Hamburger */}

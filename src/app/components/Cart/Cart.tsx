@@ -1,7 +1,7 @@
 import React from "react";
 import CartList from "./CartList";
 import OrderSummary from "./OrderSummary";
-
+import Link from "next/link";
 const Cart = () => {
   return (
     <main className="w-full flex justify-center  py-1">
@@ -17,9 +17,11 @@ const Cart = () => {
           <h1 className="h1-secondary-medium ">Shopping Cart</h1>
           <p className="h5-20px-regular text-gray-600">
             Log in to synchronize the items in your shopping cart.{" "}
+            <Link href={"/auth/login"}>
             <span className="text-[#F15939] cursor-pointer hover:underline">
               Log In Now
             </span>
+            </Link>
           </p>
         </div>
 
