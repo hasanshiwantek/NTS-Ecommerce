@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import banner from "@/assets/privacy-banner.png";
 
-const page = () => {
+const Page = () => {
   // Enable smooth scroll globally
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
@@ -610,4 +610,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
