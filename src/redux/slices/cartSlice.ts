@@ -60,19 +60,23 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<any>) => {
-      const existingItem = state.items.find(
-        (item) => item.id === action.payload.id
-      );
+  const newProduct = action.payload;
+  const existingItem = state.items.find(
+    (item) => item.id === newProduct.id
+  );
 
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        state.items.push({
-          ...action.payload, // pura product object
-          quantity: 1, // 👈 sirf quantity inject
-        });
-      }
-    },
+  if (existingItem) {
+    // ✅ increase by selected quantity
+    existingItem.quantity += newProduct.quantity || 1;
+  } else {
+    // ✅ add new product with selected quantity
+    state.items.push({
+      ...newProduct,
+      quantity: newProduct.quantity || 1,
+    });
+  }
+},
+
 
     removeFromCart: (state, action: PayloadAction<string | number>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
