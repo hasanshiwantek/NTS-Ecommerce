@@ -4,7 +4,6 @@ import { ShoppingCart } from "lucide-react";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "@/hooks/useReduxHooks";
-
 interface Product {
   id: number;
   name: string;

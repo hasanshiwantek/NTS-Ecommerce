@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -15,6 +15,7 @@ const CheckoutComponent = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
   console.log("reduxxxx", cart);
+  const [paymentMethod, setPaymentMethod] = useState("credit_card");
 
   // subtotal calculate (price string → number)
   const subtotal = cart.reduce(
@@ -289,7 +290,8 @@ const CheckoutComponent = () => {
                 <div className="flex items-center gap-2 py-3">
                   <input
                     type="radio"
-                    name="payment"
+                    checked={paymentMethod === "credit_card"}
+                    onChange={() => setPaymentMethod("credit_card")}
                     className="text-orange-500 focus:ring-orange-500"
                   />
                   <span className="h3-secondary">Credit Card</span>
@@ -303,42 +305,44 @@ const CheckoutComponent = () => {
                 />
               </div>
 
-              <div className="space-y-6 py-3">
-                <div>
-                  <label htmlFor="ccNumber" className="h5-regular mb-4">
-                    Credit Card Number*
-                  </label>
-                  <Input
-                    id="ccNumber"
-                    type="text"
-                    className="w-full h-[60px] !max-w-full mt-3"
-                  />
-                </div>
+              {paymentMethod === "credit_card" && (
+                <div className="space-y-6 py-3">
+                  <div>
+                    <label htmlFor="ccNumber" className="h5-regular mb-4">
+                      Credit Card Number*
+                    </label>
+                    <Input
+                      id="ccNumber"
+                      type="text"
+                      className="w-full h-[60px] !max-w-full mt-3"
+                    />
+                  </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 w-full">
-                  <div className="flex flex-col w-full sm:w-1/2">
-                    <label htmlFor="expiration" className="h5-regular mb-4">
-                      Expiration *
-                    </label>
-                    <Input
-                      id="expiration"
-                      type="text"
-                      placeholder="MM / YY"
-                      className="w-full h-[60px] !max-w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col w-full sm:w-1/2">
-                    <label htmlFor="cvc" className="h5-regular mb-4">
-                      CVC *
-                    </label>
-                    <Input
-                      id="cvc"
-                      type="text"
-                      className="w-full h-[60px] !max-w-full"
-                    />
+                  <div className="flex flex-col sm:flex-row gap-4 w-full">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label htmlFor="expiration" className="h5-regular mb-4">
+                        Expiration *
+                      </label>
+                      <Input
+                        id="expiration"
+                        type="text"
+                        placeholder="MM / YY"
+                        className="w-full h-[60px] !max-w-full"
+                      />
+                    </div>
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label htmlFor="cvc" className="h5-regular mb-4">
+                        CVC *
+                      </label>
+                      <Input
+                        id="cvc"
+                        type="text"
+                        className="w-full h-[60px] !max-w-full"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </label>
 
             {/* Google Pay */}
@@ -347,6 +351,8 @@ const CheckoutComponent = () => {
                 <input
                   type="radio"
                   name="payment"
+                  checked={paymentMethod === "google_pay"}
+                  onChange={() => setPaymentMethod("google_pay")}
                   className="text-orange-500 focus:ring-orange-500"
                 />
                 <Image
@@ -372,6 +378,8 @@ const CheckoutComponent = () => {
                 <input
                   type="radio"
                   name="payment"
+                  checked={paymentMethod === "affirm"}
+                  onChange={() => setPaymentMethod("affirm")}
                   className="text-orange-500 focus:ring-orange-500"
                 />
                 <Image
@@ -414,12 +422,10 @@ const CheckoutComponent = () => {
                   className="object-cover"
                 />
                 <div className="flex-1">
-                  {" "}
                   <p className="h6-medium !text-[#333333] line-clamp-2">
                     {item.name}
                   </p>
                   <p className="h6-regular !text-[#4A4A4A]">
-                    {" "}
                     ${Number(item.price).toFixed(2)}{" "}
                   </p>
                   <div className="flex w-[146.39999389648438px] h-[48px] items-center justify-center border border-gray-300 rounded-full">
@@ -428,12 +434,10 @@ const CheckoutComponent = () => {
                       onClick={() => dispatch(decreaseQty(item.id))}
                       className="flex items-center justify-center w-16 h-10 h5-medium"
                     >
-                      {" "}
-                      --{" "}
+                      --
                     </button>
                     {/* Quantity Display */}
                     <span className="h5-medium border-x h-[48px] border-gray-300 px-6 flex items-center justify-center select-none">
-                      {" "}
                       {item.quantity}{" "}
                     </span>
                     {/* Increase Button */}{" "}
@@ -449,7 +453,6 @@ const CheckoutComponent = () => {
                     onClick={() => dispatch(removeFromCart(item.id))}
                     className="absolute right-6 bottom-9 ml-auto text-gray-500 hover:text-red-700 transition"
                   >
-                    {" "}
                     <Trash2 className="w-5 h-5" />{" "}
                   </button>{" "}
                 </div>
@@ -462,12 +465,10 @@ const CheckoutComponent = () => {
               <span>Cart Subtotal</span> <span>${subtotal.toFixed(2)}</span>
             </div>{" "}
             <div className="flex justify-between h5-regular">
-              {" "}
               <span>Shipping</span>
               <span>${shipping.toFixed(2)}</span>{" "}
             </div>{" "}
             <div className="flex justify-between h5-regular">
-              {" "}
               <span>Tax</span>
               <span>${tax.toFixed(2)}</span>{" "}
             </div>{" "}
@@ -475,7 +476,6 @@ const CheckoutComponent = () => {
           {/* Discount Code */}{" "}
           <div className="mt-4 space-y-2">
             <label htmlFor="discountCode" className="h5-regular">
-              {" "}
               Apply Discount Code{" "}
             </label>{" "}
             <div className="flex gap-2 my-2">
@@ -491,7 +491,6 @@ const CheckoutComponent = () => {
           </div>{" "}
           {/* Total */}{" "}
           <div className="mt-4 flex justify-between h3-secondary">
-            {" "}
             <span>Order total</span> <span>${total.toFixed(2)}</span>{" "}
           </div>
         </div>

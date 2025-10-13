@@ -1,10 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import banner from '@/assets/privacy-banner.png'
+import banner from "@/assets/privacy-banner.png";
 
 const Privacy = () => {
+  // Enable smooth scroll globally
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
+    return () => {
+      document.documentElement.style.scrollBehavior = "auto";
+    };
+  }, []);
+
   return (
      <div className="w-full">
           {/* Row 1: Banner */}

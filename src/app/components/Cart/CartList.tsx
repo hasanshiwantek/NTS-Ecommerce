@@ -4,51 +4,58 @@ import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
-import { decreaseQty, increaseQty, removeFromCart, updateQty } from "@/redux/slices/cartSlice";
+import {
+  decreaseQty,
+  increaseQty,
+  removeFromCart,
+  updateQty,
+} from "@/redux/slices/cartSlice";
 import { Trash2 } from "lucide-react";
 const CartList = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
- const [quantities, setQuantities] = useState<{ [key: string]: number | string }>({});
+  const [quantities, setQuantities] = useState<{
+    [key: string]: number | string;
+  }>({});
 
-const handleChange = (id: string, value: string) => {
-  if (value === "" || /^\d*$/.test(value)) {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  }
-};
+  const handleChange = (id: string, value: string) => {
+    if (value === "" || /^\d*$/.test(value)) {
+      setQuantities((prev) => ({
+        ...prev,
+        [id]: value,
+      }));
+    }
+  };
 
-useEffect(() => {
-  const updatedQuantities: { [key: string]: number } = {};
-  cart.forEach((item) => {
-    updatedQuantities[item.id] = item.quantity;
-  });
-  setQuantities(updatedQuantities);
-}, [cart]);
+  useEffect(() => {
+    const updatedQuantities: { [key: string]: number } = {};
+    cart.forEach((item) => {
+      updatedQuantities[item.id] = item.quantity;
+    });
+    setQuantities(updatedQuantities);
+  }, [cart]);
 
-const handleManualQtyUpdate = (
-  e: React.KeyboardEvent<HTMLInputElement>,
-  id: string
-) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    const inputValue = quantities[id];
-    const parsed = Number(inputValue);
+  const handleManualQtyUpdate = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    id: string
+  ) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const inputValue = quantities[id];
+      const parsed = Number(inputValue);
 
-    const newQty = parsed > 0 ? parsed : 1;
+      const newQty = parsed > 0 ? parsed : 1;
 
-    dispatch(updateQty({ id, quantity: newQty }));
+      dispatch(updateQty({ id, quantity: newQty }));
 
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: newQty,
-    }));
+      setQuantities((prev) => ({
+        ...prev,
+        [id]: newQty,
+      }));
 
-    e.currentTarget.blur();
-  }
-};
+      e.currentTarget.blur();
+    }
+  };
 
   return (
     <div className="border border-[#D6D6D6] rounded-lg 2xl:w-full">
@@ -60,90 +67,100 @@ const handleManualQtyUpdate = (
           <span className="h5-20px-regular">Subtotal</span>
         </span>
       </div>
-      {
-       cart?.length > 0 ?  cart?.map((item,index)=>
+      {cart?.length > 0 ? (
+        cart?.map((item, index) => (
           <>
-             {/* Example product row */}
-      <div key={index} className="flex flex-col xl:flex-row items-center justify-between p-4">
-        <div className="flex flex-col xl:flex-row items-center xl:w-[65.1%] 2xl:w-[64.5%]">
-          <div className="w-full xl:w-[18.1%] 2xl:w-[18%]">
-            <Image
-              width={98}
-              height={105}
-              src={item.image?.[0]?.path || "/checkouticon/orderimg.png"}
-                  alt={item.name}
-              className="xl:w-[87.6%] 2xl:w-[53%] xl:h-[6.5rem] 2xl:h-[8.8rem] object-contain border m-auto"
-            />
-          </div>
-          <div className="w-full xl:w-[82.1%] 2xl:w-[82%]">
-            <p className="h5-medium-20px-medium text-center xl:text-start">
-              SKU: {item.sku || "N/A"}
-            </p>
-            <p className="h5-medium  mx-auto text-center w-[100%] sm:w-[60%]  md:w-[70%] lg:w-[80%] xl:text-start xl:w-[91.7%] 2xl:w-[100%]">
-               {item.name}
-            </p>
-          </div>
-        </div>
+            {/* Example product row */}
+            <div
+              key={index}
+              className="flex flex-col xl:flex-row items-center justify-between p-4"
+            >
+              <div className="flex flex-col xl:flex-row items-center xl:w-[65.1%] 2xl:w-[64.5%]">
+                <div className="w-full xl:w-[18.1%] 2xl:w-[18%]">
+                  <Image
+                    width={98}
+                    height={105}
+                    src={item.image?.[0]?.path || "/checkouticon/orderimg.png"}
+                    alt={item.name}
+                    className="xl:w-[87.6%] 2xl:w-[53%] xl:h-[6.5rem] 2xl:h-[8.8rem] object-contain border m-auto"
+                  />
+                </div>
+                <div className="w-full xl:w-[82.1%] 2xl:w-[82%] mx-2">
+                  <p className="h5-medium-20px-medium text-center xl:text-start">
+                    SKU: {item.sku || "N/A"}
+                  </p>
+                  <p className="h5-medium   text-center lg:mx-auto md:mx-auto sm:mx-auto w-[100%] sm:w-[60%]  md:w-[70%] lg:w-[80%] xl:text-start xl:w-[100%] 2xl:w-[100%]">
+                    {item.name}
+                  </p>
+                </div>
+              </div>
 
-        <div className="relative flex items-center gap-4 xl:gap-0 xl:w-[33%]  2xl:w-[32%] justify-between">
-          <p className="h5-regular">${Number(item.price).toFixed(2)}</p>
-          <div className="flex items-center border border-gray-300 overflow-hidden xl:w-[27.9%] 2xl:w-[28.1%]">
-            {/* Number Input */}
-            <input
-              type="number"
-                value={
-    quantities[item.id] === undefined
-      ? item.quantity
-      : quantities[item.id]
-  }
-  onChange={(e) => handleChange(item.id, e.target.value)}
-  onKeyDown={(e) => handleManualQtyUpdate(e, item.id)}
-              className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-2 outline-none h5-medium [appearance:textfield] 
+              <div className="relative flex items-center gap-4 xl:gap-0 xl:w-[33%]  2xl:w-[32%] justify-between">
+                <p className="h5-regular">${Number(item.price).toFixed(2)}</p>
+                <div className="flex items-center border border-gray-300 overflow-hidden xl:w-[27.9%] 2xl:w-[28.1%]">
+                  {/* Number Input */}
+                  <input
+                    type="number"
+                    value={
+                      quantities[item.id] === undefined
+                        ? item.quantity
+                        : quantities[item.id]
+                    }
+                    onChange={(e) => handleChange(item.id, e.target.value)}
+                    onKeyDown={(e) => handleManualQtyUpdate(e, item.id)}
+                    className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-2 outline-none h5-medium [appearance:textfield] 
                    [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-            />
+                  />
 
-            {/* Buttons */}
-            <div className="flex flex-col justify-center items-center border-l border-gray-300 w-10 xl:w-[51%] 2xl:w-[48.9%]">
-              <button
-                type="button"
-                 onClick={() => dispatch(increaseQty(item.id))}
-
-                className="flex items-center justify-center w-2.5 h-5 hover:bg-gray-100 text-[#AEAEAE]"
-              >
-                ▲
-              </button>
-              <button
-                type="button"
-                onClick={() => dispatch(decreaseQty(item.id))}
-                className="flex items-center justify-center w-2.5 h-6 hover:bg-gray-100 text-[#AEAEAE]"
-              >
-                ▼
-              </button>
+                  {/* Buttons */}
+                  <div className="flex flex-col justify-center items-center border-l border-gray-300 w-10 xl:w-[51%] 2xl:w-[48.9%]">
+                    <button
+                      type="button"
+                      onClick={() => dispatch(increaseQty(item.id))}
+                      className="flex items-center justify-center w-2.5 h-5 hover:bg-gray-100 text-[#AEAEAE]"
+                    >
+                      ▲
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => dispatch(decreaseQty(item.id))}
+                      className="flex items-center justify-center w-2.5 h-6 hover:bg-gray-100 text-[#AEAEAE]"
+                    >
+                      ▼
+                    </button>
+                  </div>
+                </div>
+                <button
+                  onClick={() => dispatch(removeFromCart(item.id))}
+                  className="absolute -right-12 xl:right-0 xl:bottom-14 2xl:right-1 2xl:bottom-18 ml-auto text-gray-500 hover:text-red-700 transition"
+                >
+                  {" "}
+                  <Trash2 className="w-5 h-5" />{" "}
+                </button>{" "}
+                <p className="h5-regular">
+                  {" "}
+                  ${Number(item.price * item.quantity).toFixed(2)}
+                </p>
+              </div>
             </div>
-          </div>
-           <button
-                              onClick={() => dispatch(removeFromCart(item.id))}
-                              className="absolute -right-12 xl:right-0 xl:bottom-14 2xl:right-1 2xl:bottom-18 ml-auto text-gray-500 hover:text-red-700 transition"
-                            >
-                              {" "}
-                              <Trash2 className="w-5 h-5" />{" "}
-                            </button>{" "}
-          <p className="h5-regular"> ${Number(item.price * item.quantity).toFixed(2)}</p>
-        </div>
-      </div>
 
-      {/* line grey */}
-      <div className="w-[97%] mx-auto h-[1px] bg-gray-300"></div>
+            {/* line grey */}
+            <div className="w-[97%] mx-auto h-[1px] bg-gray-300"></div>
           </>
-        ) : <div className="text-7xl text-[#4A4A4A] text-center my-16">No Cart Added</div>
-      }
-   
+        ))
+      ) : (
+        <div className="text-7xl text-[#4A4A4A] text-center my-16">
+          No Cart Added
+        </div>
+      )}
 
       {/* Continue + Update */}
       <div className="flex justify-between items-center my-7 px-6">
-        <button className="h3-regular xl:w-64 2xl:w-80 py-2 px-4 rounded-lg border border-[#4A4A4A] hover:text-[#F15939] transition">
-          Continue Shopping
-        </button>
+        <Link href={"/products"}>
+          <button className="h3-regular xl:w-64 2xl:w-80 py-2 px-4 rounded-lg border border-[#4A4A4A] hover:text-[#F15939] transition">
+            Continue Shopping
+          </button>
+        </Link>
         <button className="h3-regular xl:w-44 2xl:w-52 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
           Update Cart
         </button>
