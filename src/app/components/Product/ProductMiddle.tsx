@@ -177,9 +177,9 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         {/* Add to Cart */}
         <button
           onClick={() => {
-            dispatch(addToCart(product));
-            toast.success(`${product.name} added to cart!`);
-          }}
+  dispatch(addToCart({ ...product, quantity }));
+  toast.success(`${product.name} added to cart (${quantity})!`);
+}}
           className="
       bg-[#F15939] 
       hover:border-[#F15939] hover:bg-white hover:text-[#F15939] 
