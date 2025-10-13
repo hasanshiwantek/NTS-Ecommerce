@@ -4,9 +4,17 @@ import Image from "next/image";
 import ProductLeft from "./ProductLeft";
 import ProductMiddle from "./ProductMiddle";
 import ProductRight from "./ProductRight";
+import { useAppDispatch } from "@/hooks/useReduxHooks";
+import { toast } from "react-toastify";
+import { addToCart } from "@/redux/slices/cartSlice";
 
 const ProductCard = ({ product }: { product: any }) => {
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useAppDispatch();
+  const addtocart = ()=>{
+     dispatch(addToCart(product));
+    toast.success(`${product.name} added to cart!`);
+  }
   const images =
     product?.image?.length > 0
       ? product.image.map((img: any) => img.path)
@@ -48,6 +56,7 @@ const ProductCard = ({ product }: { product: any }) => {
             quantity={quantity}
             increment={increment}
             decrement={decrement}
+            addtocart={addtocart}
           />
           <ProductRight />
         </div>
