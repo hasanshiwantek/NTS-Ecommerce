@@ -76,7 +76,7 @@ export default function ProductsClientWrapper({
   }, [filters]);
   return (
     <div className="container  ">
-      <div className="flex gap-6 py-4">
+      <div className="flex flex-col md:flex-row gap-6 py-4">
         {/* Sidebar: Filters */}
         <aside
           className="
@@ -84,7 +84,7 @@ export default function ProductsClientWrapper({
   xl:w-[25rem]      /* 309px → 19.3rem */
         lg:w-[20rem] 
   md:w-[20rem] 
-  sm:w-[20rem] 
+  sm:w-full
   w-full
   2xl:px-2 p-0
   shrink-0 rounded bg-white
@@ -102,7 +102,7 @@ export default function ProductsClientWrapper({
         </aside>
 
         {/* Product Listing */}
-        <main className="flex-1">
+        <main className="">
           <ProductList
             filters={filters}
             setFilters={setFilters}
