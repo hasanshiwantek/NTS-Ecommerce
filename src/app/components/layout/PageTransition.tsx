@@ -56,6 +56,8 @@ export default function PageTransition({
             "/privacyPolicy",
             "/payment-options",
             "/terms-conditions",
+            "/shippingpolicy",
+            "/returnPolicy",
           ].some((p) => pathname.includes(p))
             ? ""
             : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
