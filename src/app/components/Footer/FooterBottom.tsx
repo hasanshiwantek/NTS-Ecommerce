@@ -125,13 +125,16 @@ const FooterBottom = () => {
             <h4 className="h5-bold !text-[#FFFFFF] mb-4">Customer Services</h4>
             <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
               <li>
-                <Link href="#">Refund policy</Link>
+                <Link href="/privacyPolicy">Privacy policy</Link>
               </li>
               <li>
-                <Link href="#">Warranty</Link>
+                <Link href="/shippingPolicy">Shipping policy</Link>
               </li>
               <li>
-                <Link href="#">Exchange policy</Link>
+                <Link href="/returnPolicy">Return policy</Link>
+              </li>
+              <li>
+                <Link href="/terms-conditions">Terms and conditions</Link>
               </li>
             </ul>
           </nav>
