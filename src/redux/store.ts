@@ -13,9 +13,15 @@ const cartPersistConfig = {
   storage,
 };
 
+// ✅ only auth persist hoga
+const authPersistConfig = {
+  key: "auth",
+  storage,
+};
+
 const rootReducer = combineReducers({
   home: homeReducer,
-  auth: authReducer,
+  auth: persistReducer(authPersistConfig,authReducer), // persisted
   config: configReducer,
   cart: persistReducer(cartPersistConfig, cartSliceReducer), // persisted
 });

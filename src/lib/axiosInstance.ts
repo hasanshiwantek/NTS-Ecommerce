@@ -1,4 +1,5 @@
 // lib/axiosInstance.ts
+import { store } from "@/redux/store";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -8,7 +9,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+      const state = store.getState();
+  const token = state.auth?.token;
     const storeId = 4;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
