@@ -12,6 +12,8 @@ import { loginUser } from "@/redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/redux/store";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 interface SigninFormValues {
   email: string;
   password: string;
@@ -26,6 +28,9 @@ const SigninPage = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
+   const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => setShowPassword(prev => !prev);
   const { loading } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
     try {
@@ -96,20 +101,31 @@ const SigninPage = () => {
               </div>
 
               {/* Password */}
-              <div>
-                <Label className="h5-regular" htmlFor="password">
-                  Password <span className="text-red-600">*</span>
-                </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  className="!w-full !max-w-full h-[50px] sm:h-[55px] 2xl:h-[60px]"
-                  {...register("password", { required: true })}
-                />
-                {errors.password && (
-                  <p className="text-sm text-red-500">Required</p>
-                )}
-              </div>
+              <div className="relative w-full">
+      <Label className="h5-regular" htmlFor="password">
+        Password <span className="text-red-600">*</span>
+      </Label>
+
+      <Input
+        id="password"
+        type={showPassword ? "text" : "password"}
+        className="!w-full !max-w-full h-[50px] sm:h-[55px] 2xl:h-[60px] pr-12"
+        {...register("password", { required: true })}
+      />
+
+      {/* Eye icon */}
+      <button
+        type="button"
+        onClick={togglePassword}
+        className="absolute right-3 top-[52px] 2xl:top-20 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+      >
+        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+      </button>
+
+      {errors.password && (
+        <p className="text-sm text-red-500 mt-1">Required</p>
+      )}
+    </div>
 
               {/* Forgot password */}
               <p className="text-[14px] sm:text-[16px] font-semibold text-[#F15939] text-end">
