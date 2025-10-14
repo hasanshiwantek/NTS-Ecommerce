@@ -54,7 +54,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         </div>
 
         {/* Price */}
-        <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3px] my-3">
+        <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3.1px] my-3">
           <div className="flex items-center space-x-3">
             <h2 className="h2-secondary">
               £{Number(product?.price || 0).toFixed(2)}
