@@ -24,9 +24,7 @@ const Navbar: React.FC = () => {
      const handleLogout = () => {
     dispatch(logout());       
     toast.success("Logged out successfully!"); 
-    setTimeout(() => {
-      router.replace("/auth/login");
-    }, 1000);
+    router.replace("/auth/login");
   };
   const currencies = ["USD", "CAD", "EUR"];
 

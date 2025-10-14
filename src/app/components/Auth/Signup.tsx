@@ -20,6 +20,8 @@ import { RootState } from "@/redux/store";
 import { registerUser } from "@/redux/slices/authSlice";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 interface SignupFormValues {
   firstName: string;
@@ -55,6 +57,8 @@ const SignupPage = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state: RootState) => state?.auth);
   const router = useRouter();
+    const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const onSubmit = async (data: SignupFormValues) => {
     try {
       const result = await dispatch(registerUser(data));
@@ -159,42 +163,58 @@ const SignupPage = () => {
 
           {/* Password / Confirm */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <Label className="h5-regular" htmlFor="password">
-                Password <span className="text-red-600">*</span>
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                className="!w-full !max-w-full h-[60px]"
-                {...register("password", { required: true })}
-              />
-              {errors.password && (
-                <p className="text-sm text-red-500">Required</p>
-              )}
-            </div>
-            <div>
-              <Label className="h5-regular" htmlFor="confirmPassword">
-                Confirm Password <span className="text-red-600">*</span>
-              </Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                className="!w-full !max-w-full h-[60px]"
-                {...register("password_confirmation", {
-                  required: true,
-                  validate: (value) =>
-                    value === password || "Passwords do not match",
-                })}
-              />
-              {errors.password_confirmation && (
-                <p className="text-sm text-red-500">
-                  {errors.password_confirmation.message || "Required"}
-                </p>
-              )}
-            </div>
-          </div>
+      {/* Password */}
+      <div className="relative">
+        <Label className="h5-regular" htmlFor="password">
+          Password <span className="text-red-600">*</span>
+        </Label>
+        <Input
+          id="password"
+          type={showPassword ? "text" : "password"}
+          className="!w-full !max-w-full h-[60px] pr-12"
+          {...register("password", { required: true })}
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword((prev) => !prev)}
+          className="absolute right-3 top-[65px] -translate-y-1/2 text-gray-500 hover:text-gray-700"
+        >
+          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+        {errors.password && (
+          <p className="text-sm text-red-500 mt-1">Required</p>
+        )}
+      </div>
 
+      {/* Confirm Password */}
+      <div className="relative">
+        <Label className="h5-regular" htmlFor="confirmPassword">
+          Confirm Password <span className="text-red-600">*</span>
+        </Label>
+        <Input
+          id="confirmPassword"
+          type={showConfirmPassword ? "text" : "password"}
+          className="!w-full !max-w-full h-[60px] pr-12"
+          {...register("password_confirmation", {
+            required: true,
+            validate: (value) =>
+              value === password || "Passwords do not match",
+          })}
+        />
+        <button
+          type="button"
+          onClick={() => setShowConfirmPassword((prev) => !prev)}
+          className="absolute right-3 top-[65px] -translate-y-1/2 text-gray-500 hover:text-gray-700"
+        >
+          {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+        </button>
+        {errors.password_confirmation && (
+          <p className="text-sm text-red-500 mt-1">
+            {errors.password_confirmation.message || "Required"}
+          </p>
+        )}
+      </div>
+    </div>
           {/* Company Name */}
           <div>
             <Label className="h5-regular" htmlFor="company">
