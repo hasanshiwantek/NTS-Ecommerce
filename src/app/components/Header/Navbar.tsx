@@ -7,15 +7,27 @@ import Link from "next/link";
 import { FaHeadphones, FaUser, FaChevronDown } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { RootState } from "@/redux/store";
-import { useAppSelector } from "@/hooks/useReduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import GlobalSearchBar from "./GlobalSearchBar";
 import MobileSearchBar from "./MobileSearchBar";
+import { useRouter } from "next/navigation";
+import { logout } from "@/redux/slices/authSlice";
+import { toast } from "react-toastify";
 const Navbar: React.FC = () => {
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currency, setCurrency] = useState("USD");
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useAppSelector((state: RootState) => state.cart.items);
-
+  const auth = useAppSelector((state: RootState) => state?.auth);
+   const dispatch = useAppDispatch();
+    const router = useRouter();
+     const handleLogout = () => {
+    dispatch(logout());       
+    toast.success("Logged out successfully!"); 
+    setTimeout(() => {
+      router.replace("/auth/login");
+    }, 1000);
+  };
   const currencies = ["USD", "CAD", "EUR"];
 
   return (
@@ -139,7 +151,11 @@ const Navbar: React.FC = () => {
                   Account
                 </p>
                 <div className="flex items-center gap-1">
-                  <Link href={"/auth/login"}>
+                    {auth?.isAuthenticated ? <button onClick={handleLogout} className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
+                      Logout
+                    </button>:
+                    <>
+                    <Link href={"/auth/login"}>
                     <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
                       Sign In
                     </button>
@@ -150,6 +166,8 @@ const Navbar: React.FC = () => {
                       Register
                     </button>
                   </Link>
+                    </>
+                    }
                 </div>
               </div>
             </div>

@@ -28,13 +28,12 @@ const SigninPage = () => {
   const router = useRouter();
   const { loading } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
-    console.log("Signin Data:", data);
     try {
       const result = await dispatch(loginUser({ data: data }));
       if (loginUser?.fulfilled?.match(result)) {
         console.log("User login successfully: ", result?.payload?.message);
         setTimeout(() => {
-          router.push("/");
+          router.replace("/");
         }, 2000);
       } else {
         console.log("Error Login: ", result?.payload?.message);
