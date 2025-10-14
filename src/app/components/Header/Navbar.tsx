@@ -19,11 +19,11 @@ const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const auth = useAppSelector((state: RootState) => state?.auth);
-   const dispatch = useAppDispatch();
-    const router = useRouter();
-     const handleLogout = () => {
-    dispatch(logout());       
-    toast.success("Logged out successfully!"); 
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logged out successfully!");
     router.replace("/auth/login");
   };
   const currencies = ["USD", "CAD", "EUR"];
@@ -149,23 +149,28 @@ const Navbar: React.FC = () => {
                   Account
                 </p>
                 <div className="flex items-center gap-1">
-                    {auth?.isAuthenticated ? <button onClick={handleLogout} className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
+                  {auth?.isAuthenticated ? (
+                    <button
+                      onClick={handleLogout}
+                      className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
+                    >
                       Logout
-                    </button>:
+                    </button>
+                  ) : (
                     <>
-                    <Link href={"/auth/login"}>
-                    <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
-                      Sign In
-                    </button>
-                  </Link>
-                  <span>/</span>
-                  <Link href={"/auth/signup"}>
-                    <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
-                      Register
-                    </button>
-                  </Link>
+                      <Link href={"/auth/login"}>
+                        <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
+                          Sign In
+                        </button>
+                      </Link>
+                      <span>/</span>
+                      <Link href={"/auth/signup"}>
+                        <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
+                          Register
+                        </button>
+                      </Link>
                     </>
-                    }
+                  )}
                 </div>
               </div>
             </div>
