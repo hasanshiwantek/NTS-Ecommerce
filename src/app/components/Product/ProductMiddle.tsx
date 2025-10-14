@@ -20,7 +20,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
-    <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[40.5%] 2xl:w-[40.8%]">
+    <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[40.9%] 2xl:w-[40.8%]">
       <div>
         <div className="flex flex-col 2xl:gap-3 xl:gap-[9px] gap-3">
           <h6 className="h6-regular">{product?.brand?.name}</h6>
@@ -89,7 +89,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           />
           <div className="flex-1 text-center sm:text-left ">
             <h5 className="h5-bold">Free shipping Up to 10 lbs</h5>
-            <p className="h7-regular">
+            <p className="h7-regular ">
               Get your orders delivered without extra cost.
             </p>
           </div>
