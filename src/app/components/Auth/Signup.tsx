@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 interface SignupFormValues {
-   firstName: string;
+  firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
@@ -30,7 +30,7 @@ interface SignupFormValues {
   password_confirmation: string;
   companyName: string;
   addressLine1: string;
-  addressLine2?: string; 
+  addressLine2?: string;
   suburb: string;
   country: string;
   state: string;
@@ -52,28 +52,27 @@ const SignupPage = () => {
     reset,
     formState: { errors },
   } = useForm<SignupFormValues>();
-    const dispatch = useAppDispatch();
-    const {loading} = useAppSelector((state: RootState) => state?.auth);
-     const router = useRouter();
-const onSubmit = async (data: SignupFormValues) => {
-  try {
-    const result = await dispatch(registerUser(data));
+  const dispatch = useAppDispatch();
+  const { loading } = useAppSelector((state: RootState) => state?.auth);
+  const router = useRouter();
+  const onSubmit = async (data: SignupFormValues) => {
+    try {
+      const result = await dispatch(registerUser(data));
 
-    if (registerUser.fulfilled.match(result)) {
-      reset();
-          router.push("/auth/login");
-    } else {
-      const errorMessage = result.error?.message || "Registration failed. Please try again.";
-      console.error("❌ Registration failed:", errorMessage);
+      if (registerUser.fulfilled.match(result)) {
+        reset();
+        router.push("/auth/login");
+      } else {
+        const errorMessage =
+          result.error?.message || "Registration failed. Please try again.";
+        console.error("❌ Registration failed:", errorMessage);
+      }
+    } catch (err: any) {
+      console.error("🚨 Unexpected error:", err);
     }
-  } catch (err: any) {
-    console.error("🚨 Unexpected error:", err);
-  }
-};
-
+  };
 
   const password = watch("password");
-
 
   return (
     <section
@@ -168,7 +167,7 @@ const onSubmit = async (data: SignupFormValues) => {
                 id="password"
                 type="password"
                 className="!w-full !max-w-full h-[60px]"
-                 {...register("password", { required: true })}
+                {...register("password", { required: true })}
               />
               {errors.password && (
                 <p className="text-sm text-red-500">Required</p>
@@ -182,13 +181,13 @@ const onSubmit = async (data: SignupFormValues) => {
                 id="confirmPassword"
                 type="password"
                 className="!w-full !max-w-full h-[60px]"
-                 {...register("password_confirmation", {
+                {...register("password_confirmation", {
                   required: true,
                   validate: (value) =>
                     value === password || "Passwords do not match",
                 })}
               />
-               {errors.password_confirmation && (
+              {errors.password_confirmation && (
                 <p className="text-sm text-red-500">
                   {errors.password_confirmation.message || "Required"}
                 </p>
@@ -242,7 +241,9 @@ const onSubmit = async (data: SignupFormValues) => {
                 className="!w-full !max-w-full h-[60px]"
                 {...register("suburb", { required: true })}
               />
-              {errors.suburb && <p className="text-sm text-red-500">Required</p>}
+              {errors.suburb && (
+                <p className="text-sm text-red-500">Required</p>
+              )}
             </div>
           </div>
 
@@ -274,11 +275,9 @@ const onSubmit = async (data: SignupFormValues) => {
               <Input
                 id="state"
                 className="!w-full !max-w-full h-[60px]"
-                 {...register("state", { required: true })}
+                {...register("state", { required: true })}
               />
-               {errors.state && (
-                <p className="text-sm text-red-500">Required</p>
-              )}
+              {errors.state && <p className="text-sm text-red-500">Required</p>}
             </div>
             <div>
               <Label className="h5-regular" htmlFor="zip">
@@ -289,23 +288,24 @@ const onSubmit = async (data: SignupFormValues) => {
                 className="!w-full !max-w-full h-[60px]"
                 {...register("zip", { required: true })}
               />
-               {errors.zip && (
-                <p className="text-sm text-red-500">Required</p>
-              )}
+              {errors.zip && <p className="text-sm text-red-500">Required</p>}
             </div>
           </div>
 
           {/* Submit */}
-          {loading ?  <div className="flex justify-center items-center py-9">
-    <div className="w-8 h-8 border-4 border-t-transparent border-[#F15939] rounded-full animate-spin"></div>
-  </div> : <Button
-            type="submit"
-            className="w-full !py-9 !rounded-full btn-primary 2xl:text-[22px] xl:text-[16.5] text-[14px]"
-          >
-            Sign up
-          </Button>
-}
-          
+          {loading ? (
+            <div className="flex justify-center items-center py-9">
+              <div className="w-8 h-8 border-4 border-t-transparent border-[#F15939] rounded-full animate-spin"></div>
+            </div>
+          ) : (
+            <Button
+              type="submit"
+              className="w-full !py-9 !rounded-full btn-primary 2xl:text-[22px] xl:text-[16.5] text-[14px]"
+            >
+              Sign up
+            </Button>
+          )}
+
           <p className="h6-medium text-center !text-[#4A4A4A] mt-4">
             Already have an account?{" "}
             <Link href="/auth/login" className="text-red-500 hover:underline">

@@ -10,13 +10,12 @@ export interface RegisterPayload {
   password_confirmation: string;
   companyName: string;
   addressLine1: string;
-  addressLine2?: string; 
+  addressLine2?: string;
   suburb: string;
   country: string;
   state: string;
   zip: string;
 }
-
 
 interface AuthState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,12 +39,10 @@ const initialState: AuthState = {
 // Login thunk
 export const loginUser = createAsyncThunk(
   "auth/login",
-  async (
-    { email, password }: { email: string; password: string },
-    thunkAPI
-  ) => {
+  async ({ data }: { data: any }, thunkAPI) => {
     try {
-      const res = await axiosInstance.post("auth/login", { email, password });
+      const res = await axiosInstance.post("user/login", data);
+      console.log("Login Response: ", res.data);
       return res.data;
     } catch (err: any) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
