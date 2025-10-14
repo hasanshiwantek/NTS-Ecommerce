@@ -56,7 +56,7 @@ export default function PageTransition({
             "/privacyPolicy",
             "/payment-options",
             "/terms-conditions",
-            "/shippingPolicy",
+            "/shipping-policy",
             "/returnPolicy",
           ].some((p) => pathname.includes(p))
             ? ""

@@ -128,7 +128,7 @@ const FooterBottom = () => {
                 <Link href="/privacyPolicy">Privacy policy</Link>
               </li>
               <li>
-                <Link href="/shippingPolicy">Shipping policy</Link>
+                <Link href="/shipping-policy">Shipping policy</Link>
               </li>
               <li>
                 <Link href="/returnPolicy">Return policy</Link>
