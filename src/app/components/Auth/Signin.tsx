@@ -21,6 +21,7 @@ const SigninPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SigninFormValues>();
 
@@ -30,16 +31,17 @@ const SigninPage = () => {
   const onSubmit = async (data: SigninFormValues) => {
     try {
       const result = await dispatch(loginUser({ data: data }));
-      if (loginUser?.fulfilled?.match(result)) {
-        console.log("User login successfully: ", result?.payload?.message);
-        setTimeout(() => {
-          router.replace("/");
-        }, 2000);
+
+      if (loginUser.fulfilled.match(result)) {
+        reset();
+        router.push("/");
       } else {
-        console.log("Error Login: ", result?.payload?.message);
+        const errorMessage =
+          result.error?.message || "Login failed. Please try again.";
+        console.error("Login failed:", errorMessage);
       }
-    } catch (err) {
-      console.log("Something went wrong!", err);
+    } catch (err: any) {
+      console.error("🚨 Unexpected error:", err);
     }
   };
 
