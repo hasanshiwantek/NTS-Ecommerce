@@ -187,7 +187,7 @@ export default function Sidebar({
                     <CategoryFilter
                       categories={cat.subcategories || []}
                       handleCategoryClick={handleCategoryClick}
-                       activeCategoryId={filters?.categoryIds?.[0]} // ✅ pass current active ID
+                      activeCategoryId={filters?.categoryIds?.[0]} // ✅ pass current active ID
                     />
                   </motion.div>
                 )}
