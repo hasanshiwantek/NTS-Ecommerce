@@ -43,7 +43,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           xl:h-[35%]
           lg:h-[30%]
           md:h-[25%]
-          sm:h-[22%]
+          sm:h-[20%]
         "
       >
         <Image
@@ -53,12 +53,12 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           height={250}
           className="
             object-contain
-            w-[80%] h-auto max-h-[220px]
+            w-[50%] h-auto max-h-[220px]
             2xl:w-[95%]
             xl:w-[80%]
             lg:w-[70%]
             md:w-[65%]
-            sm:w-[60%]
+            sm:w-[50%]
           "
         />
       </div>
@@ -143,7 +143,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
     bg-[var(--primary-color)] text-white font-medium rounded-md
     hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]
     transition duration-300
-    w-[70%] sm:w-[65%] md:w-[60%] xl:w-[80%] 2xl:w-[85%]
+    w-[50%] sm:w-[65%] md:w-[60%] xl:w-[80%] 2xl:w-[85%]
     2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
     text-base sm:text-base xl:text-lg 2xl:text-xl
   "
@@ -157,7 +157,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           className="
     border border-gray-500 text-gray-800 bg-white rounded-md font-medium
     hover:bg-gray-100 transition duration-300
-    w-[65%] sm:w-[60%] md:w-[55%] xl:w-[80%] 2xl:w-[85%]
+    w-[50%] sm:w-[60%] md:w-[55%] xl:w-[80%] 2xl:w-[85%]
    2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
    text-base sm:text-base xl:text-lg 2xl:text-xl
   "
