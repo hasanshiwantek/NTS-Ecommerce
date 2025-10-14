@@ -2,7 +2,6 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import countries from "world-countries";
-
 import {
   Select,
   SelectTrigger,
@@ -16,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SignUpBG from "@/assets/auth/Signup-bg.png";
 import styles from "@/styles/auth/Auth.module.css";
+
 interface SignupFormValues {
   firstName: string;
   lastName: string;
@@ -26,6 +26,7 @@ interface SignupFormValues {
   company: string;
   address1: string;
   address2: string;
+  address?: string;
   city: string;
   country: string;
   state: string;
@@ -33,22 +34,33 @@ interface SignupFormValues {
 }
 
 const SignupPage = () => {
-  // Prepare formatted country list (sorted alphabetically)
   const countryList = countries
     .map((country) => ({
       name: country.name.common,
       code: country.cca2,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignupFormValues>();
 
   const onSubmit = (data: SignupFormValues) => {
-    console.log("Signup Data:", data);
+    const fullAddress = `${data.address1 || ""} ${data.address2 || ""}`.trim();
+    const { address1, address2, ...rest } = data;
+    const updatedData = {
+      ...rest,
+      address: fullAddress,
+    };
+
+    console.log("Signup Data:", updatedData);
   };
+
+  const password = watch("password");
+
 
   return (
     <section
@@ -63,7 +75,7 @@ const SignupPage = () => {
                    max-w-[95%] sm:max-w-[90%] lg:max-w-[80%] 2xl:max-w-[1000px]
                    bg-white rounded-lg shadow-md 
                    p-6 sm:p-8 lg:px-[40px] 
-                   h-auto 2xl:h-[880px] flex flex-col justify-center"
+                   h-auto 2xl:h-[926px] flex flex-col justify-center"
       >
         <div className="flex flex-col justify-center items-center">
           <h1 className="h2-medium text-center">Signup</h1>
@@ -143,7 +155,7 @@ const SignupPage = () => {
                 id="password"
                 type="password"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("password", { required: true })}
+                 {...register("password", { required: true })}
               />
               {errors.password && (
                 <p className="text-sm text-red-500">Required</p>
@@ -157,10 +169,16 @@ const SignupPage = () => {
                 id="confirmPassword"
                 type="password"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("confirmPassword", { required: true })}
+                 {...register("confirmPassword", {
+                  required: true,
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
               />
-              {errors.confirmPassword && (
-                <p className="text-sm text-red-500">Required</p>
+               {errors.confirmPassword && (
+                <p className="text-sm text-red-500">
+                  {errors.confirmPassword.message || "Required"}
+                </p>
               )}
             </div>
           </div>
@@ -238,23 +256,29 @@ const SignupPage = () => {
             </div>
             <div>
               <Label className="h5-regular" htmlFor="state">
-                State/Province
+                State/Province <span className="text-red-600">*</span>
               </Label>
               <Input
                 id="state"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("state")}
+                 {...register("state", { required: true })}
               />
+               {errors.state && (
+                <p className="text-sm text-red-500">Required</p>
+              )}
             </div>
             <div>
               <Label className="h5-regular" htmlFor="zip">
-                Zip/Postcode
+                Zip/Postcode <span className="text-red-600">*</span>
               </Label>
               <Input
                 id="zip"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("zip")}
+                {...register("zip", { required: true })}
               />
+               {errors.zip && (
+                <p className="text-sm text-red-500">Required</p>
+              )}
             </div>
           </div>
 

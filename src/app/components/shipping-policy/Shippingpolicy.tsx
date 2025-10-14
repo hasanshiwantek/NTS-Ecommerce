@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from 'react'
 import Image from "next/image";
-import banner from '@/assets/privacy-banner.png'
+import banner from '@/assets/shipping-banner.png'
 const Shippingpolicy = () => {
   
     // Enable smooth scroll globally
