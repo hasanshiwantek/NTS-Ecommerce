@@ -2,15 +2,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/lib/axiosInstance";
 
 export interface RegisterPayload {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  password: string;
   phoneNumber: string;
-  storeName: string;
-  userRole: number;
-  businessSize: string;
-  region: string;
+  password: string;
+  password_confirmation: string;
+  companyName: string;
+  addressLine1: string;
+  addressLine2?: string; 
+  suburb: string;
+  country: string;
+  state: string;
+  zip: string;
 }
+
 
 interface AuthState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,7 +61,7 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (formData: RegisterPayload, thunkAPI) => {
     try {
-      const res = await axiosInstance.post("/auth/register", formData);
+      const res = await axiosInstance.post("user/register", formData);
       return res.data;
     } catch (err: any) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

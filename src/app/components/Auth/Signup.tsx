@@ -15,19 +15,23 @@ import Image from "next/image";
 import Link from "next/link";
 import SignUpBG from "@/assets/auth/Signup-bg.png";
 import styles from "@/styles/auth/Auth.module.css";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { RootState } from "@/redux/store";
+import { registerUser } from "@/redux/slices/authSlice";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 interface SignupFormValues {
-  firstName: string;
+   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   password: string;
-  confirmPassword: string;
-  company: string;
-  address1: string;
-  address2: string;
-  address?: string;
-  city: string;
+  password_confirmation: string;
+  companyName: string;
+  addressLine1: string;
+  addressLine2?: string; 
+  suburb: string;
   country: string;
   state: string;
   zip: string;
@@ -45,19 +49,28 @@ const SignupPage = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<SignupFormValues>();
+    const dispatch = useAppDispatch();
+    const {loading} = useAppSelector((state: RootState) => state?.auth);
+     const router = useRouter();
+const onSubmit = async (data: SignupFormValues) => {
+  try {
+    const result = await dispatch(registerUser(data));
 
-  const onSubmit = (data: SignupFormValues) => {
-    const fullAddress = `${data.address1 || ""} ${data.address2 || ""}`.trim();
-    const { address1, address2, ...rest } = data;
-    const updatedData = {
-      ...rest,
-      address: fullAddress,
-    };
+    if (registerUser.fulfilled.match(result)) {
+      reset();
+          router.push("/auth/login");
+    } else {
+      const errorMessage = result.error?.message || "Registration failed. Please try again.";
+      console.error("❌ Registration failed:", errorMessage);
+    }
+  } catch (err: any) {
+    console.error("🚨 Unexpected error:", err);
+  }
+};
 
-    console.log("Signup Data:", updatedData);
-  };
 
   const password = watch("password");
 
@@ -75,7 +88,7 @@ const SignupPage = () => {
                    max-w-[95%] sm:max-w-[90%] lg:max-w-[80%] 2xl:max-w-[1000px]
                    bg-white rounded-lg shadow-md 
                    p-6 sm:p-8 lg:px-[40px] 
-                   h-auto 2xl:h-[926px] flex flex-col justify-center"
+                   h-auto  flex flex-col justify-center"
       >
         <div className="flex flex-col justify-center items-center">
           <h1 className="h2-medium text-center">Signup</h1>
@@ -140,7 +153,7 @@ const SignupPage = () => {
                 id="phone"
                 type="tel"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("phone")}
+                {...register("phoneNumber")}
               />
             </div>
           </div>
@@ -169,15 +182,15 @@ const SignupPage = () => {
                 id="confirmPassword"
                 type="password"
                 className="!w-full !max-w-full h-[60px]"
-                 {...register("confirmPassword", {
+                 {...register("password_confirmation", {
                   required: true,
                   validate: (value) =>
                     value === password || "Passwords do not match",
                 })}
               />
-               {errors.confirmPassword && (
+               {errors.password_confirmation && (
                 <p className="text-sm text-red-500">
-                  {errors.confirmPassword.message || "Required"}
+                  {errors.password_confirmation.message || "Required"}
                 </p>
               )}
             </div>
@@ -191,7 +204,7 @@ const SignupPage = () => {
             <Input
               id="company"
               className="!w-full !max-w-full h-[60px]"
-              {...register("company")}
+              {...register("companyName")}
             />
           </div>
 
@@ -204,9 +217,9 @@ const SignupPage = () => {
               <Input
                 id="address1"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("address1", { required: true })}
+                {...register("addressLine1", { required: true })}
               />
-              {errors.address1 && (
+              {errors.addressLine1 && (
                 <p className="text-sm text-red-500">Required</p>
               )}
             </div>
@@ -217,7 +230,7 @@ const SignupPage = () => {
               <Input
                 id="address2"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("address2")}
+                {...register("addressLine2")}
               />
             </div>
             <div>
@@ -227,9 +240,9 @@ const SignupPage = () => {
               <Input
                 id="city"
                 className="!w-full !max-w-full h-[60px]"
-                {...register("city", { required: true })}
+                {...register("suburb", { required: true })}
               />
-              {errors.city && <p className="text-sm text-red-500">Required</p>}
+              {errors.suburb && <p className="text-sm text-red-500">Required</p>}
             </div>
           </div>
 
@@ -283,13 +296,16 @@ const SignupPage = () => {
           </div>
 
           {/* Submit */}
-          <Button
+          {loading ?  <div className="flex justify-center items-center py-9">
+    <div className="w-8 h-8 border-4 border-t-transparent border-[#F15939] rounded-full animate-spin"></div>
+  </div> : <Button
             type="submit"
             className="w-full !py-9 !rounded-full btn-primary 2xl:text-[22px] xl:text-[16.5] text-[14px]"
           >
             Sign up
           </Button>
-
+}
+          
           <p className="h6-medium text-center !text-[#4A4A4A] mt-4">
             Already have an account?{" "}
             <Link href="/auth/login" className="text-red-500 hover:underline">
