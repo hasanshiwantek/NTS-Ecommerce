@@ -3,7 +3,7 @@
 import React from "react";
 import { useEffect } from "react";
 import Image from "next/image";
-import banner from "@/assets/privacy-banner.png";
+import banner from "@/assets/terms-banner.png";
 
 const Page = () => {
   // Enable smooth scroll globally
