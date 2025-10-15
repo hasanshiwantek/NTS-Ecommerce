@@ -24,7 +24,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div>
         <div className="flex flex-col 2xl:gap-3 xl:gap-[9px] gap-3">
           <h6 className="h6-regular">{product?.brand?.name}</h6>
-          <h3
+          <h1
             className="
     font-bold uppercase 
     text-[14px] leading-[1.3] tracking-[0.0075em] text-[#4a4a4a] 
@@ -37,7 +37,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   "
           >
             {product?.name || "N/A"}
-          </h3>
+          </h1>
 
           {/* Rating */}
           <div className="flex items-center space-x-3">
