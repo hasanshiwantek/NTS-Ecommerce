@@ -14,7 +14,7 @@ export default async function ProductsPage({
   const brands = await fetchBrands();
 
   return (
-    <div className="container">
+    <div className="">
       <ProductsClientWrapper
         categories={categories}
         brands={brands}
