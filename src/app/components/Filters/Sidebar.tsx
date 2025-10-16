@@ -96,11 +96,6 @@ export default function Sidebar({
       className="
       flex flex-col gap-5 w-full bg-white rounded-xl
       2xl:px-2 p-0
-      2xl:w-[34rem]   xl:w-[25rem] 
-        lg:w-[20rem]
-         
-  md:w-[20rem] 
-  sm:w-full
       transition-all duration-300
     "
     >

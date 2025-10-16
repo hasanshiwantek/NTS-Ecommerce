@@ -75,19 +75,11 @@ export default function ProductsClientWrapper({
     fetchData();
   }, [filters]);
   return (
-    <div className="container  ">
-      <div className="flex flex-col md:flex-row gap-6 py-4">
+      <div className="flex flex-col md:flex-row gap-4 py-4 w-full xl:max-w-[100%] 2xl:max-w-[119.5%]">
+
         {/* Sidebar: Filters */}
         <aside
-          className="
-  2xl:w-[34rem]    /* 412px → 25.75rem */
-  xl:w-[25rem]      /* 309px → 19.3rem */
-        lg:w-[20rem] 
-  md:w-[20rem] 
-  sm:w-full
-  w-full
-  2xl:px-2 p-0
-  shrink-0 rounded bg-white
+          className="w-full md:w-[28%] lg:w-[27%] xl:w-[24%] 2xl:w-[24.1%] bg-white rounded
 "
         >
           <Sidebar
@@ -102,7 +94,7 @@ export default function ProductsClientWrapper({
         </aside>
 
         {/* Product Listing */}
-        <main className="">
+        <main className="w-full md:w-[71%] lg:w-[72%] xl:w-[73.3%] 2xl:w-[73.8%]">
           <ProductList
             filters={filters}
             setFilters={setFilters}
@@ -114,6 +106,5 @@ export default function ProductsClientWrapper({
           />
         </main>
       </div>
-    </div>
   );
 }
