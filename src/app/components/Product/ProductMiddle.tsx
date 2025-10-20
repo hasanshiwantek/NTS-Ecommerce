@@ -202,10 +202,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       w-full xl:w-[50rem] 2xl:w-[67.9%]
     "
             >
-              <ShoppingCart
+              {/* <ShoppingCart
                 className="w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7"
                 fill="white"
-              />
+              /> */}
               <span>Add to Cart</span>
             </button>
           </div>
