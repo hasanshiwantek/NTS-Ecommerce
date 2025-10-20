@@ -227,9 +227,9 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       text-[14px] xl:text-[11.2px] 2xl:text-[14px] 
       font-bold  
       bg-[#121e4d] text-white
-      hover:text-[#F15939] hover:bg-white hover:border-[#F15939] 
+      hover:text-[#F15939] hover:bg-white 
     flex items-center justify-center space-x-2 transition 
-      w-full xl:w-full 2xl:w-[100%] h-full border
+      w-full xl:w-full 2xl:w-[100%] h-full hover:border-[#F15939] border-1
     "
         >
           <span>Buy Now</span>
