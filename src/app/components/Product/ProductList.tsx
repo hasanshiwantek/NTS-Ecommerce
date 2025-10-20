@@ -40,10 +40,8 @@ export default function ProductList({
   return (
     <section
       className="
-        flex-1 px-4 sm:px-6 md:px-8
-
-w-[95%] sm:w-[90%] md:w-[110%] lg:w-[110%] xl:w-[105%] 2xl:w-[110%]
-        mx-auto
+         px-4 sm:px-6 md:px-8
+w-full
         transition-all duration-300
       "
     >

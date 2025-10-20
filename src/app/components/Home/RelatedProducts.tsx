@@ -62,7 +62,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                 {/* Product Image */}
                 <div
                   className="w-full flex items-center justify-center 
-                  xl:h-[225px] 2xl:h-[280px] mb-4"
+                  xl:h-[225px] 2xl:h-[240px] mb-4"
                 >
                   <Image
                     src={
@@ -87,7 +87,6 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                   </p>
 
                   {/* Animated underline */}
-                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#F15939] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
 
                 {/* Brand + Availability + Price (reserve space) */}
@@ -106,7 +105,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
                 {/* Action Buttons → Always bottom aligned */}
                 <div
-                  className="absolute bottom-5 left-0 right-0 flex justify-center gap-3 
+                  className="absolute bottom-5 xl:bottom-8 left-0 right-0 flex justify-center gap-3 
                                 opacity-0 translate-y-10 group-hover:translate-y-4 
                                 lg:group-hover:translate-y-6 group-hover:opacity-100 
                                 transition-all duration-300 p-2"
@@ -118,7 +117,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                     }}
                     className="btn-primary xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
                                w-full sm:w-[48%] md:w-[45%] lg:w-[50%] xl:w-[45%]
-                               2xl:w-[173.875px] 2xl:h-[50px] mr-2 whitespace-nowrap"
+                               2xl:w-[173.875px] 2xl:h-[50px] whitespace-nowrap"
                   >
                     Add to Cart
                   </button>

@@ -20,121 +20,134 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
-    <div className=" product-middle  flex flex-col h-full w-full  lg:w-[45%] xl:w-[40.9%] 2xl:w-[40.8%]">
+    <div className=" product-middle  flex flex-col h-full w-full  xl:w-[38%] 2xl:w-[36.4%]">
       <div>
-        <div className="flex flex-col 2xl:gap-3 xl:gap-[9px] gap-3">
-          <h6 className="h6-regular">{product?.brand?.name}</h6>
-          <h3
+        <div className="flex flex-col xl:gap-2.5 2xl:gap-3 gap-3">
+          {/* <h6 className="h6-regular">{product?.brand?.name}</h6> */}
+          <h1
             className="
     font-bold uppercase 
-    text-[14px] leading-[1.3] tracking-[0.0075em] text-[#4a4a4a] 
-    sm:text-[16px] 
-    lg:text-[18px]
-    lg:font-semibold 
-    xl:text-[18px] 
-    xl:font-semibold
-    2xl:text-[24px]
+    text-[14px] leading-9 2xl:leading-11 tracking-[0.0075em] text-[#000000] 
+    xl:text-[16.8px] 
+    2xl:text-[21px]
   "
           >
             {product?.name || "N/A"}
-          </h3>
+          </h1>
 
           {/* Rating */}
           <div className="flex items-center space-x-3">
             {product?.rating && (
               <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
             )}
-            <h6 className="h6-medium-color">
+            <h6 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
               {product?.rating || "N/A " + " Ratings"}
             </h6>
-            <h6 className="!text-[#1A80AD] h6-medium">
+            <h6 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
               {product.reviews || "N/A " + " Reviews"}
             </h6>
           </div>
         </div>
 
         {/* Price */}
-        <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3.1px] my-3">
-          <div className="flex items-center space-x-3">
-            <h2 className="h2-secondary">
-              £{Number(product?.price || 0).toFixed(2)}
+        <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3.1px] xl:mt-4 2xl:mt-6">
+          <div className="flex flex-col items-start">
+            <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
+             Was ${Number(product?.price || 0).toFixed(2)}
             </h2>
-            <h5 className="h5-regular line-through !text-[#FF435C]">
-              £
+            <h5 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
+             Now $
               {product?.msrp && product.msrp > 0
                 ? Number(product.msrp).toFixed(2)
-                : "N/A"}
+                : "N/A"} <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511]">You save  {(Number(product?.price || 0) - Number(product.msrp || 0)).toFixed(2)}</span>
             </h5>
           </div>
 
           {/* Secure Methods */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="h6-18-px-regular">Secure methods:</span>
-            <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center xl:mt-4 2xl:mt-6">
+            <span className="xl:text-[10.2px] 2xl:[12.8px] text-[#000000]">Secure methods:</span>
+            {/* <div className="flex items-center gap-2">
               <Image src={visa} alt="Visa" />
               <Image src={debit} alt="Debit" />
               <Image src={paypal} alt="PayPal" />
               <Image src={americanexpress} alt="AmEx" />
               <Image src={googlepay} alt="GooglePay" />
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Shipping Info */}
-        <div className="2xl:gap-[16px]  xl:gap-[12px] bg-[#F5F5F5] p-4 rounded-md flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="2xl:gap-[16px]  xl:gap-[12px] bg-[#F5F5F5] xl:mt-4 2xl:mt-6 px-4 xl:h-[4.2rem] 2xl:h-[5.3rem] rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
           <Image
             src={freelogo}
             alt="Free Shipping"
-            className="w-16 h-16 object-contain"
+            className="w-14 h-w-14 object-contain"
           />
           <div className="flex-1 text-center sm:text-left ">
-            <h5 className="h5-bold">Free shipping Up to 10 lbs</h5>
-            <p className="h7-regular ">
+            <h5 className="text-[#000000] font-bold xl:text-[11.2px] 2xl:text-[14px]">Free shipping Up to 10 lbs</h5>
+            <p className="xl:text-[8.4px] 2xl:text-[10.5px] text-[#000000]">
               Get your orders delivered without extra cost.
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <Image src={dhllogo} alt="DHL" className="w-14 h-10" />
-            <Image src={upslogo} alt="UPS" className="w-14 h-10" />
-            <Image src={feedxlogo} alt="FedEx" className="w-14 h-10" />
+            <Image src={dhllogo} alt="DHL" className="w-16 h-10" />
+            <Image src={upslogo} alt="UPS" className="w-16 h-10" />
+            <Image src={feedxlogo} alt="FedEx" className="w-20 h-10" />
           </div>
         </div>
 
         {/* SKU / Availability / Quantity */}
-        <div className="flex flex-col gap-3 w-full max-w-[696px] mt-2">
-          <div className="flex items-center">
-            <h5 className="h5-medium w-32 min-w-[120px]">SKU:</h5>
-            <h5 className="h5-medium-20px-medium">{product?.sku || "N/A"}</h5>
+        <div className="flex flex-col gap-1 w-full mt-3">
+          <div className="flex xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Manufacture</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">{product?.sku || "N/A"}</h5>
           </div>
-          <div className="flex items-center">
-            <h5 className="h5-regular w-32 min-w-[120px]">Availability:</h5>
-            <h5 className="h5-medium !text-[#00B67A]">
+          <div className="flex xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Mfr Part#</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+              {product?.availabilityText || "N/A"}
+            </h5>
+          </div>
+          <div className="flex xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Availability</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+              {product?.availabilityText || "N/A"}
+            </h5>
+          </div>
+          <div className="flex xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Weight</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+              {product?.availabilityText || "N/A"}
+            </h5>
+          </div>
+          <div className="flex xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Shipping</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.availabilityText || "N/A"}
             </h5>
           </div>
 
-          <div className="flex items-center">
-            <h5 className="h5-regular w-32 min-w-[120px]">Quantity:</h5>
+          <div className="flex xl:gap-2.5 xl:mt-4 2xl:mt-6">
             <div
               className="
       flex items-center justify-center 
-      w-24 h-10                   /* default (sm and below) */
-      md:w-28 md:h-11             /* md screens */
-      lg:w-32 lg:h-12             /* lg screens */
-      xl:w-[120px] xl:h-[40px]    /* xl screens */
-      2xl:w-[146px] 2xl:h-[48px]  /* 2xl screens */
-      border border-gray-300 rounded-full
+      w-24 h-10                
+      md:w-28 md:h-11             
+      lg:w-32 lg:h-12            
+      xl:w-[30.1%] xl:h-[3.2rem]    
+      2xl:w-[30%] 2xl:h-[48px]  
+      border border-gray-300
     "
             >
               <button
                 onClick={decrement}
                 className="
         flex items-center justify-center
-        w-8 h-8 text-gray-700       /* default */
+        w-8 h-8 text-gray-700      
         md:w-9 md:h-9
         lg:w-10 lg:h-10
-        xl:w-[40px] xl:h-[40px]
-        2xl:w-[48px] 2xl:h-[48px]
+        xl:w-[48.8px] xl:h-[40px]
+        2xl:w-[35%] 2xl:h-[48px]
         hover:text-red-500 transition
       "
               >
@@ -146,7 +159,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         flex items-center justify-center font-semibold
         text-sm sm:text-base md:text-lg
         w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12
-        xl:w-[40px] xl:h-[40px] 2xl:w-[48px] 2xl:h-[48px]
+        xl:w-[48.8px] xl:h-[40px] 2xl:w-[35%] 2xl:h-[48px]
         border-x border-gray-300
       "
               >
@@ -160,21 +173,16 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         w-8 h-8 text-gray-700
         md:w-9 md:h-9
         lg:w-10 lg:h-10
-        xl:w-[40px] xl:h-[40px]
-        2xl:w-[48px] 2xl:h-[48px]
+        xl:w-[48.8px] xl:h-[40px]
+        2xl:w-[35%] 2xl:h-[48px]
         hover:text-green-600 transition
       "
               >
                 <Plus width={15} height={15} />
               </button>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Actions */}
-      <div className="flex justify-between items-center 2xl:mt-8 xl:mt-7 lg:mt-5 md:mt-3 mt-3 gap-3 sm:gap-4">
-        {/* Add to Cart */}
+             {/* Add to Cart */}
         <button
           onClick={() => {
   dispatch(addToCart({ ...product, quantity }));
@@ -183,11 +191,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           className="
       bg-[#F15939] 
       hover:border-[#F15939] hover:bg-white hover:text-[#F15939] 
-      font-medium text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[16.5px] 2xl:text-[22px] 
+      font-bold text-[13px] xl:text-[11.2px] 2xl:text-[14px] 
       text-white border border-[#F15939] 
-      rounded-full flex items-center justify-center space-x-2 transition 
-      py-3 sm:py-4 xl:py-3
-      w-full lg:w-[40rem] xl:w-[50rem] 2xl:w-[70rem]
+     flex items-center justify-center space-x-2 transition 
+      w-full lg:w-[40rem] xl:w-[50rem] 2xl:w-[67.9%]
     "
         >
           <ShoppingCart
@@ -196,7 +203,12 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           />
           <span>Add to Cart</span>
         </button>
+          </div>
+        </div>
+      </div>
 
+      {/* Actions */}
+      <div className="flex items-center xl:mt-4 2xl:mt-6 xl:h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
           onClick={() => {
@@ -206,13 +218,12 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             }, 2000);
           }}
           className="
-      text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[16.5px] 2xl:text-[22px] 
-      font-medium border border-[#4A4A4A] 
-      bg-transparent text-[#4A4A4A] 
+      text-[14px] xl:text-[11.2px] 2xl:text-[14px] 
+      font-bold  
+      bg-[#121e4d] text-white
       hover:text-[#F15939] hover:bg-white hover:border-[#F15939] 
-      rounded-full flex items-center justify-center space-x-2 transition 
-      py-3 sm:py-4 xl:py-3
-      w-full lg:w-[20rem] xl:w-[25rem] 2xl:w-[30rem]
+    flex items-center justify-center space-x-2 transition 
+      w-full lg:w-[20rem] xl:w-full 2xl:w-[100%] h-full
     "
         >
           <span>Buy Now</span>
@@ -220,9 +231,9 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       </div>
 
       {/* Note */}
-      <div className="p-3 2xl:mt-4 xl:mt-2 mt-2">
-        <p className="h6-regular !text-[#4A4A4A] leading-6 italic xl:w-[490px] 2xl:w-[550px]">
-          <span className="text-red-600">*</span> All Business Entities,
+      <div className="xl:mt-6 2xl:mt-8">
+        <p className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+          <span className="text-red-600 ">*</span> All Business Entities,
           Corporations, Public & Private School Systems, Governmental
           Organizations, Colleges, Universities & Libraries are welcome to
           submit purchase orders.
