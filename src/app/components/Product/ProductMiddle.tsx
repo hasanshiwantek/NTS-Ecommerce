@@ -122,13 +122,13 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Availability</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.dimensions?.weight || "N/A"}
+              {product?.availabilityText || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Weight</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.availabilityText || "N/A"}
+              {product?.dimensions?.weight || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
@@ -138,9 +138,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             </h5>
           </div>
 
-          <div className="flex gap-7 lg:gap-1.5 xl:gap-2.5 mt-2 xl:mt-4 2xl:mt-6">
+          <div className="flex gap-7 lg:gap-1.5 xl:gap-2.5 mt-2 xl:mt-4 2xl:mt-6 ">
             <div
               className="
+              bg-[#f5f5f5]
       flex items-center justify-center 
       w-48 h-[38.39px]             
       lg:w-32 lg:h-12            
@@ -207,10 +208,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       w-full xl:w-[50rem] 2xl:w-[67.9%]
     "
             >
-              <ShoppingCart
+              {/* <ShoppingCart
                 className="w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7"
                 fill="white"
-              />
+              /> */}
               <span>Add to Cart</span>
             </button>
           </div>
@@ -231,9 +232,9 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       text-[14px] xl:text-[11.2px] 2xl:text-[14px] 
       font-bold  
       bg-[#121e4d] text-white
-      hover:text-[#F15939] hover:bg-white hover:border-[#F15939] 
+      hover:text-[#F15939] hover:bg-white 
     flex items-center justify-center space-x-2 transition 
-      w-full xl:w-full 2xl:w-[100%] h-full
+      w-full xl:w-full 2xl:w-[100%] h-full hover:border-[#F15939] border-1
     "
         >
           <span>Buy Now</span>
