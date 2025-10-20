@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import navlogo from "@/assets/navlogo.png";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import MobileSearchBar from "./MobileSearchBar";
 import { useRouter } from "next/navigation";
 import { logout } from "@/redux/slices/authSlice";
 import { toast } from "react-toastify";
+import { fetchCurrencies, setSelectedCurrency } from "@/redux/slices/currencySlice";
 const Navbar: React.FC = () => {
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [currency, setCurrency] = useState("USD");
@@ -20,13 +21,21 @@ const Navbar: React.FC = () => {
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const auth = useAppSelector((state: RootState) => state?.auth);
   const dispatch = useAppDispatch();
+ const { currencies, selectedCurrency, status } = useAppSelector((state: RootState) => state.currency);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (status === "idle") dispatch(fetchCurrencies());
+  }, [status, dispatch]);
+
+  // const currencies: ("USD" | "EUR" | "CAD")[] = ["USD", "EUR", "CAD"];
   const router = useRouter();
   const handleLogout = () => {
     dispatch(logout());
     toast.success("Logged out successfully!");
     router.replace("/auth/login");
   };
-  const currencies = ["USD", "CAD", "EUR"];
+  // const currencies = ["USD", "CAD", "EUR"];
 
   return (
     <header className="bg-[#484848] text-white shadow-md sticky top-0 z-50">
@@ -124,17 +133,36 @@ const Navbar: React.FC = () => {
               rounded-full
             "
               />
-              <div className="flex flex-col leading-tight">
-                <p className="text-[16px] text-[#EDEDED] font-normal ">
-                  Currency
-                </p>
-                <button className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300">
-                  <span className="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-[20px]">
-                    {currency}
-                  </span>
-                  <FaChevronDown className="text-xs" />
-                </button>
-              </div>
+            <div className="flex flex-col leading-tight relative">
+      <p className="text-[16px] text-[#EDEDED] font-normal">Currency</p>
+
+      <button
+        className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300"
+        onClick={() => setOpen(!open)}
+      >
+        <span className="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-[20px]">
+          {selectedCurrency}
+        </span>
+        <FaChevronDown className="text-xs" />
+      </button>
+
+       {open && (
+        <div className="absolute mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10">
+          {currencies.map(c => (
+            <div
+              key={c.code}
+              className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+              onClick={() => {
+                dispatch(setSelectedCurrency(c.code));
+                setOpen(false);
+              }}
+            >
+              {c.symbol} - {c.name}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
             </div>
 
             {/* Account */}
