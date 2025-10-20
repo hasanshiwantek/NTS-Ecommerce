@@ -1,11 +1,15 @@
-// redux/slices/currencySlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
+interface Currency {
+  code: string;
+  rate: number;
+}
+
 interface CurrencyState {
-  currencies: { code: string; name: string; symbol: string; rate: number }[];
+  currencies: Currency[];
   selectedCurrency: string;
-  status: "idle" | "loading" | "failed";
+  status: "idle" | "loading" | "succeeded" | "failed";
 }
 
 const initialState: CurrencyState = {
@@ -14,25 +18,16 @@ const initialState: CurrencyState = {
   status: "idle",
 };
 
-// Async thunk to fetch all currencies
+// Fetch currencies from open.er-api.com
 export const fetchCurrencies = createAsyncThunk(
   "currency/fetchCurrencies",
   async () => {
-    const res = await axios.get("https://api.exchangerate.host/symbols"); // free API
-    // Returns object of symbols like {USD: {description: "US Dollar", code: "USD"}, ...}
-    const symbols = res.data.symbols;
-    // Fetch rates
-    const ratesRes = await axios.get("https://api.exchangerate.host/latest?base=USD");
-    const rates = ratesRes.data.rates;
-
-    const currencies = Object.keys(symbols).map((code) => ({
+    const res = await axios.get("https://open.er-api.com/v6/latest/USD");
+    const rates = res.data.rates;
+    return Object.keys(rates).map((code) => ({
       code,
-      name: symbols[code].description,
-      symbol: code, // symbol ke liye code use kar sakte ho ya API me available ho
-      rate: rates[code] || 1,
+      rate: rates[code],
     }));
-
-    return currencies;
   }
 );
 
@@ -50,8 +45,8 @@ const currencySlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchCurrencies.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.currencies = action.payload;
-        state.status = "idle";
       })
       .addCase(fetchCurrencies.rejected, (state) => {
         state.status = "failed";

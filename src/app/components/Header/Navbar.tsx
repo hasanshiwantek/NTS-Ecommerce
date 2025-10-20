@@ -24,9 +24,12 @@ const Navbar: React.FC = () => {
  const { currencies, selectedCurrency, status } = useAppSelector((state: RootState) => state.currency);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (status === "idle") dispatch(fetchCurrencies());
-  }, [status, dispatch]);
+useEffect(() => {
+  if (status === "idle") {
+    dispatch(fetchCurrencies());
+  }
+}, [status, dispatch]);
+
 
   // const currencies: ("USD" | "EUR" | "CAD")[] = ["USD", "EUR", "CAD"];
   const router = useRouter();
@@ -123,8 +126,7 @@ const Navbar: React.FC = () => {
 
           {/* Right Section (Desktop only) */}
           <section className="hidden lg:flex items-center gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
-            {/* Currency */}
-            <div className="relative flex items-center gap-1 sm:gap-2">
+             <div className="relative flex items-center gap-1 sm:gap-2">
               <img
                 src="/usa-logo.png"
                 alt="US Flag"
@@ -133,37 +135,36 @@ const Navbar: React.FC = () => {
               rounded-full
             "
               />
-            <div className="flex flex-col leading-tight relative">
+                 <div className="flex flex-col leading-tight relative">
       <p className="text-[16px] text-[#EDEDED] font-normal">Currency</p>
 
-      <button
-        className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300"
-        onClick={() => setOpen(!open)}
-      >
-        <span className="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-[20px]">
-          {selectedCurrency}
-        </span>
-        <FaChevronDown className="text-xs" />
-      </button>
+        <button   onClick={() => setOpen(!open)}
+         className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300">
+                  <span className="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-[20px]">
+                    {currency}
+                  </span>
+                  <FaChevronDown className="text-xs" />
+                </button>
 
-       {open && (
-        <div className="absolute mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10">
-          {currencies.map(c => (
+      {open && (
+        <div className="absolute top-12 mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10">
+          {currencies.map((c) => (
             <div
               key={c.code}
-              className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+              className="px-3 py-2 text-black hover:bg-gray-100 cursor-pointer"
               onClick={() => {
                 dispatch(setSelectedCurrency(c.code));
                 setOpen(false);
               }}
             >
-              {c.symbol} - {c.name}
+              {c.code} - {c.rate.toFixed(2)}
             </div>
           ))}
         </div>
       )}
     </div>
             </div>
+       
 
             {/* Account */}
             <div className="flex items-center gap-1 sm:gap-2">

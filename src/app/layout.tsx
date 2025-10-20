@@ -1,115 +1,3 @@
-// import type { Metadata } from "next";
-// import "./globals.css";
-// import LayoutWrapper from "./components/layout/LayoutWrapper";
-// import { Jost } from "next/font/google";
-// import localFont from "next/font/local";
-// const jost = Jost({
-//   subsets: ["latin"],
-//   weight: ["400", "600", "700"],
-// });
-
-// // ✅ Recoleta (400–700)
-// // const recoleta = localFont({
-// //   src: [
-// //     {
-// //       path: "./Recoleta-Regular.woff2",
-// //       weight: "400",
-// //       style: "normal",
-// //     },
-// //     {
-// //       path: "./Recoleta-Medium.woff2",
-// //       weight: "500",
-// //       style: "normal",
-// //     },
-// //     {
-// //       path: "./Recoleta-SemiBold.woff2",
-// //       weight: "600",
-// //       style: "normal",
-// //     },
-// //     {
-// //       path: "./Recoleta-Bold.woff2",
-// //       weight: "700",
-// //       style: "normal",
-// //     },
-// //   ],
-// //   variable: "--font-recoleta",
-// // });
-
-
-
-// // const recoleta = localFont({
-// //   src: [
-// //     {
-// //       path: "/public/fonts/Recoleta-RegularDEMO.otf",
-// //       weight: "400",
-// //       style: "normal",
-// //     },
-// //   ],
-// //   variable: "--font-recoleta",
-// //   display: "swap",
-// // });
-
-// export const metadata: Metadata = {
-//   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
-//   title: {
-//     default: "New Town Spares",
-//     template: "%s | New Town Spares",
-//   },
-//   description:
-//     "Buy electronics, connectors, cables, and computer accessories online at New Town Spares. Quality parts at affordable prices with fast shipping.",
-//   keywords: [
-//     "New Town Spares",
-//     "computer accessories",
-//     "connectors",
-//     "cables",
-//     "electronics store",
-//     "buy online",
-//   ],
-//   openGraph: {
-//     type: "website",
-//     locale: "en_US",
-//     url: "https://nts-ecommerce.vercel.app",
-//     siteName: "New Town Spares",
-//     title: "New Town Spares – Quality Electronics & Accessories",
-//     description:
-//       "Discover premium connectors, cables, motherboards, and storage devices at New Town Spares.",
-//     images: [
-//       {
-//         url: "/navlogo.png",
-//         width: 1200,
-//         height: 630,
-//         alt: "New Town Spares",
-//       },
-//     ],
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: "New Town Spares – Quality Electronics & Accessories",
-//     description:
-//       "Shop premium electronics, connectors, cables, and computer parts at New Town Spares.",
-//     images: ["/navlogo.png"],
-//   },
-//   icons: {
-//     icon: "/favicon.ico",
-//     shortcut: "/favicon.ico",
-//     apple: "/apple-touch-icon.png",
-//   },
-// };
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en">
-//       <body className={`antialiased`}>
-//         <LayoutWrapper>{children}</LayoutWrapper>
-//       </body>
-//     </html>
-//   );
-// }
-
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
@@ -119,70 +7,48 @@ const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
- 
-// ✅ Recoleta (400–700) - Loading multiple weights
-const recoleta = localFont({
-  src: [
-    {
-      // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta Regular.woff2",
-      weight: "400", // Regular
-      style: "normal",
-    },
-    {
-      // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta Medium.woff2",
-      weight: "500", // Medium
-      style: "normal",
-    },
-    {
-      // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta SemiBold.woff2",
-      weight: "600", // SemiBold
-      style: "normal",
-    },
-    {
-      // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta Bold.woff2",
-      weight: "700", // Bold
-      style: "normal",
-    },
-  ],
-  variable: "--font-recoleta",
-});
- 
+
+// ✅ Recoleta (400–700)
 // const recoleta = localFont({
 //   src: [
 //     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-regular.otf",
-//       weight: "400", // Regular
+//       path: "./Recoleta-Regular.woff2",
+//       weight: "400",
 //       style: "normal",
 //     },
 //     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-medium.otf",
-//       weight: "500", // Medium
+//       path: "./Recoleta-Medium.woff2",
+//       weight: "500",
 //       style: "normal",
 //     },
 //     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-semibold.otf",
-//       weight: "600", // SemiBold
+//       path: "./Recoleta-SemiBold.woff2",
+//       weight: "600",
 //       style: "normal",
 //     },
 //     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-bold.otf",
-//       weight: "700", // Bold
+//       path: "./Recoleta-Bold.woff2",
+//       weight: "700",
 //       style: "normal",
 //     },
 //   ],
 //   variable: "--font-recoleta",
 // });
- 
- 
- 
+
+
+
+// const recoleta = localFont({
+//   src: [
+//     {
+//       path: "/public/fonts/Recoleta-RegularDEMO.otf",
+//       weight: "400",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-recoleta",
+//   display: "swap",
+// });
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
   title: {
@@ -229,7 +95,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
 };
- 
+
 export default function RootLayout({
   children,
 }: {
@@ -237,7 +103,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${recoleta.className} antialiased`}>
+      <body className={`antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
