@@ -66,6 +66,10 @@ useEffect(() => {
                 />
               </div>
             </Link>
+            <button onClick={() => console.log("Live button clicked")}>
+  Test
+</button>
+
           </div>
 
           {/* Center: Search (Desktop only) */}
@@ -151,16 +155,16 @@ useEffect(() => {
 
       {open && (
         <div className="absolute top-12 mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10">
-          {currencies.map((c) => (
+          {currencies?.map((c) => (
             <div
-              key={c.code}
+              key={c?.code}
               className="px-3 py-2 text-black hover:bg-gray-100 cursor-pointer"
               onClick={() => {
-                dispatch(setSelectedCurrency(c.code));
+                dispatch(setSelectedCurrency(c?.code));
                 setOpen(false);
               }}
             >
-              {c.code} - {c.rate.toFixed(2)}
+              {c?.code} - {c?.rate?.toFixed(2)}
             </div>
           ))}
         </div>
