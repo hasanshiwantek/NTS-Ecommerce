@@ -53,13 +53,19 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3.1px] xl:mt-4 2xl:mt-6">
           <div className="flex flex-col items-start">
             <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
-             Was ${Number(product?.price || 0).toFixed(2)}
+              Was ${Number(product?.price || 0).toFixed(2)}
             </h2>
             <h5 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
-             Now $
+              Now $
               {product?.msrp && product.msrp > 0
                 ? Number(product.msrp).toFixed(2)
-                : "N/A"} <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511]">You save  {(Number(product?.price || 0) - Number(product.msrp || 0)).toFixed(2)}</span>
+                : "N/A"}{" "}
+              <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511]">
+                You save{" "}
+                {(
+                  Number(product?.price || 0) - Number(product.msrp || 0)
+                ).toFixed(2)}
+              </span>
             </h5>
           </div>
 
@@ -100,18 +106,18 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         <div className="flex flex-col gap-1 w-full mt-3">
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Manufacture</h5>
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">{product?.sku || "N/A"}</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">{product?.brand?.name || "N/A"}</h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Mfr Part#</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.availabilityText || "N/A"}
+              {product?.sku || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Availability</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.availabilityText || "N/A"}
+              {product?.dimensions?.weight || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
@@ -123,7 +129,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Shipping</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.availabilityText || "N/A"}
+              {product?.fixedShippingCost || "N/A"}
             </h5>
           </div>
 
@@ -181,13 +187,13 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
               </button>
             </div>
 
-             {/* Add to Cart */}
-        <button
-          onClick={() => {
-  dispatch(addToCart({ ...product, quantity }));
-  toast.success(`${product.name} added to cart (${quantity})!`);
-}}
-          className="
+            {/* Add to Cart */}
+            <button
+              onClick={() => {
+                dispatch(addToCart({ ...product, quantity }));
+                toast.success(`${product.name} added to cart (${quantity})!`);
+              }}
+              className="
       bg-[#F15939] 
       hover:border-[#F15939] hover:bg-white hover:text-[#F15939] 
       font-bold text-[13px] xl:text-[11.2px] 2xl:text-[14px] 
@@ -195,13 +201,13 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
      flex items-center justify-center space-x-2 transition 
       w-full xl:w-[50rem] 2xl:w-[67.9%]
     "
-        >
-          <ShoppingCart
-            className="w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7"
-            fill="white"
-          />
-          <span>Add to Cart</span>
-        </button>
+            >
+              <ShoppingCart
+                className="w-5 h-5 sm:w-6 sm:h-6 2xl:w-7 2xl:h-7"
+                fill="white"
+              />
+              <span>Add to Cart</span>
+            </button>
           </div>
         </div>
       </div>

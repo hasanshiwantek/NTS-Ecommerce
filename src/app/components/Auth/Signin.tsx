@@ -29,24 +29,33 @@ const SigninPage = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const togglePassword = () => setShowPassword(prev => !prev);
+  const togglePassword = () => setShowPassword((prev) => !prev);
   const { loading } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
+    console.groupCollapsed("🟢 [Form] handleSubmit(onSubmit)");
+    console.log("📋 Form Data:", data);
+
     try {
-      const result = await dispatch(loginUser({ data: data }));
+      console.log("🚀 Dispatching loginUser thunk...");
+      const result = await dispatch(loginUser(data));
+
+      console.log("📥 Thunk Result:", result);
 
       if (loginUser.fulfilled.match(result)) {
+        console.log("✅ Login succeeded");
         reset();
         router.push("/");
       } else {
         const errorMessage =
           result.error?.message || "Login failed. Please try again.";
-        console.error("Login failed:", errorMessage);
+        console.error("❌ Login rejected with message:", errorMessage);
       }
     } catch (err: any) {
-      console.error("🚨 Unexpected error:", err);
+      console.error("🚨 Unexpected error during onSubmit:", err);
+    } finally {
+      console.groupEnd();
     }
   };
 
@@ -104,30 +113,30 @@ const SigninPage = () => {
 
               {/* Password */}
               <div className="relative w-full">
-      <Label className="h5-regular" htmlFor="password">
-        Password <span className="text-red-600">*</span>
-      </Label>
+                <Label className="h5-regular" htmlFor="password">
+                  Password <span className="text-red-600">*</span>
+                </Label>
 
-      <Input
-        id="password"
-        type={showPassword ? "text" : "password"}
-        className="!w-full !max-w-full h-[50px] sm:h-[55px] 2xl:h-[60px] pr-12"
-        {...register("password", { required: true })}
-      />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  className="!w-full !max-w-full h-[50px] sm:h-[55px] 2xl:h-[60px] pr-12"
+                  {...register("password", { required: true })}
+                />
 
-      {/* Eye icon */}
-      <button
-        type="button"
-        onClick={togglePassword}
-        className="absolute right-3 top-[52px] 2xl:top-20 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-      >
-        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-      </button>
+                {/* Eye icon */}
+                <button
+                  type="button"
+                  onClick={togglePassword}
+                  className="absolute right-3 top-[52px] 2xl:top-20 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
 
-      {errors.password && (
-        <p className="text-sm text-red-500 mt-1">Required</p>
-      )}
-    </div>
+                {errors.password && (
+                  <p className="text-sm text-red-500 mt-1">Required</p>
+                )}
+              </div>
 
               {/* Forgot password */}
               <p className="text-[14px] sm:text-[16px] font-semibold text-[#F15939] text-end">
@@ -144,7 +153,7 @@ const SigninPage = () => {
                   type="submit"
                   className="w-full !py-6 sm:!py-7 2xl:!py-9 !rounded-full btn-primary  2xl:text-[22px] xl:text-[16.5] text-[14px] text-[#FFFFFF]"
                 >
-                  Login
+                  {loading ? "Logging in..." : "Login"}
                 </Button>
               )}
             </form>
