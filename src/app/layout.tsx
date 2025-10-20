@@ -13,25 +13,25 @@ const recoleta = localFont({
   src: [
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta Regular.woff2",
+      path: "./fonts/Recoleta-regular.woff2",
       weight: "400", // Regular
       style: "normal",
     },
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta Medium.woff2",
+      path: "./fonts/Recoleta-medium.woff2",
       weight: "500", // Medium
       style: "normal",
     },
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta SemiBold.woff2",
+      path: "./fonts/Recoleta-semibold.woff2",
       weight: "600", // SemiBold
       style: "normal",
     },
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "/fonts/Recoleta Bold.woff2",
+      path: "./fonts/Recoleta-bold.woff2",
       weight: "700", // Bold
       style: "normal",
     },
@@ -68,8 +68,6 @@ const recoleta = localFont({
 //   ],
 //   variable: "--font-recoleta",
 // });
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
