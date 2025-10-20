@@ -13,7 +13,7 @@ const ProductCard = ({ product }: { product: any }) => {
   const dispatch = useAppDispatch();
   const addtocart = ()=>{
      dispatch(addToCart(product));
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`${product.name} added to cart!!`);
   }
   const images =
     product?.image?.length > 0
