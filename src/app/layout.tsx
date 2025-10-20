@@ -2,11 +2,52 @@ import type { Metadata } from "next";
 import "./globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Jost } from "next/font/google";
-
+import localFont from "next/font/local";
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
+
+// ✅ Recoleta (400–700)
+// const recoleta = localFont({
+//   src: [
+//     {
+//       path: "./Recoleta-Regular.woff2",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "./Recoleta-Medium.woff2",
+//       weight: "500",
+//       style: "normal",
+//     },
+//     {
+//       path: "./Recoleta-SemiBold.woff2",
+//       weight: "600",
+//       style: "normal",
+//     },
+//     {
+//       path: "./Recoleta-Bold.woff2",
+//       weight: "700",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-recoleta",
+// });
+
+
+
+// const recoleta = localFont({
+//   src: [
+//     {
+//       path: "/public/fonts/Recoleta-RegularDEMO.otf",
+//       weight: "400",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-recoleta",
+//   display: "swap",
+// });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
@@ -62,7 +103,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${jost.className} antialiased`}>
+      <body className={`antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

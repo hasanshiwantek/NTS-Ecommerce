@@ -50,15 +50,15 @@ const ProductRight = () => {
            <h1 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000] font-bold mt-3 2xl:mt-5">Certified IT Hardware Specialists</h1>
           </div>
           <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3">
-            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939]" />
+            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939] stroke-4" />
            <p className=" xl:text-[11.2px] 2xl:text-[14px]">Proven reliability, 99% customer satisfaction rate.</p>
           </div>
-          <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3">
-            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939]" />
+          <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3 ">
+            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939] stroke-4" />
            <p className=" xl:text-[11.2px] 2xl:text-[14px]">Global shipping with post-delivery support.</p>
           </div>
           <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3">
-            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939]" />
+            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939] stroke-4" />
            <p className=" xl:text-[11.2px] 2xl:text-[14px]">Certified professionals guiding you through every step.</p>
           </div>
           
