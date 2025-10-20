@@ -16,13 +16,16 @@ import { toast } from "react-toastify";
 import { fetchCurrencies, setSelectedCurrency } from "@/redux/slices/currencySlice";
 const Navbar: React.FC = () => {
   const [currencyOpen, setCurrencyOpen] = useState(false);
-  const [currency, setCurrency] = useState("USD");
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const auth = useAppSelector((state: RootState) => state?.auth);
   const dispatch = useAppDispatch();
- const { currencies, selectedCurrency, status } = useAppSelector((state: RootState) => state.currency);
+ const { currencies, status ,selectedCurrency} = useAppSelector((state: RootState) => state.currency);
   const [open, setOpen] = useState(false);
+
+  console.log("ccccccccccccccccccccc" , selectedCurrency );
+  console.log("ddddddddddddddddddddd" , currencies );
+  
 
 useEffect(() => {
   if (status === "idle") {
@@ -141,7 +144,7 @@ useEffect(() => {
         <button   onClick={() => setOpen(!open)}
          className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300">
                   <span className="text-sm sm:text-base md:text-lg lg:text-xl 2xl:text-[20px]">
-                    {currency}
+                    {selectedCurrency}
                   </span>
                   <FaChevronDown className="text-xs" />
                 </button>
@@ -276,7 +279,7 @@ useEffect(() => {
                   onClick={() => setCurrencyOpen(!currencyOpen)}
                   className="flex items-center gap-1 text-sm font-semibold hover:text-blue-300"
                 >
-                  <span>{currency}</span>
+                  <span>{selectedCurrency}</span>
                   <FaChevronDown className="text-xs" />
                 </button>
               </div>

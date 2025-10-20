@@ -230,7 +230,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           }}
           className="
       text-[14px] xl:text-[11.2px] 2xl:text-[14px] 
-      font-bold  
+      font-bold 
       bg-[#121e4d] text-white
       hover:text-[#F15939] hover:bg-white 
     flex items-center justify-center space-x-2 transition 
