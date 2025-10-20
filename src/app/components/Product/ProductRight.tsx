@@ -45,27 +45,6 @@ const ProductRight = () => {
   </div>
 </div>
 
-<<<<<<< HEAD
-        <div className="w-[80%] 2xl:w-[70%] mx-auto">
-          <div className="flex justify-center xl:mb-2 2xl:mb-3">
-           <h1 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000] font-bold mt-3 2xl:mt-5">Certified IT Hardware Specialists</h1>
-          </div>
-          <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3">
-            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939] stroke-4" />
-           <p className=" xl:text-[11.2px] 2xl:text-[14px]">Proven reliability, 99% customer satisfaction rate.</p>
-          </div>
-          <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3 ">
-            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939] stroke-4" />
-           <p className=" xl:text-[11.2px] 2xl:text-[14px]">Global shipping with post-delivery support.</p>
-          </div>
-          <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3">
-            <Check className="w-7 h-6 2xl:w-10 2xl:h-9 text-[#F15939] stroke-4" />
-           <p className=" xl:text-[11.2px] 2xl:text-[14px]">Certified professionals guiding you through every step.</p>
-          </div>
-          
-        </div>
-        <div className="flex justify-center gap-2 xl:mb-2 2xl:mb-3">
-=======
         <div className="w-full xl:w-[80%] 2xl:w-[75%] mx-auto px-1 flex flex-col items-center">
   {/* Heading */}
   <h1 className="text-center font-bold text-[#000000] mt-3 2xl:mt-5 lg:text-sm xl:text-[11.2px] 2xl:text-[14px]">
@@ -93,7 +72,6 @@ const ProductRight = () => {
 </div>
 
         <div className="flex justify-center lg:gap-1 xl:gap-2 xl:mb-2 2xl:mb-3 mt-2">
->>>>>>> b33a0e2ec7bc32697f76e9ba6b435feb26e0c3e8
       {/* Camera Icon */}
       <div className="border border-gray-300 p-1 rounded-md flex items-center justify-center">
         <Camera className="w-10 h-8 text-black" />
