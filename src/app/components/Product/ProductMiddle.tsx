@@ -133,9 +133,10 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             </h5>
           </div>
 
-          <div className="flex gap-7 lg:gap-1.5 xl:gap-2.5 mt-2 xl:mt-4 2xl:mt-6">
+          <div className="flex gap-7 lg:gap-1.5 xl:gap-2.5 mt-2 xl:mt-4 2xl:mt-6 ">
             <div
               className="
+              bg-[#f5f5f5]
       flex items-center justify-center 
       w-48 h-[38.39px]             
       lg:w-32 lg:h-12            
