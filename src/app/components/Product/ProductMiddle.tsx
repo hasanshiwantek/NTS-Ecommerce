@@ -117,13 +117,13 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Availability</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.dimensions?.weight || "N/A"}
+              {product?.availabilityText || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Weight</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.availabilityText || "N/A"}
+              {product?.dimensions?.weight || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
@@ -228,7 +228,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       bg-[#121e4d] text-white
       hover:text-[#F15939] hover:bg-white hover:border-[#F15939] 
     flex items-center justify-center space-x-2 transition 
-      w-full xl:w-full 2xl:w-[100%] h-full
+      w-full xl:w-full 2xl:w-[100%] h-full border
     "
         >
           <span>Buy Now</span>

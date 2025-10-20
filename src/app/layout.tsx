@@ -8,27 +8,61 @@ const jost = Jost({
   weight: ["400", "600", "700"],
 });
 
-// ✅ Recoleta (400–700)
+// ✅ Recoleta (400–700) - Loading multiple weights
+const recoleta = localFont({
+  src: [
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "./fonts/Recoleta Regular.woff2",
+      weight: "400", // Regular
+      style: "normal",
+    },
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "./fonts/Recoleta Medium.woff2",
+      weight: "500", // Medium
+      style: "normal",
+    },
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "./fonts/Recoleta SemiBold.woff2",
+      weight: "600", // SemiBold
+      style: "normal",
+    },
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "./fonts/Recoleta Bold.woff2",
+      weight: "700", // Bold
+      style: "normal",
+    },
+  ],
+  variable: "--font-recoleta",
+});
+
 // const recoleta = localFont({
 //   src: [
 //     {
-//       path: "./Recoleta-Regular.woff2",
-//       weight: "400",
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/fonnts.com-recoleta-regular.otf",
+//       weight: "400", // Regular
 //       style: "normal",
 //     },
 //     {
-//       path: "./Recoleta-Medium.woff2",
-//       weight: "500",
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/fonnts.com-recoleta-medium.otf",
+//       weight: "500", // Medium
 //       style: "normal",
 //     },
 //     {
-//       path: "./Recoleta-SemiBold.woff2",
-//       weight: "600",
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/fonnts.com-recoleta-semibold.otf",
+//       weight: "600", // SemiBold
 //       style: "normal",
 //     },
 //     {
-//       path: "./Recoleta-Bold.woff2",
-//       weight: "700",
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/fonnts.com-recoleta-bold.otf",
+//       weight: "700", // Bold
 //       style: "normal",
 //     },
 //   ],
@@ -36,18 +70,6 @@ const jost = Jost({
 // });
 
 
-
-// const recoleta = localFont({
-//   src: [
-//     {
-//       path: "/public/fonts/Recoleta-RegularDEMO.otf",
-//       weight: "400",
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-recoleta",
-//   display: "swap",
-// });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
@@ -103,7 +125,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className={`${recoleta.className} antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
