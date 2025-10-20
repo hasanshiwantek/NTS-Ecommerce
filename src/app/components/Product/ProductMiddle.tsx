@@ -16,6 +16,7 @@ import { useAppDispatch } from "@/hooks/useReduxHooks";
 import { toast } from "react-toastify";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { useRouter } from "next/navigation";
+import ProductPrice from "../productprice/ProductPrice";
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -52,9 +53,13 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         {/* Price */}
         <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3.1px] xl:mt-4 2xl:mt-6">
           <div className="flex flex-col items-start">
-            <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
-              Was ${Number(product?.price || 0).toFixed(2)}
-            </h2>
+            {/* Pehle wali hardcoded price */}
+{/* <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
+  Was ${Number(product?.price || 0).toFixed(2)}
+</h2> */}
+
+{/* Ab ProductPrice component use karo */}
+<ProductPrice price={Number(product?.price || 0)} />
             <h5 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
               Now $
               {product?.msrp && product.msrp > 0
