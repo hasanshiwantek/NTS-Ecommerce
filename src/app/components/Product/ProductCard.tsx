@@ -27,7 +27,7 @@ const ProductCard = ({ product }: { product: any }) => {
 
   return (
     <div className="max-w-full mx-auto">
-      <div className="bg-white rounded-xl w-full max-w-[1719px] 2xl:px-3 px-0">
+      <div className="bg-white rounded-xl w-full 2xl:max-w-[1719px] 2xl:px-3 px-0">
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 h5-20px-regular lg:mb-7 sm:mb-7 mb-7">
           <span>Home</span>
@@ -45,7 +45,7 @@ const ProductCard = ({ product }: { product: any }) => {
           ))}
         </div>
 
-        <div className="flex flex-wrap lg:flex-nowrap 2xl:gap-6 xl:gap-10 lg:gap-6 md:gap-5 sm:gap-4 gap-4 ">
+        <div className="flex flex-wrap lg:flex-nowrap 2xl:gap-6 xl:gap-[20px] lg:gap-[25px] md:gap-5 sm:gap-4 gap-4 ">
           <ProductLeft
             images={images}
             selectedImage={selectedImage}

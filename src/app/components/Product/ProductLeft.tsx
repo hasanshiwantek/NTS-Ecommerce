@@ -4,17 +4,31 @@ import Image from "next/image";
 
 const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
   return (
-    <div className=" product-left flex flex-col w-full lg:w-[30%] xl:w-[450px] xl:h-[374px] 2xl:w-[35.3%]">
-      <div className="flex flex-col sm:flex-row sm:space-x-4">
-        {/* Thumbnails */}
+    <div className=" product-left flex flex-col w-full xl:w-[40.1%] 2xl:w-[34.9%]">
+      <div className="flex flex-col gap-[10px]">
+     
+        {/* Main Image */}
+        <div
+          className="rounded-md sm:mt-0 border flex items-center justify-center 
+          w-full h-64 sm:h-[400px] md:h-[450px] lg:w-[30rem] xl:w-[100%] xl:h-[39.1rem] 2xl:w-[100%] 2xl:h-[49.1rem]  
+           p-1 bg-[#F2F3F7]"
+        >
+          <Image
+            src={selectedImage || "/default-product-image.svg"}
+            alt="Product"
+            className="xl:w-[84.5%] 2xl:w-[84.2%] 2xl:h-[62.2%] xl:h-[62.2%] object-contain rounded-lg p-10 md:p-20 sm:p-10 lg:p-12 2xl:p-16 xl:p-12"
+            width={500}
+            height={500}
+          />
+        </div>
+
+            {/* Thumbnails */}
         <div
           className="
-            flex flex-col justify-between gap-2 
-            max-[642px]:flex-row max-[642px]:overflow-x-auto
-            sm:flex-col sm:gap-y-3 sm:overflow-visible sm:pb-0  max-[642px]:p-[5px]
+            flex justify-center items-center xl:w-[100%] h-[5.7rem] 2xl:w-[100%] 2xl:h-[7.2rem] border
           "
-        >
-          {images.map((img: string, idx: number) => (
+        > Image may differ from the actual product
+          {/* {images.map((img: string, idx: number) => (
             <Image
               key={idx}
               src={img}
@@ -29,22 +43,7 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
                     : "border border-black ring-2 ring-[#3333331A]"
                 }`}
             />
-          ))}
-        </div>
-
-        {/* Main Image */}
-        <div
-          className="flex-1 rounded-md sm:mt-0 border flex items-center justify-center 
-          w-full h-64 sm:h-[400px] md:h-[450px] lg:w-[30rem] 2xl:w-[499.67px] 2xl:h-[499.6673889160156px] xl:w-[374.75px] xl:h-[374.75px] 
-           p-1 bg-[#F2F3F7]"
-        >
-          <Image
-            src={selectedImage || "/default-product-image.svg"}
-            alt="Product"
-            className="w-full h-full object-contain rounded-lg p-10 md:p-20 sm:p-10 lg:p-12 2xl:p-16 xl:p-12"
-            width={500}
-            height={500}
-          />
+          ))} */}
         </div>
       </div>
     </div>
