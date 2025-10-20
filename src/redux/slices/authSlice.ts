@@ -39,13 +39,28 @@ const initialState: AuthState = {
 // Login thunk
 export const loginUser = createAsyncThunk(
   "auth/login",
-  async ({ data }: { data: any }, thunkAPI) => {
+  async (data: any, thunkAPI) => {
+    console.groupCollapsed("🟢 [Thunk] loginUser()");
     try {
+      console.log("➡️ Base URL:", axiosInstance.defaults.baseURL);
+      console.log("➡️ Endpoint:", "user/login");
+      console.log("📤 Payload being sent:", data);
+
       const res = await axiosInstance.post("user/login", data);
-      console.log("Login Response: ", res.data);
+
+      console.log("✅ Response Status:", res.status);
+      console.log("✅ Response Data:", res.data);
+      console.groupEnd();
       return res.data;
     } catch (err: any) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.error("❌ Thunk Error caught:", err);
+      if (err.response) {
+        console.error("❌ Response Status:", err.response.status);
+        console.error("❌ Response Data:", err.response.data);
+      } else {
+        console.error("❌ No response (network or CORS):", err.message);
+      }
+      console.groupEnd();
       return thunkAPI.rejectWithValue(
         err.response?.data?.message || "Login failed"
       );
@@ -111,9 +126,10 @@ const authSlice = createSlice({
 
       // Fulfilled - login
       .addCase(loginUser.fulfilled, (state, action) => {
+        const { user, token } = action.payload.data || action.payload;
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = user;
+        state.token = token;
         state.isAuthenticated = true;
         // state.stores = action.payload.stores.map((store: any) => ({
         //   storeId: store.id,

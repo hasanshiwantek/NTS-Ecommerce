@@ -90,22 +90,6 @@ const GlobalSearchBar: React.FC = () => {
     <div ref={containerRef} className="relative">
       {/* Input Box */}
       <div className="relative">
-        {/* <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search categories..."
-          className="w-full px-5 py-3 rounded-full bg-white text-gray-800
-          focus:outline-none focus:ring-2 focus:ring-orange-400
-          text-base lg:text-lg pr-12"
-        />
-        <Search
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-          onClick={() => {
-            if (query.trim()) dispatch(globalSearch({ query }));
-          }}
-        /> */}
-
         <div>
           <input
             type="search"
