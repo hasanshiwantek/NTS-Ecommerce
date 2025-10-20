@@ -20,14 +20,14 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
-    <div className=" product-middle  flex flex-col h-full w-full  xl:w-[38%] 2xl:w-[36.4%]">
+    <div className=" product-middle  flex flex-col h-full w-full lg:w-[38%] xl:w-[38%] 2xl:w-[36.4%]">
       <div>
-        <div className="flex flex-col xl:gap-2.5 2xl:gap-3 gap-3">
+        <div className="flex flex-col gap-1 xl:gap-2.5 2xl:gap-3">
           {/* <h6 className="h6-regular">{product?.brand?.name}</h6> */}
           <h1
             className="
     font-bold uppercase 
-    text-[14px] leading-9 2xl:leading-11 tracking-[0.0075em] text-[#000000] 
+    text-[14px] leading-7 xl:leading-9 2xl:leading-11 tracking-[0.0075em] text-[#000000] 
     xl:text-[16.8px] 
     2xl:text-[21px]
   "
@@ -38,7 +38,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           {/* Rating */}
           <div className="flex items-center space-x-3">
             {product?.rating && (
-              <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+              <Star className="w-5 h-5 text-[#F15939] fill-[#F15939]" />
             )}
             <h6 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
               {product?.rating || "N/A " + " Ratings"}
@@ -70,10 +70,8 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           </div>
 
           {/* Secure Methods */}
-          <div className="flex flex-wrap items-center xl:mt-4 2xl:mt-6">
-            <span className="xl:text-[10.2px] 2xl:[12.8px] text-[#000000]">
-              Secure methods:
-            </span>
+          <div className="flex flex-wrap items-center justify-between mt-1 xl:mt-4 2xl:mt-6">
+            <span className="xl:text-[10.2px] 2xl:[12.8px] text-[#000000]">Secure methods:</span>
             {/* <div className="flex items-center gap-2">
               <Image src={visa} alt="Visa" />
               <Image src={debit} alt="Debit" />
@@ -85,76 +83,61 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         </div>
 
         {/* Shipping Info */}
-        <div className="2xl:gap-[16px]  xl:gap-[12px] bg-[#F5F5F5] xl:mt-4 2xl:mt-6 px-4 xl:h-[4.2rem] 2xl:h-[5.3rem] rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="2xl:gap-[16px]  xl:gap-[12px] gap-2 bg-[#F5F5F5] mt-3 xl:mt-4 2xl:mt-6  px-4 py-2 xl:py-0 xl:h-[4.2rem] 2xl:h-[5.3rem] rounded-md flex flex-col sm:flex-row items-center justify-between">
           <Image
             src={freelogo}
             alt="Free Shipping"
             className="w-14 h-w-14 object-contain"
           />
           <div className="flex-1 text-center sm:text-left ">
-            <h5 className="text-[#000000] font-bold xl:text-[11.2px] 2xl:text-[14px]">
-              Free shipping Up to 10 lbs
-            </h5>
+            <h5 className="text-[#000000] font-bold text-[11.2px] 2xl:text-[14px]">Free shipping Up to 10 lbs</h5>
             <p className="xl:text-[8.4px] 2xl:text-[10.5px] text-[#000000]">
               Get your orders delivered without extra cost.
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Image src={dhllogo} alt="DHL" className="w-16 h-10" />
-            <Image src={upslogo} alt="UPS" className="w-16 h-10" />
-            <Image src={feedxlogo} alt="FedEx" className="w-20 h-10" />
+          <div className="flex items-center gap-1 xl:gap-3">
+            <Image src={dhllogo} alt="DHL" className="w-12 xl:w-16 h-10" />
+            <Image src={upslogo} alt="UPS" className="w-12 xl:w-16 h-10" />
+            <Image src={feedxlogo} alt="FedEx" className="w-14 xl:w-20 h-10" />
           </div>
         </div>
 
         {/* SKU / Availability / Quantity */}
         <div className="flex flex-col gap-1 w-full mt-3">
-          <div className="flex xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
-              Manufacture
-            </h5>
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.brand?.name || "N/A"}
-            </h5>
+          <div className="flex gap-12 xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Manufacture</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">{product?.brand?.name || "N/A"}</h5>
           </div>
-          <div className="flex xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
-              Mfr Part#
-            </h5>
+          <div className="flex gap-12 xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Mfr Part#</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.sku || "N/A"}
             </h5>
           </div>
-          <div className="flex xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
-              Availability
-            </h5>
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.availabilityText || "N/A"}
-            </h5>
-          </div>
-          <div className="flex xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
-              Weight
-            </h5>
+          <div className="flex gap-12 xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Availability</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.dimensions?.weight || "N/A"}
             </h5>
           </div>
-          <div className="flex xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
-              Shipping
+          <div className="flex gap-12 xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Weight</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+              {product?.availabilityText || "N/A"}
             </h5>
+          </div>
+          <div className="flex gap-12 xl:gap-14 2xl:gap-16">
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Shipping</h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.fixedShippingCost || "N/A"}
             </h5>
           </div>
 
-          <div className="flex xl:gap-2.5 xl:mt-4 2xl:mt-6">
+          <div className="flex gap-7 lg:gap-1.5 xl:gap-2.5 mt-2 xl:mt-4 2xl:mt-6">
             <div
               className="
       flex items-center justify-center 
-      w-24 h-10                
-      md:w-28 md:h-11             
+      w-48 h-[38.39px]             
       lg:w-32 lg:h-12            
       xl:w-[30.1%] xl:h-[3.2rem]    
       2xl:w-[30%] 2xl:h-[48px]  
@@ -165,8 +148,8 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
                 onClick={decrement}
                 className="
         flex items-center justify-center
-        w-8 h-8 text-gray-700      
-        md:w-9 md:h-9
+        text-gray-700      
+        w-full h-full
         lg:w-10 lg:h-10
         xl:w-[48.8px] xl:h-[40px]
         2xl:w-[35%] 2xl:h-[48px]
@@ -180,7 +163,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
                 className="
         flex items-center justify-center font-semibold
         text-sm sm:text-base md:text-lg
-        w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12
+         w-full h-full lg:w-12 lg:h-12
         xl:w-[48.8px] xl:h-[40px] 2xl:w-[35%] 2xl:h-[48px]
         border-x border-gray-300
       "
@@ -192,8 +175,8 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
                 onClick={increment}
                 className="
         flex items-center justify-center
-        w-8 h-8 text-gray-700
-        md:w-9 md:h-9
+         text-gray-700
+        w-full h-full
         lg:w-10 lg:h-10
         xl:w-[48.8px] xl:h-[40px]
         2xl:w-[35%] 2xl:h-[48px]
@@ -216,7 +199,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       font-bold text-[13px] xl:text-[11.2px] 2xl:text-[14px] 
       text-white border border-[#F15939] 
      flex items-center justify-center space-x-2 transition 
-      w-full lg:w-[40rem] xl:w-[50rem] 2xl:w-[67.9%]
+      w-full xl:w-[50rem] 2xl:w-[67.9%]
     "
             >
               <ShoppingCart
@@ -230,7 +213,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center xl:mt-4 2xl:mt-6 xl:h-[38.4px] 2xl:h-[48.1px]">
+      <div className="flex items-center mt-3 xl:mt-4 2xl:mt-6 h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
           onClick={() => {
@@ -245,7 +228,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       bg-[#121e4d] text-white
       hover:text-[#F15939] hover:bg-white hover:border-[#F15939] 
     flex items-center justify-center space-x-2 transition 
-      w-full lg:w-[20rem] xl:w-full 2xl:w-[100%] h-full border
+      w-full xl:w-full 2xl:w-[100%] h-full
     "
         >
           <span>Buy Now</span>
@@ -253,7 +236,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       </div>
 
       {/* Note */}
-      <div className="xl:mt-6 2xl:mt-8">
+      <div className="mt-3 xl:mt-6 2xl:mt-8">
         <p className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
           <span className="text-red-600 ">*</span> All Business Entities,
           Corporations, Public & Private School Systems, Governmental
