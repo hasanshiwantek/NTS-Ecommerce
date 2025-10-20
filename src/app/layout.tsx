@@ -9,35 +9,35 @@ const jost = Jost({
 });
 
 // ✅ Recoleta (400–700) - Loading multiple weights
-// const recoleta = localFont({
-//   src: [
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "/fonts/Recoleta Regular.woff2",
-//       weight: "400", // Regular
-//       style: "normal",
-//     },
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "/fonts/Recoleta Medium.woff2",
-//       weight: "500", // Medium
-//       style: "normal",
-//     },
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "/fonts/Recoleta SemiBold.woff2",
-//       weight: "600", // SemiBold
-//       style: "normal",
-//     },
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "/fonts/Recoleta Bold.woff2",
-//       weight: "700", // Bold
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-recoleta",
-// });
+const recoleta = localFont({
+  src: [
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "/fonts/Recoleta Regular.woff2",
+      weight: "400", // Regular
+      style: "normal",
+    },
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "/fonts/Recoleta Medium.woff2",
+      weight: "500", // Medium
+      style: "normal",
+    },
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "/fonts/Recoleta SemiBold.woff2",
+      weight: "600", // SemiBold
+      style: "normal",
+    },
+    {
+      // 🚨 Ensure file name matches exactly (with space)
+      path: "/fonts/Recoleta Bold.woff2",
+      weight: "700", // Bold
+      style: "normal",
+    },
+  ],
+  variable: "--font-recoleta",
+});
 
 // const recoleta = localFont({
 //   src: [
@@ -125,7 +125,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${jost.className} antialiased`}>
+      <body className={`${recoleta.className} antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
