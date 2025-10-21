@@ -19,7 +19,6 @@ const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const auth = useAppSelector((state: RootState) => state?.auth);
-  console.log("aaaaaaaaaaaaaaaaaa" , auth);
   
   const dispatch = useAppDispatch();
  const { currencies, status ,selectedCurrency} = useAppSelector((state: RootState) => state.currency);
