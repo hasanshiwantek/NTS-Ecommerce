@@ -136,6 +136,9 @@ const FooterBottom = () => {
               <li>
                 <Link href="/terms-conditions">Terms and conditions</Link>
               </li>
+                      <li>
+                <Link href="/blogs">Blog</Link>
+              </li>
             </ul>
           </nav>
 
