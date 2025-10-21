@@ -1,6 +1,7 @@
 import React from "react";
 import SignupPage from "@/app/components/Auth/Signup";
 import { Metadata } from "next";
+import ProtectedRoute from "@/app/components/ProtectedPages/ProtectedRoute";
 export const metadata: Metadata = {
   title: "Signup - New Town Spares",
   description:
@@ -11,9 +12,11 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div>
+   <ProtectedRoute>
+     <div>
       <SignupPage />
     </div>
+   </ProtectedRoute>
   );
 };
 

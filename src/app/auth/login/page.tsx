@@ -1,4 +1,5 @@
 import Signin from '@/app/components/Auth/Signin'
+import ProtectedRoute from '@/app/components/ProtectedPages/ProtectedRoute';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -20,9 +21,11 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div>
+   <ProtectedRoute>
+     <div>
       <Signin/>
     </div>
+   </ProtectedRoute>
   )
 }
 
