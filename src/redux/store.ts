@@ -7,7 +7,7 @@ import authReducer from "./slices/authSlice";
 import configReducer from "./slices/configSlice";
 import cartSliceReducer from "./slices/cartSlice";
 import currencyReducer from "./slices/currencySlice";
-
+import storeFrontReducer from "./slices/storeFrontSlice";
 // ✅ only cart persist hoga
 const cartPersistConfig = {
   key: "cart",
@@ -22,10 +22,11 @@ const authPersistConfig = {
 
 const rootReducer = combineReducers({
   home: homeReducer,
-   currency: currencyReducer,
-  auth: persistReducer(authPersistConfig,authReducer), // persisted
+  currency: currencyReducer,
+  auth: persistReducer(authPersistConfig, authReducer), // persisted
   config: configReducer,
   cart: persistReducer(cartPersistConfig, cartSliceReducer), // persisted
+  storeFront: storeFrontReducer,
 });
 
 export const store = configureStore({
