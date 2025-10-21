@@ -34,7 +34,6 @@ const SigninPage = () => {
   const togglePassword = () => setShowPassword((prev) => !prev);
   const { loading } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
-    console.groupCollapsed("🟢 [Form] handleSubmit(onSubmit)");
     console.log("📋 Form Data:", data);
 
     try {
@@ -54,8 +53,6 @@ const SigninPage = () => {
       }
     } catch (err: any) {
       console.error("🚨 Unexpected error during onSubmit:", err);
-    } finally {
-      console.groupEnd();
     }
   };
 
