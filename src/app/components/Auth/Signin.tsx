@@ -34,16 +34,10 @@ const SigninPage = () => {
   const togglePassword = () => setShowPassword((prev) => !prev);
   const { loading } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
-    console.log("📋 Form Data:", data);
 
     try {
-      console.log("🚀 Dispatching loginUser thunk...");
       const result = await dispatch(loginUser(data));
-
-      console.log("📥 Thunk Result:", result);
-
       if (loginUser.fulfilled.match(result)) {
-        console.log("✅ Login succeeded");
         reset();
         router.push("/");
       } else {
