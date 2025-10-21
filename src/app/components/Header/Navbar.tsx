@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import navlogo from "@/assets/navlogo.png";
 import Image from "next/image";
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const auth = useAppSelector((state: RootState) => state?.auth);
-
+  const currencyRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useAppDispatch();
   const { currencies, status, selectedCurrency } = useAppSelector(
     (state: RootState) => state.currency
@@ -48,6 +48,22 @@ const Navbar: React.FC = () => {
     }
   };
   // const currencies = ["USD", "CAD", "EUR"];
+
+  // Close menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        currencyRef.current &&
+        !currencyRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="bg-[#484848] text-white shadow-md sticky top-0 z-50">
@@ -160,7 +176,10 @@ const Navbar: React.FC = () => {
                 </button>
 
                 {open && (
-                  <div className="absolute top-12 mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10">
+                  <div
+                    className="absolute top-12 mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10"
+                    ref={currencyRef}
+                  >
                     {currencies?.map((c) => (
                       <div
                         key={c?.code}
