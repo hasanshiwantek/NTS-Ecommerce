@@ -40,17 +40,9 @@ const initialState: AuthState = {
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (data: any, thunkAPI) => {
-    console.groupCollapsed("🟢 [Thunk] loginUser()");
     try {
-      console.log("➡️ Base URL:", axiosInstance.defaults.baseURL);
-      console.log("➡️ Endpoint:", "user/login");
-      console.log("📤 Payload being sent:", data);
-
       const res = await axiosInstance.post("user/login", data);
-
-      console.log("✅ Response Status:", res.status);
       console.log("✅ Response Data:", res.data);
-      console.groupEnd();
       return res.data;
     } catch (err: any) {
       console.error("❌ Thunk Error caught:", err);
@@ -126,9 +118,9 @@ const authSlice = createSlice({
 
       // Fulfilled - login
       .addCase(loginUser.fulfilled, (state, action) => {
-        const { user, token } = action.payload.data || action.payload;
+        const { customer, token } = action.payload.data || action.payload;
         state.loading = false;
-        state.user = user;
+        state.user = customer;
         state.token = token;
         state.isAuthenticated = true;
         // state.stores = action.payload.stores.map((store: any) => ({

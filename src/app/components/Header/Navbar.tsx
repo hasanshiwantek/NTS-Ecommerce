@@ -19,6 +19,8 @@ const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const auth = useAppSelector((state: RootState) => state?.auth);
+  console.log("aaaaaaaaaaaaaaaaaa" , auth);
+  
   const dispatch = useAppDispatch();
  const { currencies, status ,selectedCurrency} = useAppSelector((state: RootState) => state.currency);
   const [open, setOpen] = useState(false);
@@ -177,7 +179,7 @@ useEffect(() => {
               />
               <div className="flex flex-col leading-tight">
                 <p className="text-[16px] text-[#EDEDED] font-normal ">
-                  Account
+                 {auth?.user ?  `${auth?.user?.firstName} ${auth?.user?.lastName}` : "Account"}
                 </p>
                 <div className="flex items-center gap-1">
                   {auth?.isAuthenticated ? (
