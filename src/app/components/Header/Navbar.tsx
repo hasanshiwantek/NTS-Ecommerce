@@ -23,8 +23,6 @@ const Navbar: React.FC = () => {
  const { currencies, status ,selectedCurrency} = useAppSelector((state: RootState) => state.currency);
   const [open, setOpen] = useState(false);
 
-  console.log("ccccccccccccccccccccc" , selectedCurrency );
-  console.log("ddddddddddddddddddddd" , currencies );
   
 
 useEffect(() => {
@@ -66,10 +64,7 @@ useEffect(() => {
                 />
               </div>
             </Link>
-            <button onClick={() => console.log("Live button clicked")}>
-  Test
-</button>
-
+            
           </div>
 
           {/* Center: Search (Desktop only) */}
