@@ -31,6 +31,8 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
   };
 
   const visibleProducts = products.slice(startIndex, startIndex + itemsPerPage);
+  console.log("Related Products: ",products);
+  
 
   return (
     <>
@@ -95,11 +97,13 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                     {product.brand.name} | {product.availabilityText}
                   </h3>
                   <p className="h6-18-px-medium group-hover:invisible">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      minimumFractionDigits: 2,
-                    }).format(Number(product.price))}
+                    {product?.price
+                      ? new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                          minimumFractionDigits: 2,
+                        }).format(Number(product.price))
+                      : "$0.00"}
                   </p>
                 </div>
 

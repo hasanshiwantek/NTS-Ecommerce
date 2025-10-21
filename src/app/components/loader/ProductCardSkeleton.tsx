@@ -17,14 +17,14 @@ const ProductCardSkeleton = () => {
         <div className="flex flex-col flex-shrink-0 w-full md:w-1/2 xl:w-[30%]">
           <div className="flex flex-col sm:flex-row sm:space-x-4">
             {/* Thumbnails */}
-            <div className="flex gap-2 pb-2 sm:flex-col sm:gap-y-3">
+            {/* <div className="flex gap-2 pb-2 sm:flex-col sm:gap-y-3">
               {Array.from({ length: 4 }).map((_, idx) => (
                 <Skeleton
                   key={idx}
                   className="w-20 h-16 sm:w-24 sm:h-20 rounded-lg"
                 />
               ))}
-            </div>
+            </div> */}
 
             {/* Main Image */}
             <div className="flex-1 flex items-center justify-center h-64 sm:h-[400px] md:h-[450px] p-1">
