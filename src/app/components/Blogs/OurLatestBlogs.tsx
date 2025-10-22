@@ -74,12 +74,12 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
                 className="w-full rounded-lg h-auto lg:h-[95%] xl:h-[545.25px] 2xl:h-[97%] object-cover"
               />
             </Link>
-            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3 text-white">
-              <h4 className="text-sm md:text-base font-semibold">
+            <div className="absolute bottom-5 left-7 lg:bottom-14 lg:left-10 w-full p-3 text-white space-y-3">
+              <h4 className="font-medium text-2xl xl:text-[27px] xl:leading-[33px] 2xl:text-[36px] 2xl:leading-[42px]">
                 {blogPosts[0].title}
               </h4>
-              <p className="text-xs md:text-sm">
-                By {blogPosts[0].author} |{" "}
+              <p className="font-normal text-2xl xl:text-[15px] 2xl:text-[20px]">
+                By {blogPosts[0].author} <span className="text-[#F15939] font-extrabold"> {" "} | {" "} </span>
                 {dayjs(blogPosts[0].createdAt).format("MMM D, YYYY")}
               </p>
             </div>
@@ -101,14 +101,14 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
                     height={200}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3 text-white">
-                    <h4 className="text-sm md:text-base font-semibold">
+                  <div className="absolute bottom-5 left-7 w-full  p-3 text-white space-y-3">
+                    <h4 className="font-medium text-2xl xl:text-[27px] xl:leading-[33px] 2xl:text-[36px] 2xl:leading-[42px] line-clamp-1">
                       {blog.title}
                     </h4>
-                    <p className="text-xs md:text-sm">
-                      By {blog.author} |{" "}
+                    {/* <p className="font-normal text-2xl xl:text-[15px] 2xl:text-[20px]">
+                      By {blog.author}  <span className="text-[#F15939] font-extrabold"> {" "} | {" "} </span>
                       {dayjs(blog.createdAt).format("MMM D, YYYY")}
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </Link>
