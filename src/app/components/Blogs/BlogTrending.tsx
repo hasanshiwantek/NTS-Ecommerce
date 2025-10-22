@@ -30,21 +30,22 @@ const blogs = [
 
 const BlogTrending = () => {
   return (
-    <section className="w-full flex justify-center bg-white text-black py-12">
+    <section className="w-full flex justify-center bg-white text-black py-10">
       <div className="w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
         {/* Heading */}
-        <h2 className="h1-secondary uppercase tracking-wide mb-8 !text-[#4A4A4A]">
+        {/* <h2 className="h1-secondary uppercase tracking-wide mb-8 !text-[#4A4A4A]">
           What’s Trending
-        </h2>
+        </h2> */}
 
         {/* Blog Grid */}
         <div className="flex flex-wrap lg:flex-nowrap gap-10">
+          {/* <div>
+
           {blogs.map((blog) => (
             <div
               key={blog.id}
               className="flex flex-col rounded-lg overflow-hidden bg-white xl:w-[34.7%] 2xl:w-[34.7%] 2xl:h-[40%]"
             >
-              {/* Image with category label */}
               <div className="relative w-full h-[18rem] xl:h-[23.4rem] xl:w-full 2xl:h-[31.3rem] 2xl:w-full rounded-md overflow-hidden">
                 <Image
                   src={blog.image}
@@ -54,7 +55,6 @@ const BlogTrending = () => {
                 />
               </div>
 
-              {/* Text content */}
               <div className="flex flex-col justify-between mt-4">
                 <h3 className="h2-medium !text-[#4A4A4A] mb-2 line-clamp-1">
                   {blog.title}
@@ -71,7 +71,13 @@ const BlogTrending = () => {
               </div>
             </div>
           ))}
+          </div> */}
+
+          
            <div className="product-right w-full lg:w-[25%] xl:w-[24%] 2xl:w-[24.1%]">
+
+
+
       {/* Support Card 1 */}
       <div className="border border-gray-300 rounded-[20px] h-max w-full">
         <div className="bg-[#F5F6FA] px-6 py-4 rounded-t-[20px] text-center">
@@ -110,6 +116,9 @@ const BlogTrending = () => {
           </div>
         </div>
       </div>
+
+
+
 
       {/* Support Card 2 */}
       <div className="mt-6 border border-gray-300 rounded-[20px] h-max lg:h-max">

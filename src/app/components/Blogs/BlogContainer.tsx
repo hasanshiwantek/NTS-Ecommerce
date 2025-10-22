@@ -9,8 +9,10 @@ import { getBlogs } from "@/redux/slices/storeFrontSlice";
 
 const BlogContainer = () => {
   const dispatch = useAppDispatch();
-  const { blogs,loading,error } = useAppSelector((state:any) => state.storeFront);
-  const blogPosts=blogs?.data
+  const { blogs, error,loading } = useAppSelector(
+    (state: any) => state.storeFront
+  );
+  const blogPosts = blogs?.data;
   console.log("Blogs data from frontend: ", blogPosts);
 
   useEffect(() => {
@@ -19,10 +21,10 @@ const BlogContainer = () => {
 
   return (
     <div>
-      <OurLatestBlogs blogPosts={blogPosts}/>
-      <GridCard />
-      <BlogTrending />
-      <BlogCategories />
+      <OurLatestBlogs />
+      {/* <GridCard /> */}
+      <BlogCategories blogPosts={blogPosts} error={error} loading={loading} />
+      {/* <BlogTrending /> */}
     </div>
   );
 };

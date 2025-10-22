@@ -5,11 +5,11 @@ import FeaturedHBATable from "./FeaturedHBATable";
 import Image from "next/image";
 import Blogimg2 from "@/assets/blog/blogImage2.png";
 import CommentForm from "./CommentForm";
-import css from "@/styles/blog/blog.module.css"
-
+import css from "@/styles/blog/blog.module.css";
+import "../../../styles/blog/blog-content.css"
 const SingleBlog = ({ blogPost }: { blogPost: any }) => {
-  console.log("Blogpost data: ",blogPost);
-  
+  console.log("Blogpost data: ", blogPost);
+
   return (
     <>
       <div className="flex flex-col gap-5  py-10 2xl:w-[68.6%]  2xl:max-w-[1180px] xl:w-[68.6%] xl:max-w-[885px]   w-full">
@@ -108,9 +108,10 @@ const SingleBlog = ({ blogPost }: { blogPost: any }) => {
  */}
 
           <div
-            className="max-w-none" id={css.blogContent}
+            className={`blog-content-wrapper max-w-none`}
             dangerouslySetInnerHTML={{ __html: blogPost?.body }}
           />
+
           {/* <div /> */}
           <section>
             <FeaturedHBATable />

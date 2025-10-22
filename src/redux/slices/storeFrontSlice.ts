@@ -57,6 +57,7 @@ const storeFrontSlice = createSlice({
       })
       .addCase(getBlogs.fulfilled, (state, action) => {
         state.blogs = action?.payload;
+          state.loading = false; // <-- Add this!
       })
       .addCase(getBlogs.rejected, (state, action) => {
         state.loading = false;
