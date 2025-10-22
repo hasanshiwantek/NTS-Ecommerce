@@ -38,6 +38,7 @@ export const getBlogById = createAsyncThunk(
 // 2. Initial State
 const initialState = {
   blogs: [],
+  singleBlog: [],
   loading: false,
   error: null as string | null,
 };
@@ -58,6 +59,17 @@ const storeFrontSlice = createSlice({
         state.blogs = action?.payload;
       })
       .addCase(getBlogs.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(getBlogById.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getBlogById.fulfilled, (state, action) => {
+        state.singleBlog = action?.payload?.data;
+      })
+      .addCase(getBlogById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

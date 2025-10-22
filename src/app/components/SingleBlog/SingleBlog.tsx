@@ -5,16 +5,21 @@ import FeaturedHBATable from "./FeaturedHBATable";
 import Image from "next/image";
 import Blogimg2 from "@/assets/blog/blogImage2.png";
 import CommentForm from "./CommentForm";
-const SingleBlog = () => {
+import css from "@/styles/blog/blog.module.css"
+
+const SingleBlog = ({ blogPost }: { blogPost: any }) => {
+  console.log("Blogpost data: ",blogPost);
+  
   return (
     <>
       <div className="flex flex-col gap-5  py-10 2xl:w-[68.6%]  2xl:max-w-[1180px] xl:w-[68.6%] xl:max-w-[885px]   w-full">
-        <BlogHeader />
+        <BlogHeader blogPost={blogPost} />
         <TableofContents />
 
         {/* Blog Content Sections */}
+
         <div className="flex flex-col gap-9 ">
-          <section id="overview" className="scroll-mt-[140px]">
+          {/* <section id="overview" className="scroll-mt-[140px]">
             <h2 className="h2-medium mb-4">Overview</h2>
             <p className="h3-regular">
               Host Bus Adapters (HBAs) are essential components in modern data
@@ -45,9 +50,7 @@ const SingleBlog = () => {
             </p>
           </section>
 
-          <section>
-            <FeaturedHBATable />
-          </section>
+   
 
           <section id="evolution-hba" className="scroll-mt-[140px]">
             <h2 className="h2-medium mb-4">The Evolution of HBA Technology</h2>
@@ -60,7 +63,6 @@ const SingleBlog = () => {
               efficiency.
             </p>
 
-            {/* Blog Image */}
             <div className="w-full mt-6 relative aspect-[16/9] h-auto 2xl:h-[554px]">
               <Image
                 src={Blogimg2}
@@ -103,8 +105,19 @@ const SingleBlog = () => {
               enhance overall system reliability.
             </p>
           </section>
+ */}
+
+          <div
+            className="max-w-none" id={css.blogContent}
+            dangerouslySetInnerHTML={{ __html: blogPost?.body }}
+          />
+          {/* <div /> */}
           <section>
-            <CommentForm/>
+            <FeaturedHBATable />
+          </section>
+
+          <section>
+            <CommentForm />
           </section>
         </div>
       </div>

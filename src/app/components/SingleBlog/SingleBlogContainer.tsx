@@ -1,10 +1,27 @@
-import React from "react";
-import SingleBlog from "../components/SingleBlog/SingleBlog";
-import BlogSidebar from "../components/SingleBlog/BlogSidebar.tsx/BlogSidebar";
+"use client";
+import React, { useEffect, useState } from "react";
+import SingleBlog from "@/app/components/SingleBlog/SingleBlog";
+import BlogSidebar from "@/app/components/SingleBlog/BlogSidebar.tsx/BlogSidebar";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-const page = () => {
+import { useRouter, useParams } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { getBlogById } from "@/redux/slices/storeFrontSlice";
+
+const SingleBlogContainer = () => {
+  const params = useParams();
+  const id = params?.id; // will be undefined if it's a "create" page
+  const dispatch = useAppDispatch();
+  const { singleBlog, loading, error } = useAppSelector(
+    (state: any) => state.storeFront
+  );
+  console.log("Single blog id: ", singleBlog);
+
+  useEffect(() => {
+    dispatch(getBlogById({ id: id }));
+  }, [dispatch]);
+
   return (
     <>
       <main className="2xl:px-3 px-0 w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
@@ -17,13 +34,11 @@ const page = () => {
             Blogs
           </Link>
           <ChevronRight className="mx-2 w-5 h-5 text-gray-400" />
-          <span className="h5-regular">
-            The Importance of Regular Hardware Upgrades
-          </span>
+          <span className="h5-regular">{singleBlog?.title}</span>
         </nav>
 
         <div className="flex gap-11 flex-row ">
-          <SingleBlog />
+          <SingleBlog blogPost={singleBlog}/>
           <BlogSidebar />
         </div>
         <div className="xl:max-w-[1440px] 2xl:max-w-[1720px] py-10">
@@ -68,4 +83,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SingleBlogContainer;
