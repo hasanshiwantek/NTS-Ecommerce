@@ -9,26 +9,15 @@ const SITE_NAME = "New Town Spares";
 const BASE_URL = "https://nts-ecommerce.vercel.app";
 
 
-// =========================================================================
-// 1. DYNAMIC METADATA GENERATION (SEO)
-// =========================================================================
-
 export async function generateMetadata({ 
   params,
 }: { 
-  // Custom type matching your product example's structure: Promise<{ slug: string }>
-  // Yahaan hum 'id' use kar rahe hain jo aapke folder structure [id] se aati hai.
   params: Promise<{ id: string }>; 
 }): Promise<Metadata> {
   
-  // Custom: Await params to get the ID
   const { id } = await params; 
-  
-  // Data Fetching (No try/catch, relying on the inner API function to handle errors)
-  // Next.js automatic caching use karega.
   const blog = await getBlogByIdServer(id); 
 
-  // --- Fallback Check ---
   if (!blog) {
     return {
       title: `Blog Post Not Found | ${SITE_NAME}`,
@@ -96,13 +85,13 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: { params: { id: string } }) {
   
-  const blogId = params.id;
-    const blog = await getBlogByIdServer(blogId);
+  const { id } = await params;
+  const blog = await getBlogByIdServer(id);
   if (!blog) {
     return (
       <main className="text-center p-10">
         <h1 className="text-2xl font-bold">Blog Post Not Found</h1>
-        <p className="mt-2 text-gray-600">The requested post with ID "{blogId}" does not exist.</p>
+        <p className="mt-2 text-gray-600">The requested post with ID "{id}" does not exist.</p>
       </main>
     );
   }
