@@ -5,8 +5,8 @@ import FeaturedHBATable from "./FeaturedHBATable";
 import Image from "next/image";
 import Blogimg2 from "@/assets/blog/blogImage2.png";
 import CommentForm from "./CommentForm";
-import css from "@/styles/blog/blog.module.css";
-import "../../../styles/blog/blog-content.css"
+// import css from "../../../styles/blog/BlogContent.module.css"
+
 const SingleBlog = ({ blogPost }: { blogPost: any }) => {
   console.log("Blogpost data: ", blogPost);
 
@@ -108,14 +108,13 @@ const SingleBlog = ({ blogPost }: { blogPost: any }) => {
  */}
 
           <div
-            className={`blog-content-wrapper max-w-none`}
+            className={`max-w-none api-content-wrapper`}
             dangerouslySetInnerHTML={{ __html: blogPost?.body }}
-          />
-
-          {/* <div /> */}
-          <section>
+          >
+          </div >
+          {/* <section>
             <FeaturedHBATable />
-          </section>
+          </section> */}
 
           <section>
             <CommentForm />
