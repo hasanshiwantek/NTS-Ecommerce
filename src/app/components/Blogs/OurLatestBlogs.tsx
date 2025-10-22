@@ -65,7 +65,7 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Large Blog */}
           <div className="relative overflow-hidden rounded-lg w-full lg:w-[60%] xl:w-[744.75px] 2xl:w-[57.7%]">
-            <Link href={`/blog/${blogPosts[0].postUrl}`}>
+            <Link href={`/blogs/${blogPosts[0].id}`} className="cursor-pointer">
               <Image
                 src={blogPosts[0].thumbnail}
                 alt={blogPosts[0].title}
@@ -73,8 +73,7 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
                 height={500}
                 className="w-full rounded-lg h-auto lg:h-[95%] xl:h-[545.25px] 2xl:h-[97%] object-cover"
               />
-            </Link>
-            <div className="absolute bottom-5 left-7 lg:bottom-14 lg:left-10 w-full p-3 text-white space-y-3">
+            <div className="absolute bottom-5 left-7 lg:bottom-14 lg:left-10 w-full p-3 text-white space-y-3 ">
               <h4 className="font-medium text-2xl xl:text-[27px] xl:leading-[33px] 2xl:text-[36px] 2xl:leading-[42px]">
                 {blogPosts[0].title}
               </h4>
@@ -83,6 +82,7 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
                 {dayjs(blogPosts[0].createdAt).format("MMM D, YYYY")}
               </p>
             </div>
+            </Link>
           </div>
 
           {/* Right Side Blogs */}
@@ -90,7 +90,7 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
             {blogPosts.slice(1).map((blog) => (
               <Link
                 key={blog.id}
-                href={`/blog/${blog.postUrl}`}
+                href={`/blogs/${blog.id}`}
                 className="relative rounded-lg overflow-hidden h-auto lg:h-[45.7%] xl:h-[263.25px] 2xl:h-[47.2%]"
               >
                 <div className="relative w-full h-full">
