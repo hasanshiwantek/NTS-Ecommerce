@@ -83,9 +83,14 @@ const BlogCategories = ({
                 <p className="h5-medium border-l-3 border-[#F15939] pl-3">
                   {blog.title || "N/A"}
                 </p>
-                <h3 className="h3-secondary group-hover:!text-[#F15939] leading-12.5">
-                  {blog.title}
-                </h3>
+                <Link
+                  href={`blogs/${blog.id}`}
+                  className="h4-regular relative inline-block group/readmore"
+                >
+                  <h3 className="h3-secondary group-hover:!text-[#F15939] leading-12.5">
+                    {blog.title}
+                  </h3>
+                </Link>
                 <p className="h5-regular line-clamp-3">
                   {getExcerpt(blog.body, 150)}
                 </p>
