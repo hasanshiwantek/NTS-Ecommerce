@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-
+import dayjs from "dayjs";
 const blogs = [
   {
     id: 1,
@@ -25,7 +25,8 @@ const blogs = [
   },
 ];
 
-const OurLatestBlogs = () => {
+const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
+  if (!blogPosts || blogPosts.length === 0) return null; // Handle empty state
   return (
     <section className="w-full flex justify-center  text-black py-5">
       <div className="w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
@@ -64,32 +65,52 @@ const OurLatestBlogs = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Large Blog */}
           <div className="relative overflow-hidden rounded-lg w-full lg:w-[60%] xl:w-[744.75px] 2xl:w-[57.7%]">
-            <Link href={`/blog/${blogs[0].slug}`}>
+            <Link href={`/blog/${blogPosts[0].postUrl}`}>
               <Image
-                src={blogs[0].image}
-                alt={blogs[0].title}
+                src={blogPosts[0].thumbnail}
+                alt={blogPosts[0].title}
                 width={800}
                 height={500}
                 className="w-full rounded-lg h-auto lg:h-[95%] xl:h-[545.25px] 2xl:h-[97%] object-cover"
               />
             </Link>
+            <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3 text-white">
+              <h4 className="text-sm md:text-base font-semibold">
+                {blogPosts[0].title}
+              </h4>
+              <p className="text-xs md:text-sm">
+                By {blogPosts[0].author} |{" "}
+                {dayjs(blogPosts[0].createdAt).format("MMM D, YYYY")}
+              </p>
+            </div>
           </div>
 
           {/* Right Side Blogs */}
           <div className="flex flex-col gap-6 w-full lg:w-[40%] xl:w-[527.25px] 2xl:w-[43.3%]">
-            {blogs.slice(1).map((blog, index) => (
+            {blogPosts.slice(1).map((blog) => (
               <Link
                 key={blog.id}
-                href={`/blog/${blog.slug}`}
+                href={`/blog/${blog.postUrl}`}
                 className="relative rounded-lg overflow-hidden h-auto lg:h-[45.7%] xl:h-[263.25px] 2xl:h-[47.2%]"
               >
-                <Image
-                  src={blog.image}
-                  alt={blog.title}
-                  width={400}
-                  height={200}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={blog.thumbnail}
+                    alt={blog.title}
+                    width={400}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-3 text-white">
+                    <h4 className="text-sm md:text-base font-semibold">
+                      {blog.title}
+                    </h4>
+                    <p className="text-xs md:text-sm">
+                      By {blog.author} |{" "}
+                      {dayjs(blog.createdAt).format("MMM D, YYYY")}
+                    </p>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
