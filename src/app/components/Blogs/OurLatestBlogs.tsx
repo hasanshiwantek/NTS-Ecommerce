@@ -25,11 +25,12 @@ const blogs = [
   },
 ];
 
-const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
-  if (!blogPosts || blogPosts.length === 0) return null; // Handle empty state
+const OurLatestBlogs = () => {
+  // if (!blogPosts || blogPosts.length === 0) return null; // Handle empty state
   return (
     <section className="w-full flex justify-center  text-black py-5">
       <div className="w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
+        
         {/* Heading + Search */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-0">
           <h2 className="h1-secondary !text-[#4A4A4A] uppercase tracking-wide text-center md:text-left">
@@ -62,8 +63,7 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
         </div>
 
         {/* Blog Layout */}
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Left Large Blog */}
+        {/* <div className="flex flex-col lg:flex-row gap-6">
           <div className="relative overflow-hidden rounded-lg w-full lg:w-[60%] xl:w-[744.75px] 2xl:w-[57.7%]">
             <Link href={`/blogs/${blogPosts[0].id}`} className="cursor-pointer">
               <Image
@@ -85,7 +85,6 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
             </Link>
           </div>
 
-          {/* Right Side Blogs */}
           <div className="flex flex-col gap-6 w-full lg:w-[40%] xl:w-[527.25px] 2xl:w-[43.3%]">
             {blogPosts.slice(1).map((blog) => (
               <Link
@@ -105,16 +104,13 @@ const OurLatestBlogs = ({ blogPosts }: { blogPosts: any[] }) => {
                     <h4 className="font-medium text-2xl xl:text-[27px] xl:leading-[33px] 2xl:text-[36px] 2xl:leading-[42px] line-clamp-1">
                       {blog.title}
                     </h4>
-                    {/* <p className="font-normal text-2xl xl:text-[15px] 2xl:text-[20px]">
-                      By {blog.author}  <span className="text-[#F15939] font-extrabold"> {" "} | {" "} </span>
-                      {dayjs(blog.createdAt).format("MMM D, YYYY")}
-                    </p> */}
+  
                   </div>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

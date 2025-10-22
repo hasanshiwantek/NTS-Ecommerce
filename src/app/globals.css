@@ -277,7 +277,6 @@ img {
   background-color: #4a5568;
 }
 
-
 /* Tailwind Breakpoints reference:
    sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1440px
 */
@@ -643,58 +642,4 @@ img {
   }
 }
 
-
 /* BLOG ELEMENTS STYLING */
-
-/* Headings */
-/* .blogContent h1 {
-  @apply h1-secondary mb-4;
-}
-
-.blogContent h2 {
-  @apply h2-medium mb-4;
-}
-
-.blogContent h3 {
-  @apply h3-medium mb-3;
-}
-
-.blogContent h4 {
-  @apply h4-medium mb-2;
-}
-
-.blogContent h5 {
-  @apply h5-medium mb-2;
-}
-
-.blogContent h6 {
-  @apply h6-medium mb-2;
-}
-
-.blogContent p {
-  @apply h3-regular mb-4;
-}
-
-.blogContent img {
-  @apply object-contain rounded-md my-6 w-full;
-  max-height: 554px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.blogContent table {
-  @apply w-full border-collapse border border-gray-200 mb-6;
-}
-
-.blogContent th {
-  @apply border border-gray-200 bg-gray-50 py-2 px-4 text-left;
-}
-
-.blogContent td {
-  @apply border border-gray-200 py-2 px-4;
-} */
-
-
-
-
