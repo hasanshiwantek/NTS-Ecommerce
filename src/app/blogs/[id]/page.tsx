@@ -78,12 +78,15 @@ export async function generateMetadata({
       images: [blog.thumbnail || `${BASE_URL}/default-blog-image.svg`],
     },
     
-    // 7. Author metadata
     authors: [{ name: blog.author }],
   };
 }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   
   const { id } = await params;
   const blog = await getBlogByIdServer(id);
