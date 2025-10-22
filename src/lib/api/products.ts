@@ -87,3 +87,25 @@ export async function fetchFilteredProducts(filters: {
 
   return data; // {status, message, data: []}
 }
+
+
+export const getBlogByIdServer = async (id: string) => {
+  try {
+    const res = await fetch(`${baseURL}web/blogs/blog-posts/${id}`, {
+      next: { revalidate: 3600 }, // Example: revalidate every hour
+      headers: {
+        storeId: "4",
+      },
+    });
+
+    if (!res.ok) {
+       throw new Error("Failed to fetch blog with id");
+    }
+
+    const data = await res.json();
+    return data?.data || [];
+  } catch (error) {
+    console.error(`Failed to fetch blog post with ID ${id}:`, error);
+    throw new Error("Failed to load blog post");
+  }
+};
