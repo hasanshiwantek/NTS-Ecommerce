@@ -9,19 +9,7 @@ import { useRouter, useParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { getBlogById } from "@/redux/slices/storeFrontSlice";
 
-const SingleBlogContainer = () => {
-  const params = useParams();
-  const id = params?.id; // will be undefined if it's a "create" page
-  const dispatch = useAppDispatch();
-  const { singleBlog, loading, error } = useAppSelector(
-    (state: any) => state.storeFront
-  );
-  console.log("Single blog id: ", singleBlog);
-
-  useEffect(() => {
-    dispatch(getBlogById({ id: id }));
-  }, [dispatch]);
-
+const SingleBlogContainer = ({singleBlog}:any) => {
   return (
     <>
       <main className="2xl:px-3 px-0 w-full xl:max-w-[1290px] 2xl:max-w-[1720px]">
