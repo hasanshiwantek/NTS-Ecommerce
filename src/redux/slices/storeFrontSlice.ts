@@ -3,9 +3,9 @@ import axiosInstance from "@/lib/axiosInstance";
 
 export const getBlogs = createAsyncThunk(
   "storeFront/getBlogs",
-  async (_, thunkAPI) => {
+  async ({page,perPage}:any, thunkAPI) => {
     try {
-      const res = await axiosInstance.get(`web/blogs/blog-posts`);
+      const res = await axiosInstance.get(`web/blogs/blog-posts?page=${page}&perPage=${perPage}`);
       console.log("Blogs data: ", res.data);
 
       return res.data;
