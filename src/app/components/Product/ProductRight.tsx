@@ -44,7 +44,7 @@ const ProductRight = () => {
           </div>
         </div>
 
-        <div className=" mx-auto px-1 flex flex-col items-center">
+        <div className=" mx-auto px-7 flex flex-col items-center">
           {/* Heading */}
           <h1 className="text-center font-bold text-[#000000] mt-3 2xl:mt-5 lg:text-sm xl:text-[11.2px] 2xl:text-[14px]">
             Certified IT Hardware Specialists
