@@ -3,8 +3,8 @@ import "./globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Jost } from "next/font/google";
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
 import "../styles/blog/api-content.css";
+import { Inter } from "next/font/google";
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
