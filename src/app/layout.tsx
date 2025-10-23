@@ -4,7 +4,13 @@ import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Jost } from "next/font/google";
 import localFont from "next/font/local";
 import "../styles/blog/api-content.css"
+import { Inter } from "next/font/google";
 const jost = Jost({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
@@ -134,7 +140,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${gilroy.className} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
