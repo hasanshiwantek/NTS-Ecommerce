@@ -3,8 +3,14 @@ import "./globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Jost } from "next/font/google";
 import localFont from "next/font/local";
-import "../styles/blog/api-content.css"
+import { Inter } from "next/font/google";
+import "../styles/blog/api-content.css";
 const jost = Jost({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
@@ -40,11 +46,6 @@ const jost = Jost({
 //   variable: "--font-recoleta",
 // });
 
-
-
-
-
-
 // ✅ Recoleta (400–700) - Loading multiple weights
 const gilroy = localFont({
   src: [
@@ -75,10 +76,6 @@ const gilroy = localFont({
   ],
   variable: "--font-recoleta",
 });
-
-
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
@@ -134,7 +131,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${gilroy.className} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
