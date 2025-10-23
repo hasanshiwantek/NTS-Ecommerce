@@ -161,7 +161,7 @@ const CartList = () => {
             Continue Shopping
           </button>
         </Link>
-        <button className="h3-regular xl:w-44 2xl:w-52 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
+        <button className="h3-regular xl:w-46 2xl:w-52 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
           Update Cart
         </button>
       </div>

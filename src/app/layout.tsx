@@ -45,11 +45,6 @@ const inter = Inter({
 //   variable: "--font-recoleta",
 // });
 
-
-
-
-
-
 // ✅ Recoleta (400–700) - Loading multiple weights
 const gilroy = localFont({
   src: [
@@ -80,10 +75,6 @@ const gilroy = localFont({
   ],
   variable: "--font-recoleta",
 });
-
-
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
