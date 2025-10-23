@@ -10,29 +10,65 @@ const jost = Jost({
 });
 
 // ✅ Recoleta (400–700) - Loading multiple weights
-const recoleta = localFont({
+// const recoleta = localFont({
+//   src: [
+//     {
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/Recoleta-regular.woff2",
+//       weight: "400", // Regular
+//       style: "normal",
+//     },
+//     {
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/Recoleta-medium.woff2",
+//       weight: "500", // Medium
+//       style: "normal",
+//     },
+//     {
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/Recoleta-semibold.woff2",
+//       weight: "600", // SemiBold
+//       style: "normal",
+//     },
+//     {
+//       // 🚨 Ensure file name matches exactly (with space)
+//       path: "./fonts/Recoleta-bold.woff2",
+//       weight: "700", // Bold
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-recoleta",
+// });
+
+
+
+
+
+
+// ✅ Recoleta (400–700) - Loading multiple weights
+const gilroy = localFont({
   src: [
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "./fonts/Recoleta-regular.woff2",
+      path: "./fonts/Gilroy-Regular.ttf",
       weight: "400", // Regular
       style: "normal",
     },
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "./fonts/Recoleta-medium.woff2",
+      path: "./fonts/Gilroy-Medium.ttf",
       weight: "500", // Medium
       style: "normal",
     },
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "./fonts/Recoleta-semibold.woff2",
+      path: "./fonts/Gilroy-SemiBold.ttf",
       weight: "600", // SemiBold
       style: "normal",
     },
     {
       // 🚨 Ensure file name matches exactly (with space)
-      path: "./fonts/Recoleta-bold.woff2",
+      path: "./fonts/Gilroy-Bold.ttf",
       weight: "700", // Bold
       style: "normal",
     },
@@ -40,35 +76,9 @@ const recoleta = localFont({
   variable: "--font-recoleta",
 });
 
-// const recoleta = localFont({
-//   src: [
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-regular.otf",
-//       weight: "400", // Regular
-//       style: "normal",
-//     },
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-medium.otf",
-//       weight: "500", // Medium
-//       style: "normal",
-//     },
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-semibold.otf",
-//       weight: "600", // SemiBold
-//       style: "normal",
-//     },
-//     {
-//       // 🚨 Ensure file name matches exactly (with space)
-//       path: "./fonts/fonnts.com-recoleta-bold.otf",
-//       weight: "700", // Bold
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-recoleta",
-// });
+
+
+
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),
@@ -124,7 +134,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${recoleta.className} antialiased`}>
+      <body className={`${gilroy.className} antialiased`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
