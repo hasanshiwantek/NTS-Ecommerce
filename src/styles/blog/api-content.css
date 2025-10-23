@@ -242,14 +242,15 @@
     margin-bottom: 1.5rem !important; 
     /* 3. Object Fit/Position (Jiski wajah se center mein aa rahi thi) */
     /* Agar image abhi bhi top ya bottom se choti ho rahi hai toh use poora khinche */
-    object-fit: cover !important; 
+    /* object-fit: cover !important;  */
     object-position: center !important; /* Ya 'top' set kar sakte hain */
 
     /* Rounded corners */
     border-radius: 6px !important; 
     
     /* Default height */
-    height: auto !important;
+    /* height: auto !important; */
+    max-height: 554px !important;
 }
 
 
