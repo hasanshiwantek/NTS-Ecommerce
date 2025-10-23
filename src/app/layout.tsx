@@ -3,7 +3,7 @@ import "./globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Jost } from "next/font/google";
 import localFont from "next/font/local";
-import "../styles/blog/api-content.css"
+import "../styles/blog/api-content.css";
 import { Inter } from "next/font/google";
 const jost = Jost({
   subsets: ["latin"],
@@ -46,11 +46,6 @@ const inter = Inter({
 //   variable: "--font-recoleta",
 // });
 
-
-
-
-
-
 // ✅ Recoleta (400–700) - Loading multiple weights
 const gilroy = localFont({
   src: [
@@ -81,10 +76,6 @@ const gilroy = localFont({
   ],
   variable: "--font-recoleta",
 });
-
-
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nts-ecommerce.vercel.app"),

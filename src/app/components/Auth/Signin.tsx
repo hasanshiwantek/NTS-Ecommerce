@@ -57,7 +57,7 @@ const SigninPage = () => {
       <div className="absolute inset-0 bg-black/10" />
 
       {/* Grid Layout */}
-      <div className="relative z-10 w-full max-w-8xl bg-transparent rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 overflow-hidden 2xl:ms-20">
+      <div className="relative z-10 w-full max-w-8xl bg-transparent  grid grid-cols-1 md:grid-cols-2 overflow-hidden 2xl:ms-20">
         {/* Left Section */}
         <div className="flex flex-col items-center lg:items-start justify-center p-6 sm:p-10">
           <h1 className="text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] 2xl:text-[60px] font-extrabold mb-4 text-white leading-tight">

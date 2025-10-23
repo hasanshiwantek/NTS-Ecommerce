@@ -29,7 +29,7 @@ const ProductCard = ({ product }: { product: any }) => {
     <div className="max-w-full mx-auto">
       <div className="bg-white rounded-xl w-full 2xl:max-w-[1719px] 2xl:px-3 px-0">
         {/* Breadcrumb */}
-        <div className="flex items-center space-x-2 h5-20px-regular lg:mb-7 sm:mb-7 mb-7">
+        <div className="flex items-center space-x-2 h5-20px-regular lg:mb-7 sm:mb-7 mb-7 flex-wrap">
           <span>Home</span>
           {product.categoryHierarchy?.map((data: any, index: number) => (
             <React.Fragment key={index}>
