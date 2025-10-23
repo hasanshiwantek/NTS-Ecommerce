@@ -1,13 +1,20 @@
 import React from "react";
 import BlogSkeleton from "../loader/BlogSkeleton";
 import Link from "next/link";
+import Pagination from "@/components/ui/pagination";
 const BlogCategories = ({
   blogPosts,
   error,
   loading,
+  pagination,
+  filters,
+  setFilters,
 }: {
   blogPosts: any[];
   error: any;
+  pagination: any;
+  filters: any;
+  setFilters: any;
   loading: boolean;
 }) => {
   const getExcerpt = (html: string, maxLength = 200) => {
@@ -26,7 +33,10 @@ const BlogCategories = ({
     }
     return text;
   };
-
+ 
+// Total Pages ko backend data se nikalna
+  const totalPages = pagination?.totalPages || 1;
+  const showPagination = totalPages > 1;
   return (
     <div className="flex flex-col items-start   py-5 w-full xl:max-w-[1290px] 2xl:max-w-[1720px] ">
       {/* <h2 className="h1-secondary !text-[#4A4A4A] uppercase mb-8">
@@ -112,25 +122,21 @@ const BlogCategories = ({
         )}
       </div>
 
-      {/* Pagination */}
-      <div className="flex items-center gap-2 mt-10 mx-auto">
-        <button className="px-3 py-1 border rounded hover:bg-gray-100">
-          Prev
-        </button>
-        {[1, 2, 3, 4].map((num) => (
-          <button
-            key={num}
-            className={`px-3 py-1 border rounded ${
-              num === 1 ? "bg-red-500 text-white" : "hover:bg-gray-100"
-            }`}
-          >
-            {num}
-          </button>
-        ))}
-        <button className="px-3 py-1 border rounded hover:bg-gray-100">
-          Next
-        </button>
-      </div>
+     {/* Pagination */}
+      {!loading && !error && (
+        <div className="mt-6 flex justify-end m-auto">
+         <Pagination
+            currentPage={pagination?.currentPage} 
+            totalPages={totalPages}
+            onPageChange={(page: number) =>
+              setFilters((prev: any) => ({
+                ...prev,
+                page,
+              }))
+            }
+          />
+        </div>
+      )}
     </div>
   );
 };
