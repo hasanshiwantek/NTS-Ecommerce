@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Trash2 ,Plus,Minus} from "lucide-react";
+import { Trash2, Plus, Minus } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import {
@@ -443,7 +443,7 @@ const CheckoutComponent = () => {
                       onClick={() => dispatch(decreaseQty(item.id))}
                       className="flex items-center justify-center w-16 h-10 h5-medium"
                     >
-                      <Minus className="w-5 h-5"/>
+                      <Minus className="w-5 h-5" />
                     </button>
                     {/* Quantity Display */}
                     <span className="h5-medium border-x h-[48px] border-gray-300 px-6 flex items-center justify-center select-none">
@@ -454,7 +454,7 @@ const CheckoutComponent = () => {
                       onClick={() => dispatch(increaseQty(item.id))}
                       className="flex items-center justify-center w-16 h-10 h5-medium "
                     >
-                      <Plus className="w-5 h-5"/>
+                      <Plus className="w-5 h-5" />
                     </button>
                     {/* Remove Button (trash icon) */}
                   </div>
@@ -466,39 +466,39 @@ const CheckoutComponent = () => {
                   </button>
                 </div>
               </div>
-            ))}{" "}
-          </div>{" "}
-          {/* Totals */}{" "}
+            ))}
+          </div>
+          {/* Totals */}
           <div className="mt-4 space-y-2 text-sm">
             <div className="flex justify-between h5-regular">
               <span>Cart Subtotal</span> <span>${subtotal.toFixed(2)}</span>
-            </div>{" "}
+            </div>
             <div className="flex justify-between h5-regular">
               <span>Shipping</span>
-              <span>${shipping.toFixed(2)}</span>{" "}
-            </div>{" "}
+              <span>${shipping.toFixed(2)}</span>
+            </div>
             <div className="flex justify-between h5-regular">
               <span>Tax</span>
-              <span>${tax.toFixed(2)}</span>{" "}
-            </div>{" "}
-          </div>{" "}
-          {/* Discount Code */}{" "}
+              <span>${tax.toFixed(2)}</span>
+            </div>
+          </div>
+          {/* Discount Code */}
           <div className="mt-4 space-y-2">
             <label htmlFor="discountCode" className="h5-regular">
-              Apply Discount Code{" "}
-            </label>{" "}
+              Apply Discount Code
+            </label>
             <div className="flex gap-2 my-2">
               <Input
                 id="discountCode"
                 type="text"
                 className="h-[60px] !max-w-full "
-              />{" "}
+              />
               <button className="h4-medium border border-black px-4 rounded">
                 Apply
               </button>
-            </div>{" "}
-          </div>{" "}
-          {/* Total */}{" "}
+            </div>
+          </div>
+          {/* Total */}
           <div className="mt-4 flex justify-between h3-secondary">
             <span>Order total</span> <span>${total.toFixed(2)}</span>{" "}
           </div>
