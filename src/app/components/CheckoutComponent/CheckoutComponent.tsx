@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Trash2 } from "lucide-react";
+import { Trash2 ,Plus,Minus} from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import {
@@ -26,6 +26,15 @@ const CheckoutComponent = () => {
   const shipping = cart.length > 0 ? 240 : 0; // static example
   const tax = 0; // static example
   const total = subtotal + shipping + tax;
+
+  const removeCartHandler = (item: any) => {
+    const confirm = window.confirm("Delete Product?");
+    if (!confirm) {
+      return;
+    } else {
+      dispatch(removeFromCart(item.id));
+    }
+  };
 
   return (
     <div className="min-h-screen py-10 px-[5%] md:px-[6%] lg:px-[7%] xl:px-0 2xl:px-0 xl:max-w-[1290px] 2xl:max-w-[1720px] mx-auto">
@@ -434,7 +443,7 @@ const CheckoutComponent = () => {
                       onClick={() => dispatch(decreaseQty(item.id))}
                       className="flex items-center justify-center w-16 h-10 h5-medium"
                     >
-                      --
+                      <Minus className="w-5 h-5"/>
                     </button>
                     {/* Quantity Display */}
                     <span className="h5-medium border-x h-[48px] border-gray-300 px-6 flex items-center justify-center select-none">
@@ -443,18 +452,18 @@ const CheckoutComponent = () => {
                     {/* Increase Button */}{" "}
                     <button
                       onClick={() => dispatch(increaseQty(item.id))}
-                      className="flex items-center justify-center w-16 h-10 h5-medium"
+                      className="flex items-center justify-center w-16 h-10 h5-medium "
                     >
-                      +{" "}
+                      <Plus className="w-5 h-5"/>
                     </button>
                     {/* Remove Button (trash icon) */}
                   </div>
                   <button
-                    onClick={() => dispatch(removeFromCart(item.id))}
+                    onClick={() => removeCartHandler(item)}
                     className="absolute right-6 bottom-9 ml-auto text-gray-500 hover:text-red-700 transition"
                   >
-                    <Trash2 className="w-5 h-5" />{" "}
-                  </button>{" "}
+                    <Trash2 className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
             ))}{" "}
