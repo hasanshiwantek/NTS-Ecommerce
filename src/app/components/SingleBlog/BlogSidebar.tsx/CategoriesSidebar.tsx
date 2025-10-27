@@ -55,10 +55,19 @@ const CategoriesSidebar = () => {
         </div>
         <div className="bg-white rounded-[8px] flex flex-col gap-[22px] px-[22px] py-4">
           {loading ? (
-            // Loader
-            <div className="flex items-center justify-center h-[200px]">
-              <div className="loader border-7 border-[#F15939] border-t-transparent rounded-full w-32 h-32 animate-spin"></div>
-            </div>
+            <ul className="flex flex-col gap-3">
+    {Array.from({ length: 5 }).map((_, index) => (
+      <li
+        key={index}
+        className="flex justify-between items-center py-[12px] border-b border-[#E6E6E6] last:border-none"
+      >
+        <div className="flex justify-between items-center w-full animate-pulse">
+          <div className="h-5 bg-gray-300 rounded w-3/4"></div>
+          <div className="h-5 bg-gray-300 rounded w-5"></div>
+        </div>
+      </li>
+    ))}
+  </ul>
           ) : categories && categories.length > 0 ? (
             <ul className="flex flex-col">
               {categories.map((item) => (

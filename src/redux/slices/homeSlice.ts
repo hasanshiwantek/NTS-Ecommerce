@@ -73,12 +73,31 @@ export const globalSearch = createAsyncThunk(
   }
 );
 
+
+export const getBrands = createAsyncThunk(
+  "home/getBrands",
+  async (_, thunkAPI) => {
+    try {
+      const res = await axiosInstance.get(`web/brands/brands`);
+      console.log("brands data: ", res.data);
+
+      return res.data;
+    } catch (err: any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Failed to fetch brands by id"
+      );
+    }
+  }
+);
+
 // 2. Initial State
 const initialState = {
   statistics: null,
   groups: [],
   wellerStatus: [],
-  searchData: [],
+  searchData: [],           
+  getBrand: [],           
   loading: false,
   error: null as string | null,
 };
@@ -139,6 +158,17 @@ const homeSlice = createSlice({
       .addCase(globalSearch.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch search data";
+      })
+      .addCase(getBrands.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getBrands.fulfilled, (state, action) => {
+        state.loading = false;
+        state.getBrand = action.payload;
+      })
+      .addCase(getBrands.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch getBrand data";
       });
   },
 });
