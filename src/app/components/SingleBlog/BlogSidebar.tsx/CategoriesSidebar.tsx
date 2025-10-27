@@ -1,23 +1,30 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
+import { fetchCategories } from "@/lib/api/category";
+import Link from "next/link";
 
-const categories = [
-  "Portable Storage Drive",
-  "Connectors",
-  "Power Supply",
-  "Charging Cables",
-  "Data Cables",
-  "HDMI Cables",
-  "USB Adapters",
-  "Ethernet Cables",
-  "VGA Cables",
-];
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 const CategoriesSidebar = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true); // new state
+
+  useEffect(() => {
+    fetchCategories()
+      .then((data) => setCategories(data))
+      .finally(() => setLoading(false)); // hide loader after fetch
+  }, []);
+
   return (
     <div className="flex flex-col gap-9">
-      <div className="flex items-center rounded-md overflow-hidden w-full   h-[55px] xl:h-[48.75px] 2xl:h-[65px]">
+      {/* Search Box */}
+      <div className="flex items-center rounded-md overflow-hidden w-full h-[55px] xl:h-[48.75px] 2xl:h-[65px]">
         <Input
           type="text"
           placeholder="Search..."
@@ -41,30 +48,42 @@ const CategoriesSidebar = () => {
         </button>
       </div>
 
-      <div className="w-full  border  rounded-[8px] flex flex-col gap-5 ">
+      <div className="w-full border rounded-[8px] flex flex-col gap-5">
         {/* Categories Box */}
-          <div className="bg-[#F5F6FA] p-4">
-          <h3 className="h2-medium ">
-            Categories
-          </h3>
-          </div>
-        <div className="bg-white  rounded-[8px] flex flex-col gap-[22px] px-[22px] ">
-          <ul className="flex flex-col">
-            {categories.map((item, index) => (
-              <li
-                key={index}
-                className="flex justify-between items-center py-[12px] border-b border-[#E6E6E6] last:border-none cursor-pointer group"
-              >
-                <span className="h4-regular  group-hover:text-[#F15939] transition">
-                  {item}
-                </span>
-                <ChevronRight
-                  size={18}
-                  className="text-[#666666] group-hover:text-[#F15939] transition"
-                />
-              </li>
-            ))}
-          </ul>
+        <div className="bg-[#F5F6FA] p-4">
+          <h3 className="h2-medium">Categories</h3>
+        </div>
+        <div className="bg-white rounded-[8px] flex flex-col gap-[22px] px-[22px] py-4">
+          {loading ? (
+            // Loader
+            <div className="flex items-center justify-center h-[200px]">
+              <div className="loader border-7 border-[#F15939] border-t-transparent rounded-full w-32 h-32 animate-spin"></div>
+            </div>
+          ) : categories && categories.length > 0 ? (
+            <ul className="flex flex-col">
+              {categories.map((item) => (
+                <li
+                  key={item?.id || item?.slug}
+                  className="flex justify-between items-center py-[12px] border-b border-[#E6E6E6] last:border-none cursor-pointer group"
+                >
+                  <Link
+                    href={`/category/${item?.slug}`}
+                    className="flex justify-between items-center w-full"
+                  >
+                    <span className="h4-regular group-hover:text-[#F15939] transition">
+                      {item?.name}
+                    </span>
+                    <ChevronRight
+                      size={18}
+                      className="text-[#666666] group-hover:text-[#F15939] transition"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-center text-2xl py-4 text-gray-500">Not Found</p>
+          )}
         </div>
       </div>
     </div>
