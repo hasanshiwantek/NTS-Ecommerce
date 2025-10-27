@@ -4,6 +4,7 @@ import Banner from "./components/Home/Banner";
 import { fetchProducts } from "@/lib/api/products";
 import Spinner from "./components/loader/loader";
 import { Suspense } from "react";
+import TopIndustries from "./components/Home/TopIndustries";
 export const metadata: Metadata = {
   title: "Home | New Town Spares",
   description:
@@ -37,11 +38,12 @@ const Page = async () => {
 
   return (
     <>
-      <main className="flex flex-col gp-5" role="main">
+      <main className="flex flex-col gap-5" role="main">
         <Banner />
         <Suspense fallback={<Spinner/>}>
           <RelatedProduct products={products.slice(0, 8)} />
         </Suspense>
+        <TopIndustries/>
       </main>
     </>
   );
