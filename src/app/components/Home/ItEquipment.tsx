@@ -33,12 +33,12 @@ const ItEquipment: React.FC = () => {
   return (
     <div className="max-w-full mx-auto bg-white mt-8">
       {/* Header Section */}
-      <h1 className="text-4xl md:text-5xl 2xl:text-[48px] font-medium leading-tight text-[#2A2A2A] mb-10">
+      <h1 className="h1-lg leading-tight mb-10">
         We're Expert In New & Refurbished
         <br className="hidden xl:block" /> IT{" "}
-        <span className="text-[#F15939]">Equipment </span>
+        <span className="!text-[#F15939]">Equipment </span>
         And
-        <span className="text-[#F15939]"> Solutions.</span>
+        <span className="!text-[#F15939]"> Solutions.</span>
       </h1>
 
       {/* Content Grid */}
@@ -52,7 +52,7 @@ const ItEquipment: React.FC = () => {
                 index % 2 === 0 ? "md:border-r" : ""
               } border-b`}
             >
-              <h3 className="h2-medium text-[#2A2A2A] mb-2">{service.title}</h3>
+              <h3 className="h2-32px-medium mb-2">{service.title}</h3>
               <p className="h3-regular text-[#666666]">{service.description}</p>
             </div>
           ))}
