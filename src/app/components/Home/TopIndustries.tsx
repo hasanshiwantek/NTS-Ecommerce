@@ -98,7 +98,7 @@ const TopIndustries: React.FC = () => {
   ];
 
   return (
-    <div className="w-full  min-h-screen">
+    <div className="w-full  min-h-screen py-16 bg-[#FAFAFA]">
       <div className="mx-auto text-center mb-10 flex flex-col 2xl:gap-5 gap-3">
         <h2 className="h1-lg mb-2">Top Industries</h2>
         <p className="h3-24px-regular mx-auto">
@@ -107,7 +107,7 @@ const TopIndustries: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         {industries.map((industry, index) => (
           <IndustryCard
             key={index}
