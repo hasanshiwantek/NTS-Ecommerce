@@ -31,7 +31,7 @@ const ItEquipment: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-full mx-auto bg-white mt-8">
+    <div className="max-w-full mx-auto bg-white mt-8 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
       {/* Header Section */}
       <h1 className="text-4xl md:text-5xl 2xl:text-[48px] font-medium leading-tight text-[#2A2A2A] mb-10">
         We're Expert In New & Refurbished

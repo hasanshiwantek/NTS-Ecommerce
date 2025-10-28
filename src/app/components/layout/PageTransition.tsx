@@ -51,14 +51,15 @@ export default function PageTransition({
       <motion.div
         key={pathname}
         className={`flex-grow ${
-          [
-            "/auth",
-            "/privacyPolicy",
-            "/payment-options",
-            "/terms-conditions",
-            "/shipping-policy",
-            "/returnPolicy",
-          ].some((p) => pathname.includes(p))
+      pathname === "/" ||
+      [
+        "/auth",
+        "/privacyPolicy",
+        "/payment-options",
+        "/terms-conditions",
+        "/shipping-policy",
+        "/returnPolicy",
+      ].some((p) => pathname.includes(p))
             ? ""
             : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
         }`}

@@ -40,7 +40,7 @@ const AuthorizedSupplier: React.FC = () => {
   ];
 
 const FeatureCard: React.FC<FeatureCard> = ({ icon, title, description }) => (
-  <div className="flex flex-col items-center justify-center text-center px-6 bg-white border-r border-gray-200 last:border-r-0 h-[28.2rem]">
+  <div className="flex flex-col items-center border-y justify-center text-center px-6 bg-[#FAFAFA] border-r border-gray-200 last:border-r-0 h-[28.2rem]">
     {/* Icon Area - Using Next.js Image */}
     <div className="mb-4 inline-block w-16 h-16 relative">
       <Image
@@ -62,10 +62,10 @@ const FeatureCard: React.FC<FeatureCard> = ({ icon, title, description }) => (
   </div>
 );
   return (
-    <div className="max-w-full mx-auto">
+    <div className="max-w-full mx-auto bg-[#FAFAFA]">
       
       {/* 1. SAM.GOV Header Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4 py-16">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4 py-16 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         
         {/* SAM.GOV Logo Placeholder */}
         <div className="w-[35.1%]">
@@ -96,7 +96,7 @@ const FeatureCard: React.FC<FeatureCard> = ({ icon, title, description }) => (
       </div>
       
       {/* 2. Four Feature Cards Section */}
-      <div className="bg-white border-y border-gray-200 rounded-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200">
+      <div className="bg-[#FAFAFA] rounded-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         {featureData.map((feature, index) => (
           <FeatureCard 
             key={index} 
@@ -108,7 +108,7 @@ const FeatureCard: React.FC<FeatureCard> = ({ icon, title, description }) => (
       </div>
 
       {/* 3. DUN & BRADSTREET RATING Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-16">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 py-16 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         
         {/* D&B Logo Placeholder */}
           {/* Replace with your Dun & Bradstreet logo image */}

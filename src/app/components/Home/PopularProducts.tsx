@@ -35,7 +35,7 @@ const PopularProducts = () => {
   }, [products, activeTab]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
       <div className="mx-auto">
         {/* Header */}
         <header className="text-center flex flex-col 2xl:gap-5 gap-3 mb-10 ">
