@@ -5,6 +5,8 @@ import { fetchProducts } from "@/lib/api/products";
 import Spinner from "./components/loader/loader";
 import { Suspense } from "react";
 import TopIndustries from "./components/Home/TopIndustries";
+import ItEquipment from "./components/Home/ItEquipment";
+import AuthorizedSupplier from "./components/Home/AuthorizedSupplier";
 import PopularProducts from "./components/Home/PopularProducts";
 import Testimonials from "./components/Home/Testimonials";
 export const metadata: Metadata = {
@@ -47,6 +49,8 @@ const Page = async () => {
         </Suspense> */}
         <PopularProducts/>
         <TopIndustries/>
+        <ItEquipment/>
+        <AuthorizedSupplier/>
         <Testimonials/>
       </main>
     </>
