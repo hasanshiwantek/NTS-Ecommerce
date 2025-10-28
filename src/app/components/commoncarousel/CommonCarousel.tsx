@@ -19,7 +19,7 @@ const CommonCarousel: React.FC<CommonCarouselProps> = ({ items = [] }) => {
       <div 
         className="
           text-left 
-          my-24
+         
         "
       >
         {/* Your Carousel implementation */}
