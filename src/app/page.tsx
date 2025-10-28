@@ -7,6 +7,8 @@ import { Suspense } from "react";
 import TopIndustries from "./components/Home/TopIndustries";
 import ItEquipment from "./components/Home/ItEquipment";
 import AuthorizedSupplier from "./components/Home/AuthorizedSupplier";
+import PopularProducts from "./components/Home/PopularProducts";
+import Testimonials from "./components/Home/Testimonials";
 export const metadata: Metadata = {
   title: "Home | New Town Spares",
   description:
@@ -40,14 +42,16 @@ const Page = async () => {
 
   return (
     <>
-      <main className="flex flex-col gap-5" role="main">
+      <main className="flex flex-col gap-30" role="main">
         <Banner />
-        <Suspense fallback={<Spinner/>}>
+        {/* <Suspense fallback={<Spinner/>}>
           <RelatedProduct products={products.slice(0, 8)} />
-        </Suspense>
+        </Suspense> */}
+        <PopularProducts/>
         <TopIndustries/>
         <ItEquipment/>
         <AuthorizedSupplier/>
+        <Testimonials/>
       </main>
     </>
   );

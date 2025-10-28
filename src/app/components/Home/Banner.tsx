@@ -49,8 +49,7 @@ const Banner = () => {
             flex-shrink-0 
             px-1 
             animate-pulse
-          "
-                >
+          "  >
                   {/* Outer card wrapper (no border/shadow needed for skeleton) */}
                   <div className="flex justify-center items-center">
                     {/* Mimics CardContent dimensions and provides background */}
