@@ -85,7 +85,7 @@ const Testimonials = () => {
             Don't take our words for it, See What our customers Say
           </p>
         </header>
-      <div className="flex items-center justify-between md:flex-col sm:flex-col lg:flex-row flex-col">
+      <div className="flex items-center justify-between md:flex-col sm:flex-col lg:flex-row flex-col md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]  ">
 
         <div className="flex flex-col items-center justify-between gap-5 whitespace-nowrap 2xl:px-[60px] 2xl:py-[20px] ">
           <h1 className="text-center h3-regular ">Excellent</h1>
