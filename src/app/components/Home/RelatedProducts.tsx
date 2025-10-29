@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { RootState } from "@/redux/store";
-import { toast } from "react-toastify";
+import { toast } from "sonner"
 import { motion, AnimatePresence } from "framer-motion";
 
 const RelatedProduct = ({ products }: { products: Product[] }) => {

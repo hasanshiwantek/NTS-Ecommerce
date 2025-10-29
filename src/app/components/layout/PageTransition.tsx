@@ -38,6 +38,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function PageTransition({
   children,
@@ -69,6 +70,7 @@ export default function PageTransition({
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {children}
+             <Toaster position="top-center" /> 
       </motion.div>
     </AnimatePresence>
   );

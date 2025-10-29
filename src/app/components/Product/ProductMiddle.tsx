@@ -13,7 +13,7 @@ import upslogo from "@/assets/card-icon/upslogo.png";
 import feedxlogo from "@/assets/card-icon/feedxlogo.png";
 import cart from "@/assets/card-icon/shoppingCart.svg";
 import { useAppDispatch } from "@/hooks/useReduxHooks";
-import { toast } from "react-toastify";
+import { toast } from "sonner"
 import { addToCart } from "@/redux/slices/cartSlice";
 import { useRouter } from "next/navigation";
 import ProductPrice from "../productprice/ProductPrice";
