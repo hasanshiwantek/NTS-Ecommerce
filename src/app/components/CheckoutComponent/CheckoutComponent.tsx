@@ -11,12 +11,22 @@ import {
   increaseQty,
   removeFromCart,
 } from "@/redux/slices/cartSlice";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+
 const CheckoutComponent = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
   console.log("reduxxxx", cart);
   const [paymentMethod, setPaymentMethod] = useState("credit_card");
-
+  const [itemToDelete, setItemToDelete] = useState<any | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   // subtotal calculate (price string → number)
   const subtotal = cart.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantity || 1),
@@ -27,13 +37,12 @@ const CheckoutComponent = () => {
   const tax = 0; // static example
   const total = subtotal + shipping + tax;
 
-  const removeCartHandler = (item: any) => {
-    const confirm = window.confirm("Delete Product?");
-    if (!confirm) {
-      return;
-    } else {
-      dispatch(removeFromCart(item.id));
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      dispatch(removeFromCart(itemToDelete.id));
+      setItemToDelete(null);
     }
+    setIsDialogOpen(false);
   };
 
   return (
@@ -458,8 +467,12 @@ const CheckoutComponent = () => {
                     </button>
                     {/* Remove Button (trash icon) */}
                   </div>
+
                   <button
-                    onClick={() => removeCartHandler(item)}
+                    onClick={() => {
+                      setItemToDelete(item);
+                      setIsDialogOpen(true);
+                    }}
                     className="absolute right-6 bottom-9 ml-auto text-gray-500 hover:text-red-700 transition"
                   >
                     <Trash2 className="w-5 h-5" />
@@ -504,6 +517,35 @@ const CheckoutComponent = () => {
           </div>
         </div>
       </div>
+      {/* ShadCN Dialog for Delete Confirmation */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle>Delete Item</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to remove{" "}
+              <strong>{itemToDelete?.name}</strong> from your cart? This action
+              cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex justify-end gap-3">
+            <Button
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              className="!p-4 !text-lg"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={confirmDelete}
+              className="!p-4 !text-lg"
+            >
+              Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

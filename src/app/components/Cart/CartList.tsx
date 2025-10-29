@@ -11,13 +11,24 @@ import {
   updateQty,
 } from "@/redux/slices/cartSlice";
 import { Trash2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 const CartList = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
   const [quantities, setQuantities] = useState<{
     [key: string]: number | string;
   }>({});
-
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<any | null>(null);
   const handleChange = (id: string, value: string) => {
     if (value === "" || /^\d*$/.test(value)) {
       setQuantities((prev) => ({
@@ -27,6 +38,13 @@ const CartList = () => {
     }
   };
 
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      dispatch(removeFromCart(itemToDelete.id));
+      setItemToDelete(null);
+    }
+    setIsDialogOpen(false);
+  };
   useEffect(() => {
     const updatedQuantities: { [key: string]: number } = {};
     cart.forEach((item) => {
@@ -130,15 +148,18 @@ const CartList = () => {
                     </button>
                   </div>
                 </div>
+                {/* Trash / Delete Button */}
                 <button
-                  onClick={() => dispatch(removeFromCart(item.id))}
+                  onClick={() => {
+                    setItemToDelete(item);
+                    setIsDialogOpen(true);
+                  }}
                   className="absolute -right-12 xl:right-0 xl:bottom-14 2xl:right-1 2xl:bottom-18 ml-auto text-gray-500 hover:text-red-700 transition"
                 >
-                  {" "}
-                  <Trash2 className="w-5 h-5" />{" "}
-                </button>{" "}
+                  <Trash2 className="w-5 h-5" />
+                </button>
+
                 <p className="h5-regular">
-                  {" "}
                   ${Number(item.price * item.quantity).toFixed(2)}
                 </p>
               </div>
@@ -157,14 +178,35 @@ const CartList = () => {
       {/* Continue + Update */}
       <div className="flex justify-between items-center my-7 px-6">
         <Link href={"/products"}>
-          <button className="h3-regular xl:w-64 2xl:w-80 py-2 px-4 rounded-lg border border-[#4A4A4A] hover:text-[#F15939] transition">
+          <button className="h3-regular xl:w-64 2xl:w-85 py-2 px-4  rounded-lg border border-[#4A4A4A] hover:text-[#F15939] transition">
             Continue Shopping
           </button>
         </Link>
-        <button className="h3-regular xl:w-46 2xl:w-52 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
+        <button className="h3-regular xl:w-46 2xl:w-68 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
           Update Cart
         </button>
       </div>
+      {/* ShadCN Dialog for Delete Confirmation */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Delete Item</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to remove{" "}
+              <strong>{itemToDelete?.name}</strong> from your cart? This action
+              cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex justify-end gap-3">
+            <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="!p-4 !text-lg">
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmDelete}  className="!p-4 !text-lg">
+              Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
