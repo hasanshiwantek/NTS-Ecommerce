@@ -15,8 +15,8 @@ const GetInTouch: React.FC = () => {
           {/* Dotted background pattern */}
           
           <div className="relative z-10">
-            <h1 className="text-5xl font-medium text-[#2A2A2A] mb-4">
-              Let's Get In Touch <span className="text-[#F15939]">with Us</span>
+            <h1 className="h1-lg mb-4">
+              Let's Get In Touch <span className="!text-[#F15939]">with Us</span>
             </h1>
             <p className="h3-regular !text-[#666666] mb-8 max-w-3xl">
               Have questions about our products, need expert advice, or want a custom IT hardware solution?
