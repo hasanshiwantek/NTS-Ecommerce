@@ -430,7 +430,7 @@ const CheckoutComponent = () => {
             {cart.map((item, i) => (
               <div
                 key={i}
-                className="relative flex items-center gap-3 p-3 border"
+                className="relative flex flex-col sm:flex-row items-center gap-3 p-3 border"
               >
                 <Image
                   src={item.image?.[0]?.path || "/checkouticon/orderimg.png"}
@@ -446,7 +446,7 @@ const CheckoutComponent = () => {
                   <p className="h6-regular !text-[#4A4A4A]">
                     ${Number(item.price).toFixed(2)}{" "}
                   </p>
-                  <div className="flex w-[146.39999389648438px] h-[48px] items-center justify-center border border-gray-300 rounded-full">
+                  <div className="flex  w-[120.39999389648438px] sm:w-[146.39999389648438px] h-[48px] items-center justify-center border border-gray-300 rounded-full">
                     {/* Decrease Button */}
                     <button
                       onClick={() => dispatch(decreaseQty(item.id))}
