@@ -42,9 +42,9 @@ const ItEquipment: React.FC = () => {
       </h1>
 
       {/* Content Grid */}
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col xl:flex-row gap-4">
         {/* Left Section: Service Cards */}
-        <div className="w-full 2xl:w-[72%] grid grid-cols-1 md:grid-cols-2 border-t border-gray-200">
+        <div className="w-full xl:w-[73%] 2xl:w-[72%] grid grid-cols-1 md:grid-cols-2 border-t border-gray-200">
           {serviceData.map((service, index) => (
             <div
               key={index}
@@ -59,7 +59,7 @@ const ItEquipment: React.FC = () => {
         </div>
 
         {/* Right Section: Image */}
-        <div className="w-full 2xl:w-[28.4%] relative flex items-end bg-gray-800">
+        <div className="w-full xl:w-[26%] 2xl:w-[28.4%] relative flex items-end bg-gray-800">
           <Image
             src="/it-equipment-img.png"
             alt="Man holding laptop, representing IT solutions"
