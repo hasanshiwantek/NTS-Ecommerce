@@ -45,15 +45,12 @@ const Page = async () => {
     <>
       <main className="flex flex-col gap-30" role="main">
         <Banner />
-        {/* <Suspense fallback={<Spinner/>}>
-          <RelatedProduct products={products.slice(0, 8)} />
-        </Suspense> */}
-        <PopularProducts/>
-        <TopIndustries/>
-        <ItEquipment/>
-        <AuthorizedSupplier/>
-        <Testimonials/>
-        <GetInTouch/>
+        <PopularProducts />
+        <TopIndustries />
+        <ItEquipment />
+        <AuthorizedSupplier />
+        <Testimonials />
+        <GetInTouch />
       </main>
     </>
   );
