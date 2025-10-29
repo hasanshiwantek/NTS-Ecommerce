@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { fetchPopularProducts } from "@/redux/slices/homeSlice";
 import { addToCart } from "@/redux/slices/cartSlice";
-import { toast } from "react-toastify";
 import PopularProductSkeleton from "../loader/PopularProductSkeleton";
+import { toast } from "sonner"
 const PopularProducts = () => {
   const dispatch = useAppDispatch();
   const { popularProducts, loading, error } = useAppSelector(
