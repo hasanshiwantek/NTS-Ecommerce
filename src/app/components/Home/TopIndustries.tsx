@@ -98,7 +98,7 @@ const TopIndustries: React.FC = () => {
   ];
 
   return (
-    <div className="w-full bg-[#FAFAFA]">
+    <div className="w-full bg-[#FAFAFA] py-5">
       <div className="mx-auto text-center mb-10 flex flex-col 2xl:gap-5 gap-3">
         <h2 className="h1-lg mb-2">Top Industries</h2>
         <p className="h3-24px-regular mx-auto">
