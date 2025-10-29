@@ -48,7 +48,7 @@ const PopularProducts = () => {
 
         {/* Tabs */}
         <nav className="border-b border-gray-200 mb-10  whitespace-nowrap scrollbar-hide">
-          <div className="flex justify-center gap-3 -mb-px">
+          <div className="flex flex-col md:flex-row  justify-center gap-3 -mb-px">
             {brands.map((brandName: any, index: number) => (
               <button
                 key={index}
