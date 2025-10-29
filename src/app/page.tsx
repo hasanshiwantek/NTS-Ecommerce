@@ -9,6 +9,7 @@ import ItEquipment from "./components/Home/ItEquipment";
 import AuthorizedSupplier from "./components/Home/AuthorizedSupplier";
 import PopularProducts from "./components/Home/PopularProducts";
 import Testimonials from "./components/Home/Testimonials";
+import GetInTouch from "./components/Home/GetInTouch";
 export const metadata: Metadata = {
   title: "Home | New Town Spares",
   description:
@@ -52,6 +53,7 @@ const Page = async () => {
         <ItEquipment/>
         <AuthorizedSupplier/>
         <Testimonials/>
+        <GetInTouch/>
       </main>
     </>
   );
