@@ -107,7 +107,7 @@ const GetInTouch: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full lg:w-64 xl:w-[21.6%] px-6 py-5 border border-transparent rounded-full h4-medium !text-white bg-[#F15939] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  className="w-full lg:w-64 xl:w-[21.6%] px-6 py-5 rounded-full h4-medium !text-white bg-[#F15939] border border-transparent hover:!border-[#F15939] hover:!bg-white hover:!text-[#F15939]"
                 >
                   Submit
                 </button>
@@ -117,7 +117,7 @@ const GetInTouch: React.FC = () => {
         </div>
 
         {/* Right Section: Image */}
-       <div className="w-full 2xl:w-[43.9%] h-[380px] sm:h-[520px] md:h-[550px] lg:h-[555px] relative bg-[#2A2A2A] min-h-[380px]">
+       <div className="hidden md:block w-full 2xl:w-[43.9%] h-[380px] sm:h-[520px] md:h-[550px] lg:h-[555px] relative min-h-[380px]">
          <Image
   src="/form-image.png"
   alt="Customer support representative with headset smiling"
