@@ -283,7 +283,8 @@ img {
 
 /* ================= H1 (36px final) ================= */
 .h1-secondary,
-.h1-secondary-medium .h1-lg {
+.h1-secondary-medium,
+.h1-lg {
   font-size: 20px; /* mobile */
   font-weight: 500;
 }
@@ -762,4 +763,3 @@ img {
     }
   }
 }
-
