@@ -3,7 +3,7 @@ import "./globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Inter, Jost } from "next/font/google";
 import localFont from "next/font/local";
-import "../styles/blog/api-content.css"
+import "../styles/blog/api-content.css";
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
@@ -11,7 +11,7 @@ const jost = Jost({
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 // ✅ Recoleta (400–700) - Loading multiple weights
