@@ -107,7 +107,7 @@ const GetInTouch: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full lg:w-64 xl:w-[21.6%] px-6 py-5 border border-transparent rounded-full h4-medium !text-white bg-[#F15939] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  className="w-full lg:w-64 xl:w-[21.6%] px-6 py-5 rounded-full h4-medium !text-white bg-[#F15939] border border-transparent hover:!border-[#F15939] hover:!bg-white hover:!text-[#F15939]"
                 >
                   Submit
                 </button>
