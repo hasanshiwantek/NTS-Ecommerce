@@ -117,7 +117,7 @@ const GetInTouch: React.FC = () => {
         </div>
 
         {/* Right Section: Image */}
-       <div className="w-full 2xl:w-[43.9%] h-[380px] sm:h-[520px] md:h-[550px] lg:h-[555px] relative bg-[#2A2A2A] min-h-[380px]">
+       <div className="hidden md:block w-full 2xl:w-[43.9%] h-[380px] sm:h-[520px] md:h-[550px] lg:h-[555px] relative min-h-[380px]">
          <Image
   src="/form-image.png"
   alt="Customer support representative with headset smiling"

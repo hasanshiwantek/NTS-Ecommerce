@@ -269,13 +269,17 @@ const Navbar: React.FC = () => {
           {/* Mobile Right: Cart + Hamburger */}
           <div className="flex lg:hidden items-center gap-3">
             {/* Cart */}
+             <Link
+              href="/cart"
+              className="relative text-white hover:text-blue-300 transition"
+            >
             <button className="relative text-white hover:text-blue-300 transition">
               <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
               <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] sm:text-xs rounded-full w-4 h-4 flex items-center justify-center">
                 {cart?.length || 0}
               </span>
             </button>
-
+            </Link>
             {/* Hamburger */}
             <button onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? (
