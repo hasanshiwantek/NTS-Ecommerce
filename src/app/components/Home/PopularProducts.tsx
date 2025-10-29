@@ -111,7 +111,7 @@ const PopularProducts = () => {
                       alt={product.name}
                       width={200}
                       height={100}
-                      className="object-contain h-full w-auto"
+                      className="object-contain h-full w-auto  xl:h-[185px] lg:h-[185px] md:h-[185px]"
                     />
                   </div>
 
