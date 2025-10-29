@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { addToCart } from "@/redux/slices/cartSlice";
-import { toast } from "react-toastify";
+import { toast } from "sonner"
 import { useAppDispatch } from "@/hooks/useReduxHooks";
 interface Product {
   id: number;
