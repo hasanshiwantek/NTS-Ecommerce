@@ -38,7 +38,7 @@ const Banner = () => {
         // SKELETON UI (when loading is true)
         <div className="w-full">
           <div className="flex">
-            {Array(6)
+            {Array(8)
               .fill(0)
               .map((_, index) => (
                 <div
