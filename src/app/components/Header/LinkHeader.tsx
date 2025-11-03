@@ -165,9 +165,9 @@ const LinkHeader = () => {
         {/* ✅ Right Section: Dynamic Categories */}
         <ul
           className="hidden lg:flex items-center 
-            gap-4 md:gap-6 xl:gap-8 
+            gap-4 md:gap-6 xl:gap-6 
             whitespace-nowrap 
-            text-sm sm:text-base md:text-sm lg:text-[1rem] xl:text-xl 2xl:text-[20px] 
+            text-sm sm:text-base md:text-sm lg:text-[1rem] xl:text-xl 2xl:text-2xl
             font-normal"
         >
           {visibleCategories.map((cat) => (
