@@ -4,11 +4,11 @@ import React from "react";
 
 const ProductOverview = ({ product }: { product: any }) => {
   return (
-    <section className="my-8">
+    <section className="my-8" aria-labelledby="product-overview-heading">
       <div className="w-full max-w-[1719px] flex flex-col">
         <div className="flex flex-col gap-8">
           {/* Main Overview Heading */}
-          <h1 className="h1-secondary-medium ">Overview</h1>
+          <h2 className="h1-secondary-medium ">Overview</h2>
 
           {/* Intro Paragraph */}
           <p className="h5-regular !leading-relaxed w-full xl:w-[60rem] 2xl:w-[80rem]">
@@ -19,8 +19,8 @@ const ProductOverview = ({ product }: { product: any }) => {
           </p>
 
           {/* Key Features */}
-          <section className="">
-            <h2 className="h5-regular !mb-2">Key Features:</h2>
+          <section className="" aria-labelledby="key-features-heading">
+            <h3 className="h5-regular !mb-2">Key Features:</h3>
             <ul className="!list-disc !list-inside !space-y-3">
               <li className="h5-regular">
                 <span className="">SKU:</span> {product?.sku || "N/A"}
@@ -55,13 +55,13 @@ const ProductOverview = ({ product }: { product: any }) => {
               __html:
                 product?.metaDescription ||
                 product?.description ||
-                "N/A description available for this product.",
+                "No description available for this product.",
             }}
           ></p>
         </div>
 
         {/* Product Details Section */}
-        <section className="border">
+        <section className="border" aria-labelledby="product-details-heading">
           <div className="bg-[#F5F6FA] py-[20px] px-[8px]">
             <h2 className="h3-secondary  !mb-2">{product?.sku || "N/A"}</h2>
           </div>

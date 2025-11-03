@@ -36,7 +36,7 @@ const ProductReview = () => {
       className="w-full max-w-[1719px] flex flex-col gap-8 "
     >
       <header className="mb-8">
-        <h1 className="h1-secondary-medium ">Reviews</h1>
+        <h2 className="h1-secondary-medium ">Reviews</h2>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -44,11 +44,9 @@ const ProductReview = () => {
         <aside className="rounded-lg p-6 flex flex-col items-center lg:items-start">
           <div className="mx-auto">
             <div className="flex items-center justify-center space-x-2 mb-2">
-              <span className="text-green-600 font-semibold text-3xl">
-                ★
-              </span>
+              <span className="text-green-600 font-semibold text-3xl">★</span>
               <span className="text-black font-semibold text-3xl">
-                 Trustpilot
+                Trustpilot
               </span>
             </div>
             <p className="flex items-center justify-center text-2xl font-semibold">
@@ -71,10 +69,10 @@ const ProductReview = () => {
           <ul className="w-full space-y-2">
             {[5, 4, 3, 2, 1].map((star, i) => (
               <li key={star} className="flex items-center text-sm">
-               <span className="flex items-center gap-1 font-medium ">
-  {star}.0
-  <Star className="w-6 h-6 fill-[#FFA439] text-[#FFA439]" />
-</span>
+                <span className="flex items-center gap-1 font-medium ">
+                  {star}.0
+                  <Star className="w-6 h-6 fill-[#FFA439] text-[#FFA439]" />
+                </span>
 
                 <div className="flex-1 mx-2 h-2 bg-gray-200 rounded-full">
                   <div
