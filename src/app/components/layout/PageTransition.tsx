@@ -66,7 +66,7 @@ export default function PageTransition({
         }`}
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{}} // You can customize exit transition if needed
+        // exit={{}} // You can customize exit transition if needed
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {children}
