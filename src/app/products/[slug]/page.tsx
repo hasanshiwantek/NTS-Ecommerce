@@ -6,6 +6,7 @@ import ProductOverview from "@/app/components/Product/ProductOverview";
 import ProductFAQs from "@/app/components/Product/ProductFAQs";
 import ProductReview from "@/app/components/Product/ProductReview";
 import RelatedProduct from "@/app/components/Home/RelatedProducts";
+import AOSWrapper from "@/app/components/animation/AOSWrapper";
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata({
   params,
@@ -109,13 +110,21 @@ export default async function ProductPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article >
+      <article>
         {/* Product Sections */}
         <ProductCard product={product} />
-        <ProductOverview product={product} />
-        <ProductFAQs />
-        <ProductReview />
-        <RelatedProduct products={products} />
+        <AOSWrapper animation="fade-up" delay={200}>
+          <ProductOverview product={product} />
+        </AOSWrapper>
+        <AOSWrapper animation="fade-up" delay={400}>
+          <ProductFAQs />
+        </AOSWrapper>
+        <AOSWrapper animation="fade-up" delay={600}>
+          <ProductReview />
+        </AOSWrapper>
+        <AOSWrapper animation="fade-up" delay={650}>
+          <RelatedProduct products={products} />
+        </AOSWrapper>
       </article>
     </>
   );
