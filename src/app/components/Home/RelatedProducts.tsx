@@ -36,7 +36,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
   return (
     <>
-      <h1 className="h1-secondary-medium">Related Products</h1>
+      <h2 className="h1-secondary-medium">Related Products</h2>
       <div className="my-8 relative w-full max-w-[1719px] mx-auto ">
         {/* AnimatePresence for smooth slide */}
         <AnimatePresence mode="wait" custom={direction}>

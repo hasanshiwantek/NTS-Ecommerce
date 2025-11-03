@@ -10,8 +10,11 @@ import {
 
 const ProductFAQs = () => {
   return (
-    <section className="my-8 w-full max-w-[1719px] flex flex-col gap-8 ">
-      <h1 className="h1-secondary-medium">FAQs</h1>
+    <section
+      className="my-8 w-full max-w-[1719px] flex flex-col gap-8 "
+      aria-labelledby="product-faqs-heading"
+    >
+      <h2 className="h1-secondary-medium">FAQs</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Column */}

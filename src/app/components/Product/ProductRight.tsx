@@ -9,7 +9,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const ProductRight = () => {
   return (
-    <div className="product-right  w-full lg:w-[22%] xl:w-[24.7%] 2xl:w-[24.7%] mt-3">
+    <aside className="product-right  w-full lg:w-[22%] xl:w-[24.7%] 2xl:w-[24.7%] mt-3">
       {/* Support Card 1 */}
       <div className="border border-gray-300 rounded-lg w-full pb-4">
         <div className="bg-[#F15939]  py-[2.2rem] 2xl:py-[2.7rem] text-center"></div>
@@ -46,9 +46,9 @@ const ProductRight = () => {
 
         <div className=" mx-auto px-7 flex flex-col items-center">
           {/* Heading */}
-          <h1 className="text-center font-bold text-[#000000] mt-3 2xl:mt-5 lg:text-sm xl:text-[11.2px] 2xl:text-[14px]">
+          <h2 className="text-center font-bold text-[#000000] mt-3 2xl:mt-5 lg:text-sm xl:text-[11.2px] 2xl:text-[14px]">
             Certified IT Hardware Specialists
-          </h1>
+          </h2>
 
           {/* Points List */}
           <div className="flex flex-col mt-2 xl:mt-3 2xl:mt-4 space-y-2 xl:space-y-2 2xl:space-y-3">
@@ -105,7 +105,7 @@ const ProductRight = () => {
           </button>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 
