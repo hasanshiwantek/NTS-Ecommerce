@@ -71,10 +71,10 @@ const FooterBottom = () => {
       2xl:max-w-[90%] 
       mx-auto 
       px-4 sm:px-6 lg:px-8 xl:px-10 
-      py-16
+      py-16 text-center sm:text-start
     "
       >
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {categories.map((category) => (
             <nav key={category.id} aria-label={category.name}>
               <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
@@ -117,10 +117,10 @@ const FooterBottom = () => {
       2xl:max-w-[90%] 
       mx-auto 
       px-4 sm:px-6 lg:px-8 xl:px-10 
-      py-16
+      py-16 text-center sm:text-start
     "
       >
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <nav aria-label="Customer Services">
             <h4 className="h5-bold !text-[#FFFFFF] mb-4">Customer Services</h4>
             <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
@@ -182,16 +182,16 @@ const FooterBottom = () => {
       </section>
 
       {/* 🔹 Bottom Bar */}
-      <div className="h5-regular flex items-center justify-between bg-[#585858] min-h-[4.5rem] px-[5%]">
+      <div className="h5-regular flex items-center flex-wrap sm:flex-nowrap justify-between bg-[#585858] min-h-[4.5rem] px-[5%]">
         {/* Center Content */}
-        <p className="!text-white text-center flex-1">
+        <p className="!text-white text-center w-full">
           &copy; New Town Spares {new Date().getFullYear()}. All rights
           reserved.
         </p>
 
         {/* Right Content */}
-        <p className="flex items-center gap-2 h5-regular !text-white ml-auto">
-          <span>Join Us</span>
+        <p className="flex items-center gap-2 h5-regular !text-white mx-auto sm:ml-auto">
+          <span className="whitespace-nowrap">Join Us</span>
           <Image
             src="/footer-logo.png"
             alt="Join Us Logo"
