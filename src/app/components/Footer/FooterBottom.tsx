@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { fetchCategories } from "@/lib/api/category";
 import Image from "next/image";
+import FooterSkeleton from "../loader/FooterSkeleton";
 interface Category {
   id: number;
   name: string;
@@ -65,46 +66,51 @@ const FooterBottom = () => {
       </section>
 
       {/* 🔹 Dynamic Categories Section */}
+      
       <section
         className="
-      w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[88%] xl:max-w-[85%] 
-      2xl:max-w-[90%] 
-      mx-auto 
-      px-4 sm:px-6 lg:px-8 xl:px-10 
-      py-16 text-center sm:text-start
-    "
+    w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[88%] xl:max-w-[85%] 
+    2xl:max-w-[90%] 
+    mx-auto 
+    px-4 sm:px-6 lg:px-8 xl:px-10 
+    py-16 text-center sm:text-start
+  "
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {categories.map((category) => (
-            <nav key={category.id} aria-label={category.name}>
-              <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
-                {category.name}
-              </h4>
-              <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4">
-                {category.subcategories?.length ? (
-                  category.subcategories.map((sub) => (
-                    <li key={sub.id}>
+          {categories.length === 0 ? (
+            <FooterSkeleton />
+          ) : (
+            categories.map((category) => (
+              <nav key={category.id} aria-label={category.name}>
+                <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
+                  {category.name}
+                </h4>
+                <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4">
+                  {category.subcategories?.length ? (
+                    category.subcategories.map((sub) => (
+                      <li key={sub.id}>
+                        <Link
+                          href={`/category/${sub.slug}`}
+                          className="hover:text-white"
+                        >
+                          {sub.name}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    <li>
                       <Link
-                        href={`/category/${sub.slug}`}
+                        href={`/category/${category.slug}`}
                         className="hover:text-white"
                       >
-                        {sub.name}
+                        {category.name}
                       </Link>
                     </li>
-                  ))
-                ) : (
-                  <li>
-                    <Link
-                      href={`/category/${category.slug}`}
-                      className="hover:text-white"
-                    >
-                      {category.name}
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </nav>
-          ))}
+                  )}
+                </ul>
+              </nav>
+            ))
+          )}
         </div>
       </section>
 
@@ -136,7 +142,7 @@ const FooterBottom = () => {
               <li>
                 <Link href="/terms-conditions">Terms and conditions</Link>
               </li>
-                      <li>
+              <li>
                 <Link href="/blogs">Blog</Link>
               </li>
             </ul>
