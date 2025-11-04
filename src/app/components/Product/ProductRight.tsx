@@ -120,7 +120,7 @@ const ProductRight = () => {
             touch with you very soon
           </p>
           <button
-            name="bulkInquiry"
+            aria-label="bulkInquiry"
             className="border border-[#333333] text-[#121e4d] bg-[#dde3ff] w-full py-[1.1rem] xl:text-[13.5px] 2xl:text-[17px] flex justify-center items-center mt-4"
           >
             Request A Bulk Inquiry

@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   // Enable compression
   compress: true,
-  
+
   // Optimize images
   images: {
     domains: [
@@ -38,10 +38,18 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  
+
   // Optimize production builds
   productionBrowserSourceMaps: false,
-  
+
+  experimental: {
+    esmExternals: true, // Use ES modules for faster builds
+  },
+
+  compiler: {
+    reactRemoveProperties: true, // Remove data-react-* props in production
+  },
+
   // Headers for caching and performance
   async headers() {
     return [
