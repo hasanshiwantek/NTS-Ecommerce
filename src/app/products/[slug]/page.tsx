@@ -4,27 +4,7 @@ import dynamic from "next/dynamic";
 import { fetchProductBySlug, fetchProducts } from "@/lib/api/products";
 import ProductCard from "@/app/components/Product/ProductCard";
 import ProductOverview from "@/app/components/Product/ProductOverview";
-
-// ✅ Lazy load heavy/non-critical components
-const ProductFAQs = dynamic(
-  () => import("@/app/components/Product/ProductFAQs" ),
-  {
-    loading: () => <p>Loading FAQs...</p>,
-  }
-);
-const ProductReview = dynamic(
-  () => import("@/app/components/Product/ProductReview"),
-  {
-    loading: () => <p>Loading Reviews...</p>,
-  }
-);
-const RelatedProduct = dynamic(
-  () => import("@/app/components/Home/RelatedProducts"),
-  {
-    loading: () => <p>Loading Related Products...</p>,
-  }
-);
-
+import ProductExtras from "@/app/components/Product/ProductExtras";
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata({
   params,
@@ -129,12 +109,10 @@ export default async function ProductPage({
       />
       <main role="main">
         <article>
-          {/* Product Sections */}
           <ProductCard product={product} />
           <ProductOverview product={product} />
-          <ProductFAQs />
-          <ProductReview />
-          <RelatedProduct products={products} />
+          {/* Client-side components */}
+          <ProductExtras products={products} />
         </article>
       </main>
     </>
