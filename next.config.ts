@@ -43,13 +43,16 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
 
   experimental: {
-    esmExternals: true, // Use ES modules for faster builds
+    esmExternals: true, // use ES modules
+    serverActions: { allowedOrigins: [] }, // if needed
   },
-
   compiler: {
     reactRemoveProperties: true, // Remove data-react-* props in production
   },
-
+  // optional: tell Next.js to target modern browsers only
+  future: {
+    webpack5: true,
+  },
   // Headers for caching and performance
   async headers() {
     return [
