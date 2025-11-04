@@ -54,6 +54,9 @@ const CommonCarousel: React.FC<CommonCarouselProps> = ({ items = [] }) => {
       w-full
       h-full
     "
+                        loading="lazy"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 16vw, 12vw"
+                        quality={80}
                       />
                     </div>
                   </CardContent>

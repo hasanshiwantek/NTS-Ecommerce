@@ -20,6 +20,7 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
             height={500}
             priority
             fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
             quality={85}
           />
         </figure>

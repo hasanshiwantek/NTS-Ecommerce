@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Banner from "./components/Home/Banner";
 import { fetchProducts } from "@/lib/api/products";
-import TopIndustries from "./components/Home/TopIndustries";
-import ItEquipment from "./components/Home/ItEquipment";
-import AuthorizedSupplier from "./components/Home/AuthorizedSupplier";
-import PopularProducts from "./components/Home/PopularProducts";
-import Testimonials from "./components/Home/Testimonials";
-import GetInTouch from "./components/Home/GetInTouch";
 import Brands from "./components/Home/Brands";
-import AOSWrapper from "./components/animation/AOSWrapper";
+import PopularProducts from "./components/Home/PopularProducts";
+
+// Lazy load below-the-fold components for better performance
+const TopIndustries = dynamic(() => import("./components/Home/TopIndustries"), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
+});
+const ItEquipment = dynamic(() => import("./components/Home/ItEquipment"), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
+});
+const AuthorizedSupplier = dynamic(() => import("./components/Home/AuthorizedSupplier"), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
+});
+const Testimonials = dynamic(() => import("./components/Home/Testimonials"), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
+});
+const GetInTouch = dynamic(() => import("./components/Home/GetInTouch"), {
+  loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
+});
+const AOSWrapper = dynamic(() => import("./components/animation/AOSWrapper"));
 export const metadata: Metadata = {
   title: "Home | New Town Spares",
   description:

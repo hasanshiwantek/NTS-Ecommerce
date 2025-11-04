@@ -7,11 +7,15 @@ import "../styles/blog/api-content.css";
 const jost = Jost({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
+  display: "swap",
+  preload: true,
 });
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: true,
 });
 
 // ✅ Recoleta (400–700) - Loading multiple weights
@@ -74,6 +78,8 @@ const gilroy = localFont({
     },
   ],
   variable: "--font-recoleta",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {

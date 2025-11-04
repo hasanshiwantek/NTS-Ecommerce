@@ -77,6 +77,8 @@ const ProductCard = ({ product }: { product: any }) => {
                 alt="Arrow Right"
                 width={12}
                 height={12}
+                loading="lazy"
+                sizes="12px"
               />
               <span className="h5-regular">{data?.name}</span>
             </React.Fragment>
