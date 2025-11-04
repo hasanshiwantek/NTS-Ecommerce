@@ -17,6 +17,11 @@ import {
   fetchCurrencies,
   setSelectedCurrency,
 } from "@/redux/slices/currencySlice";
+
+// ✅ Optimized imports (Next Image optimized assets)
+import usaFlag from "../../../../public/usa-logo.png";
+import userIcon from "../../../../public/human-icon.png";
+import headphoneIcon from "../../../../public/headphone-icon.png";
 const Navbar: React.FC = () => {
   const [currencyOpen, setCurrencyOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -85,6 +90,8 @@ const Navbar: React.FC = () => {
                   alt="Logo"
                   fill
                   className="object-contain"
+                  priority // ✅ improves LCP for main logo
+                  sizes="(max-width: 768px) 120px, (max-width: 1200px) 200px, 253px"
                 />
               </div>
             </Link>
@@ -98,67 +105,20 @@ const Navbar: React.FC = () => {
     flex-1 max-w-[60%] xl:max-w-[40rem] 2xl:max-w-[695.52px] 2xl:mx-8
   "
           >
-            {/* <div
-            className="
-    relative hidden lg:block 
-    flex-1 max-w-[60%] xl:max-w-[40rem] 2xl:max-w-[695.52px] 2xl:mx-8
-  "
-          >
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="
-      w-full px-4 md:px-5 lg:px-6 
-      py-2 md:py-2.5 lg:py-3 
-      rounded-full bg-white text-gray-800 
-      focus:outline-none focus:ring-2 focus:ring-orange-400 
-      text-sm sm:text-base lg:text-lg
-      h-10 sm:h-12 md:h-12 lg:h-14 xl:h-[60px] 2xl:h-[64px]
-      pr-12 sm:pr-16 md:pr-20 lg:pr-24 2xl:pr-52
-    h6-medium-color
-    "
-            />
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
-              <button
-                className="
-        bg-[#F1593957] rounded-full
-        w-8 h-8            
-        sm:w-9 sm:h-9       
-        md:w-10 md:h-6    
-        lg:w-16 lg:h-10    
-        xl:w-24 xl:h-16     
-        2xl:w-[88px] 2xl:h-[46px] 
-        flex items-center justify-center
-      "
-              >
-                <Search
-                  className="
-          w-4 h-4 
-          sm:w-5 sm:h-5 
-          md:w-6 md:h-6 
-          lg:w-7 lg:h-7 
-          xl:w-8 xl:h-8 
-          2xl:w-[23.7px] 2xl:h-[23.7px]
-          text-black 
-        "
-                />
-              </button>
-            </div>
-          </div> */}
-
             <GlobalSearchBar />
           </div>
 
           {/* Right Section (Desktop only) */}
           <section className="hidden lg:flex items-center gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
             <div className="relative flex items-center gap-1 sm:gap-2">
-              <img
-                src="/usa-logo.png"
+              <Image
+                src={usaFlag}
                 alt="US Flag"
                 className="
               w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-[40px] 2xl:h-[40px]
               rounded-full
             "
+                loading="lazy"
               />
               <div className="flex flex-col leading-tight relative">
                 <p className="text-[16px] text-[#EDEDED] font-normal">
@@ -166,6 +126,7 @@ const Navbar: React.FC = () => {
                 </p>
 
                 <button
+                  name="currency"
                   onClick={() => setOpen(!open)}
                   className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300"
                 >
@@ -199,10 +160,11 @@ const Navbar: React.FC = () => {
 
             {/* Account */}
             <div className="flex items-center gap-1 sm:gap-2">
-              <img
-                src="/human-icon.png"
-                alt="Account"
+              <Image
+                src={userIcon}
+                alt="User Account"
                 className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-[40px] 2xl:h-[40px]"
+                loading="lazy"
               />
               <div className="flex flex-col leading-tight">
                 <p className="text-[16px] text-[#EDEDED] font-normal ">
@@ -213,6 +175,7 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center gap-1">
                   {auth?.isAuthenticated ? (
                     <button
+                      name="logout"
                       onClick={handleLogout}
                       className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
                     >
@@ -221,13 +184,19 @@ const Navbar: React.FC = () => {
                   ) : (
                     <>
                       <Link href={"/auth/login"}>
-                        <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
+                        <button
+                          name="signIn"
+                          className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
+                        >
                           Sign In
                         </button>
                       </Link>
                       <span>/</span>
                       <Link href={"/auth/signup"}>
-                        <button className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300">
+                        <button
+                          name="register"
+                          className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
+                        >
                           Register
                         </button>
                       </Link>
@@ -239,10 +208,11 @@ const Navbar: React.FC = () => {
 
             {/* Contact */}
             <div className="flex items-center gap-1 sm:gap-2">
-              <img
-                src="/headphone-icon.png"
+              <Image
+                src={headphoneIcon}
                 alt="Support"
                 className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-[40px] 2xl:h-[40px]"
+                loading="lazy"
               />
               <div className="flex flex-col leading-tight">
                 <p className="text-[16px] text-[#EDEDED] font-normal ">
@@ -269,19 +239,22 @@ const Navbar: React.FC = () => {
           {/* Mobile Right: Cart + Hamburger */}
           <div className="flex lg:hidden items-center gap-3">
             {/* Cart */}
-             <Link
+            <Link
               href="/cart"
               className="relative text-white hover:text-blue-300 transition"
             >
-            <button className="relative text-white hover:text-blue-300 transition">
-              <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] sm:text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {cart?.length || 0}
-              </span>
-            </button>
+              <button
+                name="cart"
+                className="relative text-white hover:text-blue-300 transition"
+              >
+                <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[10px] sm:text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  {cart?.length || 0}
+                </span>
+              </button>
             </Link>
             {/* Hamburger */}
-            <button onClick={() => setMobileOpen(!mobileOpen)}>
+            <button name="hamburger" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? (
                 <X className="w-6 h-6" />
               ) : (
@@ -302,14 +275,16 @@ const Navbar: React.FC = () => {
 
             {/* Currency */}
             <div className="flex items-center gap-2">
-              <img
-                src="/usa-logo.png"
+              <Image
+                src={usaFlag}
                 alt="US Flag"
                 className="w-5 h-5 sm:w-6 sm:h-6 rounded-full"
+                loading="lazy"
               />
               <div className="flex flex-col">
                 <span className="text-xs text-gray-300">Currency</span>
                 <button
+                  name="currency"
                   onClick={() => setCurrencyOpen(!currencyOpen)}
                   className="flex items-center gap-1 text-sm font-semibold hover:text-blue-300"
                 >
@@ -326,13 +301,19 @@ const Navbar: React.FC = () => {
                 <p className="text-xs sm:text-sm font-semibold">Account</p>
                 <div className="flex items-center gap-1">
                   <Link href={"/auth/login"}>
-                    <button className="text-xs sm:text-sm font-semibold hover:text-blue-300">
+                    <button
+                      name="signIn"
+                      className="text-xs sm:text-sm font-semibold hover:text-blue-300"
+                    >
                       Sign In
                     </button>
                   </Link>
                   <span>/</span>
                   <Link href={"/auth/signup"}>
-                    <button className="text-xs sm:text-sm font-semibold hover:text-blue-300">
+                    <button
+                      name="register"
+                      className="text-xs sm:text-sm font-semibold hover:text-blue-300"
+                    >
                       Register
                     </button>
                   </Link>

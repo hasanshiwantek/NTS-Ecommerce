@@ -135,6 +135,7 @@ const GlobalSearchBar: React.FC = () => {
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
             <button
+            name="search"
               onClick={() => {
                 if (query.trim()) {
                   dispatch(globalSearch({ query }));

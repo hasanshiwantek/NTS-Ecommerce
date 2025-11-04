@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { RootState } from "@/redux/store";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 
 const RelatedProduct = ({ products }: { products: Product[] }) => {
@@ -31,8 +31,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
   };
 
   const visibleProducts = products.slice(startIndex, startIndex + itemsPerPage);
-  console.log("Related Products: ",products);
-  
+  console.log("Related Products: ", products);
 
   return (
     <>
@@ -118,6 +117,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                                 transition-all duration-300 p-2"
                 >
                   <button
+                    name="cart"
                     onClick={() => {
                       dispatch(addToCart(product));
                       toast.success(`${product.name} added to cart!`);
@@ -130,6 +130,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
                   </button>
 
                   <button
+                    name="getQuote"
                     className="xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
                                w-full sm:w-[48%] md:w-[45%] lg:w-[50%] xl:w-[45%]
                                2xl:w-[173.875px] 2xl:h-[50px] mr-2
@@ -146,6 +147,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
         {/* Left Arrow */}
         <button
+          name="left"
           onClick={handlePrev}
           disabled={startIndex === 0}
           className="absolute left-2 top-1/2 -translate-y-1/2 
@@ -157,6 +159,7 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
         {/* Right Arrow */}
         <button
+          name="right"
           onClick={handleNext}
           disabled={startIndex >= products.length - itemsPerPage}
           className="absolute right-2 top-1/2 -translate-y-1/2 
