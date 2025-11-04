@@ -1,12 +1,31 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 import { fetchProductBySlug, fetchProducts } from "@/lib/api/products";
 import ProductCard from "@/app/components/Product/ProductCard";
 import ProductOverview from "@/app/components/Product/ProductOverview";
-import ProductFAQs from "@/app/components/Product/ProductFAQs";
-import ProductReview from "@/app/components/Product/ProductReview";
-import RelatedProduct from "@/app/components/Home/RelatedProducts";
 import AOSWrapper from "@/app/components/animation/AOSWrapper";
+
+// ✅ Lazy load heavy/non-critical components
+const ProductFAQs = dynamic(
+  () => import("@/app/components/Product/ProductFAQs"),
+  {
+    loading: () => <p>Loading FAQs...</p>,
+  }
+);
+const ProductReview = dynamic(
+  () => import("@/app/components/Product/ProductReview"),
+  {
+    loading: () => <p>Loading Reviews...</p>,
+  }
+);
+const RelatedProduct = dynamic(
+  () => import("@/app/components/Home/RelatedProducts"),
+  {
+    loading: () => <p>Loading Related Products...</p>,
+  }
+);
+
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata({
   params,
