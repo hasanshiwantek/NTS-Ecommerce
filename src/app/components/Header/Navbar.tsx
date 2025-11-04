@@ -126,7 +126,7 @@ const Navbar: React.FC = () => {
                 </p>
 
                 <button
-                  name="currency"
+                  aria-label="currency"
                   onClick={() => setOpen(!open)}
                   className="flex items-center gap-1 text-xs sm:text-sm md:text-base lg:text-lg font-semibold hover:text-blue-300"
                 >
@@ -175,7 +175,7 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center gap-1">
                   {auth?.isAuthenticated ? (
                     <button
-                      name="logout"
+                      aria-label="logout"
                       onClick={handleLogout}
                       className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
                     >
@@ -185,7 +185,7 @@ const Navbar: React.FC = () => {
                     <>
                       <Link href={"/auth/login"}>
                         <button
-                          name="signIn"
+                          aria-label="signin"
                           className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
                         >
                           Sign In
@@ -194,7 +194,7 @@ const Navbar: React.FC = () => {
                       <span>/</span>
                       <Link href={"/auth/signup"}>
                         <button
-                          name="register"
+                          aria-label="register"
                           className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold hover:text-blue-300"
                         >
                           Register
@@ -244,7 +244,7 @@ const Navbar: React.FC = () => {
               className="relative text-white hover:text-blue-300 transition"
             >
               <button
-                name="cart"
+                aria-label="cart"
                 className="relative text-white hover:text-blue-300 transition"
               >
                 <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -254,7 +254,10 @@ const Navbar: React.FC = () => {
               </button>
             </Link>
             {/* Hamburger */}
-            <button name="hamburger" onClick={() => setMobileOpen(!mobileOpen)}>
+            <button
+              aria-label="hamburger"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
               {mobileOpen ? (
                 <X className="w-6 h-6" />
               ) : (
@@ -284,7 +287,7 @@ const Navbar: React.FC = () => {
               <div className="flex flex-col">
                 <span className="text-xs text-gray-300">Currency</span>
                 <button
-                  name="currency"
+                  aria-label="currency"
                   onClick={() => setCurrencyOpen(!currencyOpen)}
                   className="flex items-center gap-1 text-sm font-semibold hover:text-blue-300"
                 >
@@ -302,7 +305,7 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center gap-1">
                   <Link href={"/auth/login"}>
                     <button
-                      name="signIn"
+                      aria-label="signIn"
                       className="text-xs sm:text-sm font-semibold hover:text-blue-300"
                     >
                       Sign In
@@ -311,7 +314,7 @@ const Navbar: React.FC = () => {
                   <span>/</span>
                   <Link href={"/auth/signup"}>
                     <button
-                      name="register"
+                      aria-label="register"
                       className="text-xs sm:text-sm font-semibold hover:text-blue-300"
                     >
                       Register

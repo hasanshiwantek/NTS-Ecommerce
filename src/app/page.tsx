@@ -12,9 +12,12 @@ const TopIndustries = dynamic(() => import("./components/Home/TopIndustries"), {
 const ItEquipment = dynamic(() => import("./components/Home/ItEquipment"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
 });
-const AuthorizedSupplier = dynamic(() => import("./components/Home/AuthorizedSupplier"), {
-  loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
-});
+const AuthorizedSupplier = dynamic(
+  () => import("./components/Home/AuthorizedSupplier"),
+  {
+    loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
+  }
+);
 const Testimonials = dynamic(() => import("./components/Home/Testimonials"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
 });

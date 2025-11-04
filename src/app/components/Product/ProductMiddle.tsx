@@ -89,7 +89,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             className="w-14 h-w-14 object-contain"
           />
           <div className="flex-1 text-center sm:text-left ">
-            <h5 className="text-[#000000] font-bold text-[11.2px] 2xl:text-[14px]">Free shipping Up to 10 lbs</h5>
+            <h3 className="text-[#000000] font-bold text-[11.2px] 2xl:text-[14px]">Free shipping Up to 10 lbs</h3>
             <p className="xl:text-[8.4px] 2xl:text-[10.5px] text-[#000000]">
               Get your orders delivered without extra cost.
             </p>
@@ -145,7 +145,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
     "
             >
               <button
-              name="decrement"
+            aria-label="Decrease quantity"
                 onClick={decrement}
                 className="
         flex items-center justify-center
@@ -173,7 +173,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
               </span>
 
               <button
-              name="increment"
+              aria-label="Increase quantity"
                 onClick={increment}
                 className="
         flex items-center justify-center
@@ -191,7 +191,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
             {/* Add to Cart */}
             <button
-            name="cart"
+            aria-label={`Add ${quantity} ${product.name} to cart`}
               onClick={() => {
                 dispatch(addToCart({ ...product, quantity }));
                 toast.success(`${product.name} added to cart (${quantity})!`);
@@ -219,7 +219,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div className="flex items-center mt-3 xl:mt-4 2xl:mt-6 h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
-        name="buyNow"
+    aria-label={`Buy ${product.name} now`}
           onClick={() => {
             dispatch(addToCart(product));
             setTimeout(() => {
