@@ -35,12 +35,12 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             {product?.rating && (
               <Star className="w-5 h-5 text-[#F15939] fill-[#F15939]" />
             )}
-            <h6 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
+            <h2 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
               {product?.rating || "N/A " + " Ratings"}
-            </h6>
-            <h6 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
+            </h2>
+            <h2 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
               {product.reviews || "N/A " + " Reviews"}
-            </h6>
+            </h2>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
 {/* Ab ProductPrice component use karo */}
 <ProductPrice price={Number(product?.price || 0)} />
-            <h5 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
+            <h2 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
               Now $
               {product?.msrp && product.msrp > 0
                 ? Number(product.msrp).toFixed(2)
@@ -65,7 +65,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
                   Number(product?.price || 0) - Number(product.msrp || 0)
                 ).toFixed(2)}
               </span>
-            </h5>
+            </h2>
           </div>
 
           {/* Secure Methods */}
@@ -145,6 +145,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
     "
             >
               <button
+              name="decrement"
                 onClick={decrement}
                 className="
         flex items-center justify-center
@@ -172,6 +173,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
               </span>
 
               <button
+              name="increment"
                 onClick={increment}
                 className="
         flex items-center justify-center
@@ -189,6 +191,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
             {/* Add to Cart */}
             <button
+            name="cart"
               onClick={() => {
                 dispatch(addToCart({ ...product, quantity }));
                 toast.success(`${product.name} added to cart (${quantity})!`);
@@ -216,6 +219,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div className="flex items-center mt-3 xl:mt-4 2xl:mt-6 h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
+        name="buyNow"
           onClick={() => {
             dispatch(addToCart(product));
             setTimeout(() => {

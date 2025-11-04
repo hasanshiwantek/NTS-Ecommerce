@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { fetchProductBySlug, fetchProducts } from "@/lib/api/products";
 import ProductCard from "@/app/components/Product/ProductCard";
 import ProductOverview from "@/app/components/Product/ProductOverview";
-import AOSWrapper from "@/app/components/animation/AOSWrapper";
 
 // ✅ Lazy load heavy/non-critical components
 const ProductFAQs = dynamic(
@@ -132,18 +131,10 @@ export default async function ProductPage({
       <article>
         {/* Product Sections */}
         <ProductCard product={product} />
-        <AOSWrapper animation="fade-up" delay={200}>
           <ProductOverview product={product} />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={400}>
           <ProductFAQs />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={600}>
           <ProductReview />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={650}>
           <RelatedProduct products={products} />
-        </AOSWrapper>
       </article>
     </>
   );
