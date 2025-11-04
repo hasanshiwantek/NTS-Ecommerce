@@ -7,7 +7,7 @@ import ProductOverview from "@/app/components/Product/ProductOverview";
 
 // ✅ Lazy load heavy/non-critical components
 const ProductFAQs = dynamic(
-  () => import("@/app/components/Product/ProductFAQs"),
+  () => import("@/app/components/Product/ProductFAQs" ),
   {
     loading: () => <p>Loading FAQs...</p>,
   }
