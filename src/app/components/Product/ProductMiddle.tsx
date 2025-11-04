@@ -1,17 +1,11 @@
 "use client";
 import React from "react";
-import { Star, ShoppingCart, Plus, Minus } from "lucide-react";
+import { Star,Plus, Minus } from "lucide-react";
 import Image from "next/image";
-import americanexpress from "@/assets/card-icon/american-express.png";
-import debit from "@/assets/card-icon/debit-card.png";
-import googlepay from "@/assets/card-icon/google-pay.png";
-import paypal from "@/assets/card-icon/paypal.png";
-import visa from "@/assets/card-icon/visa.png";
 import freelogo from "@/assets/card-icon/freelogo.png";
 import dhllogo from "@/assets/card-icon/dhllogo.png";
 import upslogo from "@/assets/card-icon/upslogo.png";
 import feedxlogo from "@/assets/card-icon/feedxlogo.png";
-import cart from "@/assets/card-icon/shoppingCart.svg";
 import { useAppDispatch } from "@/hooks/useReduxHooks";
 import { toast } from "sonner"
 import { addToCart } from "@/redux/slices/cartSlice";
@@ -21,7 +15,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   return (
-    <div className=" product-middle  flex flex-col h-full w-full lg:w-[38%] xl:w-[38%] 2xl:w-[36.4%]">
+    <section className=" product-middle  flex flex-col h-full w-full lg:w-[38%] xl:w-[38%] 2xl:w-[36.4%]">
       <div>
         <div className="flex flex-col gap-1 xl:gap-2.5 2xl:gap-3">
           {/* <h6 className="h6-regular">{product?.brand?.name}</h6> */}
@@ -250,7 +244,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           submit purchase orders.
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -19,6 +19,8 @@ const ProductRight = () => {
               src={supportIcon1}
               alt="Support 1"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="border-2 border-[#121e4d] 2xl:w-[6rem] 2xl:h-[6rem] xl:w-[5rem] xl:h-[5rem] lg:w-[3.7rem] lg:h-[3.7rem] h-[5rem] w-[5rem] rounded-full -ml-3 overflow-hidden">
@@ -26,6 +28,8 @@ const ProductRight = () => {
               src={supportIcon1}
               alt="Support 1"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="border-2 border-[#121e4d] 2xl:w-[6rem] 2xl:h-[6rem] xl:w-[5rem] xl:h-[5rem] lg:w-[3.7rem] lg:h-[3.7rem] h-[5rem] w-[5rem] rounded-full -ml-3 overflow-hidden">
@@ -33,6 +37,8 @@ const ProductRight = () => {
               src={supportIcon2}
               alt="Support 2"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div className="border-2 border-[#121e4d] 2xl:w-[6rem] 2xl:h-[6rem] xl:w-[5rem] xl:h-[5rem] lg:w-[3.7rem] lg:h-[3.7rem] h-[5rem] w-[5rem] rounded-full -ml-3 overflow-hidden">
@@ -40,6 +46,8 @@ const ProductRight = () => {
               src={supportIcon3}
               alt="Support 3"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
