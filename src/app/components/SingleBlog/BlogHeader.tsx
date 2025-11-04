@@ -31,6 +31,7 @@ const BlogHeader = ({ blogPost }: { blogPost: any }) => {
           className="object-cover object-center"
           priority
           sizes="100vw"
+          quality={85}
         />
       </div>
     </section>

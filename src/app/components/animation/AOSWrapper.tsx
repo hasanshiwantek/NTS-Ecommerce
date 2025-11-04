@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React, { useEffect, useState } from "react";
 
 interface AOSWrapperProps {
   children: React.ReactNode;
@@ -27,14 +25,36 @@ const AOSWrapper: React.FC<AOSWrapperProps> = ({
   easing = "ease-out-cubic",
   className = "",
 }) => {
+  const [aosLoaded, setAosLoaded] = useState(false);
+
   useEffect(() => {
-    AOS.init({
-      duration,
-      offset,
-      once,
-      easing,
-    });
-    AOS.refresh();
+    // Dynamically import AOS only on client side for better performance
+    const loadAOS = async () => {
+      try {
+        const AOS = (await import("aos")).default;
+        // Load CSS dynamically to reduce initial bundle size
+        if (typeof window !== "undefined" && !document.getElementById("aos-styles")) {
+          const link = document.createElement("link");
+          link.id = "aos-styles";
+          link.rel = "stylesheet";
+          link.href = "https://unpkg.com/aos@2.3.4/dist/aos.css";
+          document.head.appendChild(link);
+        }
+        
+        AOS.init({
+          duration,
+          offset,
+          once,
+          easing,
+        });
+        AOS.refresh();
+        setAosLoaded(true);
+      } catch (error) {
+        console.error("Failed to load AOS:", error);
+      }
+    };
+    
+    loadAOS();
   }, [duration, offset, once, easing]);
 
   // If no animation is specified, pick a random one from defaults

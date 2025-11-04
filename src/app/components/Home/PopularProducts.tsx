@@ -112,6 +112,9 @@ const PopularProducts = () => {
                       width={200}
                       height={100}
                       className="object-contain h-full w-auto  xl:h-[185px] lg:h-[185px] md:h-[185px]"
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                      quality={80}
                     />
                   </div>
 

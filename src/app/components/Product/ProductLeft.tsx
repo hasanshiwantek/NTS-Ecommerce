@@ -15,10 +15,13 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
         >
           <Image
             src={selectedImage || "/default-product-image.svg"}
-          alt="Main product image"
+            alt="Main product image"
             className="md:w-[60%] lg:w-[85%] lg:h-[67.2%] xl:w-[84.5%] 2xl:w-[84.2%] 2xl:h-[62.2%] xl:h-[62.2%]  object-contain rounded-lg p-10 md:p-20 sm:p-10 lg:p-12 2xl:p-16 xl:p-12"
             width={500}
             height={500}
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+            quality={85}
           />
         </figure>
 
