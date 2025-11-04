@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { globalSearch } from "@/redux/slices/homeSlice";
 
 // Simple debounce helper
-const useDebounce = (value: string, delay = 500) => {
+const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedValue(value), delay);
@@ -24,25 +24,41 @@ const GlobalSearchBar: React.FC = () => {
   const { searchData, loading } = useAppSelector((state: any) => state.home);
 
   const [results, setResults] = useState<any[]>([]);
-  console.log("results:", searchData);
+  
+  // Cache state object for storing search results
+  const [searchCache, setSearchCache] = useState<{ [key: string]: any[] }>({});
+  
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const debouncedQuery = useDebounce(query, 500);
+  const debouncedQuery = useDebounce(query, 300);
 
-  // Auto-fetch search results after debounce delay
+  // Auto-fetch search results after debounce delay with cache check
   useEffect(() => {
-    if (debouncedQuery.trim().length > 1) {
-      dispatch(globalSearch({ query: debouncedQuery }));
-      setShowDropdown(true);
+    const trimmedQuery = debouncedQuery.trim().toLowerCase();
+    
+    if (trimmedQuery.length > 1) {
+      // Check if results exist in cache
+      if (searchCache[trimmedQuery]) {
+        console.log("✅ Data cache se aa raha hai:", trimmedQuery);
+        console.log("Cached Results:", searchCache[trimmedQuery]);
+        setResults(searchCache[trimmedQuery]);
+        setShowDropdown(true);
+      } else {
+        console.log("🔄 API call ho rahi hai:", trimmedQuery);
+        // Make API call if not in cache
+        dispatch(globalSearch({ query: debouncedQuery }));
+        setShowDropdown(true);
+      }
     } else {
+      // Input khali hai ya 1 character se kam hai
       setResults([]);
       setShowDropdown(false);
     }
   }, [debouncedQuery, dispatch]);
 
-  // Map API results into category URLs
+  // Map API results into category URLs and store in cache
   useEffect(() => {
-    if (searchData?.data?.length) {
+    if (searchData?.data) {
       const mapped = searchData.data.map((item: any) => ({
         id: item.id,
         name: item.name,
@@ -52,18 +68,28 @@ const GlobalSearchBar: React.FC = () => {
         price: item.price || item.costPrice || "0.00",
         url: `/category/${item.categories?.[0]?.slug || item.slug}`,
       }));
+      
       setResults(mapped);
-    } else {
-      setResults([]);
+      
+      // Store in cache with lowercase trimmed query as key
+      const cacheKey = debouncedQuery.trim().toLowerCase();
+      if (cacheKey.length > 1) {
+        console.log("💾 Cache mein store ho raha hai:", cacheKey);
+        console.log("Stored Data:", mapped);
+        setSearchCache((prevCache) => ({
+          ...prevCache,
+          [cacheKey]: mapped,
+        }));
+      }
     }
-  }, [searchData]);
+  }, [searchData, debouncedQuery]);
 
   // Show dropdown when results are loaded successfully
   useEffect(() => {
-    if (searchData?.data?.length) {
+    if (searchData?.data?.length || results.length > 0) {
       setShowDropdown(true);
     }
-  }, [searchData]);
+  }, [searchData, results]);
 
   // Navigate to selected category
   const handleSelect = (url: string) => {
@@ -143,7 +169,7 @@ const GlobalSearchBar: React.FC = () => {
       </div>
 
       {/* Dropdown Results */}
-      {showDropdown && (
+      {showDropdown && query.trim().length > 1 && (
         <div className="absolute top-full left-0 w-full mt-2 bg-white text-[#4A4A4A] shadow-lg rounded-md overflow-hidden z-50 max-h-[400px] overflow-y-auto">
           {loading && <div className="p-3 text-gray/80">Searching...</div>}
 
