@@ -37,19 +37,8 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "@/components/ui/sonner";
-import dynamic from "next/dynamic";
-
-// Dynamically import motion.div and AnimatePresence (client only)
-const MotionDiv = dynamic(
-  () => import("framer-motion").then((mod) => mod.motion.div),
-  { ssr: false }
-);
-
-const AnimatePresence = dynamic(
-  () => import("framer-motion").then((mod) => mod.AnimatePresence),
-  { ssr: false }
-);
 
 export default function PageTransition({
   children,
@@ -60,18 +49,18 @@ export default function PageTransition({
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <MotionDiv
+      <motion.div
         key={pathname}
         className={`flex-grow ${
-          pathname === "/" ||
-          [
-            "/auth",
-            "/privacyPolicy",
-            "/payment-options",
-            "/terms-conditions",
-            "/shipping-policy",
-            "/returnPolicy",
-          ].some((p) => pathname.includes(p))
+      pathname === "/" ||
+      [
+        "/auth",
+        "/privacyPolicy",
+        "/payment-options",
+        "/terms-conditions",
+        "/shipping-policy",
+        "/returnPolicy",
+      ].some((p) => pathname.includes(p))
             ? ""
             : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
         }`}
@@ -81,8 +70,8 @@ export default function PageTransition({
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {children}
-        <Toaster position="top-center" />
-      </MotionDiv>
+             <Toaster position="top-center" /> 
+      </motion.div>
     </AnimatePresence>
   );
 }
