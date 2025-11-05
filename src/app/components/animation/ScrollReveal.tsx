@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -11,12 +11,6 @@ interface ScrollRevealProps {
   className?: string;
 }
 
-// Dynamically import only motion.div
-const MotionDiv = dynamic(
-  () =>
-    import("framer-motion").then((mod) => mod.motion.div),
-  { ssr: false } // client-only
-);
 export default function ScrollReveal({
   children,
   delay = 0.2,
@@ -24,22 +18,6 @@ export default function ScrollReveal({
   duration = 0.6,
   className = "",
 }: ScrollRevealProps) {
-  const [motionModule, setMotionModule] = useState<any>(null);
-
-  useEffect(() => {
-    let mounted = true;
-    import("framer-motion").then((mod) => {
-      if (mounted) setMotionModule(mod);
-    });
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  if (!motionModule) return <div>{children}</div>; // fallback while loading
-
-  const { motion, useAnimation, useInView } = motionModule;
-
   const ref = useRef(null);
   const controls = useAnimation();
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -58,7 +36,7 @@ export default function ScrollReveal({
       : { x: -30 };
 
   return (
-    <MotionDiv
+    <motion.div
       ref={ref}
       className={className}
       variants={{
@@ -74,6 +52,6 @@ export default function ScrollReveal({
       animate={controls}
     >
       {children}
-    </MotionDiv>
+    </motion.div>
   );
 }
