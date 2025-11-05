@@ -23,7 +23,7 @@ interface Product {
 
 export default function ProductCategoryCard({ product }: { product: Product }) {
   const dispatch = useAppDispatch();
-  const imageUrl = product.image?.[0]?.path || "./default-product-image.svg";
+  const imageUrl = product.image?.[0]?.path || "/default-product-image.svg";
 
   return (
     <div

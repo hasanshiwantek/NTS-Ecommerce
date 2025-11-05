@@ -1,36 +1,19 @@
-"use client";
 import React from "react";
 
 const FooterSkeleton = () => {
   return (
-    <section         className="
-    w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[88%] xl:max-w-[85%] 
-    2xl:max-w-[90%] 
-    mx-auto 
-    px-4 sm:px-6 lg:px-8 xl:px-10 
-    py-16 text-center sm:text-start
-  ">
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-      {Array(4)
-        .fill(0)
-        .map((_, index) => (
-          <div key={index} className="space-y-4 animate-pulse">
-            {/* Skeleton heading */}
-            <div className="h-5 w-2/3 bg-gray-400 rounded"></div>
-            {/* Skeleton list items */}
-            <ul className="space-y-2">
-              {Array(4)
-                .fill(0)
-                .map((__, i) => (
-                  <li key={i} className="h-4 w-full bg-gray-300 rounded"></li>
-                ))}
-            </ul>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 min-h-[300px] animate-pulse">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i}>
+          <div className="h-5 bg-gray-600 rounded w-7/2 mb-4"></div>
+          <div className="space-y-2">
+            <div className="h-3 bg-gray-700 rounded w-3/4"></div>
+            <div className="h-3 bg-gray-700 rounded w-2/3"></div>
+            <div className="h-3 bg-gray-700 rounded w-1/2"></div>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
-    </section>
-
   );
 };
 

@@ -15,7 +15,7 @@ interface Product {
 }
 
 export default function ProductGridCard({ product }: { product: Product }) {
-  const imageUrl = product.image?.[0]?.path || "./default-product-image.svg";
+  const imageUrl = product.image?.[0]?.path || "/default-product-image.svg";
 
   // Normalize price to number
   const price =

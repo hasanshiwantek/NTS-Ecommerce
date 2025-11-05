@@ -1,12 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 import CategoryFilter from "./CategoryFilter";
 import BrandFilter from "./BrandFilter";
 import PriceFilter from "./PriceFilter";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { useRouter, useParams } from "next/navigation";
+import dynamic from "next/dynamic";
+
+// Dynamically import only the motion.div wrapper
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+const AnimatePresence = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 export default function Sidebar({
   categories,
   brands,
@@ -124,7 +135,7 @@ export default function Sidebar({
 
             <AnimatePresence initial={false}>
               {expandedSection === "Top Brands" && (
-                <motion.div
+                <MotionDiv
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
@@ -136,7 +147,7 @@ export default function Sidebar({
                     handleBrandClick={handleBrandClick}
                     activeBrandId={filters?.brandId}
                   />
-                </motion.div>
+                </MotionDiv>
               )}
             </AnimatePresence>
           </li>
@@ -172,7 +183,7 @@ export default function Sidebar({
 
               <AnimatePresence initial={false}>
                 {expandedCategorySection === cat.name && (
-                  <motion.div
+                  <MotionDiv
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -184,7 +195,7 @@ export default function Sidebar({
                       handleCategoryClick={handleCategoryClick}
                       activeCategoryId={filters?.categoryIds?.[0]} // ✅ pass current active ID
                     />
-                  </motion.div>
+                  </MotionDiv>
                 )}
               </AnimatePresence>
             </li>

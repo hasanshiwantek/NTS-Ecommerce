@@ -6,9 +6,21 @@ import { useState, useEffect } from "react";
 import ProductCategoryCard from "./ProductCategoryCard";
 import ProductGridCard from "./ProductGridCard";
 import SortingBar from "./SortingBar";
-import { motion, AnimatePresence } from "framer-motion";
 import ProductSkeleton from "../loader/ProductSkeleton";
 import Pagination from "@/components/ui/pagination";
+import dynamic from "next/dynamic";
+
+
+// Dynamically import motion.div and AnimatePresence (client only)
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
+const AnimatePresence = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 
 interface ProductListProps {
   filters: any;
@@ -94,7 +106,7 @@ w-full
 
       {/* Loading State */}
       {isLoading && !error && (
-        <motion.div
+        <MotionDiv
           key="loading"
           layout
           initial={{ opacity: 0 }}
@@ -110,12 +122,12 @@ w-full
           {Array.from({ length: 6 }).map((_, idx) => (
             <ProductSkeleton key={idx} view={view} />
           ))}
-        </motion.div>
+        </MotionDiv>
       )}
 
       {/* Product Cards */}
       {!isLoading && !error && products?.length > 0 && (
-        <motion.div
+        <MotionDiv
           key={view}
           layout
           initial={{ opacity: 0, scale: 0.95 }}
@@ -131,7 +143,7 @@ w-full
           <AnimatePresence mode="wait">
             {products.map((product, idx) =>
               view === "list" ? (
-                <motion.div
+                <MotionDiv
                   key={`list-${idx}`}
                   layout
                   initial={{ opacity: 0, y: 20 }}
@@ -140,9 +152,9 @@ w-full
                   transition={{ duration: 0.3, delay: idx * 0.05 }}
                 >
                   <ProductCategoryCard product={product} />
-                </motion.div>
+                </MotionDiv>
               ) : (
-                <motion.div
+                <MotionDiv
                   key={`grid-${idx}`}
                   layout
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -151,11 +163,11 @@ w-full
                   transition={{ duration: 0.3, delay: idx * 0.05 }}
                 >
                   <ProductGridCard product={product} />
-                </motion.div>
+                </MotionDiv>
               )
             )}
           </AnimatePresence>
-        </motion.div>
+        </MotionDiv>
       )}
 
       {/* Pagination */}

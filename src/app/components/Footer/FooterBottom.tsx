@@ -66,7 +66,7 @@ const FooterBottom = () => {
       </section>
 
       {/* 🔹 Dynamic Categories Section */}
-      
+
       <section
         className="
     w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[88%] xl:max-w-[85%] 
@@ -76,41 +76,61 @@ const FooterBottom = () => {
     py-16 text-center sm:text-start
   "
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {categories.length === 0 ? (
-            <FooterSkeleton />
-          ) : (
-            categories.map((category) => (
-              <nav key={category.id} aria-label={category.name}>
-                <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
-                  {category.name}
-                </h4>
-                <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4">
-                  {category.subcategories?.length ? (
-                    category.subcategories.map((sub) => (
-                      <li key={sub.id}>
+        <div className="relative min-h-[300px]">
+          {/* Skeleton (visible while loading) */}
+          <div
+            className={`absolute inset-0 transition-opacity duration-500 ${
+              categories.length === 0
+                ? "opacity-100"
+                : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              <FooterSkeleton />
+            </div>
+          </div>
+
+          {/* Actual categories (fade in smoothly after load) */}
+          <div
+            className={`transition-opacity duration-500 ${
+              categories.length > 0
+                ? "opacity-100"
+                : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {categories.map((category) => (
+                <nav key={category.id} aria-label={category.name}>
+                  <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
+                    {category.name}
+                  </h4>
+                  <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4">
+                    {category.subcategories?.length ? (
+                      category.subcategories.map((sub) => (
+                        <li key={sub.id}>
+                          <Link
+                            href={`/category/${sub.slug}`}
+                            className="hover:text-white"
+                          >
+                            {sub.name}
+                          </Link>
+                        </li>
+                      ))
+                    ) : (
+                      <li>
                         <Link
-                          href={`/category/${sub.slug}`}
+                          href={`/category/${category.slug}`}
                           className="hover:text-white"
                         >
-                          {sub.name}
+                          {category.name}
                         </Link>
                       </li>
-                    ))
-                  ) : (
-                    <li>
-                      <Link
-                        href={`/category/${category.slug}`}
-                        className="hover:text-white"
-                      >
-                        {category.name}
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </nav>
-            ))
-          )}
+                    )}
+                  </ul>
+                </nav>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

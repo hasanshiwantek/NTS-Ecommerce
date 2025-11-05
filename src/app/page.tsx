@@ -4,7 +4,7 @@ import Banner from "./components/Home/Banner";
 import { fetchProducts } from "@/lib/api/products";
 import Brands from "./components/Home/Brands";
 import PopularProducts from "./components/Home/PopularProducts";
-
+import AOSWrapper from "./components/animation/AOSWrapper";
 // Lazy load below-the-fold components for better performance
 const TopIndustries = dynamic(() => import("./components/Home/TopIndustries"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
@@ -24,7 +24,7 @@ const Testimonials = dynamic(() => import("./components/Home/Testimonials"), {
 const GetInTouch = dynamic(() => import("./components/Home/GetInTouch"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-200" />,
 });
-const AOSWrapper = dynamic(() => import("./components/animation/AOSWrapper"));
+// const AOSWrapper = dynamic(() => import("./components/animation/AOSWrapper"));
 export const metadata: Metadata = {
   title: "Home | New Town Spares",
   description:

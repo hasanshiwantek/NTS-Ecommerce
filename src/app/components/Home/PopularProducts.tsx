@@ -2,12 +2,24 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { fetchPopularProducts } from "@/redux/slices/homeSlice";
 import { addToCart } from "@/redux/slices/cartSlice";
 import PopularProductSkeleton from "../loader/PopularProductSkeleton";
-import { toast } from "sonner"
+import { toast } from "sonner";
+import dynamic from "next/dynamic";
+
+// Dynamically import motion.div and AnimatePresence (client only)
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
+const AnimatePresence = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
+
 const PopularProducts = () => {
   const dispatch = useAppDispatch();
   const { popularProducts, loading, error } = useAppSelector(
@@ -87,7 +99,7 @@ const PopularProducts = () => {
           >
             <AnimatePresence mode="wait">
               {filteredProducts.slice(0, 8).map((product: any, index: any) => (
-                <motion.div
+                <MotionDiv
                   key={product.id || index}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -177,7 +189,7 @@ const PopularProducts = () => {
                       Get Quote
                     </button>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </AnimatePresence>
           </main>
