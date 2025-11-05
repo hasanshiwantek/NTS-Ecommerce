@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -11,6 +11,16 @@ interface ScrollRevealProps {
   className?: string;
 }
 
+// Dynamically import framer-motion module
+const useFramerMotion = async () => {
+  const mod = await import("framer-motion");
+  return {
+    motion: mod.motion,
+    useAnimation: mod.useAnimation,
+    useInView: mod.useInView,
+  };
+};
+
 export default function ScrollReveal({
   children,
   delay = 0.2,
@@ -19,6 +29,28 @@ export default function ScrollReveal({
   className = "",
 }: ScrollRevealProps) {
   const ref = useRef(null);
+  const [motionModule, setMotionModule] = useState<{
+    motion: any;
+    useAnimation: any;
+    useInView: any;
+  } | null>(null);
+
+  // Load framer-motion dynamically on client
+  useEffect(() => {
+    let mounted = true;
+    useFramerMotion().then((mod) => {
+      if (mounted) setMotionModule(mod);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // fallback render without animation until loaded
+  if (!motionModule) return <div className={className}>{children}</div>;
+
+  const { motion, useAnimation, useInView } = motionModule;
+
   const controls = useAnimation();
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 

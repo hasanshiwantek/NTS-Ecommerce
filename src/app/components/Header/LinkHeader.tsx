@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, ChevronDown, ChevronRight } from "lucide-react";
 import { fetchCategories } from "@/lib/api/category";
-import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
 
 interface Category {
   id: number;
@@ -12,6 +12,27 @@ interface Category {
   slug: string;
   subcategories: Category[];
 }
+
+// Dynamically import motion.div and AnimatePresence (client only)
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false }
+);
+
+const MotionUl = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.ul),
+  { ssr: false }
+);
+
+const MotionLi = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.li),
+  { ssr: false }
+);
+
+const AnimatePresence = dynamic(
+  () => import("framer-motion").then((mod) => mod.AnimatePresence),
+  { ssr: false }
+);
 
 const DropdownColumn = ({
   heading,
@@ -38,7 +59,7 @@ const DropdownColumn = ({
       </div>
 
       {/* Animated List */}
-      <motion.ul
+      <MotionUl
         initial="hidden"
         animate="visible"
         transition={{ staggerChildren: 0.08 }}
@@ -50,7 +71,7 @@ const DropdownColumn = ({
               href={`/category/${cat.slug}`}
               onClick={() => setIsOpen(false)}
             >
-              <motion.li
+              <MotionLi
                 key={cat.id}
                 variants={listVariants}
                 className="flex justify-between items-center px-4 py-3 h4-regular hover:bg-gray-100 hover:border-l-2 border-[#F15939] cursor-pointer relative"
@@ -66,7 +87,7 @@ const DropdownColumn = ({
                 {/* Child dropdown stays same */}
                 <AnimatePresence>
                   {activeCategory === cat.id && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, x: 30 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 30 }}
@@ -80,13 +101,13 @@ const DropdownColumn = ({
                           categories={cat.subcategories}
                         />
                       ) : null}
-                    </motion.div>
+                    </MotionDiv>
                   )}
                 </AnimatePresence>
-              </motion.li>
+              </MotionLi>
             </Link>
           ))}
-      </motion.ul>
+      </MotionUl>
     </div>
   );
 };
