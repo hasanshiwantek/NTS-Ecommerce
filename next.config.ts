@@ -1,11 +1,7 @@
 import type { NextConfig } from "next";
-import withBundleAnalyzer from "@next/bundle-analyzer";
 
-const isAnalyze = process.env.ANALYZE === "true";
-
-const nextConfig: NextConfig = withBundleAnalyzer({
-  enabled: isAnalyze,
-})({
+const nextConfig: NextConfig = {
+  /* config options here */
   // Enable compression
   compress: true,
 
@@ -15,7 +11,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       "ecom.brokercell.com",
       "images.pexels.com",
       "images.unsplash.com",
-      "cdn11.bigcommerce.com",
+        "cdn11.bigcommerce.com"
     ],
     remotePatterns: [
       {
@@ -25,64 +21,40 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       {
         protocol: "https",
         hostname: "ecom.brokercell.com",
-        pathname: "/product_images/**",
+        port: "", // leave empty if no port
+        pathname: "/product_images/**", // allow all images inside /product_images/
       },
     ],
+    // Optimize image formats (Next.js 15 compatible)
     formats: ["image/avif", "image/webp"],
+    // Device sizes for responsive images
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    // Image sizes for different breakpoints
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Minimum cache TTL
     minimumCacheTTL: 60,
+    // Enable image optimization
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Remove react props in production
-  compiler: {
-    reactRemoveProperties: true,
-  },
+  // Optimize production builds
+  productionBrowserSourceMaps: false,
 
-  // Reduce legacy polyfills
   experimental: {
-    esmExternals: true,
-    serverActions: { allowedOrigins: [] },
+    esmExternals: true, // use ES modules
+    serverActions: { allowedOrigins: [] }, // if needed
   },
-
+  compiler: {
+    reactRemoveProperties: true, // Remove data-react-* props in production
+  },
+  // optional: tell Next.js to target modern browsers only
   future: {
     webpack5: true,
   },
-
-  webpack: (config) => {
-    // Target modern JS environment
-    config.output.environment = {
-      arrowFunction: true,
-      bigIntLiteral: true,
-      const: true,
-      destructuring: true,
-      dynamicImport: true,
-      forOf: true,
-      module: true,
-    };
-
-    // Only modify cacheGroups if splitChunks exists
-    if (
-      config.optimization?.splitChunks &&
-      typeof config.optimization.splitChunks !== "boolean"
-    ) {
-      config.optimization.splitChunks.cacheGroups = {
-        ...config.optimization.splitChunks.cacheGroups,
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-      };
-    }
-
-    return config;
-  },
-
-  // Optional caching headers for static assets
+    // ✅ Reduce JS bundle impact
+  // Headers for caching and performance
   async headers() {
     return [
       {
@@ -105,6 +77,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       },
     ];
   },
-});
+  
+};
 
 export default nextConfig;

@@ -1,12 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Carousel } from "primereact/carousel";
 import { reviewData } from "@/const/data";
 import Image from "next/image";
 import { IoStarSharp } from "react-icons/io5";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { FaQuoteLeft } from "react-icons/fa";
-
+import dynamic from "next/dynamic";
 interface Review {
   img: string;
   dateOfExperience: string;
@@ -15,6 +14,10 @@ interface Review {
   name: string;
 }
 
+// Dynamically import Carousel to reduce bundle size
+const Carousel = dynamic(() => import("primereact/carousel").then((mod) => mod.Carousel), {
+  ssr: false,
+});
 const Testimonials = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
