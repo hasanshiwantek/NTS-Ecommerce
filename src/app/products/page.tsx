@@ -6,9 +6,13 @@ import ProductsClientWrapper from "../components/Product/ProductsClientWrapper";
 export default async function ProductsPage({
   initialCategoryId,
   initialCategoryName,
+  initialBrandId,
+  initialBrandName,
 }: {
   initialCategoryId?: number;
   initialCategoryName?: string;
+  initialBrandId?: number;
+  initialBrandName?: string;
 }) {
   const categories = await fetchCategories();
   const brands = await fetchBrands();
@@ -20,6 +24,8 @@ export default async function ProductsPage({
         brands={brands}
         initialCategoryId={initialCategoryId}
         initialCategoryName={initialCategoryName}
+        initialBrandId={initialBrandId}
+        initialBrandName={initialBrandName}
       />
     </div>
   );

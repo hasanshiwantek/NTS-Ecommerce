@@ -11,6 +11,8 @@ export default function ProductsClientWrapper({
   brands,
   initialCategoryId,
   initialCategoryName,
+  initialBrandId,
+  initialBrandName,
 }: any) {
   const params = useParams(); // get slug param
   const [products, setProducts] = useState([]);
@@ -23,7 +25,7 @@ export default function ProductsClientWrapper({
     page: 1,
     pageSize: 20,
     categoryIds: initialCategoryId ? [initialCategoryId] : [],
-    brandId: undefined,
+    brandId: initialBrandId ? [initialBrandId] : [],
     minPrice: undefined,
     maxPrice: undefined,
     sortBy: "",
@@ -49,7 +51,7 @@ export default function ProductsClientWrapper({
 
   // 👇 Separate state for UI display (not sent to API)
   const [filterMeta, setFilterMeta] = useState({
-    brandName: undefined as string | undefined,
+    brandName: initialBrandName || undefined,
     categoryName: initialCategoryName || undefined,
   });
 
