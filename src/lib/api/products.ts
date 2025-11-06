@@ -51,7 +51,7 @@ export async function fetchFilteredProducts(filters: {
   page?: number;
   pageSize?: number;
   categoryIds?: number[];
-  brandId?: number;
+  brandId?: number[];
   minPrice?: number;
   maxPrice?: number;
   sortBy?: string;

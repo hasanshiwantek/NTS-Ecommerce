@@ -16,7 +16,7 @@ export default function BrandFilter({
         return (
           <li
             key={b.brand.id}
-            onClick={() => handleBrandClick(b.brand.id, b.brand.name)}
+            onClick={() => handleBrandClick(b.brand.id, b.brand.name )}
             className={`2xl:px-[11px] 2xl:py-[11px] xl:px-[8.25px] xl:py-[6px] p-2 rounded-md cursor-pointer h5-20px-regular transition-all duration-200
               ${
                 isActive
