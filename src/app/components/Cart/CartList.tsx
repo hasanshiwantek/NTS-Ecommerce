@@ -90,7 +90,7 @@ const CartList = () => {
           <>
             {/* Example product row */}
             <div
-              key={index}
+              key={item?.id}
               className="flex flex-col xl:flex-row items-center justify-between p-4"
             >
               <div className="flex flex-col xl:flex-row items-center xl:w-[65.1%] 2xl:w-[64.5%]">
