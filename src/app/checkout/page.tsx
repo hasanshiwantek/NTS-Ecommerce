@@ -1,11 +1,15 @@
+"use client";
 import React from 'react'
 import CheckoutComponent from '../components/CheckoutComponent/CheckoutComponent'
+import ProtectedLayout from '../components/ProtectedPages/ProtectedLayout'
 
 const page = () => {
   return (
-    <div>
+    <ProtectedLayout>
+      <div>
         <CheckoutComponent/>
-    </div>
+      </div>
+    </ProtectedLayout>
   )
 }
 

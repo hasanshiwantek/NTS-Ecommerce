@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     if (isAuthenticated) router.push("/");
   }, [isAuthenticated]);
      
-  if (isAuthenticated) {
+  if (isAuthenticated === undefined || isAuthenticated === null || isAuthenticated) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="loader border-7 border-[#F15939] border-t-transparent rounded-full w-32 h-32 animate-spin"></div>
