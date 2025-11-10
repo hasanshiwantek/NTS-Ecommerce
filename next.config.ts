@@ -71,12 +71,11 @@ const nextConfig: NextConfig = {
   },
 
   async rewrites() {
-    // Optional: Prevent redirect loops for images from external APIs
     return [
-      {
-        source: "/_next/image",
-        destination: "/_next/image",
-      },
+      // {
+      //   source: "/_next/image",
+      //   destination: "/_next/image",
+      // },
     ];
   },
 
