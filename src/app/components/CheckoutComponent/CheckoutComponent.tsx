@@ -19,7 +19,15 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { useForm } from "react-hook-form";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectItem,
+  SelectContent,
+} from "@/components/ui/select";
+import countries from "world-countries";
+import { useForm, Controller } from "react-hook-form";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -64,11 +72,19 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   
+  const countryList = countries
+    .map((country) => ({
+      name: country.name.common,
+      code: country.cca2,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors },
   } = useForm<CheckoutFormValues>({
     defaultValues: {
@@ -340,21 +356,33 @@ const CheckoutForm = () => {
                 <label htmlFor="country" className="h5-regular mb-2">
                   Country <span className="text-[#F15939]">*</span>
                 </label>
-                <select
-                  id="country"
-                  className={`border rounded px-3 py-2 w-full h-[60px] text-gray-600 ${
-                    errors.country ? "border-red-500" : ""
-                  }`}
-                  {...register("country", {
-                    required: "Country is required",
-                  })}
-                >
-                  <option value="">Select your country *</option>
-                  <option value="US">United States</option>
-                  <option value="CA">Canada</option>
-                  <option value="GB">United Kingdom</option>
-                  <option value="AU">Australia</option>
-                </select>
+                <Controller
+                  name="country"
+                  defaultValue="US"
+                  control={control}
+                  rules={{ required: "Country is required" }}
+                  render={({ field }) => (
+                    <Select
+                      onValueChange={field.onChange}
+                      value={field.value}
+                    >
+                      <SelectTrigger
+                        className={`!w-full !h-[60px] !max-w-full ${
+                          errors.country ? "border-red-500" : ""
+                        }`}
+                      >
+                        <SelectValue placeholder="Select your country *" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {countryList.map((country) => (
+                          <SelectItem key={country.code} value={country.code}>
+                            {country.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
                 {errors.country && (
                   <p className="text-sm text-red-500 mt-1">
                     {errors.country.message}
