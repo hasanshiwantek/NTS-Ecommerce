@@ -37,7 +37,6 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-
 // Stripe publishable key
 const stripePromise = loadStripe(
   "pk_test_51Rix9HQGYDEwUNjEf6i9jqnw8hsenUB057dlMUpafqy04GCVkmYrQcSrwtO7OpZqjhd27dciwptoxrnjLgAjq8gT00FBh1ZmjP"
