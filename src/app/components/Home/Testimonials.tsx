@@ -39,9 +39,12 @@ export interface Stats {
 
 
 // Dynamically import Carousel to reduce bundle size
-const Carousel = dynamic(() => import("primereact/carousel").then((mod) => mod.Carousel), {
-  ssr: false,
-});
+const Carousel = dynamic(
+  () => import("primereact/carousel").then((mod) => mod.Carousel),
+  {
+    ssr: false,
+  }
+);
 const Testimonials = () => {
   const dispatch = useAppDispatch();
   const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
@@ -136,7 +139,9 @@ const Testimonials = () => {
     <div className="mt-[2rem] m-2 text-left p-[24px] flex flex-col gap-5 bg-white ">
       <FaQuoteLeft size={24} color="#00b67a" className="mb-2" />
       <Link href={review?.url} target="_blank">
-        <h4 className="mb-2 h3-24px-medium line-clamp-1">{review?.reviewHeading}</h4>
+        <h4 className="mb-2 h3-24px-medium line-clamp-1">
+          {review?.reviewHeading}
+        </h4>
       </Link>
       <div className="mb-3 flex items-center justify-between">
         <Image 
@@ -275,7 +280,7 @@ const Testimonials = () => {
                     }`}
                   ></span>
                 ))}
-              </div>
+              </div> 
 
               <button
                 onClick={navigateRight}
