@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../Filters/Sidebar";
 import ProductList from "./ProductList";
+import Breadcrumb from "./Breadcrumb";
 import { fetchFilteredProducts } from "@/lib/api/products";
 import { ProductFilterPayload } from "@/types/types";
 import { useParams, usePathname } from "next/navigation";
@@ -100,9 +101,27 @@ export default function ProductsClientWrapper({
 
     fetchData();
   }, [filters]);
+  // Generate breadcrumb items based on page type
+  const breadcrumbItems = React.useMemo(() => {
+    const items = [{ name: "Home", href: "/" }];
+    
+    if (isCategoryPage && filterMeta.categoryName) {
+      items.push({
+        name: filterMeta.categoryName,
+        href: `/category/${params?.slug || ""}`,
+      });
+    } else if (isBrandPage && filterMeta.brandName) {
+      items.push({
+        name: filterMeta.brandName,
+        href: `/brand/${params?.slug || ""}`,
+      });
+    }
+    
+    return items;
+  }, [isCategoryPage, isBrandPage, filterMeta.categoryName, filterMeta.brandName, params?.slug]);
+
   return (
       <div className="flex flex-col md:flex-row gap-4 py-4 w-full xl:max-w-[100%] 2xl:max-w-[119.5%]">
-
         {/* Sidebar: Filters */}
         <aside
           className="w-full md:w-[28%] lg:w-[27%] xl:w-[24%] 2xl:w-[24.1%] bg-white rounded
@@ -123,6 +142,11 @@ export default function ProductsClientWrapper({
 
         {/* Product Listing */}
         <main className="w-full md:w-[71%] lg:w-[72%] xl:w-[73.3%] 2xl:w-[73.8%]">
+          {(isCategoryPage || isBrandPage) && (
+            <div className="mb-4 px-4 md:px-0">
+              <Breadcrumb items={breadcrumbItems} />
+            </div>
+          )}
           <ProductList
             filters={filters}
             setFilters={setFilters}
