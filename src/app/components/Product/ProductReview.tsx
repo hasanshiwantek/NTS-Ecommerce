@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Star } from "lucide-react";
+import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Review, Stats } from "../Home/Testimonials";
@@ -183,10 +184,13 @@ const ProductReview = () => {
                       </div>
                     </div>
                     {review?.stars ? (
-                      <img
+                      <Image
                         src={review.stars}
                         alt="Rating"
-                        className="h-6 object-contain"
+                        width={100}
+                        height={24}
+                        className="h-6 w-auto object-contain"
+                        unoptimized
                       />
                     ) : (
                       <div className="flex space-x-1 text-[#FFA439]">

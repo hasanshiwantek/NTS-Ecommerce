@@ -120,13 +120,14 @@ const Testimonials = () => {
     }
 
     const half = Math.floor(maxVisible / 2);
-    let start = Math.max(0, pageIndex - half);
-    let end = Math.min(totalPages - 1, start + maxVisible - 1);
+    const initialStart = Math.max(0, pageIndex - half);
+    const initialEnd = Math.min(totalPages - 1, initialStart + maxVisible - 1);
 
     // Adjust if we're near the end
-    if (end - start < maxVisible - 1) {
-      start = Math.max(0, end - maxVisible + 1);
-    }
+    const start = initialEnd - initialStart < maxVisible - 1 
+      ? Math.max(0, initialEnd - maxVisible + 1)
+      : initialStart;
+    const end = initialEnd;
 
     return Array.from({ length: end - start + 1 }).map((_, i) => start + i);
   }, [totalPages, pageIndex]);
@@ -138,7 +139,14 @@ const Testimonials = () => {
         <h4 className="mb-2 h3-24px-medium line-clamp-1">{review?.reviewHeading}</h4>
       </Link>
       <div className="mb-3 flex items-center justify-between">
-        <img src={review?.stars} alt="Rating" style={{ height: "2rem" }} />
+        <Image 
+          src={review?.stars || "/default-product-image.svg"} 
+          alt="Rating" 
+          width={80}
+          height={32}
+          className="h-8 w-auto"
+          unoptimized
+        />
         <p className="mb-1 font-[500]">{review.dateOfExperience}</p>
       </div>
       <div
