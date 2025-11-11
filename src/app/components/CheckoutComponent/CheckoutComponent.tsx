@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo, memo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import {
   increaseQty,
   removeFromCart,
 } from "@/redux/slices/cartSlice";
+import axiosInstance from "@/lib/axiosInstance";
 import {
   Dialog,
   DialogContent,
@@ -43,6 +44,14 @@ const stripePromise = loadStripe(
   "pk_test_51Rix9HQGYDEwUNjEf6i9jqnw8hsenUB057dlMUpafqy04GCVkmYrQcSrwtO7OpZqjhd27dciwptoxrnjLgAjq8gT00FBh1ZmjP"
 );
 
+// ✅ Pre-compute country list at module level (only once when module loads)
+const countryList = countries
+  .map((country) => ({
+    name: country.name.common,
+    code: country.cca2,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
 interface CheckoutFormValues {
   email: string;
   firstName: string;
@@ -61,6 +70,85 @@ interface CheckoutFormValues {
   billingSame: boolean;
 }
 
+// ✅ Memoized Cart Item Component to prevent unnecessary re-renders
+interface CartItemProps {
+  item: any;
+  onIncrease: (id: string | number) => void;
+  onDecrease: (id: string | number) => void;
+  onDelete: (item: any) => void;
+}
+
+const CartItem = memo(({ 
+  item, 
+  onIncrease, 
+  onDecrease, 
+  onDelete 
+}: CartItemProps) => {
+  return (
+    <div className="relative flex flex-col sm:flex-row items-center gap-3 p-3 border">
+      <Image
+        src={item.image?.[0]?.path || "/checkouticon/orderimg.png"}
+        alt={item.name}
+        width={116}
+        height={35}
+        className="object-cover"
+      />
+      <div className="flex-1">
+        <p className="h6-medium !text-[#333333] line-clamp-2">
+          {item.name}
+        </p>
+        <p className="h6-regular !text-[#4A4A4A]">
+          ${Number(item.price).toFixed(2)}
+        </p>
+        <div className="flex w-[120.39999389648438px] sm:w-[146.39999389648438px] h-[48px] items-center justify-center border border-gray-300 rounded-full">
+          {/* Decrease Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onDecrease(item.id);
+            }}
+            className="flex items-center justify-center w-16 h-10 h5-medium"
+          >
+            <Minus className="w-5 h-5" />
+          </button>
+          {/* Quantity Display */}
+          <span className="h5-medium border-x h-[48px] border-gray-300 px-6 flex items-center justify-center select-none">
+            {item.quantity}
+          </span>
+          {/* Increase Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onIncrease(item.id);
+            }}
+            className="flex items-center justify-center w-16 h-10 h5-medium"
+          >
+            <Plus className="w-5 h-5" />
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onDelete(item);
+          }}
+          className="absolute right-6 bottom-9 ml-auto text-gray-500 hover:text-red-700 transition"
+        >
+          <Trash2 className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+  );
+});
+
+CartItem.displayName = "CartItem";
+
 // Inner component that uses Stripe hooks
 const CheckoutForm = () => {
   const dispatch = useAppDispatch();
@@ -68,16 +156,14 @@ const CheckoutForm = () => {
   const [itemToDelete, setItemToDelete] = useState<any | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  
+  const [cardCompletion, setCardCompletion] = useState({
+    number: false,
+    expiry: false,
+    cvc: false,
+  });
+  const [cardError, setCardError] = useState<string | null>(null);
   const stripe = useStripe();
   const elements = useElements();
-  
-  const countryList = countries
-    .map((country) => ({
-      name: country.name.common,
-      code: country.cca2,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name));
   
   const {
     register,
@@ -95,40 +181,124 @@ const CheckoutForm = () => {
 
   const watchedPaymentMethod = watch("paymentMethod") || "credit_card";
 
-  // subtotal calculate (price string → number)
-  const subtotal = cart.reduce(
-    (acc, item) => acc + Number(item.price) * (item.quantity || 1),
-    0
-  );
+  // ✅ Memoized calculations to prevent recalculation on every render
+  const subtotal = useMemo(() => {
+    return cart.reduce(
+      (acc, item) => acc + Number(item.price) * (item.quantity || 1),
+      0
+    );
+  }, [cart]);
 
-  const shipping = cart.length > 0 ? 240 : 0; // static example
+  const shipping = useMemo(() => (cart.length > 0 ? 240 : 0), [cart.length]);
   const tax = 0; // static example
-  const total = subtotal + shipping + tax;
+  const total = useMemo(() => subtotal + shipping + tax, [subtotal, shipping]);
 
-  const confirmDelete = () => {
+  // ✅ Memoized handlers to prevent form re-renders
+  const confirmDelete = useCallback(() => {
     if (itemToDelete) {
       dispatch(removeFromCart(itemToDelete.id));
       setItemToDelete(null);
     }
     setIsDialogOpen(false);
-  };
+  }, [itemToDelete, dispatch]);
+
+  const handleIncreaseQty = useCallback((itemId: string | number) => {
+    dispatch(increaseQty(itemId));
+  }, [dispatch]);
+
+  const handleDecreaseQty = useCallback((itemId: string | number) => {
+    dispatch(decreaseQty(itemId));
+  }, [dispatch]);
+
+  const handleDeleteClick = useCallback((item: any) => {
+    setItemToDelete(item);
+    setIsDialogOpen(true);
+  }, []);
+
+  const handlePaymentSelection = useCallback(
+    (method: CheckoutFormValues["paymentMethod"]) => {
+      setValue("paymentMethod", method);
+      setCardError(null);
+      setCardCompletion({
+        number: false,
+        expiry: false,
+        cvc: false,
+      });
+    },
+    [setValue, setCardCompletion, setCardError]
+  );
 
   const onSubmit = async (data: CheckoutFormValues) => {
-    console.log("Form submitted:", data);
-    
-    // If credit card payment method is selected, process with Stripe
-    if (watchedPaymentMethod === "credit_card" && stripe && elements) {
-      setIsProcessing(true);
-      
-      const cardNumberElement = elements.getElement(CardNumberElement);
-      
-      if (!cardNumberElement) {
-        console.error("Card element not found");
-        setIsProcessing(false);
+    const selectedPaymentMethod = data.paymentMethod || "credit_card";
+
+    if (selectedPaymentMethod === "credit_card") {
+      if (!cardCompletion.number || !cardCompletion.expiry || !cardCompletion.cvc) {
+        setCardError("Please complete your card details before placing the order.");
         return;
       }
 
-      try {
+      if (cardError) {
+        alert(cardError);
+        return;
+      }
+    }
+
+    setIsProcessing(true);
+    
+    try {
+      // ✅ Step 1: Prepare order payload
+      const orderPayload = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        companyName: data.company || "",
+        email: data.email,
+        phone: data.phone || "",
+        addressLine1: data.address1,
+        addressLine2: data.address2 || "",
+        city: data.city,
+        state: data.state || "",
+        zip: data.zip,
+        country: data.country,
+        paymentMethod: data.paymentMethod,
+        shippingMethod: data.shippingMethod,
+        shippingCost: shipping,
+        comments: data.orderComment || "",
+        products: cart.map((item) => ({
+          product_id: item.id, 
+          quantity: item.quantity || 1,
+        })),
+      };
+
+      // console.log("📦 Order Payload:", JSON.stringify(orderPayload, null, 2));
+
+      // ✅ Step 2: Create order API call
+      const orderResponse = await axiosInstance.post("web/orders/place-order", orderPayload);
+      const orderId = orderResponse.data?.data?.id || orderResponse.data?.id;
+      
+      console.log("✅ Order Created - Order ID:", orderId);
+
+      // ✅ Step 3: If credit card payment, process with Stripe
+      let paymentMethodId = null;
+
+      if (selectedPaymentMethod === "credit_card") {
+        if (!stripe || !elements) {
+          alert("Payment service is not ready yet. Please try again in a moment.");
+          setIsProcessing(false);
+          return;
+        }
+
+        const stripeResponse = await axiosInstance.post("web/stripe/create-intent", { orderId });
+
+        console.log("✅ stripeResponse-:", stripeResponse);
+      
+        const cardNumberElement = elements.getElement(CardNumberElement);
+        
+        if (!cardNumberElement) {
+          console.error("Card element not found");
+          setIsProcessing(false);
+          return;
+        }
+
         // Create payment method
         const { error: pmError, paymentMethod } = await stripe.createPaymentMethod({
           type: "card",
@@ -156,25 +326,34 @@ const CheckoutForm = () => {
         }
 
         if (paymentMethod) {
-          // Log payment method ID
-          console.log("✅ Payment Method ID:", paymentMethod.id);
-          console.log("✅ Payment Method Details:", paymentMethod);
-          
-          // Here you would typically send paymentMethod.id to your backend
-          // to create a payment intent and confirm the payment
-          // For now, we're just logging the ID as requested
-          
-          alert(`Payment method created successfully! ID: ${paymentMethod.id}`);
+          paymentMethodId = paymentMethod.id;
+          console.log("💳 Stripe Payment Method ID:", paymentMethodId);
+          console.log("💳 Payment Method Details:", paymentMethod);
         }
-      } catch (err) {
-        console.error("Error processing payment:", err);
-        alert("An error occurred while processing your payment.");
-      } finally {
-        setIsProcessing(false);
       }
-    } else {
-      // Handle other payment methods (Google Pay, Affirm, etc.)
-      console.log("Processing other payment method:", watchedPaymentMethod);
+
+      // ✅ Step 4: Process payment with order ID and payment method ID
+      if (orderId) {
+        const paymentPayload = {
+          orderId: orderId,
+          paymentMethodId: paymentMethodId,
+          paymentMethod: selectedPaymentMethod,
+        };
+
+        console.log("💳 Payment Payload:", JSON.stringify(paymentPayload, null, 2));
+        
+        // Call payment API here
+        // const paymentResponse = await axiosInstance.post("web/payments/process-payment", paymentPayload);
+        // console.log("✅ Payment Response:", paymentResponse.data);
+      }
+
+      alert(`Order created successfully! Order ID: ${orderId}${paymentMethodId ? ` | Payment Method ID: ${paymentMethodId}` : ''}`);
+    } catch (err: any) {
+      console.error("❌ Error processing order:", err);
+      const errorMessage = err.response?.data?.message || err.message || "An error occurred while processing your order.";
+      alert(errorMessage);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -561,9 +740,7 @@ const CheckoutForm = () => {
                       required: "Please select a payment method",
                     })}
                     checked={watchedPaymentMethod === "credit_card"}
-                    onChange={(e) => {
-                      setValue("paymentMethod", "credit_card");
-                    }}
+                    onChange={() => handlePaymentSelection("credit_card")}
                     className="text-orange-500 focus:ring-orange-500"
                   />
                   <span className="h3-secondary">Credit Card</span>
@@ -586,6 +763,13 @@ const CheckoutForm = () => {
                     </label>
                     <div className="border border-[#d1d0d4] rounded-md p-4 mt-3 hover:border-[#86848c] focus-within:border-orange-500 focus-within:ring-1 focus-within:ring-orange-300">
                       <CardNumberElement
+                        onChange={(event) => {
+                          setCardCompletion((prev) => ({
+                            ...prev,
+                            number: event.complete,
+                          }));
+                          setCardError(event.error?.message || null);
+                        }}
                         options={{
                           style: {
                             base: {
@@ -614,6 +798,13 @@ const CheckoutForm = () => {
                       </label>
                       <div className="border border-[#d1d0d4] rounded-md p-4 hover:border-[#86848c] focus-within:border-orange-500 focus-within:ring-1 focus-within:ring-orange-300">
                         <CardExpiryElement
+                          onChange={(event) => {
+                            setCardCompletion((prev) => ({
+                              ...prev,
+                              expiry: event.complete,
+                            }));
+                            setCardError(event.error?.message || null);
+                          }}
                           options={{
                             style: {
                               base: {
@@ -639,6 +830,13 @@ const CheckoutForm = () => {
                       </label>
                       <div className="border border-[#d1d0d4] rounded-md p-4 hover:border-[#86848c] focus-within:border-orange-500 focus-within:ring-1 focus-within:ring-orange-300">
                         <CardCvcElement
+                          onChange={(event) => {
+                            setCardCompletion((prev) => ({
+                              ...prev,
+                              cvc: event.complete,
+                            }));
+                            setCardError(event.error?.message || null);
+                          }}
                           options={{
                             style: {
                               base: {
@@ -662,6 +860,9 @@ const CheckoutForm = () => {
                   <p className="text-xs text-gray-500 mt-2">
                     Test card: 4242 4242 4242 4242 | Any future date | Any 3 digits
                   </p>
+                  {cardError && (
+                    <p className="text-sm text-red-500">{cardError}</p>
+                  )}
                 </div>
               )}
             </label>
@@ -676,9 +877,7 @@ const CheckoutForm = () => {
                     required: "Please select a payment method",
                   })}
                   checked={watchedPaymentMethod === "google_pay"}
-                  onChange={(e) => {
-                    setValue("paymentMethod", "google_pay");
-                  }}
+                  onChange={() => handlePaymentSelection("google_pay")}
                   className="text-orange-500 focus:ring-orange-500"
                 />
                 <Image
@@ -708,9 +907,7 @@ const CheckoutForm = () => {
                     required: "Please select a payment method",
                   })}
                   checked={watchedPaymentMethod === "affirm"}
-                  onChange={(e) => {
-                    setValue("paymentMethod", "affirm");
-                  }}
+                  onChange={() => handlePaymentSelection("affirm")}
                   className="text-orange-500 focus:ring-orange-500"
                 />
                 <Image
@@ -747,60 +944,16 @@ const CheckoutForm = () => {
             </span>
             Order Summary
           </h2>
-          {/* Cart Items */}{" "}
+          {/* Cart Items */}
           <div className="space-y-5">
-            {cart.map((item, i) => (
-              <div
-                key={i}
-                className="relative flex flex-col sm:flex-row items-center gap-3 p-3 border"
-              >
-                <Image
-                  src={item.image?.[0]?.path || "/checkouticon/orderimg.png"}
-                  alt={item.name}
-                  width={116}
-                  height={35}
-                  className="object-cover"
-                />
-                <div className="flex-1">
-                  <p className="h6-medium !text-[#333333] line-clamp-2">
-                    {item.name}
-                  </p>
-                  <p className="h6-regular !text-[#4A4A4A]">
-                    ${Number(item.price).toFixed(2)}{" "}
-                  </p>
-                  <div className="flex  w-[120.39999389648438px] sm:w-[146.39999389648438px] h-[48px] items-center justify-center border border-gray-300 rounded-full">
-                    {/* Decrease Button */}
-                    <button
-                      onClick={() => dispatch(decreaseQty(item.id))}
-                      className="flex items-center justify-center w-16 h-10 h5-medium"
-                    >
-                      <Minus className="w-5 h-5" />
-                    </button>
-                    {/* Quantity Display */}
-                    <span className="h5-medium border-x h-[48px] border-gray-300 px-6 flex items-center justify-center select-none">
-                      {item.quantity}{" "}
-                    </span>
-                    {/* Increase Button */}{" "}
-                    <button
-                      onClick={() => dispatch(increaseQty(item.id))}
-                      className="flex items-center justify-center w-16 h-10 h5-medium "
-                    >
-                      <Plus className="w-5 h-5" />
-                    </button>
-                    {/* Remove Button (trash icon) */}
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      setItemToDelete(item);
-                      setIsDialogOpen(true);
-                    }}
-                    className="absolute right-6 bottom-9 ml-auto text-gray-500 hover:text-red-700 transition"
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+            {cart.map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                onIncrease={handleIncreaseQty}
+                onDecrease={handleDecreaseQty}
+                onDelete={handleDeleteClick}
+              />
             ))}
           </div>
           {/* Totals */}

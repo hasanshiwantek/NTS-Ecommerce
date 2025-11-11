@@ -1,34 +1,73 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import axiosInstance from "@/lib/axiosInstance";
+import { Review } from "../Home/Testimonials";
+
+const MIN_VISIBLE_REVIEWS = 4;
+
 const ProductReview = () => {
   const [showAll, setShowAll] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const reviews = [
-    {
-      name: "Bella Thompson",
-      time: "3 days ago",
-      text: "I recently discovered this incredible gadget, and it has transformed the way I approach my daily tasks. The features are intuitive and user-friendly, which made the learning curve very minimal. I can’t believe I waited so long to try it!",
-    },
-    {
-      name: "Charlie Brown",
-      time: "5 days ago",
-      text: "This item has been a game-changer for me! The quality is top-notch, and it has made my workflow so much smoother. I highly recommend it to anyone looking to enhance their productivity.",
-    },
-    {
-      name: "Diana Prince",
-      time: "1 week ago",
-      text: "I’ve been using this product for a while now, and I’ve seen a huge improvement in my efficiency. The design is sleek and the performance is reliable. It’s definitely worth every penny!",
-    },
-    {
-      name: "Ethan Hunt",
-      time: "2 weeks ago",
-      text: "What an outstanding product! It offers remarkable functionality and has surpassed my expectations in every aspect. I’m extremely satisfied and will be recommending it to my friends.",
-    },
-  ];
+  const fetchReviews = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axiosInstance.get(
+        "https://widget.advertsedge.com/api/reviews-nts"
+      );
+      setReviews(response?.data?.data ?? []);
+    } catch (err: any) {
+      const message =
+        err?.response?.data?.message ??
+        err?.message ??
+        "Unable to load product reviews. Please try again.";
+      console.error("Error fetching reviews:", err);
+      setError(message);
+      setReviews([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchReviews();
+  }, [fetchReviews]);
+
+  const displayedReviews = useMemo(() => {
+    if (showAll) {
+      return reviews;
+    }
+
+    return reviews.slice(0, MIN_VISIBLE_REVIEWS);
+  }, [reviews, showAll]);
+
+  const getInitials = useCallback((name?: string) => {
+    if (!name) return "N/A";
+    const parts = name.split(" ").filter(Boolean);
+    if (!parts.length) return "N/A";
+    const initials = parts
+      .map((part) => part[0]?.toUpperCase() ?? "")
+      .join("")
+      .slice(0, 2);
+    return initials || "N/A";
+  }, []);
+
+  const handleSeeMore = useCallback(() => {
+    setShowAll(true);
+    setTimeout(() => {
+      document.getElementById("reviews")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 100);
+  }, []);
 
   return (
     <section
@@ -94,78 +133,112 @@ const ProductReview = () => {
 
         {/* RIGHT: Reviews */}
         <div className="lg:col-span-2 relative">
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-2 gap-6 transition-all duration-700`}
-          >
-            {reviews.map((review, idx) => (
-              <article
-                key={idx}
-                className="border rounded-lg p-5 bg-white shadow-xs transition-all duration-500"
-                itemScope
-                itemType="http://schema.org/Review"
-              >
-                <header className="flex items-center justify-between mb-3 pb-2 border-b">
-                  <div className="flex items-center gap-3">
-                    <Avatar>
-                      <AvatarFallback>
-                        {review.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h6 className="text-[20px] font-medium" itemProp="author">
-                        {review.name}
-                      </h6>
-                      <time
-                        dateTime={review.time}
-                        className="h5-20px-medium"
-                        itemProp="datePublished"
-                      >
-                        {review.time}
-                      </time>
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {Array.from({ length: MIN_VISIBLE_REVIEWS }).map((_, index) => (
+                <div
+                  key={index}
+                  className="border rounded-lg p-5 bg-white shadow-xs animate-pulse space-y-4"
+                >
+                  <div className="flex items-center justify-between pb-2 border-b">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-gray-200" />
+                      <div className="space-y-2">
+                        <div className="h-4 w-28 rounded bg-gray-200" />
+                        <div className="h-3 w-20 rounded bg-gray-100" />
+                      </div>
                     </div>
+                    <div className="h-4 w-24 rounded bg-gray-200" />
                   </div>
-                  <div className="flex space-x-1 text-[#FFA439]">
-                    {[...Array(5)].map((_, starIdx) => (
-                      <Star
-                        key={starIdx}
-                        className={`w-6 h-6 ${
-                          starIdx < 4 ? "fill-[#FFA439]" : "fill-muted"
-                        }`}
+                  <div className="h-24 rounded bg-gray-100" />
+                </div>
+              ))}
+            </div>
+          ) : error ? (
+            <div className="border rounded-lg p-10 text-center bg-white shadow-xs flex flex-col items-center gap-4">
+              <p className="h5-regular text-red-600">{error}</p>
+              <Button
+                variant="outline"
+                className="!px-6 !py-3 !text-base"
+                onClick={fetchReviews}
+              >
+                Retry
+              </Button>
+            </div>
+          ) : displayedReviews.length === 0 ? (
+            <div className="border rounded-lg p-10 text-center bg-white shadow-xs">
+              <p className="h5-regular text-gray-600">
+                No reviews available for this product yet.
+              </p>
+            </div>
+          ) : (
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-2 gap-6 transition-all duration-700`}
+            >
+              {displayedReviews.slice(0, 8).map((review, idx) => (
+                <article key={idx} className="border rounded-lg p-5 bg-white shadow-xs transition-all duration-500">
+                  <header className="flex items-center justify-between mb-3 pb-2 border-b">
+                    <div className="flex items-center gap-3">
+                      <div>
+                        <h6 className="text-[20px] font-medium">
+                          {review?.reviewer}
+                        </h6>
+                        <time
+                          dateTime={review?.dateOfExperience}
+                          className="h5-20px-medium"
+                          itemProp="datePublished"
+                        >
+                          {review?.dateOfExperience}
+                        </time>
+                      </div>
+                    </div>
+                    {review?.stars ? (
+                      <img
+                        src={review.stars}
+                        alt="Rating"
+                        className="h-6 object-contain"
                       />
-                    ))}
-                  </div>
-                </header>
-                <p className="h5-20px-regular" itemProp="reviewBody">
-                  {review.text}
-                </p>
-              </article>
-            ))}
-          </div>
+                    ) : (
+                      <div className="flex space-x-1 text-[#FFA439]">
+                        {[...Array(5)].map((_, starIdx) => (
+                          <Star
+                            key={starIdx}
+                            className="w-6 h-6 fill-[#FFA439]"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </header>
+                  <p className="h5-20px-regular" itemProp="reviewBody">
+                    {review?.reviewContent
+                      ? review?.reviewContent
+                      : "No review content"}
+                  </p>
+                </article>
+              ))}
+            </div>
+          )}
 
           {/* ✅ Gradient Fade Effect on Bottom Cards */}
-          {!showAll && (
+          {!showAll &&
+            !loading &&
+            !error &&
+            reviews.length > displayedReviews.length && (
             <div className="absolute bottom-0 left-0 right-0 h-96 pointer-events-none bg-gradient-to-t from-white to-transparent rounded-b-lg z-10" />
           )}
         </div>
       </div>
 
       {/* SEE MORE BUTTON */}
-      {!showAll && (
+      {!showAll &&
+        !loading &&
+        !error &&
+        reviews.length > displayedReviews.length && (
         <div className="text-center mt-8">
           <Button
             variant="link"
             className="text-lg text-red-600 font-medium hover:underline"
-            onClick={() => {
-              setShowAll(true);
-              setTimeout(() => {
-                document
-                  .getElementById("reviews")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }, 100);
-            }}
+            onClick={handleSeeMore}
           >
             See more ↓
           </Button>

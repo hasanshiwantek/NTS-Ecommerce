@@ -1,6 +1,6 @@
 interface BrandFilterProps {
   brands: any[];
-  handleBrandClick: (brandId: number, brandName: string) => void;
+  handleBrandClick: (brandId: number, brandName: string, slug?: string) => void;
   activeBrandId?: number;
 }
 
@@ -16,7 +16,7 @@ export default function BrandFilter({
         return (
           <li
             key={b.brand.id}
-            onClick={() => handleBrandClick(b.brand.id, b.brand.name )}
+            onClick={() => handleBrandClick(b.brand.id, b.brand.name, b.brand.slug)}
             className={`2xl:px-[11px] 2xl:py-[11px] xl:px-[8.25px] xl:py-[6px] p-2 rounded-md cursor-pointer h5-20px-regular transition-all duration-200
               ${
                 isActive

@@ -4,7 +4,7 @@ import Sidebar from "../Filters/Sidebar";
 import ProductList from "./ProductList";
 import { fetchFilteredProducts } from "@/lib/api/products";
 import { ProductFilterPayload } from "@/types/types";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 export default function ProductsClientWrapper({
   categories,
@@ -15,25 +15,31 @@ export default function ProductsClientWrapper({
   initialBrandName,
 }: any) {
   const params = useParams(); // get slug param
+  const pathname = usePathname(); // get current path
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   console.log("Filtered Products data from frontend: ", products);
   console.log("Pagination: ", pagination);
+  
+  // Detect if we're on brand or category page
+  const isBrandPage = pathname?.startsWith('/brand/');
+  const isCategoryPage = pathname?.startsWith('/category/');
+  
   const [filters, setFilters] = useState<ProductFilterPayload>({
     page: 1,
     pageSize: 20,
     categoryIds: initialCategoryId ? [initialCategoryId] : [],
-    brandId: initialBrandId ? [initialBrandId] : [],
+    brandId: initialBrandId || null,
     minPrice: undefined,
     maxPrice: undefined,
     sortBy: "",
   });
 
-  // ✅ Sync filters when URL slug changes
+  // ✅ Sync filters when URL slug changes (for category pages)
   useEffect(() => {
-    if (params?.slug && categories?.length > 0) {
+    if (isCategoryPage && params?.slug && categories?.length > 0) {
       const matched = categories.find((c: any) => c.slug === params.slug);
       if (matched) {
         setFilters((prev) => ({
@@ -47,7 +53,25 @@ export default function ProductsClientWrapper({
         }));
       }
     }
-  }, [params?.slug, categories]);
+  }, [params?.slug, categories, isCategoryPage]);
+
+  // ✅ Sync filters when URL slug changes (for brand pages)
+  useEffect(() => {
+    if (isBrandPage && params?.slug && brands?.length > 0) {
+      const matched = brands.find((b: any) => b.brand?.slug === params.slug);
+      if (matched) {
+        setFilters((prev) => ({
+          ...prev,
+          brandId: matched.brand?.id,
+          page: 1,
+        }));
+        setFilterMeta((prev) => ({
+          ...prev,
+          brandName: matched.brand?.name,
+        }));
+      }
+    }
+  }, [params?.slug, brands, isBrandPage]);
 
   // 👇 Separate state for UI display (not sent to API)
   const [filterMeta, setFilterMeta] = useState({
@@ -92,6 +116,8 @@ export default function ProductsClientWrapper({
             products={products}
             filterMeta={filterMeta}
             setFilterMeta={setFilterMeta}
+            isBrandPage={isBrandPage}
+            isCategoryPage={isCategoryPage}
           />
         </aside>
 

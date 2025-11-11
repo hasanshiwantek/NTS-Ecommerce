@@ -26,6 +26,8 @@ export default function Sidebar({
   products,
   filterMeta,
   setFilterMeta,
+  isBrandPage,
+  isCategoryPage,
 }: {
   categories: any;
   brands: any;
@@ -34,6 +36,8 @@ export default function Sidebar({
   products: any;
   filterMeta: any;
   setFilterMeta: any;
+  isBrandPage?: boolean;
+  isCategoryPage?: boolean;
 }) {
   const [expandedSection, setExpandedSection] = useState<string | null>(
     "Top Brands"
@@ -52,7 +56,7 @@ export default function Sidebar({
     setExpandedSection((prev) => (prev === section ? null : section));
   };
 
-  // ✅ Category click: update filter + URL
+  // ✅ Category click: update filter + URL (only if not on brand page)
   const handleCategoryClick = (catId: number, name: string, slug?: string) => {
     setFilters((prev: any) => ({
       ...prev,
@@ -61,17 +65,27 @@ export default function Sidebar({
     }));
     setFilterMeta((prev: any) => ({ ...prev, categoryName: name }));
 
-    if (slug) router.push(`/category/${slug}`);
+    // Only navigate if we're NOT on a brand page
+    // If on brand page, just update filters without changing URL
+    if (slug && !isBrandPage) {
+      router.push(`/category/${slug}`);
+    }
   };
 
   // user clicks a brand
-  const handleBrandClick = (brandId: number, name: string) => {
+  const handleBrandClick = (brandId: number, name: string, slug?: string) => {
     setFilters((prev: any) => ({
       ...prev,
       brandId,
       page: 1,
     }));
     setFilterMeta((prev: any) => ({ ...prev, brandName: name }));
+
+    // Only navigate if we're NOT on a category page
+    // If on category page, just update filters without changing URL
+    if (slug && !isCategoryPage) {
+      router.push(`/brand/${slug}`);
+    }
   };
 
   // ✅ Utility: Find a category by slug and return its parent chain
