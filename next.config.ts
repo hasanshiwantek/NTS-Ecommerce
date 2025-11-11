@@ -2,39 +2,56 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  compress: true, // Enable gzip compression
+  compress: true,
 
   images: {
-    // Allow images from these domains
-    domains: [
-      "ecom.brokercell.com",
-      "images.pexels.com",
-      "images.unsplash.com",
-      "cdn11.bigcommerce.com",
-    ],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**", // Allow any host over HTTPS
-      },
-      {
-        protocol: "https",
-        hostname: "ecom.brokercell.com",
-        pathname: "/product_images/**",
-      },
-    ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: "inline",
+
+    // Explicit hosts + catch-all
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ecom.brokercell.com",
+        pathname: "/product_images/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.ebayimg.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn11.bigcommerce.com",
+        pathname: "/**",
+      },
+      // Catch-all for any other HTTPS image
+      {
+        protocol: "https",
+        hostname: "*",
+        pathname: "/**",
+      },
+    ],
   },
 
   productionBrowserSourceMaps: false,
 
   compiler: {
-    reactRemoveProperties: true, // Remove data-react-* props in production
+    reactRemoveProperties: true,
   },
 
   experimental: {
@@ -48,7 +65,6 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [
-      // Cache images & icons for long-term
       {
         source: "/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif)",
         headers: [
@@ -70,16 +86,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  async rewrites() {
-    return [
-      // {
-      //   source: "/_next/image",
-      //   destination: "/_next/image",
-      // },
-    ];
-  },
-
-  // Optional: Reduce bundle size
   webpack(config) {
     config.resolve.fallback = {
       ...config.resolve.fallback,
