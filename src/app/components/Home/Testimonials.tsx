@@ -143,7 +143,7 @@ const Testimonials = () => {
               {Array.from({ length: totalPages }).map((_, i) => (
                 <span
                   key={i}
-                  className={`w-8 h-1 rounded-full transition-all duration-500 ${
+                  className={`w-8 h-1 w-full rounded-full transition-all duration-500 ${
                     i === pageIndex ? "bg-[#e84949]" : "bg-gray-300"
                   }`}
                 ></span>
