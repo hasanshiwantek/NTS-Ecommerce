@@ -5,8 +5,9 @@ import { IoStarSharp } from "react-icons/io5";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { FaQuoteLeft } from "react-icons/fa";
 import dynamic from "next/dynamic";
-import axiosInstance from "@/lib/axiosInstance";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { fetchReviews, fetchStats } from "@/redux/slices/homeSlice";
 export interface Review {
   id: number;
   brand: string;
@@ -24,17 +25,30 @@ export interface Review {
   deleted_at: string | null;
 }
 
+export interface Stats {
+  id: number;
+  brand: string;
+  count: string;
+  rating: string;
+  status: string;
+  image: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
 
 // Dynamically import Carousel to reduce bundle size
 const Carousel = dynamic(() => import("primereact/carousel").then((mod) => mod.Carousel), {
   ssr: false,
 });
 const Testimonials = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const dispatch = useAppDispatch();
+  const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
+    (state) => state.home
+  );
   const [pageIndex, setPageIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3); // dynamically set numVisible
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const responsiveOptions = useMemo(
     () => [
@@ -46,33 +60,16 @@ const Testimonials = () => {
     []
   );
 
-  const fetchReviews = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axiosInstance.get(
-        "https://widget.advertsedge.com/api/reviews-nts"
-      );
-      const fetchedReviews = response?.data?.data ?? [];
-      setReviews(fetchedReviews);
-      setPageIndex(0);
-    } catch (err: any) {
-      const message =
-        err?.response?.data?.message ??
-        err?.message ??
-        "Unable to load testimonials. Please try again.";
-      console.error("Error fetching reviews:", err);
-      setError(message);
-      setReviews([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  useEffect(() => {
+    dispatch(fetchReviews());
+    dispatch(fetchStats());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchReviews();
-  }, [fetchReviews]);
+    if (reviews.length > 0) {
+      setPageIndex(0);
+    }
+  }, [reviews.length]);
 
   useEffect(() => {
     // setReviews(reviewData);
@@ -115,6 +112,26 @@ const Testimonials = () => {
     [totalPages]
   );
 
+  // Calculate visible indicators (max 5, centered around active)
+  const visibleIndicators = useMemo(() => {
+    const maxVisible = 5;
+    if (totalPages <= maxVisible) {
+      return Array.from({ length: totalPages }).map((_, i) => i);
+    }
+
+    const half = Math.floor(maxVisible / 2);
+    const initialStart = Math.max(0, pageIndex - half);
+    const initialEnd = Math.min(totalPages - 1, initialStart + maxVisible - 1);
+
+    // Adjust if we're near the end
+    const start = initialEnd - initialStart < maxVisible - 1 
+      ? Math.max(0, initialEnd - maxVisible + 1)
+      : initialStart;
+    const end = initialEnd;
+
+    return Array.from({ length: end - start + 1 }).map((_, i) => start + i);
+  }, [totalPages, pageIndex]);
+
   const reviewTemplate = (review: Review) => (
     <div className="mt-[2rem] m-2 text-left p-[24px] flex flex-col gap-5 bg-white ">
       <FaQuoteLeft size={24} color="#00b67a" className="mb-2" />
@@ -122,12 +139,25 @@ const Testimonials = () => {
         <h4 className="mb-2 h3-24px-medium line-clamp-1">{review?.reviewHeading}</h4>
       </Link>
       <div className="mb-3 flex items-center justify-between">
-        <img src={review?.stars} alt="Rating" style={{ height: "2rem" }} />
+        <Image 
+          src={review?.stars || "/default-product-image.svg"} 
+          alt="Rating" 
+          width={80}
+          height={32}
+          className="h-8 w-auto"
+          unoptimized
+        />
         <p className="mb-1 font-[500]">{review.dateOfExperience}</p>
       </div>
-      <p className="mb-3 h5-20px-reg h-[140px] line-clamp-5">
+      <div
+        className="mb-3 h5-20px-reg overflow-auto review-scroll"
+        style={{
+          maxHeight: "7.5em", // Approx 5 lines at 1.5em each
+          minHeight: "7.5em",
+        }}
+      >
         {review?.reviewContent ? review?.reviewContent : "No review content"}
-      </p>
+      </div>
       <p className="mb-1 h6-18-px-regular border-t p-1">{review.reviewer}</p>
     </div>
   );
@@ -150,9 +180,9 @@ const Testimonials = () => {
       <div className="flex items-center justify-between md:flex-col sm:flex-col lg:flex-row flex-col md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         {/* Left Summary Box */}
         <div className="flex flex-col items-center justify-between gap-5 whitespace-nowrap 2xl:px-[60px] 2xl:py-[20px]">
-          <h1 className="text-center h3-regular">Excellent</h1>
+          <h1 className="text-center h3-regular">{stats?.status || "Excellent"}</h1>
           <Image
-            src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"
+            src={stats?.image || "https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"}
             alt="Reviews"
             width={200}
             height={200}
@@ -161,7 +191,7 @@ const Testimonials = () => {
           <span className="h5-20px-regular">
             Based on
             <a href="#" className="ml-2 border-b-2">
-              18 <br />
+              {stats?.count || "18"} <br />
               reviews
             </a>
           </span>
@@ -173,7 +203,7 @@ const Testimonials = () => {
 
         {/* Carousel */}
         <div className="card w-[81%] relative">
-          {loading ? (
+          {reviewsLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-4 animate-pulse">
               {Array.from({ length: visibleItems }).map((_, index) => (
                 <div
@@ -187,11 +217,11 @@ const Testimonials = () => {
                 </div>
               ))}
             </div>
-          ) : error ? (
+          ) : reviewsError ? (
             <div className="flex flex-col items-center justify-center gap-4 bg-white border rounded-md p-8 text-center">
-              <p className="h5-regular text-red-600">{error}</p>
+              <p className="h5-regular text-red-600">{reviewsError}</p>
               <button
-                onClick={fetchReviews}
+                onClick={() => dispatch(fetchReviews())}
                 className="btn-outline-primary !px-6 !py-3 !text-base"
                 type="button"
               >
@@ -226,8 +256,8 @@ const Testimonials = () => {
           )}
 
           {/* Custom Navigation */}
-          {reviews.length > 0 && !loading && !error && (
-            <div className="hidden 2xl:flex items-center justify-center mt-4 gap-4">
+          {reviews.length > 0 && !reviewsLoading && !reviewsError && (
+            <div className="flex items-center justify-center mt-4 gap-4">
               <button
                 onClick={navigateLeft}
                 className="p-1 text-gray-500 hover:text-gray-800 transition"
@@ -237,7 +267,7 @@ const Testimonials = () => {
 
               {/* Indicators */}
               <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }).map((_, i) => (
+                {visibleIndicators.map((i) => (
                   <span
                     key={i}
                     className={`w-8 h-1 rounded-full transition-all duration-500 ${

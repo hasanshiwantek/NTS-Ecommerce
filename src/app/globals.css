@@ -277,6 +277,31 @@ img {
   background-color: #4a5568;
 }
 
+/* Beautiful slim scrollbar for review content */
+.review-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(229, 73, 73, 0.3) transparent;
+}
+
+.review-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.review-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.review-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(229, 73, 73, 0.4) 0%, rgba(229, 73, 73, 0.6) 100%);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.review-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(229, 73, 73, 0.6) 0%, rgba(229, 73, 73, 0.8) 100%);
+}
+
 /* Tailwind Breakpoints reference:
    sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1440px
 */
