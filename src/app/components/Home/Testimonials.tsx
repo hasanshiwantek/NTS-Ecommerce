@@ -227,7 +227,7 @@ const Testimonials = () => {
 
           {/* Custom Navigation */}
           {reviews.length > 0 && !loading && !error && (
-            <div className="flex items-center justify-center mt-4 gap-4">
+            <div className="hidden 2xl:flex items-center justify-center mt-4 gap-4">
               <button
                 onClick={navigateLeft}
                 className="p-1 text-gray-500 hover:text-gray-800 transition"
