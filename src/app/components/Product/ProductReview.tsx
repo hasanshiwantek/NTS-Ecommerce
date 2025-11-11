@@ -4,42 +4,23 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import axiosInstance from "@/lib/axiosInstance";
-import { Review } from "../Home/Testimonials";
+import { Review, Stats } from "../Home/Testimonials";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { fetchReviews, fetchStats } from "@/redux/slices/homeSlice";
 
 const MIN_VISIBLE_REVIEWS = 4;
 
 const ProductReview = () => {
+  const dispatch = useAppDispatch();
+  const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
+    (state) => state.home
+  );
   const [showAll, setShowAll] = useState(false);
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchReviews = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axiosInstance.get(
-        "https://widget.advertsedge.com/api/reviews-nts"
-      );
-      setReviews(response?.data?.data ?? []);
-    } catch (err: any) {
-      const message =
-        err?.response?.data?.message ??
-        err?.message ??
-        "Unable to load product reviews. Please try again.";
-      console.error("Error fetching reviews:", err);
-      setError(message);
-      setReviews([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
 
   useEffect(() => {
-    fetchReviews();
-  }, [fetchReviews]);
+    dispatch(fetchReviews());
+    dispatch(fetchStats());
+  }, [dispatch]);
 
   const displayedReviews = useMemo(() => {
     if (showAll) {
@@ -61,13 +42,19 @@ const ProductReview = () => {
   }, []);
 
   const handleSeeMore = useCallback(() => {
-    setShowAll(true);
-    setTimeout(() => {
-      document.getElementById("reviews")?.scrollIntoView({
-        behavior: "smooth",
-      });
-    }, 100);
-  }, []);
+    // Navigate to the URL from the first review if available
+    if (reviews.length > 0 && reviews[0]?.url) {
+      window.open(reviews[0].url, "_blank");
+    } else {
+      // Fallback: show all reviews if no URL available
+      setShowAll(true);
+      setTimeout(() => {
+        document.getElementById("reviews")?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }, 100);
+    }
+  }, [reviews]);
 
   return (
     <section
@@ -89,20 +76,23 @@ const ProductReview = () => {
               </span>
             </div>
             <p className="flex items-center justify-center text-2xl font-semibold">
-              4.5
+              {stats?.rating || "4.5"}
               <span className="flex ml-4 text-[#FFA439]">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-6 h-6 ${
-                      i < 4 ? "fill-[#FFA439]" : "fill-muted"
-                    }`}
-                  />
-                ))}
+                {[...Array(5)].map((_, i) => {
+                  const rating = parseFloat(stats?.rating || "4.5");
+                  return (
+                    <Star
+                      key={i}
+                      className={`w-6 h-6 ${
+                        i < Math.floor(rating) ? "fill-[#FFA439]" : "fill-muted"
+                      }`}
+                    />
+                  );
+                })}
               </span>
             </p>
             <p className="h6-regular !text-muted-foreground mb-4">
-              from 134 reviews
+              from {stats?.count || "134"} reviews
             </p>
           </div>
           <ul className="w-full space-y-2">
@@ -133,7 +123,7 @@ const ProductReview = () => {
 
         {/* RIGHT: Reviews */}
         <div className="lg:col-span-2 relative">
-          {loading ? (
+          {reviewsLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {Array.from({ length: MIN_VISIBLE_REVIEWS }).map((_, index) => (
                 <div
@@ -154,13 +144,13 @@ const ProductReview = () => {
                 </div>
               ))}
             </div>
-          ) : error ? (
+          ) : reviewsError ? (
             <div className="border rounded-lg p-10 text-center bg-white shadow-xs flex flex-col items-center gap-4">
-              <p className="h5-regular text-red-600">{error}</p>
+              <p className="h5-regular text-red-600">{reviewsError}</p>
               <Button
                 variant="outline"
                 className="!px-6 !py-3 !text-base"
-                onClick={fetchReviews}
+                onClick={() => dispatch(fetchReviews())}
               >
                 Retry
               </Button>
@@ -221,8 +211,8 @@ const ProductReview = () => {
 
           {/* ✅ Gradient Fade Effect on Bottom Cards */}
           {!showAll &&
-            !loading &&
-            !error &&
+            !reviewsLoading &&
+            !reviewsError &&
             reviews.length > displayedReviews.length && (
             <div className="absolute bottom-0 left-0 right-0 h-96 pointer-events-none bg-gradient-to-t from-white to-transparent rounded-b-lg z-10" />
           )}
@@ -231,8 +221,8 @@ const ProductReview = () => {
 
       {/* SEE MORE BUTTON */}
       {!showAll &&
-        !loading &&
-        !error &&
+        !reviewsLoading &&
+        !reviewsError &&
         reviews.length > displayedReviews.length && (
         <div className="text-center mt-8">
           <Button
