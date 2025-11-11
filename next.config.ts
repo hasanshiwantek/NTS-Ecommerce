@@ -86,7 +86,11 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  webpack(config) {
+  webpack(config, { dev, isServer }) {
+    // Target modern JS in client build
+    if (!dev && !isServer) {
+      config.target = ["web", "es6"];
+    }
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
