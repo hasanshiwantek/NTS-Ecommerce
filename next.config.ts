@@ -1,60 +1,68 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  // Enable compression
+  reactStrictMode: true,
   compress: true,
 
-  // Optimize images
   images: {
-    domains: [
-      "ecom.brokercell.com",
-      "images.pexels.com",
-      "images.unsplash.com",
-        "cdn11.bigcommerce.com"
-    ],
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "inline",
+
+    // Explicit hosts + catch-all
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "ecom.brokercell.com",
+        pathname: "/product_images/**",
       },
       {
         protocol: "https",
-        hostname: "ecom.brokercell.com",
-        port: "", // leave empty if no port
-        pathname: "/product_images/**", // allow all images inside /product_images/
+        hostname: "i.ebayimg.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn11.bigcommerce.com",
+        pathname: "/**",
+      },
+      // Catch-all for any other HTTPS image
+      {
+        protocol: "https",
+        hostname: "*",
+        pathname: "/**",
       },
     ],
-    // Optimize image formats (Next.js 15 compatible)
-    formats: ["image/avif", "image/webp"],
-    // Device sizes for responsive images
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    // Image sizes for different breakpoints
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Minimum cache TTL
-    minimumCacheTTL: 60,
-    // Enable image optimization
-    dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // Optimize production builds
   productionBrowserSourceMaps: false,
 
-  experimental: {
-    esmExternals: true, // use ES modules
-    serverActions: { allowedOrigins: [] }, // if needed
-  },
   compiler: {
-    reactRemoveProperties: true, // Remove data-react-* props in production
+    reactRemoveProperties: true,
   },
-  // optional: tell Next.js to target modern browsers only
+
+  experimental: {
+    esmExternals: true,
+    serverActions: { allowedOrigins: [] },
+  },
+
   future: {
     webpack5: true,
   },
-    // ✅ Reduce JS bundle impact
-  // Headers for caching and performance
+
   async headers() {
     return [
       {
@@ -77,7 +85,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  
+
+  webpack(config) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
