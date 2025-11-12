@@ -165,6 +165,9 @@ const FooterBottom = () => {
               <li>
                 <Link href="/blogs">Blog</Link>
               </li>
+                   <li>
+                <Link href="/sitemap">Sitemap</Link>
+              </li>
             </ul>
           </nav>
 
