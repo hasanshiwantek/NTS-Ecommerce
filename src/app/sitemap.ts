@@ -2,7 +2,7 @@
 import type { MetadataRoute } from "next";
 
 // Base URL of your website
-const BASE_URL = "https://nts-ecommerce.vercel.app"; // replace with your real domain
+const BASE_URL = "https://newtownspares.advertsedge.com"; // replace with your real domain
 
 async function fetchProducts() {
   try {
