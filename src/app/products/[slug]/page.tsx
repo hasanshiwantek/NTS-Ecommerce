@@ -118,6 +118,7 @@ export default async function ProductPage({
         id="product-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        strategy="lazyOnload"
       />
       <main role="main">
         <article>
