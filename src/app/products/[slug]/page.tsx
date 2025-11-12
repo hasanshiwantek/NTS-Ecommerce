@@ -56,6 +56,18 @@ export async function generateMetadata({
       description: product.metaDescription || product.description,
       images: [product.image?.[0]?.path || "/default-product-image.svg"],
     },
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 
