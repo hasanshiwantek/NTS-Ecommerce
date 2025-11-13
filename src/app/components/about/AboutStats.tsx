@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import JourneyTimeline from "./JourneyTimeline";
 const AboutStats = () => {
   const stats = [
     {
@@ -73,7 +74,9 @@ const AboutStats = () => {
                   <div className="flex flex-col justify-center gap-8 mt-90">
                     {/* First Vision Card */}
                     <div className=" p-6  border-l">
-                      <h3 className="h3-24px-regular !text-[#DCDCDC]   mb-3">Our Vision</h3>
+                      <h3 className="h3-24px-regular !text-[#DCDCDC]   mb-3">
+                        Our Vision
+                      </h3>
                       <p className="h3-24px-regular !text-[#DCDCDC]  leading-relaxed">
                         To be the bridge for connecting the world and innovative
                         technology products.
@@ -82,7 +85,9 @@ const AboutStats = () => {
 
                     {/* Second Vision Card */}
                     <div className=" p-6 border-l">
-                      <h3 className="h3-24px-regular !text-[#DCDCDC]  mb-3">Our Vision</h3>
+                      <h3 className="h3-24px-regular !text-[#DCDCDC]  mb-3">
+                        Our Vision
+                      </h3>
                       <div className="h3-24px-regular !text-[#DCDCDC] leading-relaxed space-y-2">
                         <p>
                           Collaborate with IT partners to build a strong network
@@ -106,6 +111,8 @@ const AboutStats = () => {
             </div>
           </div>
         </div>
+
+        <JourneyTimeline />
       </div>
     </>
   );

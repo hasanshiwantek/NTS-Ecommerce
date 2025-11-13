@@ -17,19 +17,19 @@ const page = () => {
       <AOSWrapper animation="fade-up" delay={300}>
         <GlobalSupplier />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={500}>
+      <AOSWrapper animation="fade-up" delay={400}>
         <AboutStats />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={600}>
+      <AOSWrapper animation="fade-up" delay={500}>
         <AboutBrandSection />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={700}>
+      <AOSWrapper animation="fade-up" delay={600}>
         <SocialResponsibilitySection />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={800}>
+      <AOSWrapper animation="fade-up" delay={700}>
         <GetInTouch />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={900}>
+      <AOSWrapper animation="fade-up" delay={800}>
         <ProductServicesSection />
       </AOSWrapper>
     </main>
