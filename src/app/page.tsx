@@ -62,22 +62,22 @@ const Page = async () => {
         <AOSWrapper animation="fade-up" delay={400}>
           <Brands />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={600}>
+        <AOSWrapper animation="fade-up" delay={500}>
           <PopularProducts />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={800}>
+        <AOSWrapper animation="fade-up" delay={600}>
           <TopIndustries />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={900}>
+        <AOSWrapper animation="fade-up" delay={700}>
           <ItEquipment />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={1000}>
+        <AOSWrapper animation="fade-up" delay={800}>
           <AuthorizedSupplier />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={1100}>
+        <AOSWrapper animation="fade-up" delay={900}>
           <Testimonials />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={1200}>
+        <AOSWrapper animation="fade-up" delay={1000}>
           <GetInTouch />
         </AOSWrapper>
       </main>

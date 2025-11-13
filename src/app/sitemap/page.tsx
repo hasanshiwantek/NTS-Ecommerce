@@ -53,8 +53,8 @@ export default async function SitemapPage() {
   // Static pages
   const staticPages = [
     { name: "Home", url: "/" },
-    { name: "About", url: "/about" },
-    { name: "Contact", url: "/contact" },
+    { name: "About", url: "/about-us" },
+    { name: "Contact", url: "/contact-us" },
     { name: "Login", url: "/auth/login" },
     { name: "Signup", url: "/auth/signup" },
 

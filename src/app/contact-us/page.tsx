@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     'New Town Spares contact',
   ],
   alternates: {
-    canonical: 'https://nts-ecommerce.vercel.app/contact-us',
+    canonical: 'https://newtownspares.advertsedge.com/contact-us',
   },
   openGraph: {
     title: 'Contact Us | New Town Spares',
     description:
       'Get in touch with New Town Spares for product inquiries, customer support, and sales questions.',
-    url: 'https://nts-ecommerce.vercel.app/contact-us',
+    url: 'https://newtownspares.advertsedge.com/contact-us',
     siteName: 'New Town Spares',
     images: [
       {

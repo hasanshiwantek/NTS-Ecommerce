@@ -63,8 +63,8 @@ const SocialResponsibilitySection = () => {
                   className="object-cover w-full h-full sm:h-[300px] lg:h-[200px]   xl:h-[300px]  2xl:h-[400px] rounded-xl "
                 />
               </div>
-              <div className="p-6 flex flex-col flex-grow ">
-                <h3 className="h3-24px-medium mb-2">{card.title}</h3>
+              <div className="p-6 flex flex-col  flex-grow ">
+                <h3 className="h3-24px-medium   mb-2 ">{card.title}</h3>
                 <p className="h6-18-px-regular  flex-grow">
                   {card.description}
                 </p>

@@ -5,7 +5,11 @@ import ContactBanner from "./ContactBanner";
 import ContactForm from "./ContactForm";
 import ReachOutSection from "./ReachOutSection";
 import FAQSection from "./FAQSection";
+import dynamic from "next/dynamic";
 
+const AOSWrapper = dynamic(
+  () => import("../../components/animation/AOSWrapper")
+);
 const ContactUs = () => {
   // Enable smooth scroll globally
   useEffect(() => {
@@ -18,19 +22,26 @@ const ContactUs = () => {
   return (
     <div className="w-full">
       {/* Row 1: Banner */}
-      <ContactBanner />
+      <AOSWrapper animation="zoom-in" delay={100}>
+        <ContactBanner />
+      </AOSWrapper>
 
       {/* Row 2: Contact Form */}
-      <ContactForm />
+      <AOSWrapper animation="fade-up" delay={200}>
+        <ContactForm />
+      </AOSWrapper>
 
       {/* Reach Out to Us Section */}
-      <ReachOutSection />
+      <AOSWrapper animation="fade-up" delay={300}>
+        <ReachOutSection />
+      </AOSWrapper>
 
       {/* Frequently Asked Question Section */}
-      <FAQSection />
+      <AOSWrapper animation="fade-up" delay={400}>
+        <FAQSection />
+      </AOSWrapper>
     </div>
   );
 };
 
 export default ContactUs;
-

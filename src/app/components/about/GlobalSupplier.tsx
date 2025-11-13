@@ -33,7 +33,7 @@ const GlobalSupplier = () => {
             <Image
               src="/about/global-supplier-img1.png"
               alt="Digital warehouse management"
-              width={800}
+              width={500}
               height={600}
               className="w-full h-full object-cover"
             />
