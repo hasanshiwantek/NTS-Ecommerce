@@ -76,7 +76,7 @@ const FooterBottom = () => {
     py-16 text-center sm:text-start
   "
       >
-        <div className="relative min-h-[600px]">
+        <div className="relative 2xl:min-h-[600px] min-h-[500px]">
           {/* Skeleton (visible while loading) */}
           <div
             className={`absolute inset-0 transition-opacity duration-500   ${
