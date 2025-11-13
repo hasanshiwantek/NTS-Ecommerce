@@ -138,7 +138,7 @@ const LinkHeader = () => {
   }, []);
 
   // ✅ Limit the number of top-level categories shown in the navbar
-  const visibleCategories = categories.slice(0, 9); // same count as before
+  const visibleCategories = categories.slice(0, 7); // same count as before
 
   return (
     <header className="bg-[#5B5B5B] text-white">
@@ -191,6 +191,16 @@ const LinkHeader = () => {
             text-sm sm:text-base md:text-sm lg:text-[1rem] xl:text-xl 2xl:text-2xl
             font-normal"
         >
+          <li>
+            <Link href="/about-us">About</Link>
+          </li>
+          <li>
+            <Link href="/contact-us">Contact Us</Link>
+          </li>
+          <li>
+            <Link href="/blogs">Blog</Link>
+          </li>
+
           {visibleCategories.map((cat) => (
             <li key={cat.id} className="text-[#F2F2F2]">
               <Link

@@ -63,8 +63,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, lastModified: new Date() },
-    { url: `${BASE_URL}/about`, lastModified: new Date() },
-    { url: `${BASE_URL}/contact`, lastModified: new Date() },
+    { url: `${BASE_URL}/about-us`, lastModified: new Date() },
+    { url: `${BASE_URL}/contact-us`, lastModified: new Date() },
     { url: `${BASE_URL}/auth/login`, lastModified: new Date() },
     { url: `${BASE_URL}/auth/signup`, lastModified: new Date() },
 

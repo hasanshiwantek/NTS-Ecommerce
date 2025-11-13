@@ -77,7 +77,7 @@ const Page = async () => {
         <AOSWrapper animation="fade-up" delay={900}>
           <Testimonials />
         </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={950}>
+        <AOSWrapper animation="fade-up" delay={1000}>
           <GetInTouch />
         </AOSWrapper>
       </main>
