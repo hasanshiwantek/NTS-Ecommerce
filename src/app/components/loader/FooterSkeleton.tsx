@@ -2,7 +2,7 @@ import React from "react";
 
 const FooterSkeleton = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 min-h-[300px] animate-pulse">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 min-h-[690px] animate-pulse">
       {[1, 2, 3, 4].map((i) => (
         <div key={i}>
           <div className="h-5 bg-gray-600 rounded w-full mb-4"></div>

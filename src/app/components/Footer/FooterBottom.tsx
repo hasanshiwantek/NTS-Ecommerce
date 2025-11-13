@@ -76,16 +76,16 @@ const FooterBottom = () => {
     py-16 text-center sm:text-start
   "
       >
-        <div className="relative min-h-[300px]">
+        <div className="relative 2xl:min-h-[600px] min-h-[500px]">
           {/* Skeleton (visible while loading) */}
           <div
-            className={`absolute inset-0 transition-opacity duration-500 ${
+            className={`absolute inset-0 transition-opacity duration-500   ${
               categories.length === 0
                 ? "opacity-100"
                 : "opacity-0 pointer-events-none"
             }`}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 ">
               <FooterSkeleton />
             </div>
           </div>
@@ -165,13 +165,13 @@ const FooterBottom = () => {
               <li>
                 <Link href="/blogs">Blog</Link>
               </li>
-                       <li>
+              <li>
                 <Link href="/about-us">About</Link>
               </li>
-                          <li>
+              <li>
                 <Link href="/contact-us">Contact Us</Link>
               </li>
-                   <li>
+              <li>
                 <Link href="/sitemap">Sitemap</Link>
               </li>
             </ul>
