@@ -3,9 +3,9 @@ import React from "react";
 import { Star,Plus, Minus } from "lucide-react";
 import Image from "next/image";
 import freelogo from "@/assets/card-icon/freelogo.png";
-import dhllogo from "@/assets/card-icon/dhllogo.png";
-import upslogo from "@/assets/card-icon/upslogo.png";
-import feedxlogo from "@/assets/card-icon/feedxlogo.png";
+import dhllogo from "@/assets/card-icon/dhl.svg";
+import upslogo from "@/assets/card-icon/ups.svg";
+import feedxlogo from "@/assets/card-icon/fedex.svg";
 import { useAppDispatch } from "@/hooks/useReduxHooks";
 import { toast } from "sonner"
 import { addToCart } from "@/redux/slices/cartSlice";
@@ -95,7 +95,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             </p>
           </div>
           <div className="flex items-center gap-1 xl:gap-3">
-            <Image src={dhllogo} alt="DHL" className="w-12 xl:w-16 h-10" />
+            <Image src={dhllogo} alt="DHL" className="w-12 xl:w-18 h-10" />
             <Image src={upslogo} alt="UPS" className="w-12 xl:w-16 h-10" />
             <Image src={feedxlogo} alt="FedEx" className="w-14 xl:w-20 h-10" />
           </div>

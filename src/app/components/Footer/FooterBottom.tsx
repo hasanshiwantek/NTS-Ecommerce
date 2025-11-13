@@ -168,6 +168,9 @@ const FooterBottom = () => {
                        <li>
                 <Link href="/about-us">About</Link>
               </li>
+                          <li>
+                <Link href="/contact-us">Contact Us</Link>
+              </li>
                    <li>
                 <Link href="/sitemap">Sitemap</Link>
               </li>

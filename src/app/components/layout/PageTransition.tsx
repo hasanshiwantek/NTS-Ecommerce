@@ -55,12 +55,13 @@ export default function PageTransition({
           pathname === "/" ||
           [
             "/auth",
-            "/about",
             "/privacyPolicy",
             "/payment-options",
             "/terms-conditions",
             "/shipping-policy",
             "/returnPolicy",
+            "/contact-us",
+            "/about-us",
           ].some((p) => pathname.includes(p))
             ? ""
             : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
