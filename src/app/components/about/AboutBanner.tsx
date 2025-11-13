@@ -40,10 +40,10 @@ const AboutBanner = () => {
             marginTop: "clamp(1rem, 0vh, 12rem)",
           }}
         >
-          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[2rem] 2xl:text-[3.5rem] font-medium w-full leading-tight  2xl:w-[45%] sm:w-[80%]">
+          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3rem] 2xl:text-[3.5rem] font-medium w-full leading-tight  2xl:w-[45%] sm:w-[80%]">
             A Bridge Connecting IT Hardware to The World
           </h1>
-          <p className="text-lg sm:text-lg md:text-2xl lg:text-3xl xl:text-[1.5rem] 2xl:text-[2rem] font-normal w-full text-white 2xl:w-[45%] leading-normal xl:w-[45%] md:w-[60%] lg:w-[70%] sm:w-[70%]">
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[1.5rem] 2xl:text-[2rem] font-normal w-full text-white 2xl:w-[45%] leading-normal xl:w-[45%] md:w-[60%] lg:w-[70%] sm:w-[70%]">
             We strive to create a seamless link between IT hardware, people, and
             the world, making IT procurement easier and fostering innovation and
             growth.
