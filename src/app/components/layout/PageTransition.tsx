@@ -52,16 +52,17 @@ export default function PageTransition({
       <motion.div
         key={pathname}
         className={`flex-grow ${
-      pathname === "/" ||
-      [
-        "/auth",
-        "/privacyPolicy",
-        "/payment-options",
-        "/terms-conditions",
-        "/shipping-policy",
-        "/returnPolicy",
-        "/contact-us",
-      ].some((p) => pathname.includes(p))
+          pathname === "/" ||
+          [
+            "/auth",
+            "/privacyPolicy",
+            "/payment-options",
+            "/terms-conditions",
+            "/shipping-policy",
+            "/returnPolicy",
+            "/contact-us",
+            "/about-us",
+          ].some((p) => pathname.includes(p))
             ? ""
             : "py-6 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]"
         }`}
@@ -71,7 +72,7 @@ export default function PageTransition({
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         {children}
-             <Toaster position="top-center" /> 
+        <Toaster position="top-center" />
       </motion.div>
     </AnimatePresence>
   );
