@@ -104,13 +104,13 @@ const FooterBottom = () => {
                   <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
                     {category.name}
                   </h4>
-                  <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4">
+                  <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4 gap-5">
                     {category.subcategories?.length ? (
                       category.subcategories.map((sub) => (
                         <li key={sub.id}>
                           <Link
                             href={`/category/${sub.slug}`}
-                            className="hover:text-white"
+                            className="hover:text-white "
                           >
                             {sub.name}
                           </Link>
@@ -149,7 +149,7 @@ const FooterBottom = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <nav aria-label="Customer Services">
             <h4 className="h5-bold !text-[#FFFFFF] mb-4">Customer Services</h4>
-            <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
+            <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF] gap-5">
               <li>
                 <Link href="/privacyPolicy">Privacy policy</Link>
               </li>
@@ -179,7 +179,7 @@ const FooterBottom = () => {
 
           <nav aria-label="My Account">
             <h4 className="h5-bold !text-[#FFFFFF] mb-4">My Account</h4>
-            <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
+            <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF] gap-5">
               <li>
                 <Link href="/login">Sign in</Link>
               </li>
