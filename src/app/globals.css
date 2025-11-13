@@ -293,13 +293,21 @@ img {
 }
 
 .review-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(229, 73, 73, 0.4) 0%, rgba(229, 73, 73, 0.6) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(229, 73, 73, 0.4) 0%,
+    rgba(229, 73, 73, 0.6) 100%
+  );
   border-radius: 10px;
   transition: all 0.3s ease;
 }
 
 .review-scroll::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(229, 73, 73, 0.6) 0%, rgba(229, 73, 73, 0.8) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(229, 73, 73, 0.6) 0%,
+    rgba(229, 73, 73, 0.8) 100%
+  );
 }
 
 /* Tailwind Breakpoints reference:
@@ -457,28 +465,31 @@ img {
 @media (min-width: 640px) {
   .h3-secondary,
   .h3-regular,
-  .h3-24px-medium {
+  .h3-24px-medium .h3-24px-regular {
     font-size: 16px;
   }
 }
 @media (min-width: 1024px) {
   .h3-secondary,
   .h3-regular,
-  .h3-24px-medium {
+  .h3-24px-medium,
+  .h3-24px-regular {
     font-size: 18px;
   }
 }
 @media (min-width: 1280px) {
   .h3-secondary,
   .h3-regular,
-  .h3-24px-medium {
+  .h3-24px-medium,
+  .h3-24px-regular {
     font-size: 18px;
   }
 }
 @media (min-width: 1440px) {
   .h3-secondary,
   .h3-regular,
-  .h3-24px-medium {
+  .h3-24px-medium,
+  .h3-24px-regular {
     font-size: 24px;
     line-height: 33px;
   }
@@ -500,32 +511,40 @@ img {
 .h4-regular {
   font-weight: 400;
 }
+.h4-22px-medium {
+  color: #fff;
+  font-weight: 500;
+}
 
 @media (min-width: 640px) {
   .h4-bold,
   .h4-medium,
-  .h4-regular {
+  .h4-regular,
+  .h4-22px-medium {
     font-size: 16px;
   }
 }
 @media (min-width: 1024px) {
   .h4-bold,
   .h4-medium,
-  .h4-regular {
+  .h4-regular,
+  .h4-22px-medium {
     font-size: 16px;
   }
 }
 @media (min-width: 1280px) {
   .h4-bold,
   .h4-medium,
-  .h4-regular {
+  .h4-regular,
+  .h4-22px-medium {
     font-size: 16.5px;
   }
 }
 @media (min-width: 1440px) {
   .h4-bold,
   .h4-medium,
-  .h4-regular {
+  .h4-regular,
+  .h4-22px-medium {
     font-size: 22px;
     line-height: 32px;
   }
