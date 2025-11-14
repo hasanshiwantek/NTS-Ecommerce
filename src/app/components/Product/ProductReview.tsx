@@ -171,9 +171,9 @@ const ProductReview = () => {
                   <header className="flex items-center justify-between mb-3 pb-2 border-b">
                     <div className="flex items-center gap-3">
                       <div>
-                        <h6 className="text-[20px] font-medium">
+                        <h5 className="text-[20px] font-medium">
                           {review?.reviewer}
-                        </h6>
+                        </h5>
                         <time
                           dateTime={review?.dateOfExperience}
                           className="h5-20px-medium"

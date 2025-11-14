@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
+import Link from "next/link";
 const GlobalSupplier = () => {
   return (
     <div className="w-full  bg-white ">
@@ -59,12 +59,14 @@ const GlobalSupplier = () => {
                 periodically so that you don't face any technical difficulty
                 with our equipment while performing your chores.
               </p>
+              <Link href={"/products"}>
               <button
                 type="button"
                 className="  md:[w-60%] xl:[w-80%] 2xl:[w-70%] lg:[w-80%] w-full      px-6 py-3 rounded-full h4-medium !text-white bg-[#F15939] border border-transparent hover:!border-[#F15939] hover:!bg-white hover:!text-[#F15939] whitespace-nowrap"
-              >
+                >
                 Shop Now
               </button>
+                </Link>
             </div>
           </div>
         </div>

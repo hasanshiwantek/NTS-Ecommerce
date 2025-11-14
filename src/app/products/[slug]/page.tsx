@@ -63,9 +63,9 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };
@@ -83,33 +83,8 @@ export default async function ProductPage({
   const product = await fetchProductBySlug(slug);
   const products = await fetchProducts();
 
-  // ✅ JSON-LD Structured Data for rich snippets
-  const jsonLd = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    name: product.pageTitle || product.name,
-    image: product.image?.[0]?.path || "/default-product-image.svg",
-    description: product.metaDescription || product.description,
-    sku: product.sku,
-    mpn: product.mpn,
-    brand: {
-      "@type": "Brand",
-      name: product.brand?.name || "New Town Spares",
-    },
-    offers: {
-      "@type": "Offer",
-      url: `https://nts-ecommerce.vercel.app/products/${slug}`,
-      priceCurrency: "USD",
-      price: product.price,
-      availability: product.availabilityText
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
-      seller: {
-        "@type": "Organization",
-        name: "New Town Spares",
-      },
-    },
-  };
+  // ✅ Use backend schema directly
+  const backendSchema = product?.schema; // Assuming backend returns the full JSON-LD object
 
   return (
     <>
@@ -117,7 +92,7 @@ export default async function ProductPage({
       <Script
         id="product-jsonld"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(backendSchema) }}
         strategy="lazyOnload"
       />
       <main role="main">
