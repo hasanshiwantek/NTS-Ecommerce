@@ -62,7 +62,7 @@ export default function ProductGridCard({ product }: { product: Product }) {
       >
         {/* Product Name */}
         <Link
-          href={`/products/${product?.slug}`}
+          href={`/products/${product?.sku}`}
           className="w-full cursor-pointer relative inline-block  group "
         >
           <h3 className="h6-18-px-medium w-full line-clamp-2">

@@ -132,7 +132,7 @@ const PopularProducts = () => {
 
                   {/* Product Name */}
                   <Link
-                    href={`/products/${product?.slug}`}
+                    href={`/products/${product?.sku}`}
                     className="relative inline-block cursor-pointer group"
                   >
                     <p className="h6-18-px-medium line-clamp-2 min-h-[3rem]">

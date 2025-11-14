@@ -68,22 +68,22 @@ const page = () => {
       <AOSWrapper animation="zoom-in" delay={100}>
         <AboutBanner />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={300}>
+      <AOSWrapper animation="fade-up" delay={200}>
         <GlobalSupplier />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={400}>
+      <AOSWrapper animation="fade-up" delay={300}>
         <AboutStats />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={500}>
+      <AOSWrapper animation="fade-up" delay={400}>
         <AboutBrandSection />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={600}>
+      <AOSWrapper animation="fade-up" delay={500}>
         <SocialResponsibilitySection />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={700}>
+      <AOSWrapper animation="fade-up" delay={600}>
         <GetInTouch />
       </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={800}>
+      <AOSWrapper animation="fade-up" delay={700}>
         <ProductServicesSection />
       </AOSWrapper>
     </main>
