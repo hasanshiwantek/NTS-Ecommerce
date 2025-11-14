@@ -75,7 +75,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
         "
       >
         <Link
-          href={`/products/${product?.slug}`}
+          href={`/products/${product?.sku}`}
           className="cursor-pointer relative inline-block  group "
         >
           <h3 className="mb-1 h3-regular line-clamp-2 ">{product?.name}</h3>

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import JourneyTimeline from "./JourneyTimeline";
+import WorkLifeSlider from "./WorkLifeSlider";
 const AboutStats = () => {
   const stats = [
     {
@@ -113,6 +114,8 @@ const AboutStats = () => {
         </div>
 
         <JourneyTimeline />
+        
+        <WorkLifeSlider />
       </div>
     </>
   );
