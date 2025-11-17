@@ -6,44 +6,31 @@ import Image from "next/image";
 const Banner = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
-    // Trigger animation on page load
+    // Trigger text and image animations
     setIsLoaded(true);
 
+    // Ensure autoplay works on mobile/desktop
     const video = videoRef.current;
     if (video) {
-      // Ensure video plays
-      video.play().catch((error) => {
-        console.log("Video autoplay failed:", error);
-      });
-
-      // Force loop on ended event (backup for loop attribute)
-      const handleEnded = () => {
-        video.currentTime = 0;
-        video.play();
-      };
-
-      video.addEventListener("ended", handleEnded);
-
-      // Cleanup
-      return () => {
-        video.removeEventListener("ended", handleEnded);
-      };
+      video.play().catch((err) => console.log("Video autoplay failed:", err));
     }
   }, []);
+
   return (
     <div className="relative w-full h-screen overflow-visible">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {/* <Image
+        <Image
           src="/home-banner-bg.png"
           alt="Banner Background"
           fill
           className="object-cover"
           priority
           quality={90}
-        /> */}
-        <video
+        />
+        {/* <video
           ref={videoRef}
           autoPlay
           loop
@@ -51,14 +38,10 @@ const Banner = () => {
           playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          onLoadedData={() => {
-            // Ensure video starts playing when loaded
-            videoRef.current?.play();
-          }}
         >
           <source src="/home-banner.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
         {/* Overlay for better text readability */}
         {/* <div className="absolute inset-0 bg-gradient-to-r from-[#0a1a3a]/80 via-[#0a1a3a]/60 to-transparent"></div> */}
       </div>

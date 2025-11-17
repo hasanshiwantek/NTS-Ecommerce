@@ -41,9 +41,9 @@ const FooterBottom = () => {
       "
         >
           <div className="text-center md:text-left w-full md:w-[60%] 2xl:max-w-[50%]">
-            <h4 className="h1-secondary-medium !text-white">
+            <h3 className="h1-secondary-medium !text-white">
               Subscribe to our Newsletter
-            </h4>
+            </h3>
             <p className="!text-gray-300 h6-regular">
               Get the latest updates on new products and upcoming sales
             </p>
@@ -241,3 +241,14 @@ const FooterBottom = () => {
 };
 
 export default FooterBottom;
+
+
+
+
+
+
+
+
+
+
+
