@@ -6,28 +6,83 @@ import Image from "next/image";
 const Banner = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isReversingRef = useRef(false);
+  const animationFrameRef = useRef<number | null>(null);
+
   useEffect(() => {
     // Trigger animation on page load
     setIsLoaded(true);
 
     const video = videoRef.current;
     if (video) {
-      // Ensure video plays
+      // Ensure video plays forward initially
       video.play().catch((error) => {
         console.log("Video autoplay failed:", error);
       });
 
-      // Force loop on ended event (backup for loop attribute)
+      // When video ends, immediately start reversing (no pause)
       const handleEnded = () => {
-        video.currentTime = 0;
-        video.play();
+        if (!isReversingRef.current) {
+          isReversingRef.current = true;
+          // Don't pause, immediately start reverse for smooth transition
+          startReversePlayback(video);
+        }
+      };
+
+      // Monitor video time to catch when it's near the end for smoother transition
+      const handleTimeUpdate = () => {
+        if (!isReversingRef.current && video.duration) {
+          // If video is very close to end (within 0.05 seconds), start reverse immediately
+          // This prevents the pause/gap when video ends
+          if (video.currentTime >= video.duration - 0.05) {
+            isReversingRef.current = true;
+            startReversePlayback(video);
+          }
+        }
+      };
+
+      const startReversePlayback = (vid: HTMLVideoElement) => {
+        // Cancel any existing animation frame
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+
+        // Use requestAnimationFrame for smooth 60fps reverse playback
+        const reverseStep = () => {
+          if (vid.currentTime > 0.03) {
+            // Decrease currentTime smoothly at ~60fps
+            vid.currentTime = Math.max(0, vid.currentTime - 0.033);
+            animationFrameRef.current = requestAnimationFrame(reverseStep);
+          } else {
+            // Reached the start, play forward again immediately
+            stopReversePlayback();
+            isReversingRef.current = false;
+            vid.currentTime = 0;
+            vid.play().catch((error) => {
+              console.log("Video play failed:", error);
+            });
+          }
+        };
+
+        // Start reverse immediately
+        animationFrameRef.current = requestAnimationFrame(reverseStep);
+      };
+
+      const stopReversePlayback = () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+          animationFrameRef.current = null;
+        }
       };
 
       video.addEventListener("ended", handleEnded);
+      video.addEventListener("timeupdate", handleTimeUpdate);
 
       // Cleanup
       return () => {
         video.removeEventListener("ended", handleEnded);
+        video.removeEventListener("timeupdate", handleTimeUpdate);
+        stopReversePlayback();
       };
     }
   }, []);
@@ -46,7 +101,6 @@ const Banner = () => {
         <video
           ref={videoRef}
           autoPlay
-          loop
           muted
           playsInline
           preload="auto"

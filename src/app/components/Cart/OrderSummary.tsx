@@ -1,13 +1,15 @@
 "use client";
 import { Input } from "@/components/ui/input";
 import { Package } from "lucide-react";
-import React, { useMemo } from "react";
-import Link from "next/link";
+import React, { useMemo, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 
 const OrderSummary = () => {
   const cart = useAppSelector((state: RootState) => state.cart.items);
+  const router = useRouter();
 
   const subtotal = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -17,6 +19,15 @@ const OrderSummary = () => {
   const shippingLabel = "FedEx priority $370.00";
 
   const total = subtotal + shipping;
+
+  const handleProceedToCheckout = useCallback(() => {
+    if (!cart.length) {
+      toast.error("Please add something");
+      return;
+    }
+
+    router.push("/checkout");
+  }, [cart.length, router]);
 
   return (
     <div className="border rounded-lg 2xl:w-full">
@@ -80,11 +91,13 @@ const OrderSummary = () => {
 
         {/* Buttons */}
         <div className="flex flex-col gap-3 mt-5">
-          <Link href="/checkout">
-            <button className="w-full bg-[#F15939] hover:bg-[#e04f33] !text-white py-5 h4-medium font-semibold rounded-lg mb-3 transition">
-              Proceed to Checkout
-            </button>
-          </Link>
+          <button
+            type="button"
+            onClick={handleProceedToCheckout}
+            className="w-full bg-[#F15939] hover:bg-[#e04f33] !text-white py-5 h4-medium font-semibold rounded-lg mb-3 transition"
+          >
+            Proceed to Checkout
+          </button>
 
           <button className="w-full bg-black hover:bg-gray-900 !text-white py-5 h4-medium font-semibold rounded-lg mb-3 flex items-center justify-center gap-2 transition">
             <img
