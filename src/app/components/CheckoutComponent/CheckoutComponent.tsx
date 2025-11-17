@@ -1,5 +1,12 @@
 "use client";
-import React, { useState, useCallback, useMemo, memo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  memo,
+  useEffect,
+  useRef,
+} from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -10,8 +17,10 @@ import {
   decreaseQty,
   increaseQty,
   removeFromCart,
+  clearCart,
 } from "@/redux/slices/cartSlice";
 import axiosInstance from "@/lib/axiosInstance";
+import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -38,9 +47,10 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
 // Stripe publishable key
 const stripePromise = loadStripe(
-  "pk_test_51Rix9HQGYDEwUNjEf6i9jqnw8hsenUB057dlMUpafqy04GCVkmYrQcSrwtO7OpZqjhd27dciwptoxrnjLgAjq8gT00FBh1ZmjP"
+  "pk_test_51Q84ITDXm8Pt3arOOI28hj5W9JPohSimaAfVeGxCPCf9N86B5rK1POKOhQpOsNmeaid1cbRAU06yzV8eienwD10B00KDT12v4S"
 );
 
 // ✅ Pre-compute country list at module level (only once when module loads)
@@ -155,6 +165,8 @@ const CheckoutForm = () => {
   const [itemToDelete, setItemToDelete] = useState<any | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [latestOrderId, setLatestOrderId] = useState<string | number | null>(null);
   const [cardCompletion, setCardCompletion] = useState({
     number: false,
     expiry: false,
@@ -163,6 +175,50 @@ const CheckoutForm = () => {
   const [cardError, setCardError] = useState<string | null>(null);
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const emptyCartWarningShownRef = useRef(false);
+  const skipEmptyCartCheckRef = useRef(false);
+
+  const handleSuccessModalChange = useCallback(
+    (open: boolean) => {
+      setIsSuccessModalOpen(open);
+      if (!open) {
+        router.push("/");
+      }
+    },
+    [router]
+  );
+
+  useEffect(() => {
+    if (!isSuccessModalOpen) {
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      handleSuccessModalChange(false);
+    }, 2500);
+
+    return () => clearTimeout(timeoutId);
+  }, [isSuccessModalOpen, handleSuccessModalChange]);
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      if (skipEmptyCartCheckRef.current) {
+        return;
+      }
+
+      if (!emptyCartWarningShownRef.current) {
+        emptyCartWarningShownRef.current = true;
+        toast.error("Please add something");
+        router.push("/cart");
+      }
+    } else {
+      emptyCartWarningShownRef.current = false;
+    }
+  }, [cart.length, router]);
+
+  const handleSuccessRedirect = useCallback(() => {
+    handleSuccessModalChange(false);
+  }, [handleSuccessModalChange]);
   
   const {
     register,
@@ -232,12 +288,14 @@ const CheckoutForm = () => {
 
     if (selectedPaymentMethod === "credit_card") {
       if (!cardCompletion.number || !cardCompletion.expiry || !cardCompletion.cvc) {
-        setCardError("Please complete your card details before placing the order.");
+        const message = "Please complete your card details before placing the order.";
+        setCardError(message);
+        toast.error(message);
         return;
       }
 
       if (cardError) {
-        alert(cardError);
+        toast.error(cardError);
         return;
       }
     }
@@ -245,55 +303,22 @@ const CheckoutForm = () => {
     setIsProcessing(true);
     
     try {
-      // ✅ Step 1: Prepare order payload
-      const orderPayload = {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        companyName: data.company || "",
-        email: data.email,
-        phone: data.phone || "",
-        addressLine1: data.address1,
-        addressLine2: data.address2 || "",
-        city: data.city,
-        state: data.state || "",
-        zip: data.zip,
-        country: data.country,
-        paymentMethod: data.paymentMethod,
-        shippingMethod: data.shippingMethod,
-        shippingCost: shipping,
-        comments: data.orderComment || "",
-        products: cart.map((item) => ({
-          product_id: item.id, 
-          quantity: item.quantity || 1,
-        })),
-      };
-
-      // console.log("📦 Order Payload:", JSON.stringify(orderPayload, null, 2));
-
-      // ✅ Step 2: Create order API call
-      const orderResponse = await axiosInstance.post("web/orders/place-order", orderPayload);
-      const orderId = orderResponse.data?.data?.id || orderResponse.data?.id;
-      
-      console.log("✅ Order Created - Order ID:", orderId);
-
-      // ✅ Step 3: If credit card payment, process with Stripe
+      // ✅ Step 1: If credit card, first create payment method and call Stripe API with required payload
       let paymentMethodId = null;
+      let stripeIntentSuccessful = false;
 
       if (selectedPaymentMethod === "credit_card") {
         if (!stripe || !elements) {
-          alert("Payment service is not ready yet. Please try again in a moment.");
+          toast.error("Payment service is not ready yet. Please try again.");
           setIsProcessing(false);
           return;
         }
 
-        const stripeResponse = await axiosInstance.post("web/stripe/create-intent", { orderId });
-
-        console.log("✅ stripeResponse-:", stripeResponse);
-      
         const cardNumberElement = elements.getElement(CardNumberElement);
         
         if (!cardNumberElement) {
           console.error("Card element not found");
+          toast.error("Payment form is not ready. Please refresh and try again.");
           setIsProcessing(false);
           return;
         }
@@ -319,7 +344,7 @@ const CheckoutForm = () => {
 
         if (pmError) {
           console.error("Payment method error:", pmError);
-          alert(pmError.message);
+          toast.error(pmError.message || "Unable to create payment method.");
           setIsProcessing(false);
           return;
         }
@@ -328,29 +353,67 @@ const CheckoutForm = () => {
           paymentMethodId = paymentMethod.id;
           console.log("💳 Stripe Payment Method ID:", paymentMethodId);
           console.log("💳 Payment Method Details:", paymentMethod);
+
+          const stripePayload = {
+            payment_method_id: paymentMethodId,
+            products: cart.map((item) => ({
+              product_id: item.id,
+              quantity: item.quantity || 1,
+            })),
+          };
+
+          await axiosInstance.post("web/stripe/pay", stripePayload);
+          stripeIntentSuccessful = true;
         }
       }
 
-      // ✅ Step 4: Process payment with order ID and payment method ID
-      if (orderId) {
-        const paymentPayload = {
-          orderId: orderId,
-          paymentMethodId: paymentMethodId,
-          paymentMethod: selectedPaymentMethod,
-        };
+      // ✅ Step 2: Prepare order payload (same as before)
+      const orderPayload = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        companyName: data.company || "",
+        email: data.email,
+        phone: data.phone || "",
+        addressLine1: data.address1,
+        addressLine2: data.address2 || "",
+        city: data.city,
+        state: data.state || "",
+        zip: data.zip,
+        country: data.country,
+        paymentMethod: data.paymentMethod,
+        shippingMethod: data.shippingMethod,
+        shippingCost: shipping,
+        comments: data.orderComment || "",
+        products: cart.map((item) => ({
+          product_id: item.id, 
+          quantity: item.quantity || 1,
+        })),
+      };
 
-        console.log("💳 Payment Payload:", JSON.stringify(paymentPayload, null, 2));
-        
-        // Call payment API here
-        // const paymentResponse = await axiosInstance.post("web/payments/process-payment", paymentPayload);
-        // console.log("✅ Payment Response:", paymentResponse.data);
+      // console.log("📦 Order Payload:", JSON.stringify(orderPayload, null, 2));
+
+      // ✅ Step 3: Create order API call
+      const orderResponse = await axiosInstance.post("web/orders/place-order", orderPayload);
+      const orderId = orderResponse.data?.data?.id || orderResponse.data?.id;
+      
+      console.log("✅ Order Created - Order ID:", orderId);
+
+      const isStripeFlowValid =
+        selectedPaymentMethod !== "credit_card" || stripeIntentSuccessful;
+
+      if (orderId && isStripeFlowValid) {
+        skipEmptyCartCheckRef.current = true;
+        dispatch(clearCart());
+        setLatestOrderId(orderId);
+        setIsSuccessModalOpen(true);
+        toast.success(
+          orderId ? `Order #${orderId} created successfully!` : "Order created successfully!"
+        );
       }
-
-      alert(`Order created successfully! Order ID: ${orderId}${paymentMethodId ? ` | Payment Method ID: ${paymentMethodId}` : ''}`);
     } catch (err: any) {
       console.error("❌ Error processing order:", err);
       const errorMessage = err.response?.data?.message || err.message || "An error occurred while processing your order.";
-      alert(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setIsProcessing(false);
     }
@@ -1017,6 +1080,27 @@ const CheckoutForm = () => {
               className="!p-4 !text-lg"
             >
               Confirm
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
+        <DialogContent className="sm:max-w-[400px] text-center">
+          <DialogHeader>
+            <DialogTitle>Order Placed Successfully</DialogTitle>
+            <DialogDescription>
+              Thank you for your purchase. We&apos;ll take you back to the home page
+              in just a moment.
+              {latestOrderId && (
+                <span className="block mt-3 font-semibold text-gray-800">
+                  Order ID: {latestOrderId}
+                </span>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex justify-center">
+            <Button className="!p-4 !text-lg" onClick={handleSuccessRedirect}>
+              Go to Home
             </Button>
           </DialogFooter>
         </DialogContent>
