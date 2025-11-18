@@ -98,7 +98,11 @@ const ProductCard = ({ product }: { product: any }) => {
             decrement={decrement}
             addtocart={addtocart}
           />
-          <ProductRight />
+          <ProductRight      product={{
+              name: product.name,
+              image: images[0],
+              sku:product.sku,
+            }}/>
         </div>
       </div>
     </div>

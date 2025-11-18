@@ -1,19 +1,35 @@
 "use client";
-import React from "react";
-import { Star,Plus, Minus } from "lucide-react";
+import React, { useEffect } from "react";
+import { Star, Plus, Minus } from "lucide-react";
 import Image from "next/image";
 import freelogo from "@/assets/card-icon/freelogo.png";
 import dhllogo from "@/assets/card-icon/dhl.svg";
 import upslogo from "@/assets/card-icon/ups.svg";
 import feedxlogo from "@/assets/card-icon/fedex.svg";
-import { useAppDispatch } from "@/hooks/useReduxHooks";
-import { toast } from "sonner"
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { toast } from "sonner";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { useRouter } from "next/navigation";
 import ProductPrice from "../productprice/ProductPrice";
+import { fetchReviews, fetchStats } from "@/redux/slices/homeSlice";
+
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
+    (state) => state.home
+  );
+  console.log({
+    reviews,
+    reviewsLoading,
+    reviewsError,
+    stats,
+  });
+
+  useEffect(() => {
+    dispatch(fetchReviews());
+    dispatch(fetchStats());
+  }, [dispatch]);
   return (
     <section className=" product-middle  flex flex-col h-full w-full lg:w-[38%] xl:w-[38%] 2xl:w-[36.4%]">
       <div>
@@ -31,16 +47,26 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           </h1>
 
           {/* Rating */}
+          {/* Rating & Reviews */}
           <div className="flex items-center space-x-3">
-            {product?.rating && (
-              <Star className="w-5 h-5 text-[#F15939] fill-[#F15939]" />
+            {/* Stars */}
+            {stats?.rating && (
+              <img
+                src={stats.image}
+                alt={`${stats.rating} Stars`}
+                className="w-20"
+              />
             )}
-            <h2 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
-              {product?.rating || "N/A " + " Ratings"}
-            </h2>
-            <h2 className="xl:text-[11.3px] 2xl:text-[14.2px] text-[#121e4d]">
-              {product.reviews || "N/A " + " Reviews"}
-            </h2>
+
+            {/* Rating number */}
+            {stats?.rating && (
+              <span className="text-[#121e4d] text-base">{stats.rating}</span>
+            )}
+
+            {/* Reviews count */}
+            <span className="text-[#121e4d] text-base">
+              {stats?.count ? `${stats.count} Reviews` : "— Reviews"}
+            </span>
           </div>
         </div>
 
@@ -48,29 +74,34 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         <div className="flex flex-col 2xl:gap-[4px] xl:gap-[3.1px] xl:mt-4 2xl:mt-6">
           <div className="flex flex-col items-start">
             {/* Pehle wali hardcoded price */}
-{/* <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
+            {/* <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
   Was ${Number(product?.price || 0).toFixed(2)}
 </h2> */}
 
-{/* Ab ProductPrice component use karo */}
-<ProductPrice price={Number(product?.price || 0)} />
+            {/* Ab ProductPrice component use karo */}
+            <ProductPrice price={Number(product?.salePrice || 0)} />
             <h2 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
-              Now $
-              {product?.msrp && product.msrp > 0
-                ? Number(product.msrp).toFixed(2)
-                : "N/A"}{" "}
-              <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511]">
-                You save{" "}
-                {(
-                  Number(product?.price || 0) - Number(product.msrp || 0)
-                ).toFixed(2)}
-              </span>
+              Now ${Number(product?.price || 0).toFixed(2)}
+              {product?.salePrice && Number(product.salePrice) > 0 ? (
+                <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511] ml-2">
+                  You save $
+                  {(
+                    Number(product?.price || 0) - Number(product.salePrice)
+                  ).toFixed(2)}
+                </span>
+              ) : (
+                <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511] ml-2">
+                  Not on Sale
+                </span>
+              )}
             </h2>
           </div>
 
           {/* Secure Methods */}
           <div className="flex flex-wrap items-center justify-between mt-1 xl:mt-4 2xl:mt-6">
-            <span className="xl:text-[10.2px] 2xl:[12.8px] text-[#000000]">Secure methods:</span>
+            <span className="xl:text-[10.2px] 2xl:[12.8px] text-[#000000]">
+              Secure methods:
+            </span>
             {/* <div className="flex items-center gap-2">
               <Image src={visa} alt="Visa" />
               <Image src={debit} alt="Debit" />
@@ -89,7 +120,9 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
             className="w-14 h-w-14 object-contain"
           />
           <div className="flex-1 text-center sm:text-left ">
-            <h3 className="text-[#000000] font-bold text-[11.2px] 2xl:text-[14px]">Free shipping Up to 10 lbs</h3>
+            <h3 className="text-[#000000] font-bold text-[11.2px] 2xl:text-[14px]">
+              Free shipping Up to 10 lbs
+            </h3>
             <p className="xl:text-[8.4px] 2xl:text-[10.5px] text-[#000000]">
               Get your orders delivered without extra cost.
             </p>
@@ -104,29 +137,41 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
         {/* SKU / Availability / Quantity */}
         <div className="flex flex-col gap-1 w-full mt-3">
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Manufacture</h5>
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">{product?.brand?.name || "N/A"}</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
+              Manufacture
+            </h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+              {product?.brand?.name || "N/A"}
+            </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Mfr Part#</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
+              Mfr Part#
+            </h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.sku || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Availability</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
+              Availability
+            </h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.availabilityText || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Weight</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
+              Weight
+            </h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.dimensions?.weight || "N/A"}
             </h5>
           </div>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">Shipping</h5>
+            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
+              Shipping
+            </h5>
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
               {product?.fixedShippingCost || "N/A"}
             </h5>
@@ -145,7 +190,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
     "
             >
               <button
-            aria-label="Decrease quantity"
+                aria-label="Decrease quantity"
                 onClick={decrement}
                 className="
         flex items-center justify-center
@@ -173,7 +218,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
               </span>
 
               <button
-              aria-label="Increase quantity"
+                aria-label="Increase quantity"
                 onClick={increment}
                 className="
         flex items-center justify-center
@@ -191,7 +236,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
             {/* Add to Cart */}
             <button
-            aria-label={`Add ${quantity} ${product.name} to cart`}
+              aria-label={`Add ${quantity} ${product.name} to cart`}
               onClick={() => {
                 dispatch(addToCart({ ...product, quantity }));
                 toast.success(`${product.name} added to cart (${quantity})!`);
@@ -219,7 +264,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div className="flex items-center mt-3 xl:mt-4 2xl:mt-6 h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
-    aria-label={`Buy ${product.name} now`}
+          aria-label={`Buy ${product.name} now`}
           onClick={() => {
             dispatch(addToCart(product));
             setTimeout(() => {

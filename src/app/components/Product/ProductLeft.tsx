@@ -10,7 +10,7 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
         <figure
           className="rounded-md sm:mt-0 border flex items-center justify-center 
           w-full lg:h-[35rem] lg:w-[100%] xl:w-[100%]  xl:h-[39.1rem] 2xl:w-[100%] 2xl:h-[49.1rem]  
-           p-1 bg-[#F2F3F7]"
+           p-1 bg-[#FFF]"
         >
           <Image
             src={selectedImage || "/default-product-image.svg"}
@@ -28,7 +28,7 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
         {/* Thumbnails */}
         <figcaption
           className="
-            flex justify-center items-center h-[5.1rem] xl:w-[100%] xl:h-[5.7rem] 2xl:w-[100%] 2xl:h-[7.2rem] border
+            flex justify-center items-center h-[5.1rem] xl:w-[100%] xl:h-[5.7rem] 2xl:w-[100%] 2xl:h-[7.2rem] 
           "
         >
           Image may differ from the actual product
