@@ -39,11 +39,13 @@ import {
 import countries from "world-countries";
 import { useForm, Controller } from "react-hook-form";
 import { loadStripe } from "@stripe/stripe-js";
+import type { PaymentRequest as StripePaymentRequest } from "@stripe/stripe-js";
 import {
   Elements,
   CardNumberElement,
   CardExpiryElement,
   CardCvcElement,
+  PaymentRequestButtonElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
@@ -173,6 +175,14 @@ const CheckoutForm = () => {
     cvc: false,
   });
   const [cardError, setCardError] = useState<string | null>(null);
+  const [paymentRequest, setPaymentRequest] =
+    useState<StripePaymentRequest | null>(null);
+  const [walletSupport, setWalletSupport] = useState<{
+    applePay: boolean;
+    googlePay: boolean;
+  }>({ applePay: false, googlePay: false });
+  const [pendingWalletForm, setPendingWalletForm] =
+    useState<CheckoutFormValues | null>(null);
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
@@ -235,6 +245,8 @@ const CheckoutForm = () => {
   });
 
   const watchedPaymentMethod = watch("paymentMethod") || "credit_card";
+  const stripeCardMethods = ["credit_card"];
+  const walletMethods = ["google_pay", "apple_pay"];
 
   // ✅ Memoized calculations to prevent recalculation on every render
   const subtotal = useMemo(() => {
@@ -283,12 +295,168 @@ const CheckoutForm = () => {
     [setValue, setCardCompletion, setCardError]
   );
 
+  useEffect(() => {
+    if (!stripe || cart.length === 0) {
+      setPaymentRequest(null);
+      setWalletSupport({ applePay: false, googlePay: false });
+      return;
+    }
+
+    const pr = stripe.paymentRequest({
+      country: "US",
+      currency: "usd",
+      total: {
+        label: "Order Total",
+        amount: Math.max(0, Math.round(total * 100)),
+      },
+      requestPayerName: true,
+      requestPayerEmail: true,
+      requestPayerPhone: true,
+    });
+
+    let isMounted = true;
+
+    pr.canMakePayment().then((result) => {
+      if (!isMounted) return;
+      if (result) {
+        setPaymentRequest(pr);
+        setWalletSupport({
+          applePay: Boolean(result.applePay),
+          googlePay: Boolean(result.googlePay || result.browserPay),
+        });
+      } else {
+        setPaymentRequest(null);
+        setWalletSupport({ applePay: false, googlePay: false });
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [stripe, cart, total]);
+
+  const buildOrderPayload = useCallback(
+    (data: CheckoutFormValues) => ({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      companyName: data.company || "",
+      email: data.email,
+      phone: data.phone || "",
+      addressLine1: data.address1,
+      addressLine2: data.address2 || "",
+      city: data.city,
+      state: data.state || "",
+      zip: data.zip,
+      country: data.country,
+      paymentMethod: data.paymentMethod,
+      shippingMethod: data.shippingMethod,
+      shippingCost: shipping,
+      comments: data.orderComment || "",
+      products: cart.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity || 1,
+      })),
+    }),
+    [cart, shipping]
+  );
+
+  const placeOrder = useCallback(
+    async (data: CheckoutFormValues) => {
+      const orderPayload = buildOrderPayload(data);
+      const orderResponse = await axiosInstance.post(
+        "web/orders/place-order",
+        orderPayload
+      );
+      return orderResponse.data?.data?.id || orderResponse.data?.id;
+    },
+    [buildOrderPayload]
+  );
+
+  const handleOrderSuccess = useCallback(
+    (orderId?: string | number | null) => {
+      skipEmptyCartCheckRef.current = true;
+      dispatch(clearCart());
+      setLatestOrderId(orderId ?? null);
+      setIsSuccessModalOpen(true);
+      toast.success(
+        orderId
+          ? `Order #${orderId} created successfully!`
+          : "Order created successfully!"
+      );
+      setIsProcessing(false);
+    },
+    [dispatch]
+  );
+
+  const handleStripeCharge = useCallback(
+    async (paymentMethodId: string) => {
+      const stripePayload = {
+        payment_method_id: paymentMethodId,
+        products: cart.map((item) => ({
+          product_id: item.id,
+          quantity: item.quantity || 1,
+        })),
+      };
+
+      await axiosInstance.post("web/stripe/pay", stripePayload);
+    },
+    [cart]
+  );
+
+  useEffect(() => {
+    if (!paymentRequest) {
+      return;
+    }
+
+    const handlePaymentMethod = async (event: any) => {
+      if (!pendingWalletForm) {
+        event.complete("fail");
+        toast.error("Unable to process wallet payment. Please try again.");
+        setIsProcessing(false);
+        return;
+      }
+
+      try {
+        await handleStripeCharge(event.paymentMethod.id);
+        const orderId = await placeOrder(pendingWalletForm);
+        event.complete("success");
+        handleOrderSuccess(orderId);
+      } catch (err: any) {
+        console.error("❌ Wallet payment failed:", err);
+        event.complete("fail");
+        const errorMessage =
+          err?.response?.data?.message || err?.message || "Payment failed.";
+        toast.error(errorMessage);
+        setIsProcessing(false);
+      } finally {
+        setPendingWalletForm(null);
+      }
+    };
+
+    const handleCancel = () => {
+      setIsProcessing(false);
+      setPendingWalletForm(null);
+    };
+
+    paymentRequest.on("paymentmethod", handlePaymentMethod);
+    paymentRequest.on("cancel", handleCancel);
+
+    return () => {
+      paymentRequest.off("paymentmethod", handlePaymentMethod);
+      paymentRequest.off("cancel", handleCancel);
+    };
+  }, [paymentRequest, pendingWalletForm, handleStripeCharge, placeOrder, handleOrderSuccess]);
+
   const onSubmit = async (data: CheckoutFormValues) => {
     const selectedPaymentMethod = data.paymentMethod || "credit_card";
 
-    if (selectedPaymentMethod === "credit_card") {
+    const requiresStripeCard = stripeCardMethods.includes(selectedPaymentMethod);
+    const isWalletMethod = walletMethods.includes(selectedPaymentMethod);
+
+    if (requiresStripeCard) {
       if (!cardCompletion.number || !cardCompletion.expiry || !cardCompletion.cvc) {
-        const message = "Please complete your card details before placing the order.";
+        const message =
+          "Please complete your card details before placing the order.";
         setCardError(message);
         toast.error(message);
         return;
@@ -300,14 +468,34 @@ const CheckoutForm = () => {
       }
     }
 
-    setIsProcessing(true);
-    
-    try {
-      // ✅ Step 1: If credit card, first create payment method and call Stripe API with required payload
-      let paymentMethodId = null;
-      let stripeIntentSuccessful = false;
+    if (isWalletMethod) {
+      const walletAvailable =
+        selectedPaymentMethod === "apple_pay"
+          ? walletSupport.applePay
+          : walletSupport.googlePay;
 
-      if (selectedPaymentMethod === "credit_card") {
+      if (!paymentRequest || !walletAvailable) {
+        toast.error("This wallet is not available on your device.");
+        return;
+      }
+
+      setPendingWalletForm(data);
+      setIsProcessing(true);
+      try {
+        paymentRequest.show();
+      } catch (err: any) {
+        console.error("❌ Unable to launch wallet:", err);
+        toast.error("Could not open the wallet sheet. Please try again.");
+        setIsProcessing(false);
+        setPendingWalletForm(null);
+      }
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      if (requiresStripeCard) {
         if (!stripe || !elements) {
           toast.error("Payment service is not ready yet. Please try again.");
           setIsProcessing(false);
@@ -315,7 +503,7 @@ const CheckoutForm = () => {
         }
 
         const cardNumberElement = elements.getElement(CardNumberElement);
-        
+
         if (!cardNumberElement) {
           console.error("Card element not found");
           toast.error("Payment form is not ready. Please refresh and try again.");
@@ -323,24 +511,24 @@ const CheckoutForm = () => {
           return;
         }
 
-        // Create payment method
-        const { error: pmError, paymentMethod } = await stripe.createPaymentMethod({
-          type: "card",
-          card: cardNumberElement,
-          billing_details: {
-            name: `${data.firstName} ${data.lastName}`,
-            email: data.email,
-            phone: data.phone,
-            address: {
-              line1: data.address1,
-              line2: data.address2,
-              city: data.city,
-              state: data.state,
-              postal_code: data.zip,
-              country: data.country,
+        const { error: pmError, paymentMethod } =
+          await stripe.createPaymentMethod({
+            type: "card",
+            card: cardNumberElement,
+            billing_details: {
+              name: `${data.firstName} ${data.lastName}`,
+              email: data.email,
+              phone: data.phone,
+              address: {
+                line1: data.address1,
+                line2: data.address2,
+                city: data.city,
+                state: data.state,
+                postal_code: data.zip,
+                country: data.country,
+              },
             },
-          },
-        });
+          });
 
         if (pmError) {
           console.error("Payment method error:", pmError);
@@ -350,71 +538,19 @@ const CheckoutForm = () => {
         }
 
         if (paymentMethod) {
-          paymentMethodId = paymentMethod.id;
-          console.log("💳 Stripe Payment Method ID:", paymentMethodId);
-          console.log("💳 Payment Method Details:", paymentMethod);
-
-          const stripePayload = {
-            payment_method_id: paymentMethodId,
-            products: cart.map((item) => ({
-              product_id: item.id,
-              quantity: item.quantity || 1,
-            })),
-          };
-
-          await axiosInstance.post("web/stripe/pay", stripePayload);
-          stripeIntentSuccessful = true;
+          await handleStripeCharge(paymentMethod.id);
         }
       }
 
-      // ✅ Step 2: Prepare order payload (same as before)
-      const orderPayload = {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        companyName: data.company || "",
-        email: data.email,
-        phone: data.phone || "",
-        addressLine1: data.address1,
-        addressLine2: data.address2 || "",
-        city: data.city,
-        state: data.state || "",
-        zip: data.zip,
-        country: data.country,
-        paymentMethod: data.paymentMethod,
-        shippingMethod: data.shippingMethod,
-        shippingCost: shipping,
-        comments: data.orderComment || "",
-        products: cart.map((item) => ({
-          product_id: item.id, 
-          quantity: item.quantity || 1,
-        })),
-      };
-
-      // console.log("📦 Order Payload:", JSON.stringify(orderPayload, null, 2));
-
-      // ✅ Step 3: Create order API call
-      const orderResponse = await axiosInstance.post("web/orders/place-order", orderPayload);
-      const orderId = orderResponse.data?.data?.id || orderResponse.data?.id;
-      
-      console.log("✅ Order Created - Order ID:", orderId);
-
-      const isStripeFlowValid =
-        selectedPaymentMethod !== "credit_card" || stripeIntentSuccessful;
-
-      if (orderId && isStripeFlowValid) {
-        skipEmptyCartCheckRef.current = true;
-        dispatch(clearCart());
-        setLatestOrderId(orderId);
-        setIsSuccessModalOpen(true);
-        toast.success(
-          orderId ? `Order #${orderId} created successfully!` : "Order created successfully!"
-        );
-      }
+      const orderId = await placeOrder(data);
+      handleOrderSuccess(orderId);
     } catch (err: any) {
       console.error("❌ Error processing order:", err);
-      const errorMessage = err.response?.data?.message || err.message || "An error occurred while processing your order.";
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message ||
+        "An error occurred while processing your order.";
       toast.error(errorMessage);
-    } finally {
       setIsProcessing(false);
     }
   };
@@ -428,6 +564,13 @@ const CheckoutForm = () => {
           Please enter your details below to complete your purchase
         </p>
       </div>
+
+      {/* Payment Request Button (hidden, used for Apple/Google Pay) */}
+      {paymentRequest && (
+        <div className="hidden">
+          <PaymentRequestButtonElement options={{ paymentRequest }} />
+        </div>
+      )}
 
       {/* Main Grid */}
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -816,7 +959,7 @@ const CheckoutForm = () => {
                 />
               </div>
 
-              {watchedPaymentMethod === "credit_card" && (
+              {stripeCardMethods.includes(watchedPaymentMethod) && (
                 <div className="space-y-6 py-3">
                   {/* Card Number */}
                   <div>
@@ -930,7 +1073,11 @@ const CheckoutForm = () => {
             </label>
 
             {/* Google Pay */}
-            <label className="flex flex-col mt-4 sm:flex-row items-center justify-between border rounded px-3 py-3 cursor-pointer w-full gap-3 has-[:checked]:border-orange-500">
+            <label
+              className={`flex flex-col mt-4 sm:flex-row items-center justify-between border rounded px-3 py-3 cursor-pointer w-full gap-3 has-[:checked]:border-orange-500 ${
+                !walletSupport.googlePay ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
               <div className="flex items-center gap-3">
                 <input
                   type="radio"
@@ -941,6 +1088,7 @@ const CheckoutForm = () => {
                   checked={watchedPaymentMethod === "google_pay"}
                   onChange={() => handlePaymentSelection("google_pay")}
                   className="text-orange-500 focus:ring-orange-500"
+                  disabled={!walletSupport.googlePay}
                 />
                 <Image
                   src="/checkouticon/googlepay.png"
@@ -950,13 +1098,60 @@ const CheckoutForm = () => {
                   className="object-contain my-2"
                 />
               </div>
-              <Image
-                src="/checkouticon/card.png"
-                alt="Card"
-                width={133}
-                height={45}
-                className="object-contain"
-              />
+              {walletSupport.googlePay ? (
+                <Image
+                  src="/checkouticon/card.png"
+                  alt="Card"
+                  width={133}
+                  height={45}
+                  className="object-contain"
+                />
+              ) : (
+                <span className="text-xs text-gray-500">
+                  Not available on this device
+                </span>
+              )}
+            </label>
+
+            {/* Apple Pay */}
+            <label
+              className={`flex flex-col mt-4 sm:flex-row items-center justify-between border rounded px-3 py-3 cursor-pointer w-full gap-3 has-[:checked]:border-orange-500 ${
+                !walletSupport.applePay ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <input
+                  type="radio"
+                  value="apple_pay"
+                  {...register("paymentMethod", {
+                    required: "Please select a payment method",
+                  })}
+                  checked={watchedPaymentMethod === "apple_pay"}
+                  onChange={() => handlePaymentSelection("apple_pay")}
+                  className="text-orange-500 focus:ring-orange-500"
+                  disabled={!walletSupport.applePay}
+                />
+                <Image
+                  src="/checkouticon/applepay.png"
+                  alt="Apple Pay"
+                  width={70}
+                  height={25}
+                  className="object-contain my-2"
+                />
+              </div>
+              {walletSupport.applePay ? (
+                <Image
+                  src="/checkouticon/card.png"
+                  alt="Card"
+                  width={133}
+                  height={45}
+                  className="object-contain"
+                />
+              ) : (
+                <span className="text-xs text-gray-500">
+                  Not available on this device
+                </span>
+              )}
             </label>
 
             {/* Affirm */}

@@ -8,6 +8,7 @@ import { addToCart } from "@/redux/slices/cartSlice";
 import PopularProductSkeleton from "../loader/PopularProductSkeleton";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
+import BulkInquiryModal from "../modal/BulkInquiryModal";
 
 // Dynamically import motion.div and AnimatePresence (client only)
 const MotionDiv = dynamic(
@@ -26,6 +27,8 @@ const PopularProducts = () => {
     (state: any) => state.home
   );
   const products = popularProducts?.data || [];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
   useEffect(() => {
     dispatch(fetchPopularProducts());
@@ -185,6 +188,10 @@ const PopularProducts = () => {
                                  2xl:w-[173.875px] 2xl:h-[50px] mr-2
                                  text-[#4A4A4A] bg-white border border-[#4A4A4A] 
                                  rounded-md px-4 py-2 transition-all my-1 duration-200 cursor-pointer whitespace-nowrap"
+                      onClick={() => {
+                        setSelectedProduct(product);
+                        setIsModalOpen(true);
+                      }}
                     >
                       Get Quote
                     </button>
@@ -203,6 +210,30 @@ const PopularProducts = () => {
             </button>
           </Link>
         </div>
+
+        <BulkInquiryModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedProduct(null);
+          }}
+          product={
+            selectedProduct
+              ? {
+                  name:
+                    selectedProduct.name ??
+                    (typeof selectedProduct.title === "string"
+                      ? selectedProduct.title
+                      : undefined) ??
+                    "Product",
+                  image:
+                    selectedProduct.image?.[0]?.path ||
+                    selectedProduct.image?.[1]?.path,
+                  sku: selectedProduct.sku ?? String(selectedProduct.id ?? ""),
+                }
+              : undefined
+          }
+        />
       </div>
     </div>
   );
