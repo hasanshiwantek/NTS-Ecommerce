@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Camera, Check, Phone } from "lucide-react";
+import { Check } from "lucide-react";
 import supportIcon1 from "@/assets/support/support-img1.png";
 import supportIcon2 from "@/assets/support/support-img2.png";
 import supportIcon3 from "@/assets/support/support-img3.png";
-import { FaWhatsapp } from "react-icons/fa";
+import teamIcon from "@/assets/support/teams-icon.svg";
+import whatsappIcon from "@/assets/support/wp-icon.svg";
 
 const ProductRight = () => {
   return (
@@ -90,15 +91,32 @@ const ProductRight = () => {
         </div>
 
         <div className="flex justify-center lg:gap-1 xl:gap-2 xl:mb-2 2xl:mb-3 mt-2">
-          {/* Camera Icon */}
+          {/* Team Icon */}
           <div className="border border-gray-300 p-1 rounded-md flex items-center justify-center">
-            <Camera className="w-10 h-8 text-black" />
+            <Image
+              src={teamIcon}
+              alt="Support team"
+              width={40}
+              height={32}
+              className="w-10 h-8 text-black"
+            />
           </div>
 
           {/* WhatsApp Icon */}
-          <div className="border border-gray-300 p-1 rounded-md flex items-center justify-center">
-            <FaWhatsapp className="w-10 h-8 text-black" />
-          </div>
+          <a
+            href="https://api.whatsapp.com/send/?phone=%2B17867611656&text&type=phone_number&app_absent=0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-gray-300 p-1 rounded-md flex items-center justify-center"
+          >
+            <Image
+              src={whatsappIcon}
+              alt="WhatsApp"
+              width={40}
+              height={32}
+              className="w-10 h-8 text-black"
+            />
+          </a>
           <div className="border border-gray-300 p-1 px-2 rounded-md flex items-center justify-center">
             <p className="lg:text-sm xl:text-[13.6px] 2xl:text-[17px] text-[#121e4d]">
               +44 (192) 9507-277
