@@ -1,22 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Camera, Check, Phone } from "lucide-react";
+import { Check } from "lucide-react";
 import supportIcon1 from "@/assets/support/support-img1.png";
 import supportIcon2 from "@/assets/support/support-img2.png";
 import supportIcon3 from "@/assets/support/support-img3.png";
-import { FaWhatsapp } from "react-icons/fa";
+import teamIcon from "@/assets/support/teams-icon.svg";
+import whatsappIcon from "@/assets/support/wp-icon.svg";
 import BulkInquiryModal from "../modal/BulkInquiryModal";
-
+ 
 interface ProductRightProps {
   product?: {
     name: string;
     image?: string;
-    sku?:string;
+    sku?: string;
   };
 }
-
-const ProductRight = ({ product }: { product: any }) => {
+ 
+const ProductRight: React.FC<ProductRightProps> = ({ product }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
@@ -73,13 +74,13 @@ const ProductRight = ({ product }: { product: any }) => {
               />
             </div>
           </div>
-
+ 
           <div className=" mx-auto px-7 flex flex-col items-center">
             {/* Heading */}
             <h2 className="text-center font-bold text-[#000000] mt-3 2xl:mt-5 lg:text-sm xl:text-[11.2px] 2xl:text-[14px]">
               Certified IT Hardware Specialists
             </h2>
-
+ 
             {/* Points List */}
             <div className="flex flex-col mt-2 xl:mt-3 2xl:mt-4 space-y-2 xl:space-y-2 2xl:space-y-3">
               {[
@@ -99,25 +100,50 @@ const ProductRight = ({ product }: { product: any }) => {
               ))}
             </div>
           </div>
-
+ 
           <div className="flex justify-center lg:gap-1 xl:gap-2 xl:mb-2 2xl:mb-3 mt-2">
             {/* Camera Icon */}
-            <div className="border border-gray-300 p-1 rounded-md flex items-center justify-center">
-              <Camera className="w-10 h-8 text-black" />
-            </div>
+            {/* Team Icon */}
+            <a
+              href="tel:+441929507277"
+              className="border border-gray-300 p-1 rounded-md flex items-center justify-center hover:border-[#121e4d] transition-colors"
+            >
+              <Image
+                src={teamIcon}
+                alt="Call our team"
+                className="w-10 h-8 object-contain"
+                width={40}
+                height={40}
+              />
+            </a>
 
             {/* WhatsApp Icon */}
-            <div className="border border-gray-300 p-1 rounded-md flex items-center justify-center">
-              <FaWhatsapp className="w-10 h-8 text-black" />
-            </div>
-            <div className="border border-gray-300 p-1 px-2 rounded-md flex items-center justify-center">
-              <p className="lg:text-sm xl:text-[13.6px] 2xl:text-[17px] text-[#121e4d]">
-                +44 (192) 9507-277
-              </p>
-            </div>
+            <a
+              href="https://wa.me/441929507277"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-gray-300 p-1 rounded-md flex items-center justify-center hover:border-[#25D366] transition-colors"
+            >
+              <Image
+                src={whatsappIcon}
+                alt="Chat on WhatsApp"
+                className="w-10 h-8 object-contain"
+                width={40}
+                height={40}
+              />
+            </a>
+
+            <a
+              href="https://wa.me/441929507277"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-gray-300 p-1 px-2 rounded-md flex items-center justify-center lg:text-sm xl:text-[13.6px] 2xl:text-[17px] text-[#121e4d] hover:text-[#25D366] transition-colors"
+            >
+              +44 (192) 9507-277
+            </a>
           </div>
         </div>
-
+ 
         {/* Support Card 2 */}
         <div className=" border border-gray-300 rounded-lg mt-6 2xl:mt-8">
           <div className="bg-[#121e4d] px-6 py-4 text-center">
@@ -140,15 +166,23 @@ const ProductRight = ({ product }: { product: any }) => {
           </div>
         </div>
       </aside>
-
+ 
       {/* Bulk Inquiry Modal */}
       <BulkInquiryModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        product={product}
+        product={
+          product
+            ? {
+                name: product.name,
+                image: product.image,
+                sku: product.sku ?? "",
+              }
+            : undefined
+        }
       />
     </>
   );
 };
-
+ 
 export default ProductRight;

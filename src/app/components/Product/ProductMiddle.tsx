@@ -268,7 +268,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
           onClick={() => {
             dispatch(addToCart(product));
             setTimeout(() => {
-              router.push("/cart");
+              router.push("/checkout");
             }, 2000);
           }}
           className="

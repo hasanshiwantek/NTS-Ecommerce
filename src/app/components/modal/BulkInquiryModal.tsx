@@ -20,7 +20,7 @@ interface BulkInquiryModalProps {
   product?: {
     name: string;
     image?: string;
-    sku: string;
+    sku?: string;
   };
 }
 

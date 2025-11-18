@@ -4,6 +4,8 @@ import { ShoppingCart } from "lucide-react";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { toast } from "sonner"
 import { useAppDispatch } from "@/hooks/useReduxHooks";
+import BulkInquiryModal from "../modal/BulkInquiryModal";
+import { useState } from "react";
 interface Product {
   id: number;
   name: string;
@@ -23,6 +25,7 @@ interface Product {
 
 export default function ProductCategoryCard({ product }: { product: Product }) {
   const dispatch = useAppDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const imageUrl = product.image?.[0]?.path || "/default-product-image.svg";
 
   return (
@@ -161,10 +164,25 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
    2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
    text-base sm:text-base xl:text-lg 2xl:text-xl
   "
+  onClick={() => setIsModalOpen(true)}
         >
           Quote | Help
         </button>
       </div>
+      {/* Bulk Inquiry Modal */}
+      <BulkInquiryModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={
+          product
+            ? {
+                name: product.name,
+                image: product.image?.[0]?.path,
+                sku: product.sku ?? "",
+              }
+            : undefined
+        }
+      />
     </div>
   );
 }

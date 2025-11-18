@@ -9,14 +9,24 @@ import { addToCart } from "@/redux/slices/cartSlice";
 import { RootState } from "@/redux/store";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import BulkInquiryModal from "../modal/BulkInquiryModal";
 
-const RelatedProduct = ({ products }: { products: Product[] }) => {
+type RelatedProductItem = Omit<Product, "image"> & {
+  name?: string;
+  sku?: string;
+  image?: { path?: string }[];
+  brand?: { name?: string };
+  availabilityText?: string;
+};
+
+const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [direction, setDirection] = useState(0); // 👈 direction detect
   const itemsPerPage = 4;
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
-  console.log(cart);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<RelatedProductItem | null>(null);
 
   const handlePrev = () => {
     setDirection(-1); // 👈 going left
@@ -131,6 +141,10 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
 
                   <button
                     name="getQuote"
+                    onClick={() => {
+                      setSelectedProduct(product);
+                      setIsModalOpen(true);
+                    }}
                     className="xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
                                w-full sm:w-[48%] md:w-[45%] lg:w-[50%] xl:w-[45%]
                                2xl:w-[173.875px] 2xl:h-[50px] mr-2
@@ -169,6 +183,29 @@ const RelatedProduct = ({ products }: { products: Product[] }) => {
           <FaChevronRight className="w-[10px]" />
         </button>
       </div>
+      <BulkInquiryModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedProduct(null);
+        }}
+        product={
+          selectedProduct
+            ? {
+                name:
+                  selectedProduct.name ??
+                  (typeof selectedProduct.title === "string"
+                    ? selectedProduct.title
+                    : undefined) ??
+                  "Product",
+                image:
+                  selectedProduct.image?.[0]?.path ||
+                  selectedProduct.image?.[1]?.path,
+                sku: selectedProduct.sku ?? String(selectedProduct.id ?? ""),
+              }
+            : undefined
+        }
+      />
     </>
   );
 };
