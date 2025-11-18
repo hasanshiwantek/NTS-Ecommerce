@@ -41,7 +41,7 @@ const currencySymbols: Record<string, string> = {
 
   return (
     <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
-      {symbol} {(price * rate).toFixed(2)}
+      Was {symbol} {(price * rate).toFixed(2)}
     </h2>
   );
 };
