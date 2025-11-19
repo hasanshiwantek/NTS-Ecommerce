@@ -43,9 +43,9 @@ const GetInTouch: React.FC = () => {
       <div className="flex flex-col lg:flex-row gap-10 bg-[#FAFAFA] rounded-lg overflow-hidden">
         <div className="w-full 2xl:w-[54.7%] relative">
           <div className="relative z-10">
-            <h1 className="h1-lg mb-4">
+            <h2 className="h1-lg mb-4">
               Let's Get In Touch <span className="!text-[#F15939]">with Us</span>
-            </h1>
+            </h2>
             <p className="h3-regular !text-[#666666] mb-8 max-w-3xl">
               Have questions about our products, need expert advice, or want a custom IT hardware solution?
             </p>

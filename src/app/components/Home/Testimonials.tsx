@@ -171,7 +171,7 @@ const Testimonials = () => {
     <div>
       {/* Header */}
       <header className="text-center flex flex-col 2xl:gap-5 gap-3 mb-10">
-        <h1 className="h5-20px-regular mb-4">Testimonials</h1>
+        <h4 className="h5-20px-regular mb-4">Testimonials</h4>
         <h2 className="h1-lg mb-4">
           Trusted by
           <span className="!text-[var(--primary-color)]"> 450+</span> Satisfied
@@ -185,7 +185,7 @@ const Testimonials = () => {
       <div className="flex items-center justify-between md:flex-col sm:flex-col lg:flex-row flex-col md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         {/* Left Summary Box */}
         <div className="flex flex-col items-center justify-between gap-5 whitespace-nowrap 2xl:px-[60px] 2xl:py-[20px]">
-          <h1 className="text-center h3-regular">{stats?.status || "Excellent"}</h1>
+          <h3 className="text-center h3-regular">{stats?.status || "Excellent"}</h3>
           <Image
             src={stats?.image || "https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"}
             alt="Reviews"
@@ -202,7 +202,7 @@ const Testimonials = () => {
           </span>
           <div className="flex items-center justify-center">
             <IoStarSharp size={20} color="#00b67a" />
-            <h1 className="text-[#2A2A2A] mt-1">TrustPilot</h1>
+            <h4 className="text-[#2A2A2A] mt-1">TrustPilot</h4>
           </div>
         </div>
 

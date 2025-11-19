@@ -33,9 +33,9 @@ const OurLatestBlogs = () => {
         
         {/* Heading + Search */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 md:gap-0">
-          <h2 className="h1-secondary !text-[#4A4A4A] uppercase tracking-wide text-center md:text-left">
+          <h1 className="h1-secondary !text-[#4A4A4A] uppercase tracking-wide text-center md:text-left">
             Our Latest Blogs
-          </h2>
+          </h1>
 
           <div className="flex items-center rounded-md overflow-hidden w-full sm:w-[70%] md:w-[50%] lg:w-[38.5%] 2xl:w-[35.2%] h-[55px] xl:h-[48.75px] 2xl:h-[65px]">
             <Input

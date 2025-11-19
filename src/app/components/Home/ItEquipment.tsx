@@ -33,13 +33,13 @@ const ItEquipment: React.FC = () => {
   return (
     <div className="max-w-full mx-auto bg-white mt-8 md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
       {/* Header Section */}
-      <h1 className="h1-lg leading-tight mb-10">
+      <h2 className="h1-lg leading-tight mb-10">
         We're Expert In New & Refurbished
         <br className="hidden xl:block" /> IT{" "}
         <span className="!text-[#F15939]">Equipment </span>
         And
         <span className="!text-[#F15939]"> Solutions.</span>
-      </h1>
+      </h2>
 
       {/* Content Grid */}
       <div className="flex flex-col xl:flex-row gap-4">
