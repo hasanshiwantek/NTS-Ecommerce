@@ -23,9 +23,13 @@ const GetInTouch = dynamic(() => import("./components/Home/GetInTouch"), {
 });
 const AOSWrapper = dynamic(() => import("./components/animation/AOSWrapper"));
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nts-ecommerce.vercel.app"),
   title: "Home | New Town Spares",
   description:
     "Welcome to New Town Spares – your one-stop shop for connectors, cables, motherboards, and electronics. Get the best prices and fast delivery.",
+  alternates: {
+    canonical: "https://nts-ecommerce.vercel.app",
+  },
   openGraph: {
     title: "New Town Spares – Home",
     description:
@@ -48,6 +52,17 @@ export const metadata: Metadata = {
       "Buy electronics, connectors, cables, and computer parts at New Town Spares.",
     images: ["/navlogo.png"], // ✅ same ya custom image
   },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },},
 };
 
 const Page = async () => {

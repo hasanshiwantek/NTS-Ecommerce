@@ -54,7 +54,7 @@ const PopularProducts = () => {
       <div className="mx-auto">
         {/* Header */}
         <header className="text-center flex flex-col 2xl:gap-5 gap-3 mb-10 ">
-          <h1 className="h1-lg mb-4">Popular Products</h1>
+          <h2 className="h1-lg mb-4">Popular Products</h2>
           <p className="h3-24px-regular mx-auto ">
             Explore our most popular products, carefully crafted and loved by
             our customers for <br /> their quality and performance.

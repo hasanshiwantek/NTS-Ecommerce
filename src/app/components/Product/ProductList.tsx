@@ -59,7 +59,7 @@ w-full
     >
       {/* Headings */}
       <div className="mb-4">
-        <h2 className="h2-medium ">Heading Text</h2>
+        <h1 className="h2-medium ">Heading Text</h1>
         <p className="h4-regular ">
           Do you need to fix your computer or make it work better? At
           NewTownSpares, we have all the IT Accessories you need! It doesn’t
