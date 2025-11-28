@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 
-const ProductPrice: React.FC<{ price: number }> = ({ price }) => {
+const ProductPrice: React.FC<{ price: number; showWas?: boolean; inline?: boolean; textColor?: string; className?: string }> = ({ price, showWas = false, inline = false, textColor, className }) => {
   const { selectedCurrency, currencies } = useAppSelector((state: RootState) => state.currency);
 
   const rate = currencies.find((c) => c.code === selectedCurrency)?.rate || 1;
@@ -38,10 +38,21 @@ const currencySymbols: Record<string, string> = {
 
 
  const symbol = currencySymbols[selectedCurrency] || selectedCurrency;
+ const formattedPrice = `${symbol} ${(price * rate).toFixed(2)}`;
+ const baseClasses = "xl:text-[13.3px] 2xl:text-[16.6px] font-bold";
+ const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
+
+  if (inline) {
+    return (
+      <span className={combinedClasses} style={textColor ? { color: textColor } : {}}>
+        {showWas && "Was "}{formattedPrice}
+      </span>
+    );
+  }
 
   return (
-    <h2 className="xl:text-[13.3px] 2xl:text-[16.6px] font-bold text-[#000000]">
-      Was {symbol} {(price * rate).toFixed(2)}
+    <h2 className={combinedClasses} style={textColor ? { color: textColor } : {}}>
+      {showWas && "Was "}{formattedPrice}
     </h2>
   );
 };

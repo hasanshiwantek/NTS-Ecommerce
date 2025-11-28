@@ -1,6 +1,7 @@
 // components/Product/ProductGridCard.tsx
 import Link from "next/link";
 import Image from "next/image";
+import ProductPrice from "../productprice/ProductPrice";
 
 interface Product {
   id: number;
@@ -79,9 +80,8 @@ export default function ProductGridCard({ product }: { product: Product }) {
 
         {/* ✅ Price */}
         <div className="flex items-end gap-[2%] mt-[1%]">
-          <p className="h6-18-px-medium !text-[#191919]">
-            US$ {price?.toFixed(2)}
-          </p>
+            {/* Show converted product price */}
+            <ProductPrice price={Number(price)} inline={true} className="h6-18-px-medium !text-[#191919]" />
         </div>
       </div>
     </div>

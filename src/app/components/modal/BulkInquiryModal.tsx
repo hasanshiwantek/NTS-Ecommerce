@@ -104,7 +104,7 @@ const BulkInquiryModal: React.FC<BulkInquiryModalProps> = ({
                 value={formData.fullName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
+                className="w-full !max-w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
               />
 
               <Input
@@ -114,7 +114,7 @@ const BulkInquiryModal: React.FC<BulkInquiryModalProps> = ({
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
+                className="w-full !max-w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
               />
 
               <Input
@@ -124,7 +124,7 @@ const BulkInquiryModal: React.FC<BulkInquiryModalProps> = ({
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
+                className="w-full !max-w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
               />
 
               <Input
@@ -135,7 +135,7 @@ const BulkInquiryModal: React.FC<BulkInquiryModalProps> = ({
                 onChange={handleChange}
                 required
                 min={1}
-                className="w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
+                className="w-full !max-w-full px-4 py-3 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-[#F15939]"
               />
 
               <Textarea
