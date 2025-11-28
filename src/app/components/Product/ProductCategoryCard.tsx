@@ -146,7 +146,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           }}
           className="
     flex items-center justify-center gap-[4%]
-    bg-[var(--primary-color)] text-white font-medium rounded-md
+    bg-[var(--primary-color)] text-white font-medium rounded-md border border-[var(--primary-color)]
     hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]
     transition duration-300
     w-[50%] sm:w-[65%] md:w-[60%] lg:w-[70%] xl:w-[80%] 2xl:w-[85%]
