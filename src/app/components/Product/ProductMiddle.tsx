@@ -19,12 +19,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
     (state) => state.home
   );
-  console.log({
-    reviews,
-    reviewsLoading,
-    reviewsError,
-    stats,
-  });
+
 
   useEffect(() => {
     dispatch(fetchReviews());
@@ -79,22 +74,20 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 </h2> */}
 
             {/* Ab ProductPrice component use karo */}
-            <ProductPrice price={Number(product?.salePrice || 0)} />
             <h2 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
-              Now ${Number(product?.price || 0).toFixed(2)}
-              {product?.salePrice && Number(product.salePrice) > 0 ? (
-                <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511] ml-2">
-                  You save $
-                  {(
-                    Number(product?.price || 0) - Number(product.salePrice)
-                  ).toFixed(2)}
-                </span>
-              ) : (
-                <span className="xl:text-[13.3px] 2xl:text-[16.6px] text-[#d40511] ml-2">
-                  Not on Sale
-                </span>
-              )}
-            </h2>
+  {product?.salePrice && Number(product.salePrice) > 0 ? (
+    <>
+      Now <ProductPrice price={Number(product?.price)} inline={true} textColor="#ff482e" className="xl:text-[16.8px] 2xl:text-[21px]" />
+      <span className="xl:text-[13.3px] 2xl:text-[16.6px] ml-2 text-[#d40511]">
+        You save <ProductPrice price={Number(product?.price) - Number(product.salePrice)} inline={true} textColor="#d40511" className="xl:text-[13.3px] 2xl:text-[16.6px]" />
+      </span>
+    </>
+  ) : (
+    product?.price && <ProductPrice price={Number(product?.price)} inline={true} textColor="#ff482e" className="xl:text-[16.8px] 2xl:text-[21px]" />
+  )}
+</h2>
+
+
           </div>
 
           {/* Secure Methods */}

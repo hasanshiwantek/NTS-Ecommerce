@@ -9,6 +9,7 @@ import PopularProductSkeleton from "../loader/PopularProductSkeleton";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
 import BulkInquiryModal from "../modal/BulkInquiryModal";
+import ProductPrice from "../productprice/ProductPrice";
 
 // Dynamically import motion.div and AnimatePresence (client only)
 const MotionDiv = dynamic(
@@ -54,7 +55,7 @@ const PopularProducts = () => {
       <div className="mx-auto">
         {/* Header */}
         <header className="text-center flex flex-col 2xl:gap-5 gap-3 mb-10 ">
-          <h1 className="h1-lg mb-4">Popular Products</h1>
+          <h2 className="h1-lg mb-4">Popular Products</h2>
           <p className="h3-24px-regular mx-auto ">
             Explore our most popular products, carefully crafted and loved by
             our customers for <br /> their quality and performance.
@@ -153,13 +154,7 @@ const PopularProducts = () => {
                     </h3>
 
                     <p className="h6-18-px-medium group-hover:invisible">
-                      {product?.price
-                        ? new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                            minimumFractionDigits: 2,
-                          }).format(Number(product.price))
-                        : "$0.00"}
+                      <ProductPrice price={Number(product.price) || 0} inline className="h6-18-px-medium" />
                     </p>
                   </div>
 

@@ -83,9 +83,9 @@ const FeatureCard: React.FC<FeatureCard> = ({ icon, title, description }) => (
           <p className="h5-medium px-2 py-1 inline-block rounded-full mb-2 bg-[#00000005]">
             CAGE Code: <span className='text-[#F15939]'>9EQB2</span>
           </p>
-          <h1 className="h1-secondary-medium !text-[#2A2A2A] mb-3">
+          <h2 className="h1-secondary-medium !text-[#2A2A2A] mb-3">
             AUTHORIZED SUPPLIER ON SAM.GOV
-          </h1>
+          </h2>
           <p className="h4-regular !text-[#666666]">
             We feel tremendous pride in having achieved verified vendor status due to our ongoing commitment to 
             adhering to the exacting requirements set by the US Federal Contractor Registration. We take great pride 

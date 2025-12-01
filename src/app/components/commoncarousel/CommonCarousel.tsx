@@ -43,7 +43,7 @@ const CommonCarousel: React.FC<CommonCarouselProps> = ({ items = [] }) => {
                     <div className="xl:w-44 xl:h-44  2xl:w-44 2xl:h-44 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 w-30 h-30 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                       {/* Product Image with Hover Effect */}
                       <Image
-                        src={item.logo}
+                        src={item.logo ? item.logo : "https://dummyimage.com/250x250/cccccc/000000&text=No+Logo"}
                         alt={item.name}
                         width={250}
                         height={250}
@@ -53,9 +53,6 @@ const CommonCarousel: React.FC<CommonCarouselProps> = ({ items = [] }) => {
                         duration-700
                         ease-in-out
                         hover:scale-105
-                        
-                        // hover:opacity-70
-
                         cursor-pointer
                         w-full
                         h-full

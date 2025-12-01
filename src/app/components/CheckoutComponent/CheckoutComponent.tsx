@@ -475,7 +475,7 @@ const CheckoutForm = () => {
           : walletSupport.googlePay;
 
       if (!paymentRequest || !walletAvailable) {
-        toast.error("This wallet is not available on your device.");
+        toast.error("This wallet is not available on your devicesss.");
         return;
       }
 

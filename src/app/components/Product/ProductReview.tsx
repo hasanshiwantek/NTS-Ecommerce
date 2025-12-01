@@ -42,20 +42,10 @@ const ProductReview = () => {
     return initials || "N/A";
   }, []);
 
-  const handleSeeMore = useCallback(() => {
-    // Navigate to the URL from the first review if available
-    if (reviews.length > 0 && reviews[0]?.url) {
-      window.open(reviews[0].url, "_blank");
-    } else {
-      // Fallback: show all reviews if no URL available
-      setShowAll(true);
-      setTimeout(() => {
-        document.getElementById("reviews")?.scrollIntoView({
-          behavior: "smooth",
-        });
-      }, 100);
-    }
-  }, [reviews]);
+ const handleSeeMore = useCallback(() => {
+    // Always go to all reviews page (not single)
+    window.open("https://www.trustpilot.com/review/newtownspares.com", "_blank");
+  }, []);
 
   return (
     <section
@@ -234,7 +224,7 @@ const ProductReview = () => {
             className="text-lg text-red-600 font-medium hover:underline"
             onClick={handleSeeMore}
           >
-            See more ↓
+            See all reviews ↓
           </Button>
         </div>
       )}

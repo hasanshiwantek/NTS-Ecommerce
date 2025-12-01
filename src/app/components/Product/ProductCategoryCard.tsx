@@ -3,9 +3,10 @@ import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { toast } from "sonner"
-import { useAppDispatch } from "@/hooks/useReduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import BulkInquiryModal from "../modal/BulkInquiryModal";
 import { useState } from "react";
+import ProductPrice from "../productprice/ProductPrice";
 interface Product {
   id: number;
   name: string;
@@ -24,6 +25,9 @@ interface Product {
 }
 
 export default function ProductCategoryCard({ product }: { product: Product }) {
+  const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
+    (state) => state.home
+  );
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const imageUrl = product.image?.[0]?.path || "/default-product-image.svg";
@@ -86,23 +90,26 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#F15939] transition-all duration-300 group-hover:w-full"></span>
         </Link>
 
-        <div
-          className="
-            flex flex-wrap items-center 2xl:items-start xl:items-start  2xl:justify-start xl:justify-start   justify-center lg:justify-start gap-2
-            h6-18-px-medium
-          "
-        >
-          {product.rating && product.reviews > 0 ? (
-            <>
-              ★ {product?.rating}
-              <span className="!text-[#1A80AD]  h6-18-px-medium">
-                ({product?.reviews} Reviews)
-              </span>
-            </>
-          ) : (
-            <span className="italic  h6-18-px-medium">No reviews yet</span>
-          )}
-        </div>
+        <div className="flex items-center space-x-3">
+            {/* Stars */}
+            {stats?.rating && (
+              <img
+                src={stats.image}
+                alt={`${stats.rating} Stars`}
+                className="w-20"
+              />
+            )}
+
+            {/* Rating number */}
+            {stats?.rating && (
+              <span className="text-[#121e4d] text-base">{stats.rating}</span>
+            )}
+
+            {/* Reviews count */}
+            <span className="text-[#121e4d] text-base">
+              {stats?.count ? `${stats.count} Reviews` : "— Reviews"}
+            </span>
+          </div>
 
         <p className="h5-20px-regular mt-1">
           <span className="h5-20px-regular">SKU:</span> {product?.sku}
@@ -113,11 +120,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
             flex flex-wrap items-center justify-center lg:justify-start gap-2 mt-2
           "
         >
-          <p className="h2-bold">
-            {product?.price && !isNaN(Number(product.price))
-              ? `£${Number(product.price).toFixed(2)}`
-              : "Price not available"}
-          </p>
+          <ProductPrice price={Number(product.price)} inline={true} className="h2-bold text-black" />
 
           {product.msrp > 0 && (
             <p className="h5-20px-regular !text-[#FF435C] line-through">
@@ -143,7 +146,7 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
           }}
           className="
     flex items-center justify-center gap-[4%]
-    bg-[var(--primary-color)] text-white font-medium rounded-md
+    bg-[var(--primary-color)] text-white font-medium rounded-md border border-[var(--primary-color)]
     hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]
     transition duration-300
     w-[50%] sm:w-[65%] md:w-[60%] lg:w-[70%] xl:w-[80%] 2xl:w-[85%]
