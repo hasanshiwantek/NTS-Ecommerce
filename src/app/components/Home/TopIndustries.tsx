@@ -7,6 +7,7 @@ import img4 from "@/assets/home/Industry-img4.png";
 import img5 from "@/assets/home/Industry-img5.png";
 import img6 from "@/assets/home/Industry-img6.png";
 import { HiArrowLongRight } from "react-icons/hi2";
+import Image from "next/image";
 // Reusable IndustryCard component
 interface IndustryCardProps {
   title: string;
@@ -31,10 +32,13 @@ hover:bg-[#FEF7F5]
       <div className="flex items-center ">
         {imgSrc && (
           <div className="w-20 h-20 2xl:w-[80px] 2xl:h-[80px] flex items-center justify-center rounded-full mr-3 ">
-            <img
+            <Image
               src={typeof imgSrc === "string" ? imgSrc : imgSrc.src}
               alt={title}
               className="w-full h-auto  2xl:w-[80px] 2xl:h-[80px] object-contain"
+              // fill
+              width={100}
+              height={100}
             />
           </div>
         )}

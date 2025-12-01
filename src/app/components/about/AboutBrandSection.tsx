@@ -1,7 +1,15 @@
 import React from "react";
 import { fetchBrands } from "@/lib/api/brand";
-const brandsData = await fetchBrands();
 
+let brandsData: any[] = [];
+
+try {
+  const result = await fetchBrands();
+  brandsData = Array.isArray(result) ? result : [];
+} catch (error) {
+  console.error("Error fetching brands:", error);
+  brandsData = [];
+}
 const AboutBrandSection = () => {
   const brandLogos = {
     row1: [
@@ -45,34 +53,42 @@ const AboutBrandSection = () => {
         <div className="space-y-12">
           {/* First Row - 6 logos */}
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
-            {row1.map((brand: any, index: number) => (
-              <div
-                key={brand.id || index}
-                className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center"
-              >
-                <img
-                  src={brand.logo}
-                  alt={brand.name}
-                  className="2xl:h-[150px]  2xl:w-[200px]  xl:h-[100px]  xl:w-[100px]  h-10  w-auto   object-contain"
-                />
-              </div>
-            ))}
+            {row1.length > 0 ? (
+              row1.map((brand: any, index: number) => (
+                <div
+                  key={brand.id || index}
+                  className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center"
+                >
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="2xl:h-[150px]  2xl:w-[200px]  xl:h-[100px]  xl:w-[100px]  h-10  w-auto   object-contain"
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="text-red-500">No brands available.</p>
+            )}
           </div>
 
           {/* Second Row - 4 logos */}
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-20">
-            {row2.map((brand: any, index: number) => (
-              <div
-                key={brand.id || index}
-                className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center"
-              >
-                <img
-                  src={brand.logo}
-                  alt={brand.name}
-                  className="2xl:h-[150px]  2xl:w-[200px]  xl:h-[100px]  xl:w-[100px]  h-10  w-auto   object-contain"
-                />
-              </div>
-            ))}
+            {row2.length > 0 ? (
+              row2.map((brand: any, index: number) => (
+                <div
+                  key={brand.id || index}
+                  className="grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center"
+                >
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    className="2xl:h-[150px]  2xl:w-[200px]  xl:h-[100px]  xl:w-[100px]  h-10  w-auto   object-contain"
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="text-red-500">No additional brands available.</p>
+            )}
           </div>
         </div>
       </div>
