@@ -3,7 +3,8 @@ import React from "react";
 import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-
+import { useAppDispatch } from "@/hooks/useReduxHooks";
+import { contactUs } from "@/redux/slices/homeSlice";
 type GetInTouchFormValues = {
   fullName: string;
   email: string;
@@ -33,9 +34,22 @@ const GetInTouch: React.FC = () => {
     },
   });
 
-  const onSubmit = (values: GetInTouchFormValues) => {
-    console.log("Get in touch form submitted:", values);
-    reset();
+  const dispatch = useAppDispatch();
+
+  const onSubmit = async (values: GetInTouchFormValues) => {
+    const result = await dispatch(contactUs(values));
+    try {
+      if (contactUs.fulfilled.match(result)) {
+        console.log("Contact us response✅", result?.payload);
+        setTimeout(() => {
+          reset();
+        }, 2000);
+      } else {
+        console.log("Error Sending Contact info: ", result?.payload);
+      }
+    } catch (err) {
+      console.log("Something went wrong: ", err);
+    }
   };
 
   return (
@@ -44,13 +58,19 @@ const GetInTouch: React.FC = () => {
         <div className="w-full 2xl:w-[54.7%] relative">
           <div className="relative z-10">
             <h1 className="h1-lg mb-4">
-              Let's Get In Touch <span className="!text-[#F15939]">with Us</span>
+              Let's Get In Touch{" "}
+              <span className="!text-[#F15939]">with Us</span>
             </h1>
             <p className="h3-regular !text-[#666666] mb-8 max-w-3xl">
-              Have questions about our products, need expert advice, or want a custom IT hardware solution?
+              Have questions about our products, need expert advice, or want a
+              custom IT hardware solution?
             </p>
 
-            <form className="space-y-8" onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form
+              className="space-y-8"
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+            >
               <div>
                 <label htmlFor="fullName" className="block h5-regular">
                   Full Name <span className="text-[#F15939]">*</span>
@@ -101,14 +121,19 @@ const GetInTouch: React.FC = () => {
                         inputMode="numeric"
                         value={field.value}
                         onChange={(event) => {
-                          const numericValue = event.target.value.replace(/\D/g, "");
+                          const numericValue = event.target.value.replace(
+                            /\D/g,
+                            ""
+                          );
                           field.onChange(numericValue);
                         }}
                         className="mt-3 block !max-w-full h-[60px] px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm"
                       />
                     )}
                   />
-                  <p className="min-h-[20px] mt-2 text-sm text-transparent">placeholder</p>
+                  <p className="min-h-[20px] mt-2 text-sm text-transparent">
+                    placeholder
+                  </p>
                 </div>
               </div>
 
@@ -137,7 +162,9 @@ const GetInTouch: React.FC = () => {
                     className="mt-3 block !max-w-full h-[60px] px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500 sm:text-sm"
                     {...register("partNumber")}
                   />
-                  <p className="min-h-[20px] mt-2 text-sm text-transparent">placeholder</p>
+                  <p className="min-h-[20px] mt-2 text-sm text-transparent">
+                    placeholder
+                  </p>
                 </div>
                 <div>
                   <label htmlFor="requiredQty" className="block h5-regular">
@@ -158,7 +185,9 @@ const GetInTouch: React.FC = () => {
                       },
                     })}
                   />
-                  <p className={errorSpaceClass}>{errors.requiredQty?.message}</p>
+                  <p className={errorSpaceClass}>
+                    {errors.requiredQty?.message}
+                  </p>
                 </div>
               </div>
 

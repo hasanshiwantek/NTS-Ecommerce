@@ -1,60 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/lib/axiosInstance";
 
-export const getWellerStats = createAsyncThunk(
-  "home/getWellerStats",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axiosInstance.get(`admin/weller-stats`);
-      console.log("Count stats data: ", res.data);
-
-      return res.data;
-    } catch (err: any) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || "Failed to fetch count"
-      );
-    }
-  }
-);
-
-export const getPrayersGroup = createAsyncThunk(
-  "home/getPrayersGroup",
-  async ({ day, time }: { day: any; time: any }, thunkAPI) => {
-    try {
-      const res = await axiosInstance.get(
-        `admin/prayer-groups?day=${day}&time=${time}`
-      );
-      console.log("Prayers Group Response: ", res);
-      return res.data;
-    } catch (err: any) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return thunkAPI.rejectWithValue(
-        err?.response?.data?.error ||
-          err.response?.data?.message ||
-          "Failed to fetch count"
-      );
-    }
-  }
-);
-
-export const getWellerStatus = createAsyncThunk(
-  "home/getWellerStatus",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axiosInstance.get(`admin/wellers-status`);
-      console.log("Weller status data: ", res.data);
-
-      return res.data;
-    } catch (err: any) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return thunkAPI.rejectWithValue(
-        err.response?.data?.message || "Failed to fetch count"
-      );
-    }
-  }
-);
-
 export const globalSearch = createAsyncThunk(
   "home/globalSearch",
   async ({ query }: { query: any }, thunkAPI) => {
@@ -146,6 +92,50 @@ export const fetchStats = createAsyncThunk(
   }
 );
 
+export const bulkInquiry = createAsyncThunk(
+  "home/bulkInquiry",
+  async (payload: any, thunkAPI) => {
+    try {
+      const res = await axiosInstance.post(
+        `web/bulk-inquiries/submit`,
+        payload
+      );
+
+      if (res?.data?.status && res?.data?.data) {
+        console.log("Bulk inquiry response:", res?.data);
+        return res.data;
+      }
+
+      return null;
+    } catch (err: any) {
+      console.error("Error sending bulk inquiry:", err);
+      return null;
+    }
+  }
+);
+
+export const contactUs = createAsyncThunk(
+  "home/contactUs",
+  async (payload: any, thunkAPI) => {
+    try {
+      const res = await axiosInstance.post(
+        `web/contact-requests/submit`,
+        payload
+      );
+
+      if (res?.data?.status && res?.data?.data) {
+        console.log("Contact us response:", res?.data);
+        return res.data;
+      }
+
+      return null;
+    } catch (err: any) {
+      console.error("Error sending contact request:", err);
+      return null;
+    }
+  }
+);
+
 // 2. Initial State
 const initialState = {
   statistics: null,
@@ -171,43 +161,6 @@ const homeSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      // Statistics
-
-      .addCase(getWellerStats.pending, (state, action) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getWellerStats.fulfilled, (state, action) => {
-        state.statistics = action.payload;
-      })
-      .addCase(getWellerStats.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-      .addCase(getPrayersGroup.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getPrayersGroup.fulfilled, (state, action) => {
-        state.loading = false;
-        state.groups = action.payload;
-      })
-      .addCase(getPrayersGroup.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-      .addCase(getWellerStatus.pending, (state, action) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(getWellerStatus.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      })
-      .addCase(getWellerStatus.fulfilled, (state, action) => {
-        state.loading = false;
-        state.wellerStatus = action.payload;
-      })
       // GLOBAL SEARCH
       .addCase(globalSearch.pending, (state) => {
         state.loading = true;

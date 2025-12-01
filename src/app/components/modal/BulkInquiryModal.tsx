@@ -13,7 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-
+import { useAppDispatch } from "@/hooks/useReduxHooks";
+import { bulkInquiry } from "@/redux/slices/homeSlice";
 interface BulkInquiryModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -36,7 +37,7 @@ const BulkInquiryModal: React.FC<BulkInquiryModalProps> = ({
     quantity: "",
     comments: "",
   });
-
+  const dispatch = useAppDispatch();
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -46,15 +47,25 @@ const BulkInquiryModal: React.FC<BulkInquiryModalProps> = ({
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = {
       sku: product?.sku ?? "",
       ...formData,
     };
-    console.log("Form submitted:", payload);
-
-    onClose();
+    const result = await dispatch(bulkInquiry(payload))
+    try {
+      if (bulkInquiry.fulfilled.match(result)) {
+        console.log("Request for quote send✅", result?.payload);
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+      } else {
+        console.log("Error Sending Quote: ", result?.payload);
+      }
+    } catch (err) {
+      console.log("Something went wrong: ", err);
+    }
   };
 
   return (
