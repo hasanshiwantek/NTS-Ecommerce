@@ -12,6 +12,7 @@ import { addToCart } from "@/redux/slices/cartSlice";
 import { useRouter } from "next/navigation";
 import ProductPrice from "../productprice/ProductPrice";
 import { fetchReviews, fetchStats } from "@/redux/slices/homeSlice";
+import Link from "next/link";
 
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
@@ -129,6 +130,8 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
         {/* SKU / Availability / Quantity */}
         <div className="flex flex-col gap-1 w-full mt-3">
+           <Link
+                      href={`/brand/${product.brand?.name?.toLowerCase()}`}            >
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
               Manufacture
@@ -137,6 +140,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
               {product?.brand?.name || "N/A"}
             </h5>
           </div>
+          </Link>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
               Mfr Part#
