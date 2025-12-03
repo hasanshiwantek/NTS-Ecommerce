@@ -807,3 +807,121 @@ img {
     }
   }
 }
+
+
+
+
+
+
+/* 
+overview description */
+
+
+.description-content {
+  color: #4a4a4a; /* text color */
+  font-weight: 400; /* normal weight for paragraphs */
+  line-height: 1.625; /* relaxed line height */
+  width: 100%; /* default full width */
+  max-width: 100%;
+}
+
+/* All Headings */
+.description-content h1,
+.description-content h2,
+.description-content h3,
+.description-content h4,
+.description-content h5,
+.description-content h6 {
+  font-size: 14px;
+  line-height: 1.3;
+  letter-spacing: 0.75%;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-weight: 500;
+  color: #2a2a2a;
+}
+
+/* Paragraphs */
+.description-content p {
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0.75em;
+  font-weight: 400;
+  color: #4a4a4a;
+}
+
+/* sm breakpoint (640px) */
+@media (min-width: 640px) {
+  .description-content h1,
+  .description-content h2,
+  .description-content h3,
+  .description-content h4,
+  .description-content h5,
+  .description-content h6 {
+    font-size: 16px;
+  }
+
+  .description-content p {
+    font-size: 15px;
+  }
+}
+
+/* Lg breakpoint (1024px) */
+@media (min-width: 1024px) {
+  .description-content h1,
+  .description-content h2,
+  .description-content h3,
+  .description-content h4,
+  .description-content h5,
+  .description-content h6 {
+    font-size: 18px;
+  }
+
+  .description-content p {
+    font-size: 15px;
+  }
+}
+
+/* XL breakpoint (1280px) */
+@media (min-width: 1280px) {
+  .description-content {
+    width: 60rem;
+  }
+
+  .description-content h1,
+  .description-content h2,
+  .description-content h3,
+  .description-content h4,
+  .description-content h5,
+  .description-content h6 {
+    font-size: 18px;
+  }
+
+  .description-content p {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+/* 2XL breakpoint (1440px and above) */
+@media (min-width: 1440px) {
+  .description-content {
+    width: 80rem;
+  }
+
+  .description-content h1,
+  .description-content h2,
+  .description-content h3,
+  .description-content h4,
+  .description-content h5,
+  .description-content h6 {
+    font-size: 24px;
+    line-height: 33px;
+  }
+
+  .description-content p {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
+
