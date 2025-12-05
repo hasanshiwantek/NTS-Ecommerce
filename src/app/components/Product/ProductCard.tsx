@@ -69,8 +69,9 @@ const ProductCard = ({ product }: { product: any }) => {
         {/* Breadcrumb */}
         <nav aria-label="breadcrumb"  className="flex items-center space-x-2 h5-20px-regular lg:mb-7 sm:mb-7 mb-7 flex-wrap">
           <span>Home</span>
-          {product.categoryHierarchy?.map((data: any, index: number) => (
-            <React.Fragment key={index}>
+          {/* {product.categoryHierarchy?.map((data: any, index: number) => (
+          ))} */}
+            <React.Fragment >
               <Image
                 className="inline-block align-middle"
                 src="/arrow-right.png"
@@ -80,9 +81,8 @@ const ProductCard = ({ product }: { product: any }) => {
                 loading="lazy"
                 sizes="12px"
               />
-              <span className="h5-regular">{data?.name}</span>
+              <span className="h5-regular">{product?.sku}</span>
             </React.Fragment>
-          ))}
         </nav >
 
         <div className="flex flex-wrap lg:flex-nowrap 2xl:gap-6 xl:gap-[20px] lg:gap-[25px] md:gap-5 sm:gap-4 gap-4 ">
