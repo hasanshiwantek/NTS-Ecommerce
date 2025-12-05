@@ -164,6 +164,7 @@ CartItem.displayName = "CartItem";
 const CheckoutForm = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
+   const auth = useAppSelector((state: RootState) => state?.auth);
   const [itemToDelete, setItemToDelete] = useState<any | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -241,6 +242,12 @@ const CheckoutForm = () => {
     defaultValues: {
       paymentMethod: "credit_card",
       billingSame: true,
+      email: auth?.user?.email || "",
+      firstName: auth?.user?.firstName || "",
+      lastName: auth?.user?.lastName || "", 
+      company: auth?.user?.companyName || "",
+      phone: auth?.user?.phone || "",
+      state: auth?.user?.state || "",
     },
   });
 

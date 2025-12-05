@@ -38,7 +38,7 @@ const SigninPage = () => {
       const result = await dispatch(loginUser(data));
       if (loginUser.fulfilled.match(result)) {
         reset();
-        router.push("/");
+        router.push("/my-account/orders");
       } else {
         const errorMessage =
           result.error?.message || "Login failed. Please try again.";

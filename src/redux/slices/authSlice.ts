@@ -118,9 +118,9 @@ const authSlice = createSlice({
 
       // Fulfilled - login
       .addCase(loginUser.fulfilled, (state, action) => {
-        const { customer, token } = action.payload.data || action.payload;
+        const {user, customer, token } = action.payload.data || action.payload;
         state.loading = false;
-        state.user = customer;
+        state.user = user || customer;
         state.token = token;
         state.isAuthenticated = true;
         // state.stores = action.payload.stores.map((store: any) => ({

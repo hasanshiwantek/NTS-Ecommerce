@@ -1,10 +1,10 @@
-import AccountForm from '@/app/components/myaccount/AccountForm'
+import AddressForm from '@/app/components/myaccount/AddressForm'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      <AccountForm/>
+        <AddressForm/>
     </div>
   )
 }

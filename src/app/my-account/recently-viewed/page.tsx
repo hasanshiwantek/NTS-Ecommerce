@@ -1,8 +1,11 @@
+import RecentViewedPoduct from '@/app/components/myaccount/RecentViewedPoduct'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page i am recent viewed</div>
+    <div>
+      <RecentViewedPoduct/>
+    </div>
   )
 }
 
