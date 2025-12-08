@@ -1,6 +1,6 @@
 // app/category/[slug]/page.tsx
 import ProductsPage from "@/app/products/page";
-import { fetchCategories } from "@/lib/api/category";
+import { fetchCategories, fetchCategoryById } from "@/lib/api/category";
 import { Metadata } from "next";
 
 interface Props {
@@ -80,14 +80,16 @@ export default async function CategoryPage({ params }: Props) {
   // Find category by slug
   const category = findCategoryBySlug(categories, slug);
 
+
   if (!category) {
     return <div className="text-center py-10">❌ Category not found</div>;
   }
-
+const formattedCategorydescription = await fetchCategoryById(category.id);
   return (
     <ProductsPage
       initialCategoryId={category.id}
       initialCategoryName={category.name}
+      initialCategorydescription={formattedCategorydescription?.category}
     />
   );
 }

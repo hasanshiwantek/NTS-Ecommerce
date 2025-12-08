@@ -263,7 +263,14 @@ const CheckoutForm = () => {
     );
   }, [cart]);
 
-  const shipping = useMemo(() => (cart.length > 0 ? 240 : 0), [cart.length]);
+  const shipping = useMemo(() => {
+  if (cart.length === 0) return 0;
+
+  return cart.reduce((sum, item) => {
+    const cost = Number(item.fixedShippingCost || 0);
+    return sum + cost;
+  }, 0);
+}, [cart]);
   const tax = 0; // static example
   const total = useMemo(() => subtotal + shipping + tax, [subtotal, shipping]);
 

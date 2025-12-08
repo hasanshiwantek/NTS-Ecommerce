@@ -8,7 +8,9 @@ export default async function ProductsPage({
   initialCategoryName,
   initialBrandId,
   initialBrandName,
+  initialCategorydescription,
 }: {
+  initialCategorydescription?: any;
   initialCategoryId?: number;
   initialCategoryName?: string;
   initialBrandId?: number;
@@ -26,6 +28,7 @@ export default async function ProductsPage({
         initialCategoryName={initialCategoryName}
         initialBrandId={initialBrandId}
         initialBrandName={initialBrandName}
+        initialCategorydescription={initialCategorydescription}
       />
     </div>
   );

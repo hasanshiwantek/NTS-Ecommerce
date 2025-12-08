@@ -15,8 +15,16 @@ const OrderSummary = () => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cart]);
 
-  const shipping = cart?.length > 0 ? 240.0 : 0; 
-  const shippingLabel = "FedEx priority $370.00";
+const shipping = useMemo(() => {
+  if (cart.length === 0) return 0;
+
+  return cart.reduce((sum, item) => {
+    const cost = Number(item.fixedShippingCost || 0);
+    return sum + cost;
+  }, 0);
+}, [cart]);
+
+const shippingLabel = `FedEx priority $${shipping.toFixed(2)}`;
 
   const total = subtotal + shipping;
 
