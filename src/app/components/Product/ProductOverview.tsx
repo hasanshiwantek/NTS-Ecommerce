@@ -97,7 +97,7 @@ const ProductOverview = ({ product }: { product: any }) => {
       <dd className="h5-medium !text-center">
         {key === "Brand" && product?.brand?.name ? (
           <Link
-            href={`/brand/${product.brand.name.toLowerCase()}`}
+            href={`/brand/${product.brand.slug}`}
           >
             {value}
           </Link>

@@ -56,14 +56,19 @@ const CartList = () => {
 
   const handleManualQtyUpdate = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    id: string
+    id: string,
+    maxPurchaseQuantity?: number
   ) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const inputValue = quantities[id];
       const parsed = Number(inputValue);
 
-      const newQty = parsed > 0 ? parsed : 1;
+         const newQty = maxPurchaseQuantity
+      ? Math.min(parsed > 0 ? parsed : 1, maxPurchaseQuantity)
+      : parsed > 0
+      ? parsed
+      : 1;
 
       dispatch(updateQty({ id, quantity: newQty }));
 
@@ -126,7 +131,7 @@ const CartList = () => {
                         : quantities[item.id]
                     }
                     onChange={(e) => handleChange(item.id, e.target.value)}
-                    onKeyDown={(e) => handleManualQtyUpdate(e, item.id)}
+                    onKeyDown={(e) => handleManualQtyUpdate(e, item.id , item.maxPurchaseQuantity)}
                     className="w-10 xl:w-[51%] 2xl:w-[48.9%] text-center py-2 xl:px-2 2xl:px-2 outline-none h5-medium [appearance:textfield] 
                    [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
@@ -135,7 +140,11 @@ const CartList = () => {
                   <div className="flex flex-col justify-center items-center border-l border-gray-300 w-10 xl:w-[51%] 2xl:w-[48.9%]">
                     <button
                       type="button"
-                      onClick={() => dispatch(increaseQty(item.id))}
+                        onClick={() => {
+    if (!item.maxPurchaseQuantity || item.quantity < item.maxPurchaseQuantity) {
+      dispatch(increaseQty(item.id));
+    }
+  }}
                       className="flex items-center justify-center w-2.5 h-5 hover:bg-gray-100 text-[#AEAEAE]"
                     >
                       ▲

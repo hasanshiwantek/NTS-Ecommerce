@@ -5,8 +5,9 @@ import { addToCart } from "@/redux/slices/cartSlice";
 import { toast } from "sonner"
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import BulkInquiryModal from "../modal/BulkInquiryModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductPrice from "../productprice/ProductPrice";
+import { fetchStats } from "@/redux/slices/homeSlice";
 interface Product {
   id: number;
   name: string;
@@ -30,6 +31,10 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
   );
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    dispatch(fetchStats())
+  }, [])
+  
   const imageUrl = product.image?.[0]?.path || "/default-product-image.svg";
 
   return (
@@ -120,13 +125,25 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
             flex flex-wrap items-center justify-center lg:justify-start gap-2 mt-2
           "
         >
-          <ProductPrice price={Number(product.price)} inline={true} className="h2-bold text-black" />
+          {/* Price */}
+          {product?.msrp && Number(product.msrp) > 0 ? (
+            <>
+             <ProductPrice price={Number(product.price) + Number(product.msrp) - Number(product.msrp)} inline={true} className="h2-bold text-black" />
+              <p className="h5-20px-regular !text-[#FF435C] line-through">
+                <ProductPrice price={Number(product.price) + Number(product.msrp)} inline={true} className="h5-20px-regular !text-[#FF435C] line-through" />
+      
+            </p>
+            </>
+          ) : (
+            <ProductPrice price={Number(product.price)} inline={true} className="h2-bold text-black" />
+          )}      
+          {/* <ProductPrice price={Number(product.price)} inline={true} className="h2-bold text-black" />
 
           {product.msrp > 0 && (
             <p className="h5-20px-regular !text-[#FF435C] line-through">
               £{Number(product?.msrp).toFixed(2)}
             </p>
-          )}
+          )} */}
         </div>
       </div>
 

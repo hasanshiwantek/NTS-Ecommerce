@@ -22,7 +22,12 @@ const ProductCard = ({ product }: { product: any }) => {
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
-  const increment = () => setQuantity(quantity + 1);
+  const increment = () => {
+  if (!product.maxPurchaseQuantity || quantity < product.maxPurchaseQuantity) {
+    setQuantity(quantity + 1);
+  }
+};
+
   const decrement = () => quantity > 0 && setQuantity(quantity - 1);
 
    // ✅ JSON-LD Structured Data for SEO

@@ -152,7 +152,7 @@ const PopularProducts = () => {
                   {/* Brand + Availability + Price */}
                   <div className="flex flex-col justify-between min-h-[4.5rem] mt-2">
                      <Link
-                      href={`/brand/${product.brand?.name?.toLowerCase()}`}
+                      href={`/brand/${product.brand?.slug}`}
                     >
                     <h3 className="h7-16-px-regular line-clamp-1">
                       {product.brand?.name} |{" "}

@@ -19,3 +19,22 @@ export const fetchCategories = async () => {
   
   return data?.data || [];
 };
+
+
+
+export const fetchCategoryById = async (id: number | string ) => {
+  const res = await fetch(`${baseURL}web/categories/categories/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      storeId: "4",
+    },
+    // ✅ ISR: cache once, refresh every 5 min
+    next: { revalidate: 300 },
+  });
+
+  if (!res.ok) throw new Error(`Failed to fetch category with id ${id}`);
+
+  const data = await res.json();
+  return data || null;
+};
