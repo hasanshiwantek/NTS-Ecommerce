@@ -30,6 +30,7 @@ interface ProductListProps {
   isLoading?: boolean;
   error?: string | null;
   filterMeta: any;
+  initialCategorydescription?: any;
 }
 
 export default function ProductList({
@@ -40,6 +41,7 @@ export default function ProductList({
   isLoading = false,
   error = null,
   filterMeta,
+initialCategorydescription,
 }: ProductListProps) {
   const [view, setView] = useState<"list" | "grid">("list");
   const [page, setPage] = useState(1);
@@ -48,7 +50,6 @@ export default function ProductList({
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [filters.page]);
-
   return (
     <section
       className="
@@ -59,17 +60,23 @@ w-full
     >
       {/* Headings */}
       <div className="mb-4">
-        <h1 className="h2-medium ">Heading Text</h1>
+        <h1 className="h2-medium ">
+  {initialCategorydescription?.name || "Product Category"}
+</h1>
         <p className="h4-regular ">
-          Do you need to fix your computer or make it work better? At
+          {/* Do you need to fix your computer or make it work better? At
           NewTownSpares, we have all the IT Accessories you need! It doesn’t
           matter if it’s for your home, work, or even an old computer. We are
           here to help you. We have parts from popular brands like Intel, Dell,
-          and HP.
+          and HP. */}
+          <p className="h4-regular ">
+  {initialCategorydescription?.description ||
+    "Discover quality products available in this category, curated to meet your needs."}
+</p>
         </p>
       </div>
 
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <h2 className="h2-medium ">Heading Text</h2>
         <p className="h4-regular ">
           Do you need to fix your computer or make it work better? At
@@ -78,7 +85,7 @@ w-full
           here to help you. We have parts from popular brands like Intel, Dell,
           and HP.
         </p>
-      </div>
+      </div> */}
 
       {/* Sort Bar */}
       <SortingBar

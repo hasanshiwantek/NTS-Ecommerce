@@ -14,6 +14,7 @@ export default function ProductsClientWrapper({
   initialCategoryName,
   initialBrandId,
   initialBrandName,
+  initialCategorydescription,
 }: any) {
   const params = useParams(); // get slug param
   const pathname = usePathname(); // get current path
@@ -155,6 +156,7 @@ export default function ProductsClientWrapper({
             isLoading={isLoading}
             error={error}
             filterMeta={filterMeta}
+            initialCategorydescription={initialCategorydescription}
           />
         </main>
       </div>

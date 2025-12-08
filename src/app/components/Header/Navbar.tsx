@@ -160,12 +160,14 @@ const Navbar: React.FC = () => {
 
             {/* Account */}
             <div className="flex items-center gap-1 sm:gap-2">
+              <Link href={auth?.isAuthenticated ? "/my-account/orders" : "/auth/login"}>
               <Image
                 src={userIcon}
                 alt="User Account"
                 className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-9 xl:h-9 2xl:w-[40px] 2xl:h-[40px]"
                 loading="lazy"
               />
+              </Link>
               <div className="flex flex-col leading-tight">
                 <p className="text-[16px] text-[#EDEDED] font-normal ">
                   {auth?.user

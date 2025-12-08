@@ -118,6 +118,10 @@ const PopularProducts = () => {
                     className="w-full flex items-center justify-center 
                                 xl:h-[225px] 2xl:h-[240px] mb-4"
                   >
+                    <Link
+                    href={`/products/${product?.sku}`}
+                    className="relative inline-block cursor-pointer group"
+                  >
                     <Image
                       src={
                         product.image?.[1]?.path ||
@@ -132,6 +136,7 @@ const PopularProducts = () => {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                       quality={80}
                     />
+                    </Link>
                   </div>
 
                   {/* Product Name */}
@@ -146,13 +151,16 @@ const PopularProducts = () => {
 
                   {/* Brand + Availability + Price */}
                   <div className="flex flex-col justify-between min-h-[4.5rem] mt-2">
+                     <Link
+                      href={`/brand/${product.brand?.slug}`}
+                    >
                     <h3 className="h7-16-px-regular line-clamp-1">
                       {product.brand?.name} |{" "}
                       <span className="!text-[#219653]">
                         {product.availabilityText || "In Stock"}
                       </span>
                     </h3>
-
+                        </Link>
                     <p className="h6-18-px-medium group-hover:invisible">
                       <ProductPrice price={Number(product.price) || 0} inline className="h6-18-px-medium" />
                     </p>

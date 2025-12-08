@@ -1,8 +1,12 @@
+"use client"
 import React from "react";
 import CartList from "./CartList";
 import OrderSummary from "./OrderSummary";
 import Link from "next/link";
+import { useAppSelector } from "@/hooks/useReduxHooks";
+import { RootState } from "@/redux/store";
 const Cart = () => {
+    const auth = useAppSelector((state: RootState) => state?.auth);
   return (
     <main className="w-full flex justify-center  py-1">
       {/* Fixed container centered on screen */}
@@ -15,14 +19,17 @@ const Cart = () => {
         {/* Heading Section */}
         <div className="w-full xl:max-w-[43.9%] 2xl:max-w-[44.2%]">
           <h1 className="h1-secondary-medium ">Shopping Cart</h1>
-          <p className="h5-20px-regular text-gray-600">
-            Log in to synchronize the items in your shopping cart.{" "}
-            <Link href={"/auth/login"}>
-            <span className="text-[#F15939] cursor-pointer hover:underline">
-              Log In Now
-            </span>
-            </Link>
-          </p>
+          {!auth?.isAuthenticated && (
+  <p className="h5-20px-regular text-gray-600">
+    Log in to synchronize the items in your shopping cart.{" "}
+    <Link href="/auth/login">
+      <span className="text-[#F15939] cursor-pointer hover:underline">
+        Log In Now
+      </span>
+    </Link>
+  </p>
+)}
+
         </div>
 
         {/* Main Content */}
