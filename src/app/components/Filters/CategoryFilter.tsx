@@ -14,7 +14,7 @@ export default function CategoryFilter({
   activeCategoryId,
 }: CategoryFilterProps) {
   return (
-    <ul className="space-y-1">
+    <ul className="space-y-1 ">
       {categories.map((cat: any) => {
         const isActive = activeCategoryId === cat.id; // ✅ compare current cat
         return (
