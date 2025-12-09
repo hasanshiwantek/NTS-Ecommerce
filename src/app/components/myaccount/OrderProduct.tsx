@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import { fetchAccountOrders } from "@/redux/slices/myaccountSlice";
+import Link from "next/link";
 
 const OrderProduct = () => {
   const dispatch = useAppDispatch();
@@ -69,9 +70,11 @@ const OrderProduct = () => {
 
             {/* Product Details */}
             <div className="flex flex-col justify-center w-full">
+             <Link href={`/my-account/orders/${item.order_number || ""}`}>
               <p className="h6-18-px-medium mb-1">
                 Order #{item.order_number || "N/A"}
               </p>
+             </Link>
               <p className="mb-2 text-sm md:text-base">
                 {item?.products?.length || 1} product
                 totaling $
