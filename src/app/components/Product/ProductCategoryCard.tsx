@@ -31,9 +31,11 @@ export default function ProductCategoryCard({ product }: { product: Product }) {
   );
   const dispatch = useAppDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  useEffect(() => {
-    dispatch(fetchStats())
-  }, [])
+useEffect(() => {
+  if (!stats || Object.keys(stats).length === 0) {
+    dispatch(fetchStats());
+  }
+}, [dispatch, stats]);
   
   const imageUrl = product.image?.[0]?.path || "/default-product-image.svg";
 
