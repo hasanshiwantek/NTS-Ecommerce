@@ -9,7 +9,9 @@ const OrderProduct = () => {
   const dispatch = useAppDispatch();
   const { order, loading, error } = useAppSelector(
     (state: RootState) => state.myaccount
-  );
+  ); 
+  console.log("Order.....",order);
+  
 
   useEffect(() => {
     dispatch(fetchAccountOrders());
