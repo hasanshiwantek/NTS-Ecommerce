@@ -189,6 +189,7 @@ const CheckoutForm = () => {
   const router = useRouter();
   const emptyCartWarningShownRef = useRef(false);
   const skipEmptyCartCheckRef = useRef(false);
+  const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
 
   const handleSuccessModalChange = useCallback(
     (open: boolean) => {
@@ -366,6 +367,7 @@ const CheckoutForm = () => {
       shippingMethod: data.shippingMethod,
       shippingCost: shipping,
       comments: data.orderComment || "",
+      paymentIntentId: paymentIntentId || null,
       products: cart.map((item) => ({
         product_id: item.id,
         quantity: item.quantity || 1,
@@ -412,7 +414,9 @@ const CheckoutForm = () => {
         })),
       };
 
-      await axiosInstance.post("web/stripe/pay", stripePayload);
+      const response = await axiosInstance.post("web/stripe/pay", stripePayload);
+      console.log("Stripe charge response:", response.data?.payment_intent_id);
+       setPaymentIntentId(response.data?.payment_intent_id || null);
     },
     [cart]
   );
