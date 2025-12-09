@@ -36,7 +36,7 @@ export default function CategoryFilter({
 
             {/* ✅ Nested subcategories (recursive) */}
             {cat.subcategories && cat.subcategories.length > 0 && (
-              <div className="ml-6 border-l border-gray-300 pl-2 mt-1">
+              <div className="ml-3 border-l border-gray-300 mt-1">
                 <CategoryFilter
                   categories={cat.subcategories}
                   handleCategoryClick={handleCategoryClick}
