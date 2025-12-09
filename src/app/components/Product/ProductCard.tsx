@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ProductLeft from "./ProductLeft";
 import ProductMiddle from "./ProductMiddle";
@@ -7,6 +7,7 @@ import ProductRight from "./ProductRight";
 import { useAppDispatch } from "@/hooks/useReduxHooks";
 import { toast } from "react-toastify";
 import { addToCart } from "@/redux/slices/cartSlice";
+import { addRecentView } from "@/redux/slices/recentSlice";
 
 const ProductCard = ({ product }: { product: any }) => {
   const [quantity, setQuantity] = useState(0);
@@ -21,6 +22,22 @@ const ProductCard = ({ product }: { product: any }) => {
       : ["/default-product-image.svg"];
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
+
+    useEffect(() => {
+    if (!product) return;
+
+    dispatch(
+      addRecentView({
+        sku: product.sku,
+        name: product.name,
+        image:
+          product.image?.[0]?.path ||
+          product.image?.[1]?.path ||
+          "/default-product-image.svg",
+        price: Number(product.price) || 0,
+      })
+    );
+  }, [product]);
 
   const increment = () => {
     if (
