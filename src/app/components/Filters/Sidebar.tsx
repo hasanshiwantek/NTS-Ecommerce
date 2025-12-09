@@ -124,7 +124,7 @@ export default function Sidebar({
       transition-all duration-300
     "
     >
-      <div className="border rounded-xl ">
+      <div className="border rounded-xl  ">
         {/* Category Section */}
         <div className="border-b 2xl:p-6  xl:p-[18px] p-4  bg-gray-100 rounded-t-lg">
           <h2 className="h3-secondary">Category</h2>

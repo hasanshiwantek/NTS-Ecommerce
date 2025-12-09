@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Banner from "./components/Home/Banner";
-import { fetchProducts } from "@/lib/api/products";
 import Brands from "./components/Home/Brands";
 import PopularProducts from "./components/Home/PopularProducts";
 
@@ -66,7 +65,6 @@ export const metadata: Metadata = {
 };
 
 const Page = async () => {
-  const products = await fetchProducts();
 
   return (
     <>
