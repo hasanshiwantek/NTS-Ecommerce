@@ -22,8 +22,8 @@ export interface OrderData {
     state: string;
     zip: string;
     country: string;
-    paymentMethod: string;
     email: string;
+    paymentMethod: string;
   };
   products: Array<{
     id: number;
@@ -96,7 +96,7 @@ export default function OrderConfirmation() {
     };
 
     loadOrderDetails();
-  }, [orderNumber]);
+  }, [orderNumber, dispatch]);
 
   if (loading) {
     return (
@@ -121,7 +121,7 @@ export default function OrderConfirmation() {
 
   // Calculate subtotal
   const subtotal =
-    order.shippingDestinations[0]?.products.reduce(
+    order.shippingDestinations?.[0]?.products?.reduce(
       (sum, item) => sum + parseFloat(item.price) * item.quantity,
       0
     ) || 0;
@@ -129,11 +129,24 @@ export default function OrderConfirmation() {
   const shippingCost = parseFloat(order.shippingCost) || 0;
   const total = parseFloat(order.totalAmount);
 
-  const shippingAddress = order.shippingDestinations[0]?.address;
-  const billingAddress = order.billingInformation;
+  const shippingAddress = order.shippingDestinations?.[0]?.address ?? null;
+  const billingAddress = order.billingInformation ?? {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    companyName: '',
+    addressLine1: '',
+    addressLine2: null,
+    city: '',
+    state: '',
+    zip: '',
+    country: '',
+    email: '',
+    paymentMethod: ''
+  };
 
   const getProductQuantity = (productId: number) => {
-    const product = order.shippingDestinations[0]?.products.find(
+    const product = order.shippingDestinations?.[0]?.products?.find(
       (p) => p.productId === productId
     );
     return product?.quantity || 1;
@@ -175,7 +188,9 @@ export default function OrderConfirmation() {
                 </div>
                 <div className="flex">
                   <span className="text-gray-500 w-24 flex-shrink-0">Address</span>
-                  <span className="text-gray-900">{billingAddress.addressLine1}, {billingAddress.addressLine2 && billingAddress.addressLine2}, {billingAddress.city}, {billingAddress.state}, {billingAddress.zip}, {billingAddress.country}</span>
+                  <span className="text-gray-900">
+                    {billingAddress.addressLine1}{billingAddress.addressLine2 ? `, ${billingAddress.addressLine2}` : ''}, {billingAddress.city}, {billingAddress.state}, {billingAddress.zip}, {billingAddress.country}
+                  </span>
                 </div>
                 <div className="flex">
                   <span className="text-gray-500 w-24 flex-shrink-0">Phone</span>
@@ -219,10 +234,10 @@ export default function OrderConfirmation() {
 
             {/* Order Items */}
             <div className="space-y-6 mb-6">
-              {order.products.map((item) => (
+              {order.products?.map((item) => (
                 <div key={item.id} className="flex gap-4">
                   <div className="w-20 h-20 bg-gradient-to-br from-pink-200 to-purple-300 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden">
-                    {item.image[0]?.path ? (
+                    {item.image?.[0]?.path ? (
                       <img src={item.image[0].path} alt={item.image[0].altText} className="w-full h-full object-cover" />
                     ) : (
                       <span className="text-2xl">📦</span>
@@ -262,7 +277,6 @@ export default function OrderConfirmation() {
               </div>
             </div>
 
-            {/* View All Orders Button */}
             <button
               onClick={handleGoToOrders}
               className="w-full mt-6 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
