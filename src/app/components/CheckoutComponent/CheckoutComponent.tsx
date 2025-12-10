@@ -195,7 +195,7 @@ const CheckoutForm = () => {
     (open: boolean) => {
       setIsSuccessModalOpen(open);
       if (!open) {
-        router.push("/");
+        router.push(`/checkout/${latestOrderId}`);
       }
     },
     [router]
@@ -367,7 +367,7 @@ const CheckoutForm = () => {
       shippingMethod: data.shippingMethod,
       shippingCost: shipping,
       comments: data.orderComment || "",
-      paymentIntentId: paymentIntentId || null,
+      paymentIntentId: paymentIntentId!!,
       products: cart.map((item) => ({
         product_id: item.id,
         quantity: item.quantity || 1,
@@ -383,7 +383,8 @@ const CheckoutForm = () => {
         "web/orders/place-order",
         orderPayload
       );
-      return orderResponse.data?.data?.id || orderResponse.data?.id;
+      console.log("Order respone:", orderResponse.data);
+      return orderResponse.data?.data?.orderNumber || orderResponse.data?.orderNumber;
     },
     [buildOrderPayload]
   );
@@ -391,8 +392,9 @@ const CheckoutForm = () => {
   const handleOrderSuccess = useCallback(
     (orderId?: string | number | null) => {
       skipEmptyCartCheckRef.current = true;
-      dispatch(clearCart());
+      console.log("Clearing cart after order successs" , orderId);
       setLatestOrderId(orderId ?? null);
+      dispatch(clearCart());
       setIsSuccessModalOpen(true);
       toast.success(
         orderId
