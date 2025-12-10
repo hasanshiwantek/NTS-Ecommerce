@@ -151,6 +151,7 @@ const initialState = {
   statsLoading: false,
   loading: false,
   error: null as string | null,
+  popularProductsLoading: false,
 };
 
 // 3. Slice
@@ -185,14 +186,14 @@ const homeSlice = createSlice({
         state.error = action.error.message || "Failed to fetch getBrand data";
       })
       .addCase(fetchPopularProducts.pending, (state) => {
-        state.loading = true;
+        state.popularProductsLoading = true;
       })
       .addCase(fetchPopularProducts.fulfilled, (state, action) => {
-        state.loading = false;
+        state.popularProductsLoading = false;
         state.popularProducts = action.payload;
       })
       .addCase(fetchPopularProducts.rejected, (state, action) => {
-        state.loading = false;
+        state.popularProductsLoading = false;
         state.error = action.error.message || "Failed to fetch getBrand data";
       })
       // REVIEWS

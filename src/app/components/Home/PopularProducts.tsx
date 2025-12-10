@@ -24,7 +24,7 @@ const AnimatePresence = dynamic(
 
 const PopularProducts = () => {
   const dispatch = useAppDispatch();
-  const { popularProducts, loading, error } = useAppSelector(
+  const { popularProducts, popularProductsLoading, error } = useAppSelector(
     (state: any) => state.home
   );
   const products = popularProducts?.data || [];
@@ -83,7 +83,7 @@ const PopularProducts = () => {
         </nav>
 
         {/* Loading/Error/Products */}
-        {loading ? (
+        {popularProductsLoading ? (
           <main
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
                2xl:grid-cols-4 gap-10 relative justify-items-center"
@@ -94,9 +94,7 @@ const PopularProducts = () => {
           </main>
         ) : error ? (
           <p className="text-center text-red-500">Failed to load products.</p>
-        ) : filteredProducts.length === 0 ? (
-          <p className="text-center text-gray-500">No products found.</p>
-        ) : (
+        ) : filteredProducts.length > 0 ? (
           <main
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
                        2xl:grid-cols-4 gap-10 relative justify-items-center"
@@ -119,23 +117,23 @@ const PopularProducts = () => {
                                 xl:h-[225px] 2xl:h-[240px] mb-4"
                   >
                     <Link
-                    href={`/products/${product?.sku}`}
-                    className="relative inline-block cursor-pointer group"
-                  >
-                    <Image
-                      src={
-                        product.image?.[1]?.path ||
-                        product.image?.[0]?.path ||
-                        "/default-product-image.svg"
-                      }
-                      alt={product.name}
-                      width={200}
-                      height={100}
-                      className="object-contain h-full w-auto  xl:h-[185px] lg:h-[185px] md:h-[185px]"
-                      loading="lazy"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                      quality={80}
-                    />
+                      href={`/products/${product?.sku}`}
+                      className="relative inline-block cursor-pointer group"
+                    >
+                      <Image
+                        src={
+                          product.image?.[1]?.path ||
+                          product.image?.[0]?.path ||
+                          "/default-product-image.svg"
+                        }
+                        alt={product.name}
+                        width={200}
+                        height={100}
+                        className="object-contain h-full w-auto  xl:h-[185px] lg:h-[185px] md:h-[185px]"
+                        loading="lazy"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                        quality={80}
+                      />
                     </Link>
                   </div>
 
@@ -151,18 +149,20 @@ const PopularProducts = () => {
 
                   {/* Brand + Availability + Price */}
                   <div className="flex flex-col justify-between min-h-[4.5rem] mt-2">
-                     <Link
-                      href={`/brand/${product.brand?.slug}`}
-                    >
-                    <h3 className="h7-16-px-regular line-clamp-1">
-                      {product.brand?.name} |{" "}
-                      <span className="!text-[#219653]">
-                        {product.availabilityText || "In Stock"}
-                      </span>
-                    </h3>
-                        </Link>
+                    <Link href={`/brand/${product.brand?.slug}`}>
+                      <h3 className="h7-16-px-regular line-clamp-1">
+                        {product.brand?.name} |{" "}
+                        <span className="!text-[#219653]">
+                          {product.availabilityText || "In Stock"}
+                        </span>
+                      </h3>
+                    </Link>
                     <p className="h6-18-px-medium group-hover:invisible">
-                      <ProductPrice price={Number(product.price) || 0} inline className="h6-18-px-medium" />
+                      <ProductPrice
+                        price={Number(product.price) || 0}
+                        inline
+                        className="h6-18-px-medium"
+                      />
                     </p>
                   </div>
 
@@ -203,7 +203,9 @@ const PopularProducts = () => {
               ))}
             </AnimatePresence>
           </main>
-        )}
+        ) : !popularProductsLoading && filteredProducts.length === 0 ? (
+          <p className="text-center text-gray-500">No products found.</p>
+        ) : null}
 
         {/* Explore More Button */}
         <div className="mt-16 text-center">
@@ -213,7 +215,6 @@ const PopularProducts = () => {
             </button>
           </Link>
         </div>
-        
 
         <BulkInquiryModal
           isOpen={isModalOpen}
