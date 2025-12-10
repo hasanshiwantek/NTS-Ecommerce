@@ -379,6 +379,8 @@ const CheckoutForm = () => {
   const placeOrder = useCallback(
     async (data: CheckoutFormValues) => {
       const orderPayload = buildOrderPayload(data);
+      console.log("Payload: ",orderPayload);
+      
       const orderResponse = await axiosInstance.post(
         "web/orders/place-order",
         orderPayload
