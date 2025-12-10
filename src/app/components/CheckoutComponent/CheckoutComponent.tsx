@@ -169,7 +169,7 @@ const CheckoutForm = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [latestOrderId, setLatestOrderId] = useState<string | null>(null);
+  const [latestOrderId, setLatestOrderId] = useState<string | number | null>(null);
   const [cardCompletion, setCardCompletion] = useState({
     number: false,
     expiry: false,
@@ -195,7 +195,7 @@ const CheckoutForm = () => {
     (open: boolean) => {
       setIsSuccessModalOpen(open);
       if (!open) {
-        router.push(`/checkout/${latestOrderId}`);
+        router.push("/");
       }
     },
     [router]
@@ -367,7 +367,7 @@ const CheckoutForm = () => {
       shippingMethod: data.shippingMethod,
       shippingCost: shipping,
       comments: data.orderComment || "",
-      paymentIntentId: paymentIntentId!!,
+      paymentIntentId: paymentIntentId || null,
       products: cart.map((item) => ({
         product_id: item.id,
         quantity: item.quantity || 1,
@@ -383,8 +383,7 @@ const CheckoutForm = () => {
         "web/orders/place-order",
         orderPayload
       );
-      console.log("Order respone:", orderResponse.data);
-      return orderResponse.data?.data?.orderNumber || orderResponse.data?.orderNumber;
+      return orderResponse.data?.data?.id || orderResponse.data?.id;
     },
     [buildOrderPayload]
   );
@@ -392,9 +391,8 @@ const CheckoutForm = () => {
   const handleOrderSuccess = useCallback(
     (orderId?: string | number | null) => {
       skipEmptyCartCheckRef.current = true;
-      console.log("Clearing cart after order successs" , orderId);
-      setLatestOrderId(orderId ? String(orderId) : null);
       dispatch(clearCart());
+      setLatestOrderId(orderId ?? null);
       setIsSuccessModalOpen(true);
       toast.success(
         orderId
