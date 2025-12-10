@@ -49,6 +49,29 @@ export const fetchCartList = createAsyncThunk(
 );
 
 
+export const fetchOrderDetails = createAsyncThunk(
+  "cart/fetchOrderDetails",
+  async ({ orderId }: { orderId: any}, thunkAPI) => {
+    try {
+      const res = await axiosInstance.post(`web/orders/order-details`, {orderId});
+      console.log("Order details response: ", res?.data);
+      return res.data;
+    } catch (err: any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || "Failed to fetch order details"
+      );
+    }
+  }
+);
+
+
+
+
+
+
+
+
 const initialState: CartState = {
   items: [],
   loading: false,
