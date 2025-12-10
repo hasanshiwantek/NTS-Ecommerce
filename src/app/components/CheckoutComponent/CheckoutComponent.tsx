@@ -169,7 +169,7 @@ const CheckoutForm = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [latestOrderId, setLatestOrderId] = useState<string | number | null>(null);
+  const [latestOrderId, setLatestOrderId] = useState<string | null>(null);
   const [cardCompletion, setCardCompletion] = useState({
     number: false,
     expiry: false,
