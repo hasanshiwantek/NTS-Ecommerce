@@ -393,7 +393,7 @@ const CheckoutForm = () => {
     (orderId?: string | number | null) => {
       skipEmptyCartCheckRef.current = true;
       console.log("Clearing cart after order successs" , orderId);
-      setLatestOrderId(orderId ?? null);
+      setLatestOrderId(orderId ? String(orderId) : null);
       dispatch(clearCart());
       setIsSuccessModalOpen(true);
       toast.success(
