@@ -4,7 +4,8 @@ import React from 'react'
 const page = () => {
   return (
     <div>
-        <OrderConfirmation/>
+        {/* <OrderConfirmation/> */}
+        <h1>Order Confirmation Page</h1>
     </div>
   )
 }
