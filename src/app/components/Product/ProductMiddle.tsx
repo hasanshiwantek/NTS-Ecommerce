@@ -18,7 +18,7 @@ import { RootState } from "@/redux/store";
 const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-   const cart = useAppSelector((state: RootState) => state.cart.items);
+  const cart = useAppSelector((state: RootState) => state.cart.items);
   const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
     (state) => state.home
   );
@@ -77,23 +77,44 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
             {/* Ab ProductPrice component use karo */}
             <h2 className="xl:text-[16.8px] 2xl:text-[21px] font-bold text-[#ff482e]">
-  {product?.msrp && Number(product.msrp) > 0 ? (
-    <>
-     <span className="xl:text-[13.8px] 2xl:text-[18px] text-[#000000]">
-  Was <ProductPrice price={Number(product?.retailPrice)} inline={true} className="xl:text-[13.8px] 2xl:text-[18px] text-[#000000]" />
-</span>
-
-   <br/>   Now <ProductPrice price={Number(product?.price)} inline={true} textColor="#ff482e" className="xl:text-[16.8px] 2xl:text-[21px]" />
-      <span className="xl:text-[13.3px] 2xl:text-[16.6px] ml-2 text-[#d40511]">
-        You save <ProductPrice price={Number(product.msrp)} inline={true} textColor="#d40511" className="xl:text-[13.3px] 2xl:text-[16.6px]" />
-      </span>
-    </>
-  ) : (
-    product?.price && <ProductPrice price={Number(product?.price)} inline={true} textColor="#ff482e" className="xl:text-[16.8px] 2xl:text-[21px]" />
-  )}
-</h2>
-
-
+              {product?.msrp && Number(product?.msrp) > 0 ? (
+                <>
+                  <span className="xl:text-[13.8px] 2xl:text-[18px] text-[#000000]">
+                    Was{" "}
+                    <ProductPrice
+                      price={Number(product?.retailPrice)}
+                      inline={true}
+                      className="xl:text-[13.8px] 2xl:text-[18px] text-[#000000]"
+                    />
+                  </span>
+                  <br /> Now{" "}
+                  <ProductPrice
+                    price={Number(product?.price)}
+                    inline={true}
+                    textColor="#ff482e"
+                    className="xl:text-[16.8px] 2xl:text-[21px]"
+                  />
+                  <span className="xl:text-[13.3px] 2xl:text-[16.6px] ml-2 text-[#d40511]">
+                    You save{" "}
+                    <ProductPrice
+                      price={Number(product?.msrp)}
+                      inline={true}
+                      textColor="#d40511"
+                      className="xl:text-[13.3px] 2xl:text-[16.6px]"
+                    />
+                  </span>
+                </>
+              ) : (
+                product?.price && (
+                  <ProductPrice
+                    price={Number(product?.price)}
+                    inline={true}
+                    textColor="#ff482e"
+                    className="xl:text-[16.8px] 2xl:text-[21px]"
+                  />
+                )
+              )}
+            </h2>
           </div>
 
           {/* Secure Methods */}
@@ -135,16 +156,15 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
         {/* SKU / Availability / Quantity */}
         <div className="flex flex-col gap-1 w-full mt-3">
-           <Link
-                      href={`/brand/${product.brand?.slug}`}            >
-          <div className="flex gap-12 xl:gap-14 2xl:gap-16">
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
-              Manufacture
-            </h5>
-            <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
-              {product?.brand?.name || "N/A"}
-            </h5>
-          </div>
+          <Link href={`/brand/${product?.brand?.slug}`}>
+            <div className="flex gap-12 xl:gap-14 2xl:gap-16">
+              <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
+                Manufacture
+              </h5>
+              <h5 className="xl:text-[11.2px] 2xl:text-[14px] text-[#000000]">
+                {product?.brand?.name || "N/A"}
+              </h5>
+            </div>
           </Link>
           <div className="flex gap-12 xl:gap-14 2xl:gap-16">
             <h5 className="xl:text-[11.2px] 2xl:text-[14px] w-[18%] text-[#000000]">
@@ -238,32 +258,36 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
             {/* Add to Cart */}
             <button
-              aria-label={`Add ${quantity} ${product.name} to cart`}
-onClick={() => {
-  // Check if product already in cart
-  const existingItem = cart.find((item: any) => item.id === product.id);
-  const currentQty = existingItem ? existingItem.quantity : 0;
+              aria-label={`Add ${quantity} ${product?.name} to cart`}
+              onClick={() => {
+                // Check if product already in cart
+                const existingItem = cart.find(
+                  (item: any) => item.id === product.id
+                );
+                const currentQty = existingItem ? existingItem.quantity : 0;
 
-  // Calculate how much we can add without exceeding maxPurchaseQuantity
-  const remainingQty = product.maxPurchaseQuantity
-    ? product.maxPurchaseQuantity - currentQty
-    : quantity;
+                // Calculate how much we can add without exceeding maxPurchaseQuantity
+                const remainingQty = product?.maxPurchaseQuantity
+                  ? product.maxPurchaseQuantity - currentQty
+                  : quantity;
 
-  if (remainingQty < 0) {
-    toast.error(`Cannot add more than ${product.maxPurchaseQuantity} units of ${product.name} to cart.`);
-    return;
-  }
+                if (remainingQty < 0) {
+                  toast.error(
+                    `Cannot add more than ${product?.maxPurchaseQuantity} units of ${product.name} to cart.`
+                  );
+                  return;
+                }
 
-  // Final quantity to add (not total, just the increment)
-  const quantityToAdd = Math.min(quantity, remainingQty);
+                // Final quantity to add (not total, just the increment)
+                const quantityToAdd = Math.min(quantity, remainingQty);
 
-  // Dispatch with quantityToAdd
-  dispatch(addToCart({ ...product, quantity: quantityToAdd }));
+                // Dispatch with quantityToAdd
+                dispatch(addToCart({ ...product, quantity: quantityToAdd }));
 
-  toast.success(`${product.name} added to cart (${quantityToAdd})!`);
-}}
-
-
+                toast.success(
+                  `${product.name} added to cart (${quantityToAdd})!`
+                );
+              }}
               className="
       bg-[#F15939] 
       hover:border-[#F15939] hover:bg-white hover:text-[#F15939] 
@@ -287,7 +311,7 @@ onClick={() => {
       <div className="flex items-center mt-3 xl:mt-4 2xl:mt-6 h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
-          aria-label={`Buy ${product.name} now`}
+          aria-label={`Buy ${product?.name} now`}
           onClick={() => {
             dispatch(addToCart(product));
             setTimeout(() => {

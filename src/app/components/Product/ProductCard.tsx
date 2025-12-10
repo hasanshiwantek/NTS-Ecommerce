@@ -90,9 +90,9 @@ const ProductCard = ({ product }: { product: any }) => {
           />
           <ProductRight
             product={{
-              name: product.name,
+              name: product?.name,
               image: images[0],
-              sku: product.sku,
+              sku: product?.sku,
             }}
           />
         </div>
