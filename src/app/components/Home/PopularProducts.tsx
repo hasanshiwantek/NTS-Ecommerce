@@ -213,6 +213,7 @@ const PopularProducts = () => {
             </button>
           </Link>
         </div>
+        
 
         <BulkInquiryModal
           isOpen={isModalOpen}
