@@ -37,7 +37,6 @@ export interface Stats {
   deleted_at: string | null;
 }
 
-
 // Dynamically import Carousel to reduce bundle size
 const Carousel = dynamic(
   () => import("primereact/carousel").then((mod) => mod.Carousel),
@@ -127,9 +126,10 @@ const Testimonials = () => {
     const initialEnd = Math.min(totalPages - 1, initialStart + maxVisible - 1);
 
     // Adjust if we're near the end
-    const start = initialEnd - initialStart < maxVisible - 1 
-      ? Math.max(0, initialEnd - maxVisible + 1)
-      : initialStart;
+    const start =
+      initialEnd - initialStart < maxVisible - 1
+        ? Math.max(0, initialEnd - maxVisible + 1)
+        : initialStart;
     const end = initialEnd;
 
     return Array.from({ length: end - start + 1 }).map((_, i) => start + i);
@@ -139,14 +139,14 @@ const Testimonials = () => {
     <div className="mt-[2rem] m-2 text-left p-[24px] flex flex-col gap-5 bg-white ">
       <FaQuoteLeft size={24} color="#00b67a" className="mb-2" />
       <Link href={review?.url} target="_blank">
-        <h4 className="mb-2 h3-24px-medium line-clamp-1">
+        <h2 className="mb-2 h3-24px-medium line-clamp-1">
           {review?.reviewHeading}
-        </h4>
+        </h2>
       </Link>
       <div className="mb-3 flex items-center justify-between">
-        <Image 
-          src={review?.stars || "/default-product-image.svg"} 
-          alt="Rating" 
+        <Image
+          src={review?.stars || "/default-product-image.svg"}
+          alt="Rating"
           width={80}
           height={32}
           className="h-8 w-auto"
@@ -171,7 +171,7 @@ const Testimonials = () => {
     <div>
       {/* Header */}
       <header className="text-center flex flex-col 2xl:gap-5 gap-3 mb-10">
-        <h4 className="h5-20px-regular mb-4">Testimonials</h4>
+        <h2 className="h5-20px-regular mb-4">Testimonials</h2>
         <h2 className="h1-lg mb-4">
           Trusted by
           <span className="!text-[var(--primary-color)]"> 450+</span> Satisfied
@@ -185,9 +185,14 @@ const Testimonials = () => {
       <div className="flex items-center justify-between md:flex-col sm:flex-col lg:flex-row flex-col md:px-[7%] lg:px-[5.2%] xl:px-[5.2%] 2xl:px-[5.2%] px-[7%]">
         {/* Left Summary Box */}
         <div className="flex flex-col items-center justify-between gap-5 whitespace-nowrap 2xl:px-[60px] 2xl:py-[20px]">
-          <h3 className="text-center h3-regular">{stats?.status || "Excellent"}</h3>
+          <h3 className="text-center h3-regular">
+            {stats?.status || "Excellent"}
+          </h3>
           <Image
-            src={stats?.image || "https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"}
+            src={
+              stats?.image ||
+              "https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"
+            }
             alt="Reviews"
             width={200}
             height={200}
@@ -264,6 +269,7 @@ const Testimonials = () => {
           {reviews.length > 0 && !reviewsLoading && !reviewsError && (
             <div className="flex items-center justify-center mt-4 gap-4">
               <button
+                aria-label="Previous"
                 onClick={navigateLeft}
                 className="p-1 text-gray-500 hover:text-gray-800 transition"
               >
@@ -280,10 +286,11 @@ const Testimonials = () => {
                     }`}
                   ></span>
                 ))}
-              </div> 
+              </div>
 
               <button
                 onClick={navigateRight}
+                aria-label="Next"
                 className="p-1 text-gray-500 hover:text-gray-800 transition"
               >
                 <GoArrowRight size={25} />
