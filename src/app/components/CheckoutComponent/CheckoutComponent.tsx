@@ -209,7 +209,7 @@ const CheckoutForm = () => {
     }
     const timeoutId = setTimeout(() => {
       handleSuccessModalChange(false);
-    }, 2500);
+    }, 4000);
 
     return () => clearTimeout(timeoutId);
   }, [isSuccessModalOpen, handleSuccessModalChange]);
@@ -230,9 +230,9 @@ const CheckoutForm = () => {
     }
   }, [cart.length, router]);
 
-  const handleSuccessRedirect = useCallback(() => {
-    handleSuccessModalChange(false);
-  }, [handleSuccessModalChange]);
+  // const handleSuccessRedirect = useCallback(() => {
+  //   handleSuccessModalChange(false);
+  // }, [handleSuccessModalChange]);
   
   const {
     register,
@@ -400,11 +400,6 @@ const buildOrderPayload = useCallback(
       // setLatestOrderId(orderId ? String(orderId) : null);
       dispatch(clearCart());
       setIsSuccessModalOpen(true);
-      toast.success(
-        orderId
-          ? `Order #${orderId} created successfully!`
-          : "Order created successfully!"
-      );
       setIsProcessing(false);
     },
     [dispatch]
