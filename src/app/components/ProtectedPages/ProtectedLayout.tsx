@@ -1,25 +1,45 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { RootState } from "@/redux/store";
+import { logout } from "@/redux/slices/authSlice";
+
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const { isAuthenticated, expireAt } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    // Check if user is authenticated
-    if (isAuthenticated === false) {
-      // Redirect to login page, but preserve the intended destination
+    // 1. Check if user is authenticated
+    if (!isAuthenticated) {
       const loginUrl = `/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`;
       router.replace(loginUrl);
+      return;
     }
-  }, [isAuthenticated, router, pathname]);
 
-  // If not authenticated, show loader while redirecting
-  // Don't render children until authenticated
+  if (expireAt) {
+    const now = Date.now();
+    const expiryTime = new Date(expireAt).getTime();
+
+    if (now >= expiryTime) {
+      dispatch(logout());
+      router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+    } else {
+      const timeout = expiryTime - now;
+      const timer = setTimeout(() => {
+        dispatch(logout());
+        router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+      }, timeout);
+
+      return () => clearTimeout(timer); // Cleanup
+    }
+  }
+  }, [isAuthenticated, expireAt, dispatch, router, pathname]);
+
+  // Loader while redirecting
   if (!isAuthenticated) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -28,7 +48,6 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
     );
   }
 
-  // Only render children if authenticated
+  // Render children if authenticated
   return <>{children}</>;
 }
-
