@@ -78,6 +78,7 @@ interface CheckoutFormValues {
   shippingMethod: string;
   orderComment: string;
   paymentMethod: string;
+  paymentIntentId?: string;
   billingSame: boolean;
 }
 
@@ -169,7 +170,7 @@ const CheckoutForm = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const [latestOrderId, setLatestOrderId] = useState<string | number | null>(null);
+  // const [latestOrderId, setLatestOrderId] = useState<string | null>(null);
   const [cardCompletion, setCardCompletion] = useState({
     number: false,
     expiry: false,
@@ -195,7 +196,7 @@ const CheckoutForm = () => {
     (open: boolean) => {
       setIsSuccessModalOpen(open);
       if (!open) {
-        router.push("/");
+        router.push(`/my-account/orders`);
       }
     },
     [router]
@@ -350,31 +351,31 @@ const CheckoutForm = () => {
     };
   }, [stripe, cart, total]);
 
-  const buildOrderPayload = useCallback(
-    (data: CheckoutFormValues) => ({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      companyName: data.company || "",
-      email: data.email,
-      phone: data.phone || "",
-      addressLine1: data.address1,
-      addressLine2: data.address2 || "",
-      city: data.city,
-      state: data.state || "",
-      zip: data.zip,
-      country: data.country,
-      paymentMethod: data.paymentMethod,
-      shippingMethod: data.shippingMethod,
-      shippingCost: shipping,
-      comments: data.orderComment || "",
-      paymentIntentId: paymentIntentId || null,
-      products: cart.map((item) => ({
-        product_id: item.id,
-        quantity: item.quantity || 1,
-      })),
-    }),
-    [cart, shipping]
-  );
+const buildOrderPayload = useCallback(
+  (data: CheckoutFormValues & { paymentIntentId?: string | null }) => ({
+    firstName: data.firstName,
+    lastName: data.lastName,
+    companyName: data.company || "",
+    email: data.email,
+    phone: data.phone || "",
+    addressLine1: data.address1,
+    addressLine2: data.address2 || "",
+    city: data.city,
+    state: data.state || "",
+    zip: data.zip,
+    country: data.country,
+    paymentMethod: data.paymentMethod,
+    shippingMethod: data.shippingMethod,
+    shippingCost: shipping,
+    comments: data.orderComment || "",
+    paymentIntentId: data.paymentIntentId ?? "",
+    products: cart.map((item) => ({
+      product_id: item.id,
+      quantity: item.quantity || 1,
+    })),
+  }),
+  [cart, shipping]
+);
 
   const placeOrder = useCallback(
     async (data: CheckoutFormValues) => {
@@ -385,7 +386,7 @@ const CheckoutForm = () => {
         "web/orders/place-order",
         orderPayload
       );
-      return orderResponse.data?.data?.id || orderResponse.data?.id;
+      return orderResponse.data?.data?.orderNumber || orderResponse.data?.orderNumber;
     },
     [buildOrderPayload]
   );
@@ -393,8 +394,9 @@ const CheckoutForm = () => {
   const handleOrderSuccess = useCallback(
     (orderId?: string | number | null) => {
       skipEmptyCartCheckRef.current = true;
+      // console.log("Clearing cart after order successs" , orderId);
+      // setLatestOrderId(orderId ? String(orderId) : null);
       dispatch(clearCart());
-      setLatestOrderId(orderId ?? null);
       setIsSuccessModalOpen(true);
       toast.success(
         orderId
@@ -416,9 +418,8 @@ const CheckoutForm = () => {
         })),
       };
 
-      const response = await axiosInstance.post("web/stripe/pay", stripePayload);
-      console.log("Stripe charge response:", response.data?.payment_intent_id);
-       setPaymentIntentId(response.data?.payment_intent_id || null);
+        const response = await axiosInstance.post("web/stripe/pay", stripePayload);
+        return response.data?.payment_intent_id || null;
     },
     [cart]
   );
@@ -558,12 +559,18 @@ const CheckoutForm = () => {
         }
 
         if (paymentMethod) {
-          await handleStripeCharge(paymentMethod.id);
-        }
-      }
+          const intentId = await handleStripeCharge(paymentMethod.id);
 
-      const orderId = await placeOrder(data);
-      handleOrderSuccess(orderId);
+if (!intentId) {
+  toast.error("Failed to generate payment intent.");
+  setIsProcessing(false);
+  return;
+}
+const orderId = await placeOrder({ ...data, paymentIntentId: intentId });
+handleOrderSuccess(orderId);
+  return;
+      }
+      };
     } catch (err: any) {
       console.error("❌ Error processing order:", err);
       const errorMessage =
@@ -1299,7 +1306,34 @@ const CheckoutForm = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
       <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
+  <DialogContent className="sm:max-w-[380px] text-center py-8">
+    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+      <svg
+        className="h-10 w-10 text-green-600"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <DialogHeader>
+      <DialogTitle className="text-2xl font-bold text-gray-800">
+        Thank You!
+      </DialogTitle>
+      <DialogDescription className="text-gray-600 mt-2">
+        Your order has been placed successfully.<br />
+        We appreciate your business.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+
+      {/* <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
         <DialogContent className="sm:max-w-[400px] text-center">
           <DialogHeader>
             <DialogTitle>Order Placed Successfully</DialogTitle>
@@ -1319,7 +1353,7 @@ const CheckoutForm = () => {
             </Button>
           </DialogFooter>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 };
