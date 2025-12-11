@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 interface OrderSuccessModalProps {
@@ -59,10 +60,11 @@ export const OrderSuccessModal: React.FC<OrderSuccessModalProps> = ({ open, onCl
                 <div className="flex"><span className="text-gray-600 w-20">Email</span><span className="text-gray-900">{orderData.billing.email}</span></div>
               </div>
             </div>
-
+             {<Link href="/my-account/orders">
             <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-full transition-colors">
-              Track Your Order
+              Check Your Orders
             </button>
+            </Link>}
           </div>
 
           {/* Right Section - Order Summary */}
