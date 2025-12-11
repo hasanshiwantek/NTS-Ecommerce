@@ -31,7 +31,7 @@ const SigninPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => setShowPassword((prev) => !prev);
-  const { loading } = useAppSelector((state: RootState) => state?.auth);
+  const { authloading } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
 
     try {
@@ -134,7 +134,7 @@ const SigninPage = () => {
               </p>
 
               {/* Submit */}
-              {loading ? (
+              {authloading ? (
                 <div className="flex justify-center items-center py-9">
                   <div className="w-8 h-8 border-4 border-t-transparent border-[#F15939] rounded-full animate-spin"></div>
                 </div>
@@ -143,7 +143,7 @@ const SigninPage = () => {
                   type="submit"
                   className="w-full !py-6 sm:!py-7 2xl:!py-9 !rounded-full btn-primary  2xl:text-[22px] xl:text-[16.5] text-[14px] text-[#FFFFFF]"
                 >
-                  {loading ? "Logging in..." : "Login"}
+                  {authloading ? "Logging in..." : "Login"}
                 </Button>
               )}
             </form>

@@ -21,7 +21,8 @@ interface AuthState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
   token: string | null;
-  loading: boolean;
+  expireAt?: string | null;
+  authloading: boolean;
   error: string | null;
   isAuthenticated: boolean;
   stores: { storeId: number; name?: string }[];
@@ -30,7 +31,8 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   token: null,
-  loading: false,
+  expireAt: null,
+  authloading: false,
   error: null,
   isAuthenticated: false,
   stores: [],
@@ -100,6 +102,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
+      state.expireAt = null;
       state.isAuthenticated = false;
       // localStorage.removeItem("token");
     },
@@ -108,20 +111,21 @@ const authSlice = createSlice({
     builder
       // Pending
       .addCase(loginUser.pending, (state) => {
-        state.loading = true;
+        state.authloading = true;
         state.error = null;
       })
       .addCase(registerUser.pending, (state) => {
-        state.loading = true;
+        state.authloading = true;
         state.error = null;
       })
 
       // Fulfilled - login
       .addCase(loginUser.fulfilled, (state, action) => {
-        const {user, customer, token } = action.payload.data || action.payload;
-        state.loading = false;
+        const {user, customer, token ,expireAt} = action.payload.data || action.payload;
+        state.authloading = false;
         state.user = user || customer;
         state.token = token;
+        state.expireAt = expireAt;
         state.isAuthenticated = true;
         // state.stores = action.payload.stores.map((store: any) => ({
         //   storeId: store.id,
@@ -136,16 +140,16 @@ const authSlice = createSlice({
 
       // Fulfilled - register
       .addCase(registerUser.fulfilled, (state) => {
-        state.loading = false;
+        state.authloading = false;
       })
 
       // Rejected
       .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
+        state.authloading = false;
         state.error = action.payload as string;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
+        state.authloading = false;
         state.error = action.payload as string;
       });
   },

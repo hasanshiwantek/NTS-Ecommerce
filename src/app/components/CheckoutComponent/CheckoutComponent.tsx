@@ -50,6 +50,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useRouter } from "next/navigation";
+import { OrderSuccessModal } from "./OrderSuccessModal";
 // Stripe publishable key
 const stripePromise = loadStripe(
   "pk_test_51Q84ITDXm8Pt3arOOI28hj5W9JPohSimaAfVeGxCPCf9N86B5rK1POKOhQpOsNmeaid1cbRAU06yzV8eienwD10B00KDT12v4S"
@@ -190,7 +191,7 @@ const CheckoutForm = () => {
   const router = useRouter();
   const emptyCartWarningShownRef = useRef(false);
   const skipEmptyCartCheckRef = useRef(false);
-  const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
+  const [latestOrder, setLatestOrder] = useState<any | null>(null);
 
   const handleSuccessModalChange = useCallback(
     (open: boolean) => {
@@ -379,14 +380,15 @@ const buildOrderPayload = useCallback(
 
   const placeOrder = useCallback(
     async (data: CheckoutFormValues) => {
-      const orderPayload = buildOrderPayload(data);
-      console.log("Payload: ",orderPayload);
-      
+      const orderPayload = buildOrderPayload(data);      
       const orderResponse = await axiosInstance.post(
         "web/orders/place-order",
         orderPayload
       );
-      return orderResponse.data?.data?.orderNumber || orderResponse.data?.orderNumber;
+    const orderData = orderResponse.data?.data || orderResponse.data;
+    setLatestOrder(orderData); // <-- save full response
+
+    return orderData?.orderNumber || null;
     },
     [buildOrderPayload]
   );
@@ -1307,7 +1309,13 @@ handleOrderSuccess(orderId);
         </DialogContent>
       </Dialog>
 
-      <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
+       <OrderSuccessModal
+        open={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+         data={latestOrder}
+      />
+
+      {/* <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
   <DialogContent className="sm:max-w-[380px] text-center py-8">
     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
       <svg
@@ -1331,7 +1339,7 @@ handleOrderSuccess(orderId);
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
-</Dialog>
+</Dialog> */}
 
       {/* <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
         <DialogContent className="sm:max-w-[400px] text-center">
