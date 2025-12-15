@@ -65,27 +65,27 @@ const AOSWrapper = dynamic(() => import("../components/animation/AOSWrapper"));
 const page = () => {
   return (
     <main className="flex flex-col gap-30">
-      <AOSWrapper animation="zoom-in" delay={100}>
+      {/* <AOSWrapper animation="zoom-in" delay={100}> */}
         <AboutBanner />
-      </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={200}>
+      {/* </AOSWrapper> */}
+      {/* <AOSWrapper animation="fade-up" delay={200}> */}
         <GlobalSupplier />
-      </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={300}>
+      {/* </AOSWrapper> */}
+      {/* <AOSWrapper animation="fade-up" delay={300}> */}
         <AboutStats />
-      </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={400}>
+      {/* </AOSWrapper> */}
+      {/* <AOSWrapper animation="fade-up" delay={400}> */}
         <AboutBrandSection />
-      </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={500}>
+      {/* </AOSWrapper> */}
+      {/* <AOSWrapper animation="fade-up" delay={500}> */}
         <SocialResponsibilitySection />
-      </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={600}>
+      {/* </AOSWrapper> */}
+      {/* <AOSWrapper animation="fade-up" delay={600}> */}
         <GetInTouch />
-      </AOSWrapper>
-      <AOSWrapper animation="fade-up" delay={700}>
+      {/* </AOSWrapper> */}
+      {/* <AOSWrapper animation="fade-up" delay={700}> */}
         <ProductServicesSection />
-      </AOSWrapper>
+      {/* </AOSWrapper> */}
     </main>
   );
 };

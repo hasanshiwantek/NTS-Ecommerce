@@ -26,23 +26,23 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => {
     if (response.data?.message) {
-      toast.success(response.data.message, {
-        style: {
-          fontSize: "12px",
-          fontWeight: "bold",
-        },
-      });
+      // toast.success(response.data.message, {
+      //   style: {
+      //     fontSize: "12px",
+      //     fontWeight: "bold",
+      //   },
+      // });
     }
     return response;
   },
   (error) => {
     if (error.response?.data?.message) {
-      toast.error(error.response.data.message, {
-        style: {
-          fontSize: "12px",
-          fontWeight: "bold",
-        },
-      });
+      // toast.error(error.response.data.message, {
+      //   style: {
+      //     fontSize: "12px",
+      //     fontWeight: "bold",
+      //   },
+      // });
     }
 
     const errors = error.response?.data.errors;

@@ -12,32 +12,33 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    // 1. Check if user is authenticated
-    if (!isAuthenticated) {
-      const loginUrl = `/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`;
-      router.replace(loginUrl);
-      return;
-    }
-
-  if (expireAt) {
-    const now = Date.now();
-    const expiryTime = new Date(expireAt).getTime();
-
-    if (now >= expiryTime) {
-      dispatch(logout());
-      router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
-    } else {
-      const timeout = expiryTime - now;
-      const timer = setTimeout(() => {
-        dispatch(logout());
-        router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
-      }, timeout);
-
-      return () => clearTimeout(timer); // Cleanup
-    }
+useEffect(() => {
+  if (!isAuthenticated) {
+    const loginUrl = `/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`;
+    router.replace(loginUrl);
+    return;
   }
-  }, [isAuthenticated, expireAt, dispatch, router, pathname]);
+
+  if (!expireAt) return;
+
+  const now = Date.now();
+  const expiryTime = new Date(expireAt).getTime();
+  const timeoutDuration = expiryTime - now; // ✅ const
+
+  if (timeoutDuration <= 0) {
+    dispatch(logout());
+    router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+    return;
+  }
+
+  const timerId = setTimeout(() => {
+    dispatch(logout());
+    router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+  }, timeoutDuration);
+
+  return () => clearTimeout(timerId); // cleanup
+}, [isAuthenticated, expireAt, dispatch, router, pathname]);
+
 
   // Loader while redirecting
   if (!isAuthenticated) {

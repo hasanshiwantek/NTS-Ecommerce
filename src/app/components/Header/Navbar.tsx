@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
 
                 {open && (
                   <div
-                    className="absolute top-12 mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-36 z-10"
+                    className="absolute top-14 mt-1 bg-white shadow-lg rounded-md max-h-64 overflow-y-auto w-44 z-10"
                     ref={currencyRef}
                   >
                     {currencies?.map((c) => (

@@ -22,24 +22,24 @@ const ContactUs = () => {
   return (
     <div className="w-full">
       {/* Row 1: Banner */}
-      <AOSWrapper animation="zoom-in" delay={100}>
+      {/* <AOSWrapper animation="zoom-in" delay={100}> */}
         <ContactBanner />
-      </AOSWrapper>
+      {/* </AOSWrapper> */}
 
       {/* Row 2: Contact Form */}
-      <AOSWrapper animation="fade-up" delay={200}>
+      {/* <AOSWrapper animation="fade-up" delay={200}> */}
         <ContactForm />
-      </AOSWrapper>
+      {/* </AOSWrapper> */}
 
       {/* Reach Out to Us Section */}
-      <AOSWrapper animation="fade-up" delay={300}>
+      {/* <AOSWrapper animation="fade-up" delay={300}> */}
         <ReachOutSection />
-      </AOSWrapper>
+      {/* </AOSWrapper> */}
 
       {/* Frequently Asked Question Section */}
-      <AOSWrapper animation="fade-up" delay={400}>
+      {/* <AOSWrapper animation="fade-up" delay={400}> */}
         <FAQSection />
-      </AOSWrapper>
+      {/* </AOSWrapper> */}
     </div>
   );
 };

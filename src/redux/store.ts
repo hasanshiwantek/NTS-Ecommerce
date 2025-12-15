@@ -10,6 +10,7 @@ import currencyReducer from "./slices/currencySlice";
 import storeFrontReducer from "./slices/storeFrontSlice";
 import myaccountReducer from "./slices/myaccountSlice";
 import recentReducer from "./slices/recentSlice";
+import orderReducer from "./slices/orderslice";
 
 // ✅ only cart persist hoga
 const cartPersistConfig = {
@@ -30,6 +31,12 @@ const recentPersistConfig = {
   storage,
 };
 
+// ✅ only order persist hoga
+const orderPersistConfig = {
+  key: "order",
+  storage,
+};
+
 const rootReducer = combineReducers({
   home: homeReducer,
   currency: currencyReducer,
@@ -37,6 +44,7 @@ const rootReducer = combineReducers({
   config: configReducer,
   cart: persistReducer(cartPersistConfig, cartSliceReducer), // persisted
   recent: persistReducer(recentPersistConfig, recentReducer),
+  order: persistReducer(orderPersistConfig, orderReducer),
   storeFront: storeFrontReducer,
   myaccount: myaccountReducer ,
 });
