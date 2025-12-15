@@ -68,7 +68,7 @@ const SignupPage = () => {
         router.push("/auth/login");
       } else {
         const errorMessage =
-          result.error?.message || "Registration failed. Please try again.";
+          result.payload || "Registration failed. Please try again.";
         console.error("Registration failed:", errorMessage);
       }
     } catch (err: any) {
