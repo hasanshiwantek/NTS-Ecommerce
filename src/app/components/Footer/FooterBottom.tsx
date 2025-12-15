@@ -85,7 +85,7 @@ const FooterBottom = () => {
                 : "opacity-0 pointer-events-none"
             }`}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 ">
               <FooterSkeleton />
             </div>
           </div>
