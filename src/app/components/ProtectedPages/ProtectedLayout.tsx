@@ -20,23 +20,27 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
       return;
     }
 
-  if (expireAt) {
+    if (!expireAt) return; // agar expireAt null ho toh kuch na kare
+
     const now = Date.now();
     const expiryTime = new Date(expireAt).getTime();
+    let timeoutDuration = expiryTime - now;
 
-    if (now >= expiryTime) {
+    // Safety check: agar expiry past me ho, turant logout
+    if (timeoutDuration <= 0) {
       dispatch(logout());
       router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
-    } else {
-      const timeout = expiryTime - now;
-      const timer = setTimeout(() => {
-        dispatch(logout());
-        router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
-      }, timeout);
-
-      return () => clearTimeout(timer); // Cleanup
+      return;
     }
-  }
+
+    // ✅ Set timeout based on expireAt
+    const timer = setTimeout(() => {
+      dispatch(logout());
+      router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+    }, timeoutDuration);
+
+  return () => clearTimeout(timer); 
+
   }, [isAuthenticated, expireAt, dispatch, router, pathname]);
 
   // Loader while redirecting

@@ -50,7 +50,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useRouter } from "next/navigation";
-import { OrderSuccessModal } from "./OrderSuccessModal";
+import { setLastOrder } from "@/redux/slices/orderslice";
 // Stripe publishable key
 const stripePromise = loadStripe(
   "pk_test_51Q84ITDXm8Pt3arOOI28hj5W9JPohSimaAfVeGxCPCf9N86B5rK1POKOhQpOsNmeaid1cbRAU06yzV8eienwD10B00KDT12v4S"
@@ -79,7 +79,7 @@ interface CheckoutFormValues {
   shippingMethod: string;
   orderComment: string;
   paymentMethod: string;
-  paymentIntentId?: string;
+  paymentIntentId?: string | null;
   billingSame: boolean;
 }
 
@@ -170,7 +170,7 @@ const CheckoutForm = () => {
   const [itemToDelete, setItemToDelete] = useState<any | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  // const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   // const [latestOrderId, setLatestOrderId] = useState<string | null>(null);
   const [cardCompletion, setCardCompletion] = useState({
     number: false,
@@ -191,28 +191,28 @@ const CheckoutForm = () => {
   const router = useRouter();
   const emptyCartWarningShownRef = useRef(false);
   const skipEmptyCartCheckRef = useRef(false);
-  const [latestOrder, setLatestOrder] = useState<any | null>(null);
+  // const [latestOrder, setLatestOrder] = useState<any | null>(null);
 
-  const handleSuccessModalChange = useCallback(
-    (open: boolean) => {
-      setIsSuccessModalOpen(open);
-      if (!open) {
-        router.push(`/my-account/orders`);
-      }
-    },
-    [router]
-  );
+  // const handleSuccessModalChange = useCallback(
+  //   (open: boolean) => {
+  //     setIsSuccessModalOpen(open);
+  //     if (!open) {
+  //       router.push(`/my-account/orders`);
+  //     }
+  //   },
+  //   [router]
+  // );
 
-  useEffect(() => {
-    if (!isSuccessModalOpen) {
-      return;
-    }
-    const timeoutId = setTimeout(() => {
-      handleSuccessModalChange(false);
-    }, 4000);
+  // useEffect(() => {
+  //   if (!isSuccessModalOpen) {
+  //     return;
+  //   }
+  //   const timeoutId = setTimeout(() => {
+  //     handleSuccessModalChange(false);
+  //   }, 4000);
 
-    return () => clearTimeout(timeoutId);
-  }, [isSuccessModalOpen, handleSuccessModalChange]);
+  //   return () => clearTimeout(timeoutId);
+  // }, [isSuccessModalOpen, handleSuccessModalChange]);
 
   useEffect(() => {
     if (cart.length === 0) {
@@ -386,24 +386,24 @@ const buildOrderPayload = useCallback(
         orderPayload
       );
     const orderData = orderResponse.data?.data || orderResponse.data;
-    setLatestOrder(orderData); // <-- save full response
+    // setLatestOrder(orderData); // <-- save full response
 
-    return orderData?.orderNumber || null;
+    return orderData || null;
     },
     [buildOrderPayload]
   );
 
-  const handleOrderSuccess = useCallback(
-    (orderId?: string | number | null) => {
-      skipEmptyCartCheckRef.current = true;
-      // console.log("Clearing cart after order successs" , orderId);
-      // setLatestOrderId(orderId ? String(orderId) : null);
-      dispatch(clearCart());
-      setIsSuccessModalOpen(true);
-      setIsProcessing(false);
-    },
-    [dispatch]
-  );
+  // const handleOrderSuccess = useCallback(
+  //   (orderId?: string | number | null) => {
+  //     skipEmptyCartCheckRef.current = true;
+  //     // console.log("Clearing cart after order successs" , orderId);
+  //     // setLatestOrderId(orderId ? String(orderId) : null);
+  //     dispatch(clearCart());
+  //     setIsSuccessModalOpen(true);
+  //     setIsProcessing(false);
+  //   },
+  //   [dispatch]
+  // );
 
   const handleStripeCharge = useCallback(
     async (paymentMethodId: string) => {
@@ -426,30 +426,53 @@ const buildOrderPayload = useCallback(
       return;
     }
 
-    const handlePaymentMethod = async (event: any) => {
-      if (!pendingWalletForm) {
-        event.complete("fail");
-        toast.error("Unable to process wallet payment. Please try again.");
-        setIsProcessing(false);
-        return;
-      }
+   const handlePaymentMethod = async (event: any) => {
+  if (!pendingWalletForm) {
+    event.complete("fail");
+    toast.error("Unable to process wallet payment. Please try again.");
+    setIsProcessing(false);
+    return;
+  }
 
-      try {
-        await handleStripeCharge(event.paymentMethod.id);
-        const orderId = await placeOrder(pendingWalletForm);
-        event.complete("success");
-        handleOrderSuccess(orderId);
-      } catch (err: any) {
-        console.error("❌ Wallet payment failed:", err);
-        event.complete("fail");
-        const errorMessage =
-          err?.response?.data?.message || err?.message || "Payment failed.";
-        toast.error(errorMessage);
-        setIsProcessing(false);
-      } finally {
-        setPendingWalletForm(null);
-      }
-    };
+  try {
+    const paymentIntentId = await handleStripeCharge(event.paymentMethod.id);
+
+    if (!paymentIntentId) {
+      event.complete("fail");
+      toast.error("Failed to generate payment intent.");
+      setIsProcessing(false);
+      return;
+    }
+
+    const orderData = await placeOrder({
+      ...pendingWalletForm,
+      paymentIntentId
+    });
+
+    event.complete("success");
+
+    // ✅ Save in Redux (lastOrder) and clear cart
+    skipEmptyCartCheckRef.current = true; // agar aapka cart empty check logic hai
+    dispatch(setLastOrder(orderData));
+    dispatch(clearCart());
+
+    // ✅ Redirect to order success
+    router.push("/order-success");
+
+  } catch (err: any) {
+    console.error("❌ Wallet payment failed:", err);
+    event.complete("fail");
+
+    const errorMessage =
+      err?.response?.data?.message || err?.message || "Payment failed.";
+
+    toast.error(errorMessage);
+    setIsProcessing(false);
+
+  } finally {
+    setPendingWalletForm(null);
+  }
+};
 
     const handleCancel = () => {
       setIsProcessing(false);
@@ -463,121 +486,133 @@ const buildOrderPayload = useCallback(
       paymentRequest.off("paymentmethod", handlePaymentMethod);
       paymentRequest.off("cancel", handleCancel);
     };
-  }, [paymentRequest, pendingWalletForm, handleStripeCharge, placeOrder, handleOrderSuccess]);
+  }, [paymentRequest, pendingWalletForm, handleStripeCharge, placeOrder]);
 
   const onSubmit = async (data: CheckoutFormValues) => {
-    const selectedPaymentMethod = data.paymentMethod || "credit_card";
+  const selectedPaymentMethod = data.paymentMethod || "credit_card";
 
-    const requiresStripeCard = stripeCardMethods.includes(selectedPaymentMethod);
-    const isWalletMethod = walletMethods.includes(selectedPaymentMethod);
+  const requiresStripeCard = stripeCardMethods.includes(selectedPaymentMethod);
+  const isWalletMethod = walletMethods.includes(selectedPaymentMethod);
 
-    if (requiresStripeCard) {
-      if (!cardCompletion.number || !cardCompletion.expiry || !cardCompletion.cvc) {
-        const message =
-          "Please complete your card details before placing the order.";
-        setCardError(message);
-        toast.error(message);
-        return;
-      }
-
-      if (cardError) {
-        toast.error(cardError);
-        return;
-      }
-    }
-
-    if (isWalletMethod) {
-      const walletAvailable =
-        selectedPaymentMethod === "apple_pay"
-          ? walletSupport.applePay
-          : walletSupport.googlePay;
-
-      if (!paymentRequest || !walletAvailable) {
-        toast.error("This wallet is not available on your devicesss.");
-        return;
-      }
-
-      setPendingWalletForm(data);
-      setIsProcessing(true);
-      try {
-        paymentRequest.show();
-      } catch (err: any) {
-        console.error("❌ Unable to launch wallet:", err);
-        toast.error("Could not open the wallet sheet. Please try again.");
-        setIsProcessing(false);
-        setPendingWalletForm(null);
-      }
+  if (requiresStripeCard) {
+    if (!cardCompletion.number || !cardCompletion.expiry || !cardCompletion.cvc) {
+      const message =
+        "Please complete your card details before placing the order.";
+      setCardError(message);
+      toast.error(message);
       return;
     }
 
+    if (cardError) {
+      toast.error(cardError);
+      return;
+    }
+  }
+
+  if (isWalletMethod) {
+    const walletAvailable =
+      selectedPaymentMethod === "apple_pay"
+        ? walletSupport.applePay
+        : walletSupport.googlePay;
+
+    if (!paymentRequest || !walletAvailable) {
+      toast.error("This wallet is not available on your devicesss.");
+      return;
+    }
+
+    setPendingWalletForm(data);
     setIsProcessing(true);
 
     try {
-      if (requiresStripeCard) {
-        if (!stripe || !elements) {
-          toast.error("Payment service is not ready yet. Please try again.");
-          setIsProcessing(false);
-          return;
-        }
-
-        const cardNumberElement = elements.getElement(CardNumberElement);
-
-        if (!cardNumberElement) {
-          console.error("Card element not found");
-          toast.error("Payment form is not ready. Please refresh and try again.");
-          setIsProcessing(false);
-          return;
-        }
-
-        const { error: pmError, paymentMethod } =
-          await stripe.createPaymentMethod({
-            type: "card",
-            card: cardNumberElement,
-            billing_details: {
-              name: `${data.firstName} ${data.lastName}`,
-              email: data.email,
-              phone: data.phone,
-              address: {
-                line1: data.address1,
-                line2: data.address2,
-                city: data.city,
-                state: data.state,
-                postal_code: data.zip,
-                country: data.country,
-              },
-            },
-          });
-
-        if (pmError) {
-          console.error("Payment method error:", pmError);
-          toast.error(pmError.message || "Unable to create payment method.");
-          setIsProcessing(false);
-          return;
-        }
-
-        if (paymentMethod) {
-          const intentId = await handleStripeCharge(paymentMethod.id);
-
-if (!intentId) {
-  toast.error("Failed to generate payment intent.");
-  setIsProcessing(false);
-  return;
-}
-const orderId = await placeOrder({ ...data, paymentIntentId: intentId });
-handleOrderSuccess(orderId);
-  return;
-      }
-      };
+      paymentRequest.show();
     } catch (err: any) {
-      console.error("❌ Error processing order:", err);
-      const errorMessage =
-        err.response?.data?.message ||
-        err.message ||
-        "An error occurred while processing your order.";
-      toast.error(errorMessage);
+      console.error("❌ Unable to launch wallet:", err);
+      toast.error("Could not open the wallet sheet. Please try again.");
       setIsProcessing(false);
+      setPendingWalletForm(null);
     }
-  };
+
+    return;
+  }
+
+  setIsProcessing(true);
+
+  try {
+    let paymentIntentId: string | null = null;
+
+    // Stripe card flow
+    if (requiresStripeCard) {
+      if (!stripe || !elements) {
+        toast.error("Payment service is not ready yet. Please try again.");
+        setIsProcessing(false);
+        return;
+      }
+
+      const cardNumberElement = elements.getElement(CardNumberElement);
+
+      if (!cardNumberElement) {
+        toast.error("Payment form is not ready. Please refresh and try again.");
+        setIsProcessing(false);
+        return;
+      }
+
+      const { error: pmError, paymentMethod } =
+        await stripe.createPaymentMethod({
+          type: "card",
+          card: cardNumberElement,
+          billing_details: {
+            name: `${data.firstName} ${data.lastName}`,
+            email: data.email,
+            phone: data.phone,
+            address: {
+              line1: data.address1,
+              line2: data.address2,
+              city: data.city,
+              state: data.state,
+              postal_code: data.zip,
+              country: data.country,
+            },
+          },
+        });
+
+      if (pmError) {
+        console.error("Payment method error:", pmError);
+        toast.error(pmError.message || "Unable to create payment method.");
+        setIsProcessing(false);
+        return;
+      }
+
+      if (paymentMethod) {
+        paymentIntentId = await handleStripeCharge(paymentMethod.id);
+
+        if (!paymentIntentId) {
+          toast.error("Failed to generate payment intent.");
+          setIsProcessing(false);
+          return;
+        }
+      }
+    }
+
+    // Place order
+    const orderData = await placeOrder({ ...data, paymentIntentId });
+   skipEmptyCartCheckRef.current = true;
+    // Save to Redux
+    dispatch(setLastOrder(orderData));
+    dispatch(clearCart());
+    // Redirect
+    router.push("/order-success");
+  } catch (err: any) {
+    console.error("❌ Error processing order:", err);
+    const errorMessage =
+      err.response?.data?.message ||
+      err.message ||
+      "An error occurred while processing your order.";
+
+    toast.error(errorMessage);
+    setIsProcessing(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen py-10 px-[5%] md:px-[6%] lg:px-[7%] xl:px-0 2xl:px-0 xl:max-w-[1290px] 2xl:max-w-[1720px] mx-auto">
@@ -1156,7 +1191,7 @@ handleOrderSuccess(orderId);
                   disabled={!walletSupport.applePay}
                 />
                 <Image
-                  src="/checkouticon/applepay.png"
+                  src="/checkouticon/Apple-icon.svg"
                   alt="Apple Pay"
                   width={70}
                   height={25}
@@ -1304,11 +1339,11 @@ handleOrderSuccess(orderId);
         </DialogContent>
       </Dialog>
 
-       <OrderSuccessModal
+       {/* <OrderSuccessModal
         open={isSuccessModalOpen}
         onClose={() => setIsSuccessModalOpen(false)}
          data={latestOrder}
-      />
+      /> */}
 
       {/* <Dialog open={isSuccessModalOpen} onOpenChange={handleSuccessModalChange}>
   <DialogContent className="sm:max-w-[380px] text-center py-8">

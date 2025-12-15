@@ -69,30 +69,30 @@ const Page = async () => {
   return (
     <>
       <main className="flex flex-col gap-30" role="main">
-        <AOSWrapper animation="zoom-in" delay={100}>
+        {/* <AOSWrapper animation="zoom-in" delay={100}> */}
           <Banner />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={400}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={400}> */}
           <Brands />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={500}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={500}> */}
           <PopularProducts />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={600}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={600}> */}
           <TopIndustries />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={700}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={700}> */}
           <ItEquipment />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={800}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={800}> */}
           <AuthorizedSupplier />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={900}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={900}> */}
           <Testimonials />
-        </AOSWrapper>
-        <AOSWrapper animation="fade-up" delay={1000}>
+        {/* </AOSWrapper> */}
+        {/* <AOSWrapper animation="fade-up" delay={1000}> */}
           <GetInTouch />
-        </AOSWrapper>
+        {/* </AOSWrapper> */}
       </main>
     </>
   );
