@@ -14,11 +14,11 @@ const ProductCard = ({ product }: { product: any }) => {
   const dispatch = useAppDispatch();
   const addtocart = () => {
     dispatch(addToCart(product));
-    toast.success(`${product.name} added to cart!`);
+    toast.success(`${product?.name} added to cart!`);
   };
   const images =
     product?.image?.length > 0
-      ? product.image.map((img: any) => img.path)
+      ? product?.image?.map((img: any) => img?.path)
       : ["/default-product-image.svg"];
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
@@ -28,13 +28,13 @@ const ProductCard = ({ product }: { product: any }) => {
 
     dispatch(
       addRecentView({
-        sku: product.sku,
-        name: product.name,
+        sku: product?.sku,
+        name: product?.name,
         image:
-          product.image?.[0]?.path ||
-          product.image?.[1]?.path ||
+          product?.image?.[0]?.path ||
+          product?.image?.[1]?.path ||
           "/default-product-image.svg",
-        price: Number(product.price) || 0,
+        price: Number(product?.price) || 0,
       })
     );
   }, [product]);

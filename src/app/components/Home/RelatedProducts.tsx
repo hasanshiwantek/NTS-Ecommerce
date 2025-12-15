@@ -62,9 +62,9 @@ const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 
                  gap-10  relative justify-items-center "
           >
-            {visibleProducts.map((product: any) => (
+            {visibleProducts?.map((product: any) => (
               <div
-                key={product.id}
+                key={product?.id}
                 className="group relative flex flex-col justify-evenly items-start 
              w-full 
              xl:w-[101.5%] xl:h-[335.55px] 
@@ -78,11 +78,11 @@ const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
                 >
                   <Image
                     src={
-                      product.image?.[1]?.path ||
-                      product.image?.[0]?.path ||
+                      product?.image?.[1]?.path ||
+                      product?.image?.[0]?.path ||
                       "/default-product-image.svg"
                     }
-                    alt={product.name}
+                    alt={product?.name}
                     width={200}
                     height={100}
                     className="object-contain h-full w-auto  xl:h-[185px] lg:h-[185px] md:h-[185px]"
@@ -92,13 +92,13 @@ const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
                   />
                 </div>
 
-                {/* Product Name (2 lines max, fixed height) */}
+                {/* Product? Name (2 lines max, fixed height) */}
                 <Link
                   href={`/products/${product?.sku}`}
                   className="relative inline-block cursor-pointer group"
                 >
                   <p className="h6-18-px-medium line-clamp-2 min-h-[3rem]">
-                    {product.name}
+                    {product?.name}
                   </p>
 
                   {/* Animated underline */}
@@ -107,10 +107,10 @@ const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
                 {/* Brand + Availability + Price (reserve space) */}
                 <div className="flex flex-col justify-between min-h-[4.5rem] mt-2">
                   <h3 className="h7-16-px-regular line-clamp-1">
-                    {product.brand.name} | {product.availabilityText}
+                    {product?.brand?.name} | {product?.availabilityText}
                   </h3>
                   <p className="h6-18-px-medium group-hover:invisible">
-                    <ProductPrice price={Number(product.price) || 0} inline className="h6-18-px-medium" />
+                    <ProductPrice price={Number(product?.price) || 0} inline className="h6-18-px-medium" />
                   </p>
                 </div>
 
@@ -125,7 +125,7 @@ const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
                     name="cart"
                     onClick={() => {
                       dispatch(addToCart(product));
-                      toast.success(`${product.name} added to cart!`);
+                      toast.success(`${product?.name} added to cart!`);
                     }}
                     className="btn-primary xl:!text-2xl 2xl:!text-[22px] 2xl:!font-medium 
                                w-full sm:w-[48%] md:w-[45%] lg:w-[50%] xl:w-[45%]
