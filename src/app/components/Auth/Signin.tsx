@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { RootState } from "@/redux/store";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "react-toastify";
 interface SigninFormValues {
   email: string;
   password: string;
@@ -40,8 +41,11 @@ const SigninPage = () => {
         reset();
         router.push("/my-account/orders");
       } else {
-        const errorMessage =
-          result.error?.message || "Login failed. Please try again.";
+      const errorMessage =
+  typeof result?.payload === "string"
+    ? result.payload
+    : "Login failed. Please try again.";
+toast.error(errorMessage);
         console.error("❌ Login rejected with message:", errorMessage);
       }
     } catch (err: any) {
