@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Star, Plus, Minus } from "lucide-react";
 import Image from "next/image";
 import freelogo from "@/assets/card-icon/freelogo.png";
@@ -22,6 +22,11 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
   const { reviews, reviewsLoading, reviewsError, stats } = useAppSelector(
     (state) => state.home
   );
+ 
+   const handleSeeMore = useCallback(() => {
+      // Always go to all reviews page (not single)
+      window.open("https://www.trustpilot.com/review/newtownspares.com", "_blank");
+    }, []);
 
   useEffect(() => {
     dispatch(fetchReviews());
@@ -45,7 +50,7 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
 
           {/* Rating */}
           {/* Rating & Reviews */}
-          <div className="flex items-center space-x-3">
+          <div onClick={handleSeeMore} className="flex items-center space-x-3">
             {/* Stars */}
             {stats?.rating && (
               <img
@@ -311,15 +316,15 @@ const ProductMiddle = ({ product, quantity, increment, decrement }: any) => {
       <div className="flex items-center mt-3 xl:mt-4 2xl:mt-6 h-[38.4px] 2xl:h-[48.1px]">
         {/* Buy Now */}
         <button
-          // aria-label={`Buy ${product?.name} now`}
-          // onClick={() => {
-          //   dispatch(addToCart(product));
-          //   setTimeout(() => {
-          //     router.push("/checkout");
-          //   }, 2000);
-          // }}
+          aria-label={`Buy ${product?.name} now`}
+          onClick={() => {
+            dispatch(addToCart(product));
+            setTimeout(() => {
+              router.push("/checkout");
+            }, 2000);
+          }}
             style={{ cursor: "auto" }}
-          className="
+          className=" font-bold
       text-[14px] xl:text-[11.2px] 2xl:text-[14px]  
       bg-[#121e4d] text-white
     flex items-center justify-center space-x-2  

@@ -146,8 +146,8 @@ const ProductRight: React.FC<ProductRightProps> = ({ product }) => {
  
         {/* Support Card 2 */}
         <div className=" border border-gray-300 rounded-lg mt-6 2xl:mt-8">
-          <div className="bg-[#121e4d] px-6 py-4 text-center">
-            <h3 className="xl:text-[11.2px] 2xl:text-[14px] text-[#ffffff]">
+          <div className=" bg-[#F5F5F5] px-6 py-4 text-center">
+            <h3 className="xl:text-[11.2px] 2xl:text-[14px] text-[#121e4d] font-bold">
               Bulk Inquiry
             </h3>
           </div>

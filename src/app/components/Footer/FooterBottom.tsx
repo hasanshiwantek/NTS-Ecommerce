@@ -28,16 +28,16 @@ const FooterBottom = () => {
   }, []); // ✅ run once on mount
 
   return (
-    <footer className="bg-[#484848] text-white w-full mx-auto">
+    <footer className="bg-[#333333] text-white w-full mx-auto">
       {/* 🔹 Newsletter Section */}
-      <section className="bg-[#585858] flex justify-center items-center h-auto min-h-[10rem]">
+      <section className="bg-[#2C2D2C] flex justify-center items-center h-auto min-h-[10rem]">
         <div
           className="
-        w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[88%] xl:max-w-[85%]
+        w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[85%] xl:max-w-[80%]
         2xl:max-w-[90%] 
         mx-auto 
-        px-4 sm:px-6 lg:px-8 xl:px-10 
-        flex flex-col md:flex-row items-center justify-between
+        px-4 sm:px-6 lg:px-8 xl:px-10 py-2 md:py-0
+        flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8 lg:gap-0
       "
         >
           <div className="text-center md:text-left w-full md:w-[60%] 2xl:max-w-[50%]">
@@ -49,15 +49,15 @@ const FooterBottom = () => {
             </p>
           </div>
 
-          <form className="w-full md:w-[40%] 2xl:max-w-[45%] flex items-center mt-4 md:mt-0">
+          <form className="w-[80%] md:w-[50%] 2xl:max-w-[30%] flex items-center mt-4 md:mt-0">
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-2 border border-white text-[#333] bg-white focus:outline-none rounded-md text-sm md:text-base"
+              className="w-full px-4 py-3 border border-white text-[#333] bg-white focus:outline-none rounded-md text-sm md:text-base"
             />
             <button
               type="submit"
-              className="btn-primary !p-2 !rounded-sm w-[30%] md:w-[25%] max-w-[9rem]"
+              className="btn-primary !p-3 !rounded-sm w-[40%] md:w-[30%] max-w-[9rem]"
             >
               Subscribe
             </button>
@@ -98,7 +98,7 @@ const FooterBottom = () => {
                 : "opacity-0 pointer-events-none"
             }`}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20">
               {categories.map((category) => (
                 <nav key={category.id} aria-label={category.name}>
                   <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
@@ -190,6 +190,14 @@ const FooterBottom = () => {
                 <Link href="/cart">My cart</Link>
               </li>
             </ul>
+            <h4 className="h5-bold !text-[#FFFFFF] mt-10">Follow Us</h4>
+              <Image
+            src="/footer-logo.png"
+            alt="Join Us Logo"
+            width={120}
+            height={48}
+            className="object-contain m-auto lg:m-0 mt-4"
+          />
           </nav>
 
           <section aria-label="Contact Us">
@@ -217,7 +225,7 @@ const FooterBottom = () => {
       </section>
 
       {/* 🔹 Bottom Bar */}
-      <div className="h5-regular flex items-center flex-wrap sm:flex-nowrap justify-between bg-[#585858] min-h-[4.5rem] px-[5%]">
+      <div className="h5-regular flex items-center flex-wrap sm:flex-nowrap justify-between bg-[#2C2D2C] min-h-[4.5rem] px-[5%]">
         {/* Center Content */}
         <p className="!text-white text-center w-full">
           &copy; New Town Spares {new Date().getFullYear()}. All rights
@@ -225,7 +233,7 @@ const FooterBottom = () => {
         </p>
 
         {/* Right Content */}
-        <p className="flex items-center gap-2 h5-regular !text-white mx-auto sm:ml-auto">
+        {/* <p className="flex items-center gap-2 h5-regular !text-white mx-auto sm:ml-auto">
           <span className="whitespace-nowrap">Join Us</span>
           <Image
             src="/footer-logo.png"
@@ -234,7 +242,7 @@ const FooterBottom = () => {
             height={48}
             className="object-contain"
           />
-        </p>
+        </p> */}
       </div>
     </footer>
   );
