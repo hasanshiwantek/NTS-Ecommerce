@@ -67,74 +67,9 @@ const FooterBottom = () => {
 
       {/* 🔹 Dynamic Categories Section */}
 
-      <section
-        className="
-    w-full max-w-full sm:max-w-[95%] md:max-w-[90%] lg:max-w-[88%] xl:max-w-[85%] 
-    2xl:max-w-[90%] 
-    mx-auto 
-    px-4 sm:px-6 lg:px-8 xl:px-10 
-    py-16 text-center sm:text-start
-  "
-      >
-        <div className="relative 2xl:min-h-[600px] min-h-[500px]">
-          {/* Skeleton (visible while loading) */}
-          <div
-            className={`absolute inset-0 transition-opacity duration-500   ${
-              categories.length === 0
-                ? "opacity-100"
-                : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 ">
-              <FooterSkeleton />
-            </div>
-          </div>
+     
 
-          {/* Actual categories (fade in smoothly after load) */}
-          <div
-            className={`transition-opacity duration-500 ${
-              categories.length > 0
-                ? "opacity-100"
-                : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20">
-              {categories.map((category) => (
-                <nav key={category.id} aria-label={category.name}>
-                  <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
-                    {category.name}
-                  </h4>
-                  <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4 gap-5">
-                    {category.subcategories?.length ? (
-                      category.subcategories.map((sub) => (
-                        <li key={sub.id}>
-                          <Link
-                            href={`/category/${sub.slug}`}
-                            className="hover:text-white "
-                          >
-                            {sub.name}
-                          </Link>
-                        </li>
-                      ))
-                    ) : (
-                      <li>
-                        <Link
-                          href={`/category/${category.slug}`}
-                          className="hover:text-white"
-                        >
-                          {category.name}
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
-                </nav>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="w-full max-w-[90%] h-[0.125rem] bg-[#585858] mx-auto"></div>
+      {/* <div className="w-full max-w-[90%] h-[0.125rem] bg-[#585858] mx-auto"></div> */}
 
       {/* 🔹 Info Section (static content) */}
       <section
@@ -146,7 +81,7 @@ const FooterBottom = () => {
       py-16 text-center sm:text-start
     "
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           <nav aria-label="Customer Services">
             <h4 className="h5-bold !text-[#FFFFFF] mb-4">Customer Services</h4>
             <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF] gap-5">
@@ -216,6 +151,40 @@ const FooterBottom = () => {
                 <a href="tel:+4122123345677">+41 22 123345677</a>
               </li>
             </ul>
+          </section>
+
+          <section aria-label="Contact Us">
+            
+             {categories.slice(0.10).map((category) => (
+                <nav key={category.id} aria-label={category.name}>
+                  <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
+                    {category.name}
+                  </h4>
+                  {/* <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4 gap-5">
+                    {category.subcategories?.length ? (
+                      category.subcategories.map((sub) => (
+                        <li key={sub.id}>
+                          <Link
+                            href={`/category/${sub.slug}`}
+                            className="hover:text-white "
+                          >
+                            {sub.name}
+                          </Link>
+                        </li>
+                      ))
+                    ) : (
+                      <li>
+                        <Link
+                          href={`/category/${category.slug}`}
+                          className="hover:text-white"
+                        >
+                          {category.name}
+                        </Link>
+                      </li>
+                    )}
+                  </ul> */}
+                </nav>
+              ))}
           </section>
 
           <address className="not-italic">
