@@ -191,13 +191,17 @@ const FooterBottom = () => {
               </li>
             </ul>
             <h4 className="h5-bold !text-[#FFFFFF] mt-10">Follow Us</h4>
-              <Image
-            src="/footer-logo.png"
-            alt="Join Us Logo"
-            width={120}
-            height={48}
-            className="object-contain m-auto lg:m-0 mt-4"
-          />
+            <div className="w-[120px] h-[48px] m-auto lg:m-0 mt-4">
+  <Image
+    src="/footer-logo.png"
+    alt="Join Us Logo"
+    width={120}
+    height={48}
+    className="object-contain"
+  />
+</div>
+
+
           </nav>
 
           <section aria-label="Contact Us">
