@@ -1,29 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { clearLastOrder } from "@/redux/slices/orderslice";
+import Link from "next/link";
 
 export default function OrderSuccessPage() {
   const order = useAppSelector((state) => state.order.lastOrder);
-  const [localOrder, setLocalOrder] = useState(order); // 👈 copy to local state
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (!order) return;
-
-    setLocalOrder(order); // make sure we have latest order in local state
-
-    const timer = setTimeout(() => {
-      dispatch(clearLastOrder());         // clear redux
-      window.location.href = "/my-account/orders"; // redirect
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [dispatch, order]);
+  const [localOrder] = useState(order); // ✅ copy to local state
 
   if (!localOrder) {
-    // fallback UI if somehow localOrder is null
     return (
       <div className="p-8 text-center">
         <h1 className="text-3xl font-bold mb-4">No order found</h1>
@@ -70,9 +57,15 @@ export default function OrderSuccessPage() {
     total: Number(localOrder.totalAmount || 0),
   };
 
+  const handleCheckOrders = () => {
+    // ✅ clear Redux only after UI has localOrder
+    dispatch(clearLastOrder());
+    window.location.href = "/my-account/orders";
+  };
+
   return (
     <div className="p-8 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
 
         {/* Left Section */}
         <div className="space-y-8">
@@ -83,9 +76,6 @@ export default function OrderSuccessPage() {
             <p className="text-gray-600 leading-relaxed">
               Your order will be processed within 24 hours during working days.
               We will notify you by email once your order has been shipped.
-            </p>
-            <p className="text-sm text-gray-500 mt-2">
-              You will be redirected to your orders in 5 seconds…
             </p>
           </div>
 
@@ -111,11 +101,12 @@ export default function OrderSuccessPage() {
             </div>
           </div>
 
-          <Link href="/my-account/orders">
-            <button className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-full transition-colors">
-              Check Your Orders
-            </button>
-          </Link>
+          <button
+            onClick={handleCheckOrders}
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-full transition-colors"
+          >
+            Check Your Orders
+          </button>
         </div>
 
         {/* Right Section - Order Summary */}
@@ -170,4 +161,3 @@ export default function OrderSuccessPage() {
     </div>
   );
 }
-
