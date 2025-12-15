@@ -12,36 +12,33 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    // 1. Check if user is authenticated
-    if (!isAuthenticated) {
-      const loginUrl = `/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`;
-      router.replace(loginUrl);
-      return;
-    }
+useEffect(() => {
+  if (!isAuthenticated) {
+    const loginUrl = `/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`;
+    router.replace(loginUrl);
+    return;
+  }
 
-    if (!expireAt) return; // agar expireAt null ho toh kuch na kare
+  if (!expireAt) return;
 
-    const now = Date.now();
-    const expiryTime = new Date(expireAt).getTime();
-    let timeoutDuration = expiryTime - now;
+  const now = Date.now();
+  const expiryTime = new Date(expireAt).getTime();
+  const timeoutDuration = expiryTime - now; // ✅ const
 
-    // Safety check: agar expiry past me ho, turant logout
-    if (timeoutDuration <= 0) {
-      dispatch(logout());
-      router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
-      return;
-    }
+  if (timeoutDuration <= 0) {
+    dispatch(logout());
+    router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+    return;
+  }
 
-    // ✅ Set timeout based on expireAt
-    const timer = setTimeout(() => {
-      dispatch(logout());
-      router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
-    }, timeoutDuration);
+  const timerId = setTimeout(() => {
+    dispatch(logout());
+    router.replace(`/auth/login?redirect=${encodeURIComponent(pathname || "/checkout")}`);
+  }, timeoutDuration);
 
-  return () => clearTimeout(timer); 
+  return () => clearTimeout(timerId); // cleanup
+}, [isAuthenticated, expireAt, dispatch, router, pathname]);
 
-  }, [isAuthenticated, expireAt, dispatch, router, pathname]);
 
   // Loader while redirecting
   if (!isAuthenticated) {
