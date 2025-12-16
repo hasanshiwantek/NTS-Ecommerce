@@ -126,7 +126,7 @@ const FooterBottom = () => {
               </li>
             </ul>
             <h4 className="h5-bold !text-[#FFFFFF] mt-10">Follow Us</h4>
-            <div className="w-[120px] h-[48px] m-auto lg:m-0 mt-4">
+            <div className="w-[120px] h-[48px] m-auto lg:m-0 mt-7">
   <Image
     src="/footer-logo.png"
     alt="Join Us Logo"
@@ -155,36 +155,33 @@ const FooterBottom = () => {
 
           <section aria-label="Contact Us">
             
-             {categories.slice(0.10).map((category) => (
-                <nav key={category.id} aria-label={category.name}>
-                  <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
-                    {category.name}
-                  </h4>
-                  {/* <ul className="h5-regular !text-[#FFFFFF] flex flex-col xl:gap-3 2xl:gap-4 gap-5">
-                    {category.subcategories?.length ? (
-                      category.subcategories.map((sub) => (
-                        <li key={sub.id}>
-                          <Link
-                            href={`/category/${sub.slug}`}
-                            className="hover:text-white "
-                          >
-                            {sub.name}
-                          </Link>
-                        </li>
-                      ))
-                    ) : (
-                      <li>
-                        <Link
-                          href={`/category/${category.slug}`}
-                          className="hover:text-white"
-                        >
-                          {category.name}
-                        </Link>
-                      </li>
-                    )}
-                  </ul> */}
-                </nav>
-              ))}
+     
+            <nav aria-label="Categories">
+  <h4 className="h5-bold !text-[#FFFFFF] mb-4 uppercase">
+    Categories
+  </h4>
+
+  <ul className="flex flex-col gap-5 xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF]">
+    {categories && categories.length > 0 ? (
+      categories.slice(0, 10).map((category) => (
+        <li key={category.id || category.name}>
+          <Link href={`/category/${category.slug}`}>
+            {category.name}
+          </Link>
+        </li>
+      ))
+    ) : (
+      // 🔹 Skeleton Loader
+      Array.from({ length: 6 }).map((_, index) => (
+        <li key={index}>
+          <div className="h-4 w-40 bg-white/20 rounded animate-pulse" />
+        </li>
+      ))
+    )}
+  </ul>
+</nav>
+
+
           </section>
 
           <address className="not-italic">
