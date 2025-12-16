@@ -168,7 +168,7 @@ useEffect(() => {
     bg-[var(--primary-color)] text-white font-medium rounded-md border border-[var(--primary-color)]
     hover:bg-white hover:text-[var(--primary-color)] hover:border hover:border-[var(--primary-color)]
     transition duration-300
-    w-[50%] sm:w-[65%] md:w-[60%] lg:w-[70%] xl:w-[80%] 2xl:w-[85%]
+    w-[50%] sm:w-[65%] md:w-[60%] lg:w-[75%] xl:w-[80%] 2xl:w-[85%]
     2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
     text-base sm:text-base lg:text-medium xl:text-lg 2xl:text-xl
   "
@@ -182,7 +182,7 @@ useEffect(() => {
           className="
     border border-gray-500 text-gray-800 bg-white rounded-md font-medium
     hover:bg-gray-100 transition duration-300
-    w-[50%] sm:w-[60%] md:w-[55%] xl:w-[80%] 2xl:w-[85%]
+    w-[50%] sm:w-[60%] md:w-[55%] lg:w-[75%] xl:w-[80%] 2xl:w-[85%]
    2xl:py-[7%] xl:py-[6%] lg:py-[6%] md:py-[2%] sm:py-[2%] py-[2%] 
    text-base sm:text-base xl:text-lg 2xl:text-xl
   "

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
 import {
+  clearCart,
   decreaseQty,
   increaseQty,
   removeFromCart,
@@ -192,8 +193,8 @@ const CartList = () => {
             Continue Shopping
           </button>
         </Link>
-        <button className="h3-regular xl:w-46 2xl:w-68 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
-          Update Cart
+        <button onClick={() => dispatch(clearCart())} disabled={cart.length === 0} className="h3-regular xl:w-46 2xl:w-68 py-2 px-5 border border-[#4A4A4A] rounded-lg hover:bg-gray-100 transition">
+          Empty Cart
         </button>
       </div>
       {/* ShadCN Dialog for Delete Confirmation */}

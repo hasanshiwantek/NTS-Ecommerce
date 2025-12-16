@@ -42,14 +42,27 @@ export default function Sidebar({
   const [expandedSection, setExpandedSection] = useState<string | null>(
     "Top Brands"
   );
-  const [expandedCategorySection, setExpandedCategorySection] = useState<
-    string | null
-  >(null);
+  // const [expandedCategorySection, setExpandedCategorySection] = useState<
+  //   string | null
+  // >(null);
+  const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set());
 
   const router = useRouter();
   const params = useParams();
-  const toggleCategorySection = (section: string) => {
-    setExpandedCategorySection((prev) => (prev === section ? null : section));
+  // const toggleCategorySection = (section: string) => {
+  //   setExpandedCategorySection((prev) => (prev === section ? null : section));
+  // };
+   
+ const handleToggleExpand = (categoryId: number) => {
+    setExpandedCategories((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId); // collapse
+      } else {
+        newSet.add(categoryId); // expand
+      }
+      return newSet;
+    });
   };
 
   const toggleSection = (section: string) => {
@@ -105,13 +118,13 @@ export default function Sidebar({
   };
 
   // ✅ When URL slug changes, auto-expand matching categories
-  useEffect(() => {
+ useEffect(() => {
     if (params?.slug && categories?.length > 0) {
       const chain = findParentChain(categories, params.slug);
       if (chain && chain.length > 0) {
-        // open the immediate parent section
-        const topLevel = chain[0];
-        setExpandedCategorySection(topLevel.name);
+        // Auto-expand all parents in the chain
+        const idsToExpand = chain.map((c: any) => c.id);
+        setExpandedCategories(new Set(idsToExpand));
       }
     }
   }, [params?.slug, categories]);
@@ -167,7 +180,7 @@ export default function Sidebar({
           </li>
 
           {/* Dynamic Categories */}
-          {categories.map((cat: any) => (
+          {/* {categories.map((cat: any) => (
             <li key={cat.id}>
               <div
                 onClick={() => {
@@ -196,7 +209,7 @@ export default function Sidebar({
               </div>
 
               <AnimatePresence initial={false}>
-                {expandedCategorySection === cat.name && (
+                {expandedCategorySection[cat.name] && (
                   <MotionDiv
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
@@ -213,7 +226,14 @@ export default function Sidebar({
                 )}
               </AnimatePresence>
             </li>
-          ))}
+          ))} */}
+           <CategoryFilter
+            categories={categories}
+            handleCategoryClick={handleCategoryClick}
+            activeCategoryId={filters?.categoryIds?.[0]}
+            expandedCategories={expandedCategories}
+            onToggleExpand={handleToggleExpand}
+          />
         </ul>
       </div>
 

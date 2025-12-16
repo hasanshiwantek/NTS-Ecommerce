@@ -13,18 +13,15 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
            p-1 bg-[#FFF]"
         >
            <Image
-    src={selectedImage || "/default-product-image.svg"}
-    alt="Main product image"
-    className="object-contain rounded-lg"
-    width={500}
-    height={500}
-    priority
-    fetchPriority="high"
-    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-    quality={85}
-    placeholder={selectedImage ? undefined : "blur"}
-    blurDataURL={selectedImage ? undefined : "/default-product-image.svg"} // default image blur
-  />
+        src={selectedImage || "/default-product-image.svg"}
+        alt="Main product image"
+        width={408} // Actual displayed width (640 ki jagah)
+        height={277} // Actual displayed height (434 ki jagah)
+        className="object-contain rounded-lg max-w-full h-auto"
+        priority
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 50vw, 408px"
+        quality={80}
+      />
         </figure>
 
         {/* Thumbnails */}

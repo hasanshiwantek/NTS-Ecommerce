@@ -222,13 +222,18 @@ const Navbar: React.FC = () => {
                 loading="lazy"
               />
               <div className="flex flex-col leading-tight">
-                <p className="text-[16px] text-[#EDEDED] font-normal ">
-                  orders@newtownspares.com
-                </p>
-                <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold">
-                  (209) 300 1234567
-                </p>
-              </div>
+  <p className="text-[16px] text-[#EDEDED] font-normal">
+    <a href="mailto:orders@newtownspares.com" className="hover:underline">
+      orders@newtownspares.com
+    </a>
+  </p>
+  <p className="text-xs sm:text-sm md:text-base lg:text-lg 2xl:text-[20px] font-semibold">
+    <a href="tel:+12093001234567" className="hover:underline">
+      (209) 300 1234567
+    </a>
+  </p>
+</div>
+
             </div>
 
             {/* Cart */}
