@@ -9,16 +9,18 @@ const ProductLeft = ({ images, selectedImage, setSelectedImage }: any) => {
         {/* Main Image */}
        <figure className="rounded-md sm:mt-0 border flex items-center justify-center w-full lg:h-[35rem] xl:h-[39.1rem] 2xl:h-[49.1rem] p-4 bg-[#FFF]">
   <div className="relative w-full h-full">
-    <Image
-      src={selectedImage || "/default-product-image.svg"}
-      alt="Main product image"
-      className="object-contain rounded-lg"
-      fill
-      priority
-      fetchPriority="high"
-      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-      quality={85}
-    />
+      <Image
+              src={selectedImage || "/default-product-image.svg"}
+              alt="Main product image"
+              className="object-contain rounded-lg"
+              fill
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+              quality={85}
+              placeholder={selectedImage ? undefined : "blur"} // blur for default image
+              blurDataURL={selectedImage ? undefined : "/default-product-image.svg"} // same image as tiny blur
+            />
   </div>
 </figure>
 
