@@ -5,6 +5,7 @@ import { fetchProductBySlug, fetchProducts } from "@/lib/api/products";
 import ProductCard from "@/app/components/Product/ProductCard";
 import ProductOverview from "@/app/components/Product/ProductOverview";
 import ProductExtras from "@/app/components/Product/ProductExtras";
+import { Suspense } from "react";
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata({
   params,
@@ -79,28 +80,40 @@ export default async function ProductPage({
 }) {
   const { slug } = await params; // <-- await here
   console.log("Slug: ", slug);
+  // 🔥 Parallel data fetching
+  const [product, products] = await Promise.all([
+    fetchProductBySlug(slug),
+    fetchProducts(),
+  ]);
 
-  const product = await fetchProductBySlug(slug);
-  const products = await fetchProducts();
-
-  // ✅ Use backend schema directly
-  const backendSchema = product?.schema; // Assuming backend returns the full JSON-LD object
+  const backendSchema = product?.schema;
 
   return (
     <>
-      {/* ✅ Structured Data */}
-      <Script
-        id="product-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(backendSchema) }}
-        strategy="lazyOnload"
-      />
+      {/* ✅ Structured Data (SEO safe) */}
+      {backendSchema && (
+        <Script
+          id="product-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(backendSchema),
+          }}
+          strategy="afterInteractive"
+        />
+      )}
+
       <main role="main">
         <article>
           <ProductCard product={product} />
           <ProductOverview product={product} />
-          {/* Client-side components */}
-          <ProductExtras products={products} />
+
+          {/* Client-side component */}
+        <Suspense fallback={<div className="py-10 text-center text-sm text-gray-500">
+      Loading...
+    </div>}>
+  <ProductExtras products={products} />
+       </Suspense>
+
         </article>
       </main>
     </>
