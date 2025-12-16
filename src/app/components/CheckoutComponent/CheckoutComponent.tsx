@@ -1195,7 +1195,7 @@ const buildOrderPayload = useCallback(
                   alt="Apple Pay"
                   width={70}
                   height={25}
-                  className="object-contain my-2"
+                  className="object-contain my-1 h-13 w-16"
                 />
               </div>
               {walletSupport.applePay ? (
@@ -1214,7 +1214,7 @@ const buildOrderPayload = useCallback(
             </label>
 
             {/* Affirm */}
-            <label className="flex flex-col mt-4 sm:flex-row items-center justify-between border rounded px-3 py-3 cursor-pointer w-full gap-3 has-[:checked]:border-orange-500">
+            {/* <label className="flex flex-col mt-4 sm:flex-row items-center justify-between border rounded px-3 py-3 cursor-pointer w-full gap-3 has-[:checked]:border-orange-500">
               <div className="flex items-center gap-3">
                 <input
                   type="radio"
@@ -1231,11 +1231,11 @@ const buildOrderPayload = useCallback(
                   alt="Affirm"
                   width={80}
                   height={15}
-                  className="object-contain mb-2"
+                  className="object-contain mb-3.5"
                 />
               </div>
               <span className="h5-regular">(Pay over time)</span>
-            </label>
+            </label> */}
             {errors.paymentMethod && (
               <p className="text-sm text-red-500 mt-1">
                 {errors.paymentMethod.message}

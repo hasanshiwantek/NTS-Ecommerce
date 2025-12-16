@@ -10,7 +10,7 @@ import { addToCart } from "@/redux/slices/cartSlice";
 import { addRecentView } from "@/redux/slices/recentSlice";
 
 const ProductCard = ({ product }: { product: any }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
   const addtocart = () => {
     dispatch(addToCart(product));
@@ -48,7 +48,7 @@ const ProductCard = ({ product }: { product: any }) => {
     }
   };
 
-  const decrement = () => quantity > 0 && setQuantity(quantity - 1);
+ const decrement = () => quantity > 1 && setQuantity(quantity - 1);
 
   return (
     <div className="max-w-full mx-auto">
