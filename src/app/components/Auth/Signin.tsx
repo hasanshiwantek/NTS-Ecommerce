@@ -32,7 +32,7 @@ const SigninPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => setShowPassword((prev) => !prev);
-  const { authloading } = useAppSelector((state: RootState) => state?.auth);
+  const { loginLoading  } = useAppSelector((state: RootState) => state?.auth);
   const onSubmit = async (data: SigninFormValues) => {
 
     try {
@@ -138,7 +138,7 @@ toast.error(errorMessage);
               </p>
 
               {/* Submit */}
-              {authloading ? (
+              {loginLoading  ? (
                 <div className="flex justify-center items-center py-9">
                   <div className="w-8 h-8 border-4 border-t-transparent border-[#F15939] rounded-full animate-spin"></div>
                 </div>
@@ -147,7 +147,7 @@ toast.error(errorMessage);
                   type="submit"
                   className="w-full !py-6 sm:!py-7 2xl:!py-9 !rounded-full btn-primary  2xl:text-[22px] xl:text-[16.5] text-[14px] text-[#FFFFFF]"
                 >
-                  {authloading ? "Logging in..." : "Login"}
+                  {loginLoading  ? "Logging in..." : "Login"}
                 </Button>
               )}
             </form>

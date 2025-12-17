@@ -55,7 +55,7 @@ const SignupPage = () => {
     formState: { errors },
   } = useForm<SignupFormValues>();
   const dispatch = useAppDispatch();
-  const { authloading } = useAppSelector((state: RootState) => state?.auth);
+  const { registerLoading } = useAppSelector((state: RootState) => state?.auth);
   const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -313,7 +313,7 @@ const SignupPage = () => {
           </div>
 
           {/* Submit */}
-          {authloading ? (
+          {registerLoading ? (
             <div className="flex justify-center items-center py-9">
               <div className="w-8 h-8 border-4 border-t-transparent border-[#F15939] rounded-full animate-spin"></div>
             </div>

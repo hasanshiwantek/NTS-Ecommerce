@@ -22,7 +22,8 @@ interface AuthState {
   user: any;
   token: string | null;
   expireAt?: string | null;
-  authloading: boolean;
+  loginLoading: boolean;
+  registerLoading: boolean;
   error: string | null;
   isAuthenticated: boolean;
   stores: { storeId: number; name?: string }[];
@@ -32,7 +33,8 @@ const initialState: AuthState = {
   user: null,
   token: null,
   expireAt: null,
-  authloading: false,
+  loginLoading: false,
+  registerLoading: false,
   error: null,
   isAuthenticated: false,
   stores: [],
@@ -111,18 +113,18 @@ const authSlice = createSlice({
     builder
       // Pending
       .addCase(loginUser.pending, (state) => {
-        state.authloading = true;
+        state.loginLoading  = true;
         state.error = null;
       })
       .addCase(registerUser.pending, (state) => {
-        state.authloading = true;
+        state.registerLoading = true;
         state.error = null;
       })
 
       // Fulfilled - login
       .addCase(loginUser.fulfilled, (state, action) => {
         const {user, customer, token ,expireAt} = action.payload.data || action.payload;
-        state.authloading = false;
+        state.loginLoading  = false;
         state.user = user || customer;
         state.token = token;
         state.expireAt = expireAt;
@@ -140,16 +142,16 @@ const authSlice = createSlice({
 
       // Fulfilled - register
       .addCase(registerUser.fulfilled, (state) => {
-        state.authloading = false;
+        state.registerLoading = false;
       })
 
       // Rejected
       .addCase(loginUser.rejected, (state, action) => {
-        state.authloading = false;
+        state.loginLoading  = false;
         state.error = action.payload as string;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.authloading = false;
+        state.registerLoading = false;
         state.error = action.payload as string;
       });
   },
