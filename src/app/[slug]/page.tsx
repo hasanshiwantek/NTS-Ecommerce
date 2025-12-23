@@ -22,7 +22,7 @@ export async function generateMetadata({
     };
   }
 
-  const url = `https://nts-ecommerce.vercel.app/products/${slug}`;
+  const url = `https://nts-ecommerce.vercel.app/${slug}`;
 
   return {
     title: `${product.pageTitle || product.name} | New Town Spares`,
