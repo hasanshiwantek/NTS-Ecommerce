@@ -69,7 +69,7 @@ export default function ProductGridCard({ product }: { product: Product }) {
   <div className="flex flex-col justify-between items-start w-[90%] mt-[2%] gap-2">
     {/* Product Name */}
     <Link
-      href={`/products/${product?.sku}`}
+      href={`/${product?.sku}`}
       className="w-full cursor-pointer relative inline-block group"
     >
       <h3 className="h6-18-px-medium w-full line-clamp-2">

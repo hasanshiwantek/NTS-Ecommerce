@@ -94,7 +94,7 @@ const RelatedProduct = ({ products }: { products: RelatedProductItem[] }) => {
 
                 {/* Product? Name (2 lines max, fixed height) */}
                 <Link
-                  href={`/products/${product?.sku}`}
+                  href={`/${product?.sku}`}
                   className="relative inline-block cursor-pointer group"
                 >
                   <p className="h6-18-px-medium line-clamp-2 min-h-[3rem]">
