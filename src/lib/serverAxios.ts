@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const serverAxios = axios.create({
-  baseURL: "http://backend.sparemicro.com/api/",
+  baseURL: "https://backend.sparemicro.com/api/",
   headers: {
     storeId: 4, // Replace with dynamic storeId if needed
   },
