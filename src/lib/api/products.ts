@@ -1,5 +1,6 @@
 // lib/api/products.ts
 import serverAxios from "../serverAxios";
+import { redirect } from "next/navigation";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 export const fetchProducts = async () => {
   try {
