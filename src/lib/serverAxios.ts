@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const serverAxios = axios.create({
-  baseURL: "https://ecom.brokercell.com/api/",
+  baseURL: "http://3.12.69.112/api/",
   headers: {
     storeId: 4, // Replace with dynamic storeId if needed
   },

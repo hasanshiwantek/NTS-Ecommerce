@@ -45,6 +45,15 @@ const nextConfig: NextConfig = {
         hostname: "*",
         pathname: "/**",
       },
+   {
+        protocol: 'http',
+        hostname: '3.12.69.112',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dummyimage.com',
+      },
     ],
   },
 
