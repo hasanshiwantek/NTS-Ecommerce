@@ -6,6 +6,7 @@ import ProductCard from "@/app/components/Product/ProductCard";
 import ProductOverview from "@/app/components/Product/ProductOverview";
 import ProductExtras from "@/app/components/Product/ProductExtras";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 // ✅ Dynamic metadata for SEO
 export async function generateMetadata({
   params,
@@ -14,13 +15,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params; // <-- await here
   const product = await fetchProductBySlug(slug);
-
   if (!product) {
-    return {
-      title: "Product Not Found | New Town Spares",
-      description: "This product could not be found.",
-    };
+    notFound(); // 🔥 IMPORTANT
   }
+
 
   const url = `https://nts-ecommerce.vercel.app/${slug}`;
 
@@ -85,6 +83,10 @@ export default async function ProductPage({
     fetchProductBySlug(slug),
     fetchProducts(),
   ]);
+
+  if (!product) {
+    notFound(); // 🔥 THIS IS THE KEY
+  }
 
   const backendSchema = product?.schema;
 
