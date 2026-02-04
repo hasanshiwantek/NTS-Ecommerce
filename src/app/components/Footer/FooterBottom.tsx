@@ -116,10 +116,10 @@ const FooterBottom = () => {
             <h4 className="h5-bold !text-[#FFFFFF] mb-4">My Account</h4>
             <ul className="flex flex-col xl:gap-3 2xl:gap-4 h5-regular !text-[#FFFFFF] gap-5">
               <li>
-                <Link href="/login">Sign in</Link>
+                <Link href="/auth/login">Sign in</Link>
               </li>
               <li>
-                <Link href="/signup">Sign up</Link>
+                <Link href="/auth/signup">Sign up</Link>
               </li>
               <li>
                 <Link href="/cart">My cart</Link>
