@@ -94,7 +94,7 @@ const BlogCategories = ({
                   {blog.title || "N/A"}
                 </p>
                 <Link
-                  href={`blogs/${blog.id}`}
+                  href={`blogs/${blog.slug}`}
                   className="h4-regular relative inline-block group/readmore"
                 >
                   <h3 className="h3-secondary group-hover:!text-[#F15939] leading-12.5">
@@ -106,7 +106,7 @@ const BlogCategories = ({
                 </p>
 
                 <Link
-                  href={`blogs/${blog.id}`}
+                  href={`blogs/${blog.slug}`}
                   className="h4-regular relative inline-block group/readmore"
                 >
                   Read More →
