@@ -54,7 +54,8 @@ export default function OrderSuccessPage() {
       ) || 0,
     shipping: Number(localOrder.shippingCost || 0),
     tax: 0,
-    total: Number(localOrder.totalAmount || 0),
+        total: Number(localOrder.totalAmount || 0),
+    discountAmount: Number(localOrder.discountAmount || 0),
   };
 
   const handleCheckOrders = () => {
@@ -152,10 +153,16 @@ export default function OrderSuccessPage() {
             <div className="flex justify-between text-gray-600"><span>Tax</span><span>${orderData.tax.toFixed(2)}</span></div>
           </div>
 
-          <div className="flex justify-between text-xl font-bold text-gray-900 border-t-2 border-gray-300 pt-4">
+        <div className="flex justify-between text-xl font-bold text-gray-900 border-t-2 border-gray-300 pt-4">
             <span>Order Total</span>
-            <span>${orderData.total.toFixed(2)}</span>
+            <span>${orderData?.discountAmount ? (orderData.discountAmount).toFixed(2) : orderData.total.toFixed(2)}</span>
           </div>
+       {Number(orderData?.discountAmount) > 0 && (
+  <div className="flex justify-between text-xl font-bold text-gray-900 border-t-2 border-gray-300 pt-4">
+    <span>Total Discount</span>
+    <span>- ${Number(orderData.discountAmount).toFixed(2)}</span>
+  </div>
+)}
         </div>
       </div>
     </div>

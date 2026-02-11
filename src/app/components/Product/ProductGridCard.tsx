@@ -80,7 +80,7 @@ export default function ProductGridCard({ product }: { product: Product }) {
 
     {/* SKU */}
     <p className="h6-18-px-regular group-hover:invisible">
-      HP SKU: <span>{product?.sku}</span>
+      {product?.brand?.name} SKU: <span>{product?.sku}</span>
     </p>
 
     {/* ✅ Price */}
