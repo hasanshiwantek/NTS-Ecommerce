@@ -145,6 +145,7 @@ const OrderProduct = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           orderId={selectedOrder?.order_number || null}
+                isSubmit={selectedOrder?.returnRequest?.isSubmit}
         />
       )}
     </>
