@@ -100,6 +100,16 @@ const nextConfig: NextConfig = {
     ];
   },
 
+      async rewrites() {
+    return [
+      {
+        source: "/robots.txt",
+        destination: "/api/robots", // Points to your App Router API route
+      },
+    ];
+  },
+
+  
   webpack(config, { dev, isServer }) {
     // Target modern JS in client build
     if (!dev && !isServer) {

@@ -1,32 +1,79 @@
 "use client";
+
 import { Input } from "@/components/ui/input";
 import { Package } from "lucide-react";
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useAppSelector } from "@/hooks/useReduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
+import { applyCoupon, removeCoupon } from "@/redux/slices/couponSlice";
 
 const OrderSummary = () => {
+  const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart.items);
+
+  const { appliedCoupon, discountAmount, loading: couponLoading } =
+    useAppSelector((state: RootState) => state.coupon);
+
   const router = useRouter();
+
+  const [couponCode, setCouponCode] = useState("");
+
+  /* ===============================
+     CALCULATIONS
+  ================================= */
 
   const subtotal = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }, [cart]);
 
-const shipping = useMemo(() => {
-  if (cart.length === 0) return 0;
+  const shipping = useMemo(() => {
+    if (cart.length === 0) return 0;
 
-  return cart.reduce((sum, item) => {
-    const cost = Number(item.fixedShippingCost || 0);
-    return sum + cost;
-  }, 0);
-}, [cart]);
+    return cart.reduce((sum, item) => {
+      const cost = Number(item.fixedShippingCost || 0);
+      return sum + cost;
+    }, 0);
+  }, [cart]);
 
-const shippingLabel = `FedEx priority $${shipping.toFixed(2)}`;
+  const totalBeforeDiscount = subtotal + shipping;
 
-  const total = subtotal + shipping;
+  const total = Math.max(totalBeforeDiscount - discountAmount, 0);
+
+  const shippingLabel = `FedEx priority $${shipping.toFixed(2)}`;
+
+  /* ===============================
+     HANDLERS
+  ================================= */
+
+  const handleCouponSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!couponCode.trim()) {
+      toast.error("Please enter a coupon code");
+      return;
+    }
+
+    try {
+      await dispatch(
+        applyCoupon({
+          couponCode,
+          total: totalBeforeDiscount,
+        })
+      ).unwrap();
+
+      toast.success("Coupon applied successfully!");
+      setCouponCode("");
+    } catch (err: any) {
+      toast.error(err || "Failed to apply coupon");
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    dispatch(removeCoupon());
+    toast.info("Coupon removed");
+  };
 
   const handleProceedToCheckout = useCallback(() => {
     if (!cart.length) {
@@ -36,6 +83,10 @@ const shippingLabel = `FedEx priority $${shipping.toFixed(2)}`;
 
     router.push("/checkout");
   }, [cart.length, router]);
+
+  /* ===============================
+     UI
+  ================================= */
 
   return (
     <div className="border rounded-lg 2xl:w-full">
@@ -47,29 +98,37 @@ const shippingLabel = `FedEx priority $${shipping.toFixed(2)}`;
         <h2 className="h1-secondary !text-[#4A4A4A]">Order Summary</h2>
       </div>
 
-      {/* Estimate Shipping */}
       <div className="px-6 py-6">
         <p className="h5-medium mb-3">Estimate Shipping and Tax</p>
 
-        {/* Divider */}
         <div className="w-full h-[1px] bg-gray-300 mb-3"></div>
 
-        {/* Subtotal + Shipping */}
-        <div className="text-sm text-gray-700 space-y-2 mb-2">
-          <div className="flex justify-between py-2">
-            <span className="h5-regular">Subtotal</span>
-            <span className="h5-regular">${subtotal.toFixed(2)}</span>
-          </div>
-
-          <div className="flex justify-between py-2">
-            <span className="h5-regular">
-              Shipping ({shippingLabel})
-            </span>
-            <span className="h5-regular">${shipping.toFixed(2)}</span>
-          </div>
+        {/* Subtotal */}
+        <div className="flex justify-between py-2">
+          <span className="h5-regular">Subtotal</span>
+          <span className="h5-regular">${subtotal.toFixed(2)}</span>
         </div>
 
-        {/* Divider */}
+        {/* Shipping */}
+        <div className="flex justify-between py-2">
+          <span className="h5-regular">
+            Shipping ({shippingLabel})
+          </span>
+          <span className="h5-regular">${shipping.toFixed(2)}</span>
+        </div>
+
+        {/* Coupon Discount Row */}
+        {appliedCoupon && (
+          <div className="flex justify-between py-2 text-green-600">
+            <span className="h5-regular">
+              Coupon ({appliedCoupon.couponCode.toUpperCase()})
+            </span>
+            <span className="h5-regular">
+              -${discountAmount.toFixed(2)}
+            </span>
+          </div>
+        )}
+
         <div className="w-full h-[1px] bg-gray-300 my-3"></div>
 
         {/* Total */}
@@ -80,24 +139,46 @@ const shippingLabel = `FedEx priority $${shipping.toFixed(2)}`;
           </span>
         </div>
 
-        {/* Discount Code */}
+        {/* Discount Code Section */}
         <div className="mt-4 space-y-2">
-          <label htmlFor="discountCode" className="h5-regular">
+          <label className="h5-regular">
             Apply Discount Code
           </label>
-          <div className="flex gap-2 my-2">
-            <Input
-              id="discountCode"
-              type="text"
-              className="xl:h-[45.5px] 2xl:h-[60px] !max-w-full"
-            />
-            <button className="h4-medium border border-black px-4 rounded">
-              Apply
-            </button>
-          </div>
+
+          {!appliedCoupon ? (
+            <form onSubmit={handleCouponSubmit} className="flex gap-2 my-2">
+              <Input
+                type="text"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
+                className="xl:h-[45.5px] 2xl:h-[60px] !max-w-full"
+                disabled={couponLoading}
+              />
+              <button
+                type="submit"
+                disabled={couponLoading}
+                className="h4-medium border border-black px-4 rounded disabled:opacity-50"
+              >
+                {couponLoading ? "..." : "Apply"}
+              </button>
+            </form>
+          ) : (
+            <div className="flex justify-between items-center mt-3">
+              <span className="text-green-600">
+                Applied: {appliedCoupon.couponCode.toUpperCase()}
+              </span>
+
+              <button
+                onClick={handleRemoveCoupon}
+                className="text-red-600 underline"
+              >
+                Remove
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* Buttons */}
+        {/* Buttons (UNCHANGED) */}
         <div className="flex flex-col gap-3 mt-5">
           <button
             type="button"

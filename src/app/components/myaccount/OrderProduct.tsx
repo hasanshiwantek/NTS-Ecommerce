@@ -1,17 +1,30 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { RootState } from "@/redux/store";
 import { fetchAccountOrders } from "@/redux/slices/myaccountSlice";
 import Link from "next/link";
+import ReturnItemsModal from "./ReturnItemsModal";
 
 const OrderProduct = () => {
   const dispatch = useAppDispatch();
   const { order, loading, error } = useAppSelector(
     (state: RootState) => state.myaccount
   ); 
-  console.log("Order.....",order);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<any>(null);
+
+  const handleReturnClick = (e: React.MouseEvent, item: any) => {
+    e.preventDefault(); // Link ko prevent karein
+    setSelectedOrder(item);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null);
+  };
   
 
   useEffect(() => {
@@ -49,6 +62,7 @@ const OrderProduct = () => {
     return <p>No orders found.</p>;
 
   return (
+    <>
     <div className="flex flex-col gap-4">
       {order.orders.map((item: any) => (
         <div
@@ -114,17 +128,26 @@ const OrderProduct = () => {
   </button>
 
   {item?.status === "Completed" && (
-     <Link
-      href={`/my-account/returns?order_id=${item?.order_number }`}
+     <button
+         onClick={(e) => handleReturnClick(e, item)}
       className="mt-2 text-lg text-[#393939] underline cursor-pointer hover:text-red-600 transition"
     >
       Return Items?
-    </Link>
+    </button>
   )}
 </div>
         </div>
       ))}
     </div>
+        {/* Modal */}
+      {selectedOrder && (
+        <ReturnItemsModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          orderId={selectedOrder?.order_number || null}
+        />
+      )}
+    </>
   );
 };
 
